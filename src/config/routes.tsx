@@ -1,22 +1,22 @@
-import {
-  DustIcon,
-  FarmIcon,
-  FireIcon,
-  PlayIcon,
-  SwapIcon,
-} from "components/icons/ui-icons";
-import Layout from "components/Layout/MainLayout";
-import React from "react";
-import { RouteObject } from "react-router-dom";
+// import {
+//   DustIcon,
+//   FarmIcon,
+//   FireIcon,
+//   PlayIcon,
+//   SwapIcon,
+// } from "components/icons/ui-icons";
+// import Layout from "components/Layout/MainLayout";
+// import React from "react";
+// import { RouteObject } from "react-router-dom";
 
-const SwapView = React.lazy(() => import("views/SwapView"));
+// const SwapView = React.lazy(() => import("views/SwapView"));
 // const PlayView = React.lazy(() => import("views/PlayView"));
 // const TheForgeView = React.lazy(() => import("views/TheForgeView"));
-const SwapLpTab = React.lazy(() => import("views/SwapView/commons/SwapLpTab"));
-const FarmView = React.lazy(() => import("views/FarmView"));
-const CoinFlipView = React.lazy(() => import("views/CoinFlipView"));
-const SwapTab = React.lazy(() => import("views/SwapView/commons/SwapCard"));
-const DustView = React.lazy(() => import("views/DustView/DustView"));
+// const SwapLpTab = React.lazy(() => import("views/SwapView/commons/SwapLpTab"));
+// const FarmView = React.lazy(() => import("views/FarmView"));
+// const CoinFlipView = React.lazy(() => import("views/CoinFlipView"));
+// const SwapTab = React.lazy(() => import("views/SwapView/commons/SwapCard"));
+// const DustView = React.lazy(() => import("views/DustView/DustView"));
 
 export const routeNames = {
   swap: "/",
@@ -34,25 +34,25 @@ export const routeNames = {
 export const mainSiteRoutes = [
   {
     path: routeNames.swap,
-    element: <SwapView />,
+    // element: <SwapView />,
     title: "Swap",
-    icon: <SwapIcon fontSize={"23px"} />,
-    children: [
-      {
-        path: "/",
-        element: <SwapTab />,
-      },
-      {
-        path: "/swapLp",
-        element: <SwapLpTab />,
-      },
-    ],
+    // icon: <SwapIcon fontSize={"23px"} />,
+    // children: [
+    //   {
+    //     path: "/",
+    //     element: <SwapTab />,
+    //   },
+    //   {
+    //     path: "/swapLp",
+    //     element: <SwapLpTab />,
+    //   },
+    // ],
   },
   {
     path: routeNames.farm,
-    element: <FarmView />,
+    // element: <FarmView />,
     title: "Farm",
-    icon: <FarmIcon fontSize={"25px"} />,
+    // icon: <FarmIcon fontSize={"25px"} />,
   },
 
   // {
@@ -63,9 +63,9 @@ export const mainSiteRoutes = [
   // },
   {
     path: routeNames.play,
-    element: <CoinFlipView />,
+    // element: <CoinFlipView />,
     title: "Play",
-    icon: <PlayIcon fontSize={"25px"} />,
+    // icon: <PlayIcon fontSize={"25px"} />,
     soon: false,
 
     // children: [
@@ -98,22 +98,22 @@ export const mainSiteRoutes = [
     // path: routeNames.forge,
     // element: <TheForgeView />,
     title: "The Forge",
-    icon: <FireIcon fontSize={"20px"} />,
+    // icon: <FireIcon fontSize={"20px"} />,
     soon: true,
   },
   {
     path: routeNames.dust,
-    element: <DustView />,
+    // element: <DustView />,
     title: "Dust",
-    icon: <DustIcon fontSize={"20px"} />,
+    // icon: <DustIcon fontSize={"20px"} />,
     hide: true,
   },
 ];
 
-export const routes: RouteObject[] = [
-  {
-    path: "/",
-    element: <Layout />,
-    children: mainSiteRoutes,
-  },
-];
+// export const routes: RouteObject[] = [
+//   {
+//     path: "/",
+//     element: <Layout />,
+//     children: mainSiteRoutes,
+//   },
+// ];
