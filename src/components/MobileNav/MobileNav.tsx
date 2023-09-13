@@ -7,13 +7,18 @@ import {
 } from "@/components/ui/sheet";
 import { mainSiteRoutes } from "@/config/routes";
 import { cn } from "@/lib/utils";
-import { Menu, Zap } from "lucide-react";
+import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
+import { logout } from "@multiversx/sdk-dapp/utils";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { Fragment } from "react";
+import ConnectComponent from "../Login/ConnectComponent";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 
 const MobileNav = () => {
+  const { isLoggedIn } = useGetLoginInfo();
+
   const navRoutes = mainSiteRoutes.filter((route) => Boolean(route.path));
   const routes = navRoutes.map((route) => ({
     href: route.path,
@@ -51,10 +56,11 @@ const MobileNav = () => {
           </div>
         </SheetHeader>
         <SheetFooter>
-          <Button className="lex items-center rounded-fullpx-4 w-full">
-            <Zap size={20} className="mr-2" />
-            <span>Connet</span>
-          </Button>
+          {isLoggedIn ? (
+            <Button onClick={() => logout()}>Disconnet</Button>
+          ) : (
+            <ConnectComponent place="drawer" />
+          )}
         </SheetFooter>
       </SheetContent>
     </Sheet>

@@ -1,12 +1,10 @@
+import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { PropsWithChildren } from "react";
 
 const Layout = ({ children }: PropsWithChildren) => {
-  // const dispatch = useDispatch();
   // const pathname = usePathname();
 
-  // const isLoginModal: boolean = useAppSelector(selectIsLoginModal);
-  // const { address, shard } = useGetAccountInfo();
   // const { isLoggedIn } = useGetLoginInfo();
 
   // const location = pathname;
@@ -17,21 +15,13 @@ const Layout = ({ children }: PropsWithChildren) => {
   //   }
   // }, [isLoggedIn, dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(
-  //     setUserAddress(process.env.REACT_APP_CONNECTED_ADDRESS || address)
-  //   );
-  //   dispatch(setShard(shard || 1));
-  // }, [address, dispatch, shard]);
-
   // const showFooter =
   //   location !== routeNames.swap && location !== routeNames.swapLp;
   return (
     <div>
       <Navbar />
       {children}
-      {/* {isLoginModal && <Login isLoginOpen={isLoginModal} />}
-        <Box
+      {/* <Box
         sx={{
           "& >div": {
             pt: "70px",
@@ -39,8 +29,8 @@ const Layout = ({ children }: PropsWithChildren) => {
         }}
         >
         {children}
-        </Box>
-        {showFooter && <Footer />} */}
+        </Box> */}
+      <Footer />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 "use client";
 
+import Login from "@/components/Login/Login";
 import { Button } from "@/components/ui/button";
-import { Dot, Zap } from "lucide-react";
+import { Dot } from "lucide-react";
 import Image from "next/image";
 import MobileNav from "../MobileNav/MobileNav";
 
@@ -16,13 +17,7 @@ const NavbarActions = () => {
         <Dot size={20} className="text-green-500" /> MultiversX
       </Button>
 
-      <Button
-        className="hidden sx:flex md:flex items-center rounded-fullpx-4"
-        variant={"outline"}
-      >
-        <Zap size={20} className="sm:mr-2" />
-        <span className="hidden sm:inline">Connet</span>
-      </Button>
+      <Login />
 
       <MobileNav />
 

@@ -74,3 +74,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* dapp-sdk */
+
+.dapp-core-component__dappModalStyles__dappModalContent{
+  color: black;
+}
