@@ -1,5 +1,5 @@
+import { getRealBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
-import { getRealBalance } from "utils/functions/formatBalance";
 
 describe("getRealBalance", () => {
   it("should return real balance as number when returnBigNumber is false", () => {

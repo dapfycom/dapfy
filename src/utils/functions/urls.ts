@@ -1,4 +1,4 @@
-import { routeNames } from "config/routes";
+import { routeNames } from "@/config/routes";
 
 export const getWebUrl = (path: string = ""): string => {
   return `${window.location.origin + path}`;

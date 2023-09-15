@@ -94,7 +94,7 @@ export const useSwapLpRate = () => {
         )
       ).toNumber();
       const lpAmount = new BigNumber(token1TokenDollarAmount)
-        .div(pair.price)
+        .div(pair?.price || 0)
         .toNumber();
       dispatch(onChangeSwapLpToField(lpAmount.toString()));
     }
