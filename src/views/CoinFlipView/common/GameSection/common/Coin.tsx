@@ -43,7 +43,7 @@ const Coin = () => {
     >
       <Box className="flip-card-inner" h="full" minH={"300px"}>
         <Center className="flip-card-front" h="full" minH={"300px"}>
-          <Image src={"images/bsk-logo.svg"} w="265px" h="265px" />
+          <Image src={"images/bsk-logo.svg"} w="265px" h="265px" alt="" />
         </Center>
         <Center className="flip-card-back">
           <Box

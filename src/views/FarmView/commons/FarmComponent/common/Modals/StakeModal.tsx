@@ -87,14 +87,11 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
                   formik.touched.amount && Boolean(formik.errors.amount)
                 }
               />
-              <InputRightElement
-                pointerEvents="none"
-                children={
-                  <Flex pt={2}>
-                    <LpTokenImageV2 lpToken={stakedToken} size={20} />
-                  </Flex>
-                }
-              />
+              <InputRightElement pointerEvents="none">
+                <Flex pt={2}>
+                  <LpTokenImageV2 lpToken={stakedToken} size={20} />
+                </Flex>
+              </InputRightElement>
             </InputGroup>
             <Flex justifyContent="space-between" mt={3} fontSize={"xs"}>
               <Text color="tomato">{formik.errors.amount}</Text>

@@ -32,6 +32,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "bufferutil": "^4.0.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
@@ -54,6 +55,7 @@
     "tailwindcss-animate": "^1.0.7",
     "to-hex": "^0.0.18",
     "typescript": "5.2.2",
+    "utf-8-validate": "^5.0.10",
     "zod": "^3.22.2"
   }
 }
