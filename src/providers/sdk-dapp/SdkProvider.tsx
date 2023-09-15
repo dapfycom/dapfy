@@ -2,12 +2,20 @@
 
 import { ENVIROMENT } from "@/config/network";
 import { AxiosInterceptorContext } from "@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext";
-import { DappProvider } from "@multiversx/sdk-dapp/wrappers/DappProvider";
+import dynamic from "next/dynamic";
 import {
   NotificationModal,
   SignTransactionsModals,
   TransactionsToastList,
 } from "./sdk-components";
+
+export const DappProvider = dynamic(
+  async () => {
+    return (await import("@multiversx/sdk-dapp/wrappers/DappProvider"))
+      .DappProvider;
+  },
+  { ssr: false }
+);
 
 export const walletConnectV2ProjectId = "a5e4dd12d896af078bd26e68295a8c94";
 

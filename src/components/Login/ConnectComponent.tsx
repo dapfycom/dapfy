@@ -72,11 +72,11 @@ const ConnectComponent = ({ place }: IProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className={`${placeClasess[place].button} text-lg font-semibold`}
+          className={`${placeClasess[place].button}`}
           variant={place === "navbar" ? "outline" : "default"}
         >
           Connet
-          <Zap size={20} className="ml-3" />
+          <Zap size={16} className="ml-3" />
         </Button>
       </DialogTrigger>
       <DialogContent>
