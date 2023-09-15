@@ -65,7 +65,7 @@ const InputBox = ({
         <div className="flex justify-between w-full">
           <Input
             type="text"
-            className="border-none focus-visible:border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
+            className="border-none focus-visible:border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-xl"
             placeholder="0.0"
             onChange={(e) => onChange(e, accountToken as IElrondAccountToken)}
             value={value}
@@ -151,16 +151,20 @@ const InputBox = ({
         </div>
 
         {accountToken && (
-          <div className="flex justify-end mt-3">
-            <Button
-              variant={"ghost"}
-              className="text-sm"
-              onClick={() =>
-                onMax && onMax(accountToken as IElrondAccountToken)
-              }
-            >
-              Balance: {formatBalance(accountToken)}
-            </Button>
+          <div className="flex justify-end mt-3 text-muted-foreground">
+            <div className="flex gap-3 items-center">
+              <Button
+                size={"xs"}
+                className="text-xs"
+                variant={"outline"}
+                onClick={() =>
+                  onMax && onMax(accountToken as IElrondAccountToken)
+                }
+              >
+                MAX
+              </Button>
+              <p className="text-sm">Balance: {formatBalance(accountToken)}</p>
+            </div>
           </div>
         )}
       </div>

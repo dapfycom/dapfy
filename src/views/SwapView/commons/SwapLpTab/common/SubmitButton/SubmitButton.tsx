@@ -1,17 +1,19 @@
-import { Text } from "@chakra-ui/react";
-import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
-import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks/account/useGetLoginInfo";
-import ActionButton from "components/ActionButton/ActionButton";
-import Realistic from "components/Conffeti/Realistic";
-import { useAppDispatch, useAppSelector } from "hooks/useRedux";
-import React from "react";
-import { openLogin } from "redux/dapp/dapp-slice";
-import { lpSwap } from "views/SwapView/lib/calls";
-import { useSwapLpRate } from "views/SwapView/lib/hooks";
+import { Button } from "@/components/ui/button";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { openLogin } from "@/redux/dapp/dapp-slice";
+import { lpSwap } from "@/views/SwapView/lib/calls";
+import { useSwapLpRate } from "@/views/SwapView/lib/hooks";
 import {
   selectFromField,
   selectSlippage,
-} from "views/SwapView/lib/swapLp-slice";
+} from "@/views/SwapView/lib/swapLp-slice";
+
+import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
+import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks/account/useGetLoginInfo";
+import React from "react";
+
+const Realistic = React.lazy(() => import("@/components/Conffeti/Realistic"));
+
 const SubmitButton = () => {
   const dispatch = useAppDispatch();
   const { isLoggedIn } = useGetLoginInfo();
@@ -19,7 +21,7 @@ const SubmitButton = () => {
   // const toField = useAppSelector(selectToField);
   const slippage = useAppSelector(selectSlippage);
   const { data: swapRoutes } = useSwapLpRate();
-  const [sessionId, setSessionId] = React.useState("");
+  const [sessionId, setSessionId] = React.useState<string>("");
   const [txSuccess, setTxSuccess] = React.useState(false);
 
   const onSuccess = React.useCallback(() => {
@@ -33,21 +35,24 @@ const SubmitButton = () => {
     transactionId: sessionId,
     onSuccess,
 
-    onFail: (transactionId: string, errorMessage?: string) => {
+    onFail: (transactionId: string | null, errorMessage?: string) => {
       console.log("transactionId", transactionId);
       console.log("errorMessage", errorMessage);
     },
   });
 
   const handleSwap = async () => {
+    console.log("fromField", fromField);
+
     if (!isLoggedIn) {
       dispatch(openLogin(true));
     } else {
       setTxSuccess(false);
 
       const res = await lpSwap(swapRoutes, fromField, slippage);
-
-      setSessionId(res.sessionId);
+      if (res?.sessionId) {
+        setSessionId(res.sessionId);
+      }
     }
   };
 
@@ -56,11 +61,14 @@ const SubmitButton = () => {
       ? "confirm"
       : "Enter an amount"
     : "Connect wallet";
-
   return (
     <>
       {txSuccess && <Realistic />}
-      <ActionButton
+      <Button onClick={handleSwap} className="w-full max-w-[200px]">
+        {buttonText}
+      </Button>
+
+      {/* <ActionButton
         width={"full"}
         h="auto"
         py={"20px"}
@@ -76,7 +84,7 @@ const SubmitButton = () => {
         <Text color="primary" opacity={1} fontSize={{ xs: "md", lg: "25px" }}>
           {buttonText}
         </Text>
-      </ActionButton>
+      </ActionButton> */}
     </>
   );
 };

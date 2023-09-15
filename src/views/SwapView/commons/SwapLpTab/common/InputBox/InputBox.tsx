@@ -1,25 +1,17 @@
-import {
-  Flex,
-  Image,
-  Input,
-  InputProps,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import ActionButton from "components/ActionButton/ActionButton";
-import LpTokenImage from "components/LpTokenImage/LpTokenImage";
-import useGetAccountToken from "hooks/useGetAccountToken";
-import useGetElrondToken from "hooks/useGetElrondToken";
-import useGetTokenPrice from "hooks/useGetTokenPrice";
-import { IElrondToken } from "types/elrond.interface";
-import {
-  formatBalance,
-  formatBalanceDolar,
-  setElrondBalance,
-} from "utils/functions/formatBalance";
-import { formatTokenI } from "utils/functions/tokens";
+import LpTokenImage from "@/components/LpTokenImage/LpTokenImage";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import useGetAccountToken from "@/hooks/useGetAccountToken";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
+import useGetTokenPrice from "@/hooks/useGetTokenPrice";
+import { IElrondToken } from "@/types/elrond.interface";
+import { formatBalance } from "@/utils/functions/formatBalance";
+import { formatTokenI } from "@/utils/functions/tokens";
+import { Loader2 } from "lucide-react";
+import Image from "next/image";
+// const SelectTokenModal = lazy(() => import("../SelectTokenModal"));
 
-interface IProps extends InputProps {
+interface IProps {
   type: "from" | "to";
   tokenI: string;
   handleChange: (value: string, token: IElrondToken) => void;
@@ -32,73 +24,58 @@ const InputBox = ({ type, tokenI, inputValue, handleChange }: IProps) => {
   const [tokenPrice] = useGetTokenPrice(tokenI);
 
   const handleMax = () => {
+    if (type === "to") return;
     handleChange(formatBalance(accountToken, true, 18) as any, elrondToken);
   };
+
   return (
-    <Flex w="full" flexDir={"column"} bg="dark.100" p={4} borderRadius="md">
-      <Flex gap={2} alignItems="center" mb={4}>
-        {elrondToken ? (
-          <>
-            {formatTokenI(elrondToken.name).slice(-2) === "LP" ? (
-              <LpTokenImage lpToken={elrondToken} />
+    <>
+      <div className="flex flex-col border w-full py-5 pb-4 px-5 rounded-lg">
+        <div className="flex justify-between mb-3">
+          <div className="flex items-center gap-2">
+            {elrondToken ? (
+              <>
+                {formatTokenI(elrondToken.name).slice(-2) === "LP" ? (
+                  <LpTokenImage lpToken={elrondToken} />
+                ) : (
+                  <Image
+                    src={elrondToken.assets.svgUrl}
+                    alt="token logo"
+                    width={32}
+                    height={32}
+                  />
+                )}
+                <p className="text-md">{elrondToken.ticker}</p>
+              </>
             ) : (
-              <Image
-                src={elrondToken.assets.svgUrl}
-                alt="token logo"
-                boxSize={"32px"}
-              />
+              <Loader2 className="animate-spin" />
             )}
-            <Text fontSize={"xl"} color="white">
-              {elrondToken.ticker}
-            </Text>
-          </>
-        ) : (
-          <Spinner />
-        )}
-      </Flex>
-      <Flex w="full" gap={2}>
-        <Flex flexDir={"column"} flex={1}>
-          <Input
-            variant={"unstyled"}
-            placeholder={"0"}
-            py={2}
-            fontSize="xl"
-            color="white"
-            value={inputValue}
-            onChange={(e) => handleChange(e.target.value, elrondToken)}
-          />
-          {type === "from" && elrondToken && tokenPrice && (
-            <Text>
-              ≈ $
-              {formatBalanceDolar(
-                {
-                  balance: setElrondBalance(
-                    Number(inputValue),
-                    elrondToken.decimals
-                  ),
-                  decimals: elrondToken.decimals,
-                },
-                tokenPrice
-              )}
-            </Text>
+          </div>
+          <div className="flex justify-end mt-3">
+            <p className="text-sm text-muted-foreground">
+              Balance: {formatBalance(accountToken)}
+            </p>
+          </div>
+        </div>
+        <div className="flex w-full justify-between">
+          <div className="flex justify-between w-full">
+            <Input
+              type="text"
+              className="border-none focus-visible:border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
+              placeholder="0.0"
+              value={inputValue}
+              onChange={(e) => handleChange(e.target.value, elrondToken)}
+              readOnly={type === "to"}
+            />
+          </div>
+          {type === "from" && (
+            <Button variant={"outline"} onClick={handleMax} size={"sm"}>
+              Max
+            </Button>
           )}
-        </Flex>
-        {type === "from" && Boolean(accountToken) && (
-          <Flex flexDir={"column"} alignItems="flex-end" gap={2}>
-            <Text fontSize={"lsm"}>Balance:{formatBalance(accountToken)}</Text>
-            <ActionButton
-              w="fit-content"
-              fontSize={"sm"}
-              py={2}
-              h="auto"
-              onClick={handleMax}
-            >
-              MAX
-            </ActionButton>
-          </Flex>
-        )}
-      </Flex>
-    </Flex>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -1,46 +1,56 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useState } from "react";
 import SwapCard from "../SwapCard";
+import SwapLpTab from "../SwapLpTab";
 
 export function SwapTabs() {
+  const [tab, setTab] = useState("swap");
+
+  const handleChangeTab = (tab: string) => {
+    setTab(tab);
+  };
+
   return (
-    <Tabs defaultValue="account" className="w-[500px]">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Swap Tokens</TabsTrigger>
-        <TabsTrigger value="password">Buy Liquidity</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <SwapCard />
-      </TabsContent>
-      <TabsContent value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
-      </TabsContent>
-    </Tabs>
+    <>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            {" "}
+            <PageHeaderHeading className="mb-10">
+              {tab === "swap"
+                ? "Swap any tokens on MultiversX"
+                : "Buy Liquidity for any token on MultiversX"}
+            </PageHeaderHeading>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Enjoy the smallest fees on MultiversX 🔥</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <Tabs
+        defaultValue={tab}
+        onValueChange={handleChangeTab}
+        className="w-[500px]"
+      >
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="swap">Swap Tokens</TabsTrigger>
+          <TabsTrigger value="swapLp">Buy Liquidity</TabsTrigger>
+        </TabsList>
+        <TabsContent value="swap">
+          <SwapCard />
+        </TabsContent>
+        <TabsContent value="swapLp">
+          <SwapLpTab />
+        </TabsContent>
+      </Tabs>
+    </>
   );
 }
