@@ -1,6 +1,6 @@
 import useGetElrondToken from "./useGetElrondToken";
 import { useGetFarmsLpPrices } from "./useGetFarmsLpPrices";
-const useGetTokenPrice = (tokenIdentifier) => {
+const useGetTokenPrice = (tokenIdentifier: string) => {
   const { prices: lpPrices, isLoading } = useGetFarmsLpPrices();
   const isLpPrice = Boolean(
     lpPrices.find((lpToken) => lpToken.token === tokenIdentifier)

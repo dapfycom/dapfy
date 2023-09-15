@@ -1,4 +1,4 @@
-import { selectedNetwork } from "config/network";
+import { selectedNetwork } from "@/config/network";
 import useGetMaiarPairs from "./useGetMaiarPairs";
 
 const useGetToken1AndToken2OfLpToken = (lpToken: string, token1: string) => {

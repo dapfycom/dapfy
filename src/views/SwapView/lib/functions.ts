@@ -1,8 +1,8 @@
+import { selectedNetwork } from "@/config/network";
+import { fetchElrondData } from "@/services/rest/elrond";
+import { IRoute } from "@/types/swap.interface";
+import { getRealBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
-import { selectedNetwork } from "config/network";
-import { fetchElrondData } from "services/rest/elrond";
-import { IRoute } from "types/swap.interface";
-import { getRealBalance } from "utils/functions/formatBalance";
 import { IMexPair } from "../../../types/elrond.interface";
 
 export const handleSwap = (value: string, rate: number) => {
@@ -27,10 +27,13 @@ export const getSwapPairs = async (
   const swapPairs: IMexPair[] = [];
 
   let firstSwapPair: {
-    pair: IMexPair;
+    pair?: IMexPair;
     type: "wegld" | "usdc" | "wegld-usdc";
-  } = null;
-  let lastSwapPair: IMexPair = null;
+  } = {
+    pair: undefined,
+    type: "wegld",
+  };
+  let lastSwapPair: IMexPair | null = null;
   const usdcWegldPair = pairs.find(
     (pair) => pair.baseId === "WEGLD-bd4d79" && pair.quoteId === "USDC-c76f1f"
   );
@@ -113,7 +116,7 @@ export const getSwapPairs = async (
     token1 === "USDC-c76f1f" ||
     token2 === "USDC-c76f1f"
   ) {
-    if (firstSwapPair.type === "wegld-usdc" && lastSwapPair) {
+    if (firstSwapPair?.type === "wegld-usdc" && lastSwapPair) {
       return [firstSwapPair.pair, lastSwapPair];
     } else {
       return [firstSwapPair.pair];
@@ -122,38 +125,42 @@ export const getSwapPairs = async (
 
   if (firstSwapPair && lastSwapPair) {
     const posibleBridgePair = pairs.filter((pair) => {
-      if (firstSwapPair.pair.quoteId === "WEGLD-bd4d79") {
+      if (firstSwapPair?.pair?.quoteId === "WEGLD-bd4d79") {
         if (firstSwapPair.pair.quoteId === pair.quoteId) {
           return true;
         }
       } else {
-        if (firstSwapPair.pair.baseId === pair.baseId) {
+        if (firstSwapPair?.pair?.baseId === pair.baseId) {
           return true;
         }
       }
 
       return false;
     });
-    let bridgePair: IMexPair = posibleBridgePair.find((pair) => {
-      if (lastSwapPair.quoteId === "WEGLD-bd4d79") {
+    let bridgePair: IMexPair | undefined = posibleBridgePair.find((pair) => {
+      if (lastSwapPair?.quoteId === "WEGLD-bd4d79") {
         if (lastSwapPair.baseId === pair.baseId) {
           return true;
         }
       } else {
-        if (lastSwapPair.quoteId === pair.quoteId) {
+        if (lastSwapPair?.quoteId === pair.quoteId) {
           return true;
         }
       }
       return false;
     });
     if (bridgePair) {
-      swapPairs.push(firstSwapPair.pair);
-      swapPairs.push(bridgePair);
+      if (firstSwapPair.pair) {
+        swapPairs.push(firstSwapPair.pair);
+        swapPairs.push(bridgePair);
+      }
     } else {
-      bridgePair = usdcWegldPair;
-      swapPairs.push(firstSwapPair.pair);
-      swapPairs.push(bridgePair);
-      swapPairs.push(lastSwapPair);
+      if (firstSwapPair.pair && bridgePair) {
+        bridgePair = usdcWegldPair;
+        swapPairs.push(firstSwapPair.pair);
+        // swapPairs.push(bridgePair);
+        swapPairs.push(lastSwapPair);
+      }
     }
   }
 
@@ -187,10 +194,10 @@ export const smartSwapRoutes = async ([
   >(
     `/tokens?identifiers=${pairs
       .map((p) => {
-        if (p.quoteId === "WEGLD-bd4d79") {
+        if (p?.quoteId === "WEGLD-bd4d79") {
           return p.baseId;
         } else {
-          return p.quoteId;
+          return p?.quoteId;
         }
       })
       .join(",")}`
@@ -199,11 +206,11 @@ export const smartSwapRoutes = async ([
   const routes: IRoute[] = [];
   for (let index = 0; index < pairs.length; index++) {
     const pair = pairs[index];
-    let t1: string = null;
-    let t2: string = null;
+    let t1: string | undefined;
+    let t2: string | undefined;
     let rate = 0;
 
-    if (token1Before === pair.baseId) {
+    if (token1Before === pair?.baseId) {
       //wegld route
       t1 = pair.baseId;
       t2 = pair.quoteId;
@@ -211,9 +218,11 @@ export const smartSwapRoutes = async ([
       rate = new BigNumber(pair.basePrice).div(pair.quotePrice).toNumber();
     } else {
       //usdc route
-      t1 = pair.quoteId;
-      t2 = pair.baseId;
-      rate = new BigNumber(pair.quotePrice).div(pair.basePrice).toNumber();
+      t1 = pair?.quoteId;
+      t2 = pair?.baseId;
+      rate = new BigNumber(pair?.quotePrice || 0)
+        .div(pair?.basePrice || 1)
+        .toNumber();
     }
 
     const { decimals: token1Decimals } = tokensDeciamals.find(
@@ -231,16 +240,16 @@ export const smartSwapRoutes = async ([
       .toFixed(0);
 
     const data: IRoute = {
-      token1: t1,
-      token2: t2,
+      token1: t1 || "",
+      token2: t2 || "",
       token1Amount: getRealBalance(finalAmount1, token1Decimals) as number,
       token2Amount: getRealBalance(finalAmount2, token2Decimals) as number,
       token1AmountDecimals: finalAmount1,
       token2AmountDecimals: finalAmount2,
-      sc: pair.address,
+      sc: pair?.address || "",
     };
 
-    token1Before = t2;
+    token1Before = t2 || "";
     amount1Before = finalAmount2;
     routes.push(data);
   }

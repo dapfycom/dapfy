@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import { fetchElrondData } from "@/services/rest/elrond";
+import { IElrondAccountToken } from "@/types/elrond.interface";
 import { useGetAccountInfo } from "@multiversx/sdk-dapp/hooks";
-import { selectUserAddress } from "redux/dapp/dapp-slice";
-import { fetchElrondData } from "services/rest/elrond";
 import useSwr from "swr";
-import { IElrondAccountToken } from "types/elrond.interface";
 const useGetUserTokens = (
   indentifier?: string,
   onlyEsdt?: boolean,

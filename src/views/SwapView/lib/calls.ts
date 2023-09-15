@@ -1,3 +1,11 @@
+import { selectedNetwork } from "@/config/network";
+import store from "@/redux/store";
+import { getSmartContractInteraction } from "@/services/sc";
+import { SmartContractInteraction } from "@/services/sc/calls/transaction";
+import { IElrondToken } from "@/types/elrond.interface";
+import { IRoute } from "@/types/swap.interface";
+import { getWspOfWrapedEgld } from "@/utils/functions/sc";
+import { calculateSlipageAmount } from "@/utils/functions/tokens";
 import {
   Address,
   AddressValue,
@@ -6,14 +14,6 @@ import {
   Transaction,
 } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
-import { selectedNetwork } from "config/network";
-import store from "redux/store";
-import { getSmartContractInteraction } from "services/sc";
-import { SmartContractInteraction } from "services/sc/calls/transaction";
-import { IElrondToken } from "types/elrond.interface";
-import { IRoute } from "types/swap.interface";
-import { getWspOfWrapedEgld } from "utils/functions/sc";
-import { calculateSlipageAmount } from "utils/functions/tokens";
 
 export const submitSwap = async (
   swapInfo: IRoute[],

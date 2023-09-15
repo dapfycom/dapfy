@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
-import { selectUserAddress } from "redux/dapp/dapp-slice";
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import {
   fetchAccountTokenById,
   fetchUserEgldBalance,
-} from "services/rest/elrond/accounts";
+} from "@/services/rest/elrond/accounts";
+import { useSelector } from "react-redux";
 import useSWR from "swr";
 const useGetAccountToken = (identifier: string) => {
   const address = useSelector(selectUserAddress);

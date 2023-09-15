@@ -1,6 +1,6 @@
+import { selectedNetwork } from "@/config/network";
+import { AppState } from "@/redux/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { selectedNetwork } from "config/network";
-import { AppState } from "redux/store";
 
 export interface SwapLpState {
   fromField: {

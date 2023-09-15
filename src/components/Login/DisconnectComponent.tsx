@@ -2,6 +2,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { logout } from "@multiversx/sdk-dapp/utils";
 
+import { selectedNetwork } from "@/config/network";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { useGetAccountInfo } from "@multiversx/sdk-dapp/hooks";
 import { LogOut } from "lucide-react";
@@ -31,13 +32,21 @@ const DisconnectComponent = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="hidden  md:flex">
+        <Avatar className="hidden  md:flex uppercase">
           <AvatarImage src={avatarUrl} />
           <AvatarFallback>{avatarFallback}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-[200px]">
-        <DropdownMenuLabel>{formatAddress(address, 6, 4)}</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <a
+            href={`${selectedNetwork.network.explorerAddress}/accounts/${address}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {formatAddress(address, 6, 4)}
+          </a>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={handleDisconnect}>

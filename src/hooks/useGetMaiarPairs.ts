@@ -1,9 +1,9 @@
+import { selectedNetwork } from "@/config/network";
+import { fetchElrondData } from "@/services/rest/elrond";
+import { fetchMaiarPairs } from "@/services/rest/elrond/maiar";
+import { IMexPair } from "@/types/elrond.interface";
 import BigNumber from "bignumber.js";
-import { selectedNetwork } from "config/network";
-import { fetchElrondData } from "services/rest/elrond";
-import { fetchMaiarPairs } from "services/rest/elrond/maiar";
 import useSwr from "swr";
-import { IMexPair } from "types/elrond.interface";
 const useGetMaiarPairs = () => {
   //fetch rare price
   const { data: dataPrice } = useSwr<{
@@ -15,9 +15,9 @@ const useGetMaiarPairs = () => {
     error,
   } = useSwr<IMexPair[]>("/maiar-pairs", fetchMaiarPairs);
 
-  let pairs: IMexPair[] = apiPairs;
+  let pairs: IMexPair[] | undefined = apiPairs;
   const rarePrice = dataPrice?.price;
-  if (apiPairs && rarePrice) {
+  if (pairs && rarePrice) {
     pairs = [
       ...pairs,
       {

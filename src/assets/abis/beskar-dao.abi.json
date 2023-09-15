@@ -1,0 +1,261 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.66.0-nightly",
+            "commitHash": "b8b5caee04116c7383eb1c6470fcf15c437a60d4",
+            "commitDate": "2022-10-16",
+            "channel": "Nightly",
+            "short": "rustc 1.66.0-nightly (b8b5caee0 2022-10-16)"
+        },
+        "contractCrate": {
+            "name": "beskar-dao",
+            "version": "0.0.1",
+            "git_version": "01cd9b0-modified"
+        },
+        "framework": {
+            "name": "elrond-wasm",
+            "version": "0.31.1"
+        }
+    },
+    "name": "BeskarDao",
+    "constructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "deposit",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "stop",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "amount_lp",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "nft_nonces",
+                    "type": "List<u64>"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "withdraw",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "addToken",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "start",
+                    "type": "u64"
+                },
+                {
+                    "name": "period",
+                    "type": "u64"
+                },
+                {
+                    "name": "share_lp",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "release",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "viewUserData",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "u64"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "viewAppData",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                },
+                {
+                    "type": "u64"
+                },
+                {
+                    "type": "u64"
+                },
+                {
+                    "type": "u64"
+                },
+                {
+                    "type": "u64"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "viewUserTokenData",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "List<BigUint>"
+                },
+                {
+                    "type": "List<BigUint>"
+                },
+                {
+                    "type": "List<BigUint>"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "viewAppTokenData",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<TokenIdentifier>"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "List<u64>"
+                },
+                {
+                    "type": "List<BigUint>"
+                },
+                {
+                    "type": "List<BigUint>"
+                },
+                {
+                    "type": "List<BigUint>"
+                },
+                {
+                    "type": "BigUint"
+                },
+                {
+                    "type": "u32"
+                },
+                {
+                    "type": "u64"
+                }
+            ]
+        }
+    ],
+    "hasCallback": false,
+    "types": {}
+}

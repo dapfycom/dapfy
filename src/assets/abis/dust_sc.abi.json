@@ -1,0 +1,177 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.70.0-nightly",
+            "commitHash": "28a29282f6dde2e4aba6e1e4cfea5c9430a00217",
+            "commitDate": "2023-04-06",
+            "channel": "Nightly",
+            "short": "rustc 1.70.0-nightly (28a29282f 2023-04-06)"
+        },
+        "contractCrate": {
+            "name": "dust_sc",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.39.5"
+        }
+    },
+    "docs": [
+        "An empty contract. To be used as a template when starting a new contract from scratch."
+    ],
+    "name": "DustContract",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "router",
+                "type": "Address"
+            },
+            {
+                "name": "fees_address",
+                "type": "Address"
+            },
+            {
+                "name": "initial_fees_percentage",
+                "type": "u64"
+            },
+            {
+                "name": "wegld_token_id",
+                "type": "TokenIdentifier"
+            },
+            {
+                "name": "usdc_token_id",
+                "type": "TokenIdentifier"
+            },
+            {
+                "name": "bsk_token_id",
+                "type": "TokenIdentifier"
+            }
+        ],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "setFeePercentage",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "fee_percentage",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setRoutes",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "swipe",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "min_amount_out",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getAmountOut",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "tokens_to_swipe",
+                    "type": "variadic<multi<TokenIdentifier,BigUint>>",
+                    "multi_arg": true
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getSingleRoutes",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "token_in",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<PairContractMetadata>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getAllowedOutputTokens",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<TokenIdentifier>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getAllowedInputTokens",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<TokenIdentifier>",
+                    "multi_result": true
+                }
+            ]
+        }
+    ],
+    "events": [],
+    "hasCallback": false,
+    "types": {
+        "PairContractMetadata": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "second_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ]
+        }
+    }
+}

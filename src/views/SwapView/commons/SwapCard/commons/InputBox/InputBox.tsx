@@ -1,12 +1,29 @@
-import { Box, Flex, Image, Input, Spinner, Text } from "@chakra-ui/react";
-import ActionButton from "components/ActionButton/ActionButton";
-import { AngleDownIcon } from "components/icons/ui-icons";
-import useGetAccountToken from "hooks/useGetAccountToken";
-import useGetElrondToken from "hooks/useGetElrondToken";
-import React, { lazy, useState } from "react";
-import { IElrondAccountToken } from "types/elrond.interface";
-import { formatBalance } from "utils/functions/formatBalance";
-const SelectTokenModal = lazy(() => import("../SelectTokenModal"));
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { selectedNetwork } from "@/config/network";
+import useGetAccountToken from "@/hooks/useGetAccountToken";
+import { useGetAllMaiarListedTokens } from "@/hooks/useGetAllTokensListed";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
+import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
+import { IElrondAccountToken } from "@/types/elrond.interface";
+import { formatBalance } from "@/utils/functions/formatBalance";
+import { ChevronDownIcon, Loader, Loader2Icon } from "lucide-react";
+import Image from "next/image";
+import React from "react";
+// const SelectTokenModal = lazy(() => import("../SelectTokenModal"));
 
 interface IProps {
   selectedTokenI: string;
@@ -30,105 +47,123 @@ const InputBox = ({
   disabeledTokenSelection,
   onMax,
 }: IProps) => {
-  const [openTokensListModal, setOpenTokensListModal] = useState(false);
-
   const { elrondToken, isLoading } = useGetElrondToken(selectedTokenI);
   const { accountToken } = useGetAccountToken(selectedTokenI);
 
-  const handleClose = () => {
-    setOpenTokensListModal(false);
-  };
-  const handleOpen = () => {
-    // set to true to allow the modal to open
-    setOpenTokensListModal(true);
-  };
+  // select token
+  const { maiarTokens } = useGetAllMaiarListedTokens();
+  const tokensToSwap = [
+    selectedNetwork.tokensID.egld,
+    ...maiarTokens.filter((t) => t !== selectedNetwork.tokensID.bsk),
+  ];
+  const { tokens, isLoading: loadingTokens } =
+    useGetMultipleElrondTokens(tokensToSwap);
 
   return (
     <>
-      <Box
-        bg="whiteT.50"
-        borderRadius={{ xs: "md", md: "lg" }}
-        p={"20px"}
-        border={"1px"}
-        borderColor="whiteT.100"
-      >
-        <Flex w="full" mb="20px" gap="15px" justifyContent={"flex-end"}>
-          {isLoadingInput ? (
-            <Flex flex={1}>
-              <Spinner />
-            </Flex>
-          ) : (
-            <Input
-              variant={"unstyled"}
-              flex={1}
-              placeholder="0.0"
-              fontSize={{ xs: "2xl", lg: "4xl" }}
-              value={value}
-              onChange={(e) => onChange(e, accountToken as IElrondAccountToken)}
-              color="white"
-            />
-          )}
-          <ActionButton
-            borderRadius={{ xs: "10px", lg: "20px" }}
-            px={{ xs: "10px", md: "20px" }}
-            py="15px"
-            bg={disabeledTokenSelection ? "dark.300" : "dark.100"}
-            display={"flex"}
-            justifyContent="space-between"
-            alignItems={"center"}
-            h="auto"
-            onClick={handleOpen}
-            noRipple={disabeledTokenSelection}
-            cursor={disabeledTokenSelection ? "default" : "pointer"}
-          >
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <>
-                <Flex
-                  gap={{ xs: "5px", md: "10px" }}
-                  alignItems="center"
-                  mr={2}
-                >
-                  <Image
-                    src={elrondToken?.assets?.svgUrl}
-                    alt={elrondToken?.ticker}
-                    w={{ xs: "18px", lg: "40px" }}
-                  />
-                  <Text fontSize={{ xs: "md", lg: "xl" }}>
-                    {elrondToken?.ticker}
-                  </Text>
-                </Flex>
-                {!disabeledTokenSelection && (
-                  <AngleDownIcon fontSize={{ xs: "13px", lg: "17px" }} />
+      <div className="flex flex-col border w-full py-5 pb-4 px-5 rounded-lg">
+        <div className="flex justify-between w-full">
+          <Input
+            type="text"
+            className="border-none focus-visible:border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
+            placeholder="0.0"
+            onChange={(e) => onChange(e, accountToken as IElrondAccountToken)}
+            value={value}
+          />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={`ml-auto gap-2 w-fit ${
+                  disabeledTokenSelection ? "justify-center" : ""
+                }`}
+              >
+                {isLoading ? (
+                  <div className="flex px-2">
+                    <Loader2Icon className="animate-spin w-4 h-4" />
+                  </div>
+                ) : (
+                  <div
+                    className={`flex items-center gap-2 ${
+                      disabeledTokenSelection
+                        ? "min-w-[70px] justify-center gap-3"
+                        : ""
+                    }`}
+                  >
+                    <div className="w-[23px]">
+                      <Image
+                        src={elrondToken?.assets?.svgUrl}
+                        alt={elrondToken?.ticker}
+                        width={23}
+                        height={23}
+                      />
+                    </div>
+                    <p>{elrondToken?.ticker}</p>
+                  </div>
                 )}
-              </>
+                {!disabeledTokenSelection && (
+                  <ChevronDownIcon className="ml-2 h-4 w-4 text-muted-foreground" />
+                )}
+              </Button>
+            </PopoverTrigger>
+            {!disabeledTokenSelection && (
+              <PopoverContent className="p-0" align="end">
+                <Command>
+                  <CommandInput placeholder="Select new role token" />
+                  <CommandList>
+                    <CommandEmpty>
+                      {" "}
+                      {loadingTokens ? (
+                        <div className="flex justify-center w-full">
+                          <Loader className="animate-spin" />
+                        </div>
+                      ) : (
+                        "No tokens found."
+                      )}{" "}
+                    </CommandEmpty>
+                    {loadingTokens ? null : (
+                      <CommandGroup>
+                        {tokens.map((t) => {
+                          return (
+                            <CommandItem key={t.identifier}>
+                              <div
+                                className="w-full h-full gap-3 cursor-pointer flex  items-start px-4 py-2"
+                                onClick={() => onChangeToken(t.identifier)}
+                              >
+                                <Image
+                                  src={t?.assets?.svgUrl}
+                                  alt={t?.ticker}
+                                  width={20}
+                                  height={20}
+                                />
+                                <p>{t?.ticker}</p>
+                              </div>
+                            </CommandItem>
+                          );
+                        })}
+                      </CommandGroup>
+                    )}
+                  </CommandList>
+                </Command>
+              </PopoverContent>
             )}
-          </ActionButton>
-        </Flex>
+          </Popover>
+        </div>
+
         {accountToken && (
-          <Flex justifyContent={"flex-end"}>
-            <Text
-              fontSize={{ xs: "xs", lg: "lg" }}
-              onClick={() => onMax(accountToken as IElrondAccountToken)}
-              cursor="pointer"
+          <div className="flex justify-end mt-3">
+            <Button
+              variant={"ghost"}
+              className="text-sm"
+              onClick={() =>
+                onMax && onMax(accountToken as IElrondAccountToken)
+              }
             >
               Balance: {formatBalance(accountToken)}
-            </Text>
-          </Flex>
+            </Button>
+          </div>
         )}
-      </Box>
-
-      {openTokensListModal && !disabeledTokenSelection && (
-        <SelectTokenModal
-          isOpen={openTokensListModal}
-          onClose={handleClose}
-          selectToken={(t) => {
-            handleClose();
-            onChangeToken(t);
-          }}
-        />
-      )}
+      </div>
     </>
   );
 };

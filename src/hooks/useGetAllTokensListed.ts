@@ -1,10 +1,10 @@
-import { selectedNetwork } from "config/network";
+import { selectedNetwork } from "@/config/network";
 import useGetMaiarPairs from "./useGetMaiarPairs";
 export const useGetAllMaiarListedTokens = () => {
   const { pairs, error, isLoading } = useGetMaiarPairs();
   const maiarTokens: string[] = pairs.map((pair) => {
     if (pair.baseId === "USDC-c76f1f") {
-      return pair.quoteId;
+      return pair.quoteId || "";
     } else {
       return pair.baseId;
     }

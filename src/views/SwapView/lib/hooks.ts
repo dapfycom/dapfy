@@ -1,11 +1,11 @@
+import useGetMaiarPairs from "@/hooks/useGetMaiarPairs";
+import useGetToken1AndToken2OfLpToken from "@/hooks/useGetToken1AndToken2OfLpToken";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { IElrondToken } from "@/types/elrond.interface";
+import { formatBalanceDolar } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
-import useGetMaiarPairs from "hooks/useGetMaiarPairs";
-import useGetToken1AndToken2OfLpToken from "hooks/useGetToken1AndToken2OfLpToken";
-import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { useEffect } from "react";
 import useSWR from "swr";
-import { IElrondToken } from "types/elrond.interface";
-import { formatBalanceDolar } from "utils/functions/formatBalance";
 import { smartSwapRoutes } from "./functions";
 import {
   onChangeToField,

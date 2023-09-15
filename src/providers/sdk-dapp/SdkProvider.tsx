@@ -41,9 +41,9 @@ export default function SdkProvider({
           }}
         >
           <AxiosInterceptorContext.Listener />
-          <TransactionsToastList />
+          <TransactionsToastList className="text-black" />
           <NotificationModal />
-          <SignTransactionsModals className="custom-class-for-modals" />
+          <SignTransactionsModals className="text-black" />
           <>{children}</>
         </DappProvider>
       </AxiosInterceptorContext.Interceptor>

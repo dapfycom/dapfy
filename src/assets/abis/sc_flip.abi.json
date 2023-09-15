@@ -1,0 +1,245 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.70.0-nightly",
+            "commitHash": "28a29282f6dde2e4aba6e1e4cfea5c9430a00217",
+            "commitDate": "2023-04-06",
+            "channel": "Nightly",
+            "short": "rustc 1.70.0-nightly (28a29282f 2023-04-06)"
+        },
+        "contractCrate": {
+            "name": "sc_flip",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.39.5"
+        }
+    },
+    "docs": [
+        "An empty contract. To be used as a template when starting a new contract from scratch."
+    ],
+    "name": "FlipContract",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "random_sc",
+                "type": "Address"
+            },
+            {
+                "name": "fees_address",
+                "type": "Address"
+            },
+            {
+                "name": "base_token_id",
+                "type": "TokenIdentifier"
+            },
+            {
+                "name": "max_allowed_amount",
+                "type": "BigUint"
+            }
+        ],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "changeMaxAllowedAmount",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "max_allowed_amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "flip",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "user_selection",
+                    "type": "bool"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getMaxAmountAllowed",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getTotalVolume",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getTotalHouseWinVolume",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getAllUsers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<Address>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getPaginatedUserBetsByUser",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "limit",
+                    "type": "u32"
+                },
+                {
+                    "name": "offset",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<UserBet>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getAllPaginatedUserBets",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "limit",
+                    "type": "u32"
+                },
+                {
+                    "name": "offset",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<UserBet>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getMyBetsCount",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "getAllBetsCount",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "getAllUsersCount",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "getAllPaginatedUserVolume",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "limit",
+                    "type": "u32"
+                },
+                {
+                    "name": "offset",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<multi<Address,BigUint>>",
+                    "multi_result": true
+                }
+            ]
+        }
+    ],
+    "events": [],
+    "hasCallback": true,
+    "types": {
+        "UserBet": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "user_bet_id",
+                    "type": "u64"
+                },
+                {
+                    "name": "user_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "user_bet",
+                    "type": "bool"
+                },
+                {
+                    "name": "result",
+                    "type": "bool"
+                },
+                {
+                    "name": "bsk_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "creation_date",
+                    "type": "u64"
+                }
+            ]
+        }
+    }
+}

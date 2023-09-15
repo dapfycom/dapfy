@@ -1,11 +1,11 @@
-import { selectedNetwork } from "config/network";
-import { fetchElrondEconomics } from "services/rest/elrond/network";
-import { fetchTokenById } from "services/rest/elrond/tokens";
+import { selectedNetwork } from "@/config/network";
+import { fetchElrondEconomics } from "@/services/rest/elrond/network";
+import { fetchTokenById } from "@/services/rest/elrond/tokens";
+import { IElrondToken } from "@/types/elrond.interface";
+import { egldStaticData } from "@/utils/constants/egldData";
 import useSWR from "swr";
-import { IElrondToken } from "types/elrond.interface";
-import { egldStaticData } from "utils/constants/egldData";
 
-const useGetElrondToken = (tokenI: string) => {
+const useGetElrondToken = (tokenI: string | null) => {
   const { data: elrondToken, isLoading: isLoadingElrondToken } = useSWR(
     tokenI === "EGLD" ? null : tokenI,
     fetchTokenById,

@@ -37,7 +37,7 @@ const MainNav: React.FC<MainNavProps> = ({
         return (
           <Link
             key={route.href}
-            href="/examples/dashboard"
+            href={route.href}
             className={`text-sm font-medium transition-colors hover:text-primary ${
               route.active ? "" : "text-muted-foreground"
             }`}

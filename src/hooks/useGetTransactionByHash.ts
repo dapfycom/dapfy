@@ -1,12 +1,12 @@
-import { fetchTransactionByHash } from "services/rest/elrond/transactions";
+import { fetchTransactionByHash } from "@/services/rest/elrond/transactions";
+import { ITransacation } from "@/types/elrond.interface";
 import useSwr from "swr";
-import { ITransacation } from "types/elrond.interface";
 const useGetTransactionByHash = (hash: string) => {
   const { data, error, isLoading } = useSwr<ITransacation>(
-    `/transactions/${hash}`,
-    hash ? () => fetchTransactionByHash(hash) : null,
+    hash ? `/transactions/${hash}` : null,
+    () => fetchTransactionByHash(hash),
     {
-      refreshInterval: (lastesData: ITransacation) => {
+      refreshInterval: (lastesData) => {
         let timeRefresh = 0;
 
         if (lastesData?.status === "pending") {

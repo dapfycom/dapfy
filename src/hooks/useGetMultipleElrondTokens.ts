@@ -1,8 +1,8 @@
-import { selectedNetwork } from "config/network";
-import { fetchElrondEconomics } from "services/rest/elrond/network";
-import { getFromAllTokens } from "services/rest/elrond/tokens";
+import { selectedNetwork } from "@/config/network";
+import { fetchElrondEconomics } from "@/services/rest/elrond/network";
+import { getFromAllTokens } from "@/services/rest/elrond/tokens";
+import { IElrondToken } from "@/types/elrond.interface";
 import useSWR from "swr";
-import { IElrondToken } from "types/elrond.interface";
 
 const useGetMultipleElrondTokens = (tokensIdentifiers: string[]) => {
   const isEgldonTokens = tokensIdentifiers.includes("EGLD");
@@ -68,17 +68,17 @@ const useGetMultipleElrondTokens = (tokensIdentifiers: string[]) => {
       (t) => t.identifier !== selectedNetwork.tokensID.bsk
     );
 
-    finalData = [
-      ...finalData,
-      {
-        ...bskToken,
-        assets: {
-          svgUrl: "/images/bsk-logo.svg",
+    if (bskToken) {
+      finalData = [
+        ...finalData,
+        {
+          ...bskToken,
+          assets: {
+            svgUrl: "/images/bsk-logo.svg",
+          },
         },
-      },
-    ];
-
-    console.log("finalData", finalData);
+      ];
+    }
   }
 
   return {

@@ -1,5 +1,5 @@
-import { selectedNetwork } from "config/network";
-import { WspTypes } from "services/sc";
+import { selectedNetwork } from "@/config/network";
+import { WspTypes } from "@/services/sc";
 
 export const getScOfWrapedEgld = (shard: number): string => {
   switch (shard) {
@@ -28,7 +28,7 @@ export const getWspOfWrapedEgld = (shard: number): WspTypes => {
   }
 };
 
-export const Base64toString = (base64String): string => {
+export const Base64toString = (base64String: string): string => {
   const decodedString = Buffer.from(base64String, "base64").toString("utf-8");
   return decodedString;
 };

@@ -1,6 +1,6 @@
+import { openLogin } from "@/redux/dapp/dapp-slice";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
 import { logout } from "@multiversx/sdk-dapp/utils";
-import { openLogin } from "redux/dapp/dapp-slice";
 import { useAppDispatch } from "./useRedux";
 
 const useAuthentication = () => {
