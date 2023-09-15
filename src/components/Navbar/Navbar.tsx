@@ -12,7 +12,7 @@ const Navbar = async () => {
           <Link href="/" className="ml-[-10px] flex gap-x-2">
             <p className="font-bold text-4xl">🔋</p>
           </Link>
-          <MainNav className="mx-6" />
+          <MainNav className="mx-6 hidden md:flex" />
           <NavbarActions />
         </div>
       </Container>

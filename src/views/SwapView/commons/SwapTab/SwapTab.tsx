@@ -38,7 +38,7 @@ export function SwapTabs() {
       <Tabs
         defaultValue={tab}
         onValueChange={handleChangeTab}
-        className="w-[500px]"
+        className="w-full max-w-[500px]"
       >
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="swap">Swap Tokens</TabsTrigger>
