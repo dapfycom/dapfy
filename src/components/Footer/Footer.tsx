@@ -1,3 +1,4 @@
+import { Dot } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
@@ -59,6 +60,10 @@ const Footer = () => {
         <div className="mb-10 text-center">
           <p className="text-gray-700 text-md md:text-lg max-w-xs md:max-w-prose mx-auto">
             xBeskar © {new Date().getFullYear()}. Todos los derechos reservados.
+          </p>
+          <p className="text-blue-800 font-semibold flex items-center w-full justify-center mb-[-30px]">
+            <Dot size={60} className="inline-block mr-[-20px]" /> All systems
+            normal.
           </p>
         </div>
 
