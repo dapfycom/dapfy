@@ -59,6 +59,7 @@ const InputBox = ({
   const { tokens, isLoading: loadingTokens } =
     useGetMultipleElrondTokens(tokensToSwap);
 
+  const readOnly = !Boolean(onMax);
   return (
     <>
       <div className="flex flex-col border w-full py-5 pb-4 px-5 rounded-lg">
@@ -69,6 +70,7 @@ const InputBox = ({
             placeholder="0.0"
             onChange={(e) => onChange(e, accountToken as IElrondAccountToken)}
             value={value}
+            readOnly={readOnly}
           />
           <Popover>
             <PopoverTrigger asChild>
@@ -153,16 +155,18 @@ const InputBox = ({
         {accountToken && (
           <div className="flex justify-end mt-3 text-muted-foreground">
             <div className="flex gap-3 items-center">
-              <Button
-                size={"xs"}
-                className="text-xs"
-                variant={"outline"}
-                onClick={() =>
-                  onMax && onMax(accountToken as IElrondAccountToken)
-                }
-              >
-                MAX
-              </Button>
+              {!readOnly && (
+                <Button
+                  size={"xs"}
+                  className="text-xs"
+                  variant={"outline"}
+                  onClick={() =>
+                    onMax && onMax(accountToken as IElrondAccountToken)
+                  }
+                >
+                  MAX
+                </Button>
+              )}
               <p className="text-sm">Balance: {formatBalance(accountToken)}</p>
             </div>
           </div>

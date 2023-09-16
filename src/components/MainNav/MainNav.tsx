@@ -26,7 +26,7 @@ const MainNav: React.FC<MainNavProps> = ({
 
   return (
     <nav
-      className={cn("flex items-center space-x-4 lg:space-x-6", className)}
+      className={cn("flex items-center space-x-1 lg:space-x-2", className)}
       {...props}
     >
       {routes.map((route) => {
@@ -38,8 +38,10 @@ const MainNav: React.FC<MainNavProps> = ({
           <Link
             key={route.href}
             href={route.href}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              route.active ? "" : "text-muted-foreground"
+            className={`text-sm h-[30px] flex items-center justify-center rounded-full px-[12px]   font-medium transition-colors hover:text-primary ${
+              route.active
+                ? "bg-[hsla(0,0%,100%,.09)]"
+                : "text-muted-foreground"
             }`}
           >
             {route.label}

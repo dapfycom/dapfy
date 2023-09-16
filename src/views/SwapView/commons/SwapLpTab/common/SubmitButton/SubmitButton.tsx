@@ -64,27 +64,9 @@ const SubmitButton = () => {
   return (
     <>
       {txSuccess && <Realistic />}
-      <Button onClick={handleSwap} className="w-full max-w-[200px]">
+      <Button onClick={handleSwap} className="w-full">
         {buttonText}
       </Button>
-
-      {/* <ActionButton
-        width={"full"}
-        h="auto"
-        py={"20px"}
-        bgColor="rgba(40, 67, 190, 0.3)"
-        _disabled={{
-          "& p": {
-            color: "dark.100 !important",
-          },
-          bg: "dark.400",
-        }}
-        onClick={handleSwap}
-      >
-        <Text color="primary" opacity={1} fontSize={{ xs: "md", lg: "25px" }}>
-          {buttonText}
-        </Text>
-      </ActionButton> */}
     </>
   );
 };

@@ -71,7 +71,7 @@ const SubmitButton = () => {
   return (
     <>
       {txSuccess && <Realistic />}
-      <Button onClick={handleSwap} className="w-full max-w-[200px]">
+      <Button onClick={handleSwap} className="w-full">
         {buttonText}
       </Button>
 

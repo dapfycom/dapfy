@@ -52,8 +52,6 @@ const SwapCard = () => {
     dispatch(changeFromFieldToken(token));
   };
   const handleChangeToToken = (token: string) => {
-    console.log("handleChangeToToken", token);
-
     dispatch(changeToFieldToken(token));
   };
   const handleMax = (accountToken: IElrondAccountToken) => {
