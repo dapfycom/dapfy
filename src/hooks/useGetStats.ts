@@ -1,6 +1,6 @@
 import { fetchStats } from "@/services/rest/elrond/network";
 import { useEffect, useState } from "react";
-import useSwr from "swr";
+import useSwr, { mutate } from "swr";
 // every epoch change every 24h and there is a total of 14400 rounds per epoch
 
 const useGetStats = () => {
@@ -35,21 +35,27 @@ export const useGetTimeUntilNextEpoch = () => {
 // this will make a count down until the next epoch and when reach 0 will start again with the new epoch
 export const useGetTimeUntilNextEpochCountDown = () => {
   const { timeUntilNextEpoch } = useGetTimeUntilNextEpoch();
+  // const timeUntilNextEpoch = 10;
   const [time, setTime] = useState(timeUntilNextEpoch);
 
   useEffect(() => {
-    if (timeUntilNextEpoch) {
-      setTime(timeUntilNextEpoch);
-    }
-  }, [timeUntilNextEpoch]);
+    if (!timeUntilNextEpoch) return;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime((time) => time - 1);
+    setTime(timeUntilNextEpoch);
+
+    const intervalId = setInterval(() => {
+      setTime((prevCountDown) => {
+        if (prevCountDown <= 0) {
+          mutate("/stats");
+          return 86400;
+        } else {
+          return prevCountDown - 1;
+        }
+      });
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(intervalId);
+  }, [timeUntilNextEpoch]);
 
   return {
     timeUntilNextEpoch: time,
