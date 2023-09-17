@@ -150,6 +150,7 @@ export const fetchFarmInfo = async () => {
   parsed.forEach((item, index) => {
     const value = item.valueOf();
 
+    // @ts-ignore
     data[dataFields[index][0]] = Array.isArray(value)
       ? value.map((i) => (index === 0 ? i.toString() : i.toFixed()))
       : value.toFixed();
@@ -160,6 +161,7 @@ export const fetchFarmInfo = async () => {
   data.tokenId.forEach((id: string, index) => {
     const tokenIdentifier = `${id}-${data.tokenNonce[index]}`;
 
+    // @ts-ignore
     if (!tokenData[id]) {
       newTokens.add(tokenIdentifier);
     }

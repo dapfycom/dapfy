@@ -62,9 +62,9 @@ export const useLpStoped = () => {
   const { data: userFarmInfo } = useGetFarmUserInfo();
   const { data: farmInfo } = useGetFarmsInfo();
 
-  const bnLpStoped = new BigNumber(userFarmInfo.lpStopped);
-  const bnUserBlock = new BigNumber(userFarmInfo.lock);
-  const bnCurrentBlock = new BigNumber(farmInfo.block);
+  const bnLpStoped = new BigNumber(userFarmInfo?.lpStopped || 0);
+  const bnUserBlock = new BigNumber(userFarmInfo?.lock || 0);
+  const bnCurrentBlock = new BigNumber(farmInfo?.block || 0);
   const isLpStoped = !(
     bnLpStoped.isGreaterThan(0) &&
     bnUserBlock.isLessThanOrEqualTo(bnCurrentBlock)
@@ -78,9 +78,9 @@ export const useNFTsStoped = () => {
   const { data: userFarmInfo } = useGetFarmUserInfo();
   const { data: farmInfo } = useGetFarmsInfo();
 
-  const bnLpStoped = new BigNumber(userFarmInfo.nftStopped.length);
-  const bnUserBlock = new BigNumber(userFarmInfo.lock);
-  const bnCurrentBlock = new BigNumber(farmInfo.block);
+  const bnLpStoped = new BigNumber(userFarmInfo?.nftStopped.length || 0);
+  const bnUserBlock = new BigNumber(userFarmInfo?.lock || 0);
+  const bnCurrentBlock = new BigNumber(farmInfo?.block || 0);
   const isNFTsStoped = !(
     bnLpStoped.isGreaterThan(0) &&
     bnUserBlock.isLessThanOrEqualTo(bnCurrentBlock)

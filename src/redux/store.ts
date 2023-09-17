@@ -1,5 +1,5 @@
 // import coinFlipReducer from "@/views/CoinFlipView/lib/con-flip-slice";
-// import dustReducer from "@/views/DustView/lib/dust-slice";
+import dustReducer from "@/views/DustView/lib/dust-slice";
 import swapReducer from "@/views/SwapView/lib/swap-slice";
 import swapLpReducer from "@/views/SwapView/lib/swapLp-slice";
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
@@ -12,7 +12,7 @@ export function makeStore() {
       swap: swapReducer,
       swapLp: swapLpReducer,
       // coinFlip: coinFlipReducer,
-      // dust: dustReducer,
+      dust: dustReducer,
     },
   });
 }

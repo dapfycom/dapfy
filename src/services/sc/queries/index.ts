@@ -98,7 +98,7 @@ export const scSimpleQuery = async (
 export const scQueryByFieldsDefinitions = async (
   workspace: WspTypes,
   funcName = "",
-  args = [],
+  args: any[] = [],
   dataFields?: any
 ) => {
   const { address: scAddress, abiUrl } = getInterface(workspace);
