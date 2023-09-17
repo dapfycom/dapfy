@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
+import WithdrawModal from "../Modals/WithdrawModal";
 import StakedDetails from "./StakedDetails/StakedDetails";
 
 const StakedInfo = () => {
@@ -13,10 +14,11 @@ const StakedInfo = () => {
 
   const handleHarvest = (e: any) => {
     e.stopPropagation();
+    onCloseHarvest();
     onOpenHarvest();
   };
   return (
-    <div className="flex w-full px-7 py- gap-10 flex-col md:flex-row">
+    <div className="flex w-full px-7 py- gap-10 flex-col md:flex-row pb-4 sm:pb-0">
       {isLoggedIn ? (
         <>
           <div className="flex flex-1">
@@ -32,12 +34,14 @@ const StakedInfo = () => {
             </Button>
           </div>
 
-          {/* {isOpenHarvest && (
-            <HarvestModal isOpen={isOpenHarvest} onClose={onCloseHarvest} />
-          )} */}
+          {isOpenHarvest && (
+            <WithdrawModal isOpen={isOpenHarvest} onClose={onCloseHarvest} />
+          )}
         </>
       ) : (
-        <div className="flex w-full">Please connect your wallet first</div>
+        <div className="flex w-full text-center justify-center mb-5">
+          Please connect your wallet first
+        </div>
       )}
     </div>
     // <Flex

@@ -16,7 +16,7 @@ const SelectTokens = () => {
           <CardTitle className="text-md"> Your dust</CardTitle>
         </div>
       </CardHeader>
-      <CardContent className="space-y-2">
+      <CardContent className="space-y-2 px-4 md:px-6">
         {isLoading ? (
           <div className="flex items-center justify-center w-full min-h-[400px]">
             <Loader2 className="animate-ping" />

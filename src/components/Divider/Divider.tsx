@@ -8,7 +8,9 @@ interface IProps
 const Divider = ({ className, ...props }: IProps) => {
   return (
     <div
-      className={"border-t border-gray-600 dark:border-gray-700 " + className}
+      className={
+        "w-full border-t border-gray-600 dark:border-gray-700 " + className
+      }
       {...props}
     ></div>
   );

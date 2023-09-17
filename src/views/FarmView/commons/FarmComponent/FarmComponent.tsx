@@ -26,7 +26,7 @@ const FarmComponent = () => {
         <CardHeader />
         <CardContent className="space-y-2">
           <div
-            className="flex justify-between items-center cursor-pointer"
+            className="flex justify-between items-center cursor-pointer flex-col sm:flex-row"
             onClick={onToggle}
           >
             <div className="flex items-center gap-4">
@@ -45,7 +45,7 @@ const FarmComponent = () => {
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-col sm:flex-row">
               <FarmInfo />
               <FarmMainButtons isOpen={isOpen} />
             </div>

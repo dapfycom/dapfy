@@ -38,9 +38,10 @@
     "cmdk": "^0.2.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "formik": "^2.4.4",
     "lucide-react": "^0.276.0",
     "moment": "^2.29.4",
-    "next": "13.4.19",
+    "next": "^13.4.12",
     "next-themes": "^0.2.1",
     "next-transpile-modules": "^10.0.1",
     "postcss": "8.4.29",
@@ -58,6 +59,7 @@
     "to-hex": "^0.0.18",
     "typescript": "5.2.2",
     "utf-8-validate": "^5.0.10",
+    "yup": "^1.2.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {

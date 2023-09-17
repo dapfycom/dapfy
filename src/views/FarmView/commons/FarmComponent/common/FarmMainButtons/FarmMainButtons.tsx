@@ -4,6 +4,7 @@ import useDisclosure from "@/hooks/useDisclosure";
 import { withdraw } from "@/views/FarmView/utils/services";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { MouseEvent } from "react";
+import StakeModal from "../Modals/StakeModal";
 
 interface IProps {
   isOpen: boolean;
@@ -49,9 +50,9 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
         </Button>
       )}
 
-      {/* {isOpenStake && (
+      {isOpenStake && (
         <StakeModal isOpen={isOpenStake} onClose={onCloseStake} />
-      )} */}
+      )}
     </div>
   );
 };
