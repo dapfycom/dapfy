@@ -8,27 +8,31 @@ export function getFarmNftIdentifier(nonce: BigNumber): string {
 }
 
 export const calculateFarmReward = (
-  reward,
-  activeLP,
-  rewardPerShareLP,
-  debtLP,
-  activeNFT,
-  rewardPerShareNFT,
-  debtNFT
+  reward: string | number,
+  activeLP: number | string,
+  rewardPerShareLP: number | string,
+  debtLP: number | string,
+  activeNFT: number | string,
+  rewardPerShareNFT: number | string,
+  debtNFT: number | string
 ) => {
-  const lpRewards = new BigNumber(activeLP * rewardPerShareLP)
+  const lpRewards = new BigNumber(activeLP)
+    .multipliedBy(rewardPerShareLP)
     .dividedBy(10 ** 9)
     .minus(debtLP)
     .isGreaterThan(0)
-    ? new BigNumber(activeLP * rewardPerShareLP)
+    ? new BigNumber(activeLP)
+        .multipliedBy(rewardPerShareLP)
         .dividedBy(10 ** 9)
         .minus(debtLP)
     : new BigNumber(0);
-  const nftRewards = new BigNumber(activeNFT * rewardPerShareNFT)
+  const nftRewards = new BigNumber(activeNFT)
+    .multipliedBy(rewardPerShareNFT)
     .dividedBy(10 ** 9)
     .minus(debtNFT)
     .isGreaterThan(0)
-    ? new BigNumber(activeNFT * rewardPerShareNFT)
+    ? new BigNumber(activeNFT)
+        .multipliedBy(rewardPerShareNFT)
         .dividedBy(10 ** 9)
         .minus(debtNFT)
     : new BigNumber(0);
