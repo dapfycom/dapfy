@@ -19,8 +19,8 @@ const DustHeading = () => {
           </TooltipTrigger>
           <TooltipContent>
             <p>
-              Our Dust Converter offers the smallest fees you'll find anywhere,
-              outdoing all competitors. 💸🔥
+              Our Dust Converter offers the smallest fees you&apos;ll find
+              anywhere, outdoing all competitors. 💸🔥
             </p>
           </TooltipContent>
         </Tooltip>
