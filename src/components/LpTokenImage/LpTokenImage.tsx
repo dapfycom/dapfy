@@ -27,11 +27,13 @@ const LpTokenImage = ({ lpToken }: IProps) => {
 export default LpTokenImage;
 
 interface ILpTokenImageV2Props {
-  lpToken: IElrondToken;
+  lpToken?: IElrondToken;
   size: number;
 }
 export const LpTokenImageV2 = ({ lpToken, size }: ILpTokenImageV2Props) => {
-  const lpData = pairs.find((pair) => pair.lpidentifier === lpToken.identifier);
+  const lpData = pairs.find(
+    (pair) => pair.lpidentifier === lpToken?.identifier
+  );
 
   const { tokens } = useGetMultipleElrondTokens(
     lpData ? [lpData.token1lp, lpData.token2lp] : []

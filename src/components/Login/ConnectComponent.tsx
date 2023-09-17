@@ -17,7 +17,10 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 
+import useAuthentication from "@/hooks/useAuthentication";
+import { useAppDispatch } from "@/hooks/useRedux";
 import { walletConnectV2ProjectId } from "@/providers/sdk-dapp/SdkProvider";
+import { openLogin } from "@/redux/dapp/dapp-slice";
 import { ExtensionLoginButton } from "@multiversx/sdk-dapp/UI/extension/ExtensionLoginButton";
 import { LedgerLoginButton } from "@multiversx/sdk-dapp/UI/ledger/LedgerLoginButton";
 import { WalletConnectLoginButton } from "@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton";
@@ -68,8 +71,13 @@ const ConnectComponent = ({ place }: IProps) => {
     callbackRoute: routeNames.swap,
     nativeAuth: true, // optional
   };
+  const dispatch = useAppDispatch();
+  const { isLoginModal } = useAuthentication();
+  const handleChangeModalOpen = (open: boolean) => {
+    dispatch(openLogin(open));
+  };
   return (
-    <Dialog>
+    <Dialog open={isLoginModal} onOpenChange={handleChangeModalOpen}>
       <DialogTrigger asChild>
         <Button
           style={{
