@@ -11,6 +11,8 @@ const Footer = () => {
               <Link
                 href="https://x.com/xBeskar"
                 className=" hover:text-primary transition duration-300"
+                target="_blank"
+                rel="noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +30,10 @@ const Footer = () => {
                 </svg>
               </Link>
               <Link
-                href="https://t.me/BeskarX"
+                href="https://t.me/xBeskar"
                 className=" hover:text-primary transition duration-300"
+                target="_blank"
+                rel="noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
