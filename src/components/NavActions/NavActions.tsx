@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dot } from "lucide-react";
 import Image from "next/image";
 import MobileNav from "../MobileNav/MobileNav";
+import { ModeToggle } from "../ModeToggle/ModeToggle";
 
 const NavbarActions = () => {
   return (
@@ -17,8 +18,9 @@ const NavbarActions = () => {
       <Login />
 
       <MobileNav />
-
-      {/* <ModeToggle /> */}
+      <div className="hidden sm:block">
+        <ModeToggle />
+      </div>
     </div>
   );
 };
