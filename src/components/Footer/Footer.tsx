@@ -5,15 +5,8 @@ const Footer = () => {
   return (
     <footer className="pt-12 ">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between mb-10 md:flex-row flex-col">
-          <div className="flex items-center mb-10 md:mb-0 justify-center">
-            <h6 className="text-primary text-3xl md:text-4xl">xBeskar</h6>
-          </div>
-
-          <div className="text-center md:ml-auto">
-            <h6 className="text-white text-md lg:text-lg mb-6">
-              Redes Sociales
-            </h6>
+        <div className="flex flex-wrap justify-between items-center mb-10 ">
+          <div className="text-center ">
             <div className="flex justify-center space-x-5">
               <Link
                 href="https://x.com/xBeskar"
@@ -55,13 +48,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-        </div>
-
-        <div className="mb-10 text-center">
-          <p className="text-gray-700 text-md md:text-lg max-w-xs md:max-w-prose mx-auto">
-            xBeskar © {new Date().getFullYear()}. Todos los derechos reservados.
-          </p>
-          <p className="text-blue-800 font-semibold flex items-center w-full justify-center mb-[-30px]">
+          <p className="text-blue-800 font-semibold flex items-center justify-center ">
             <Dot size={60} className="inline-block mr-[-20px]" /> All systems
             normal.
           </p>
@@ -76,8 +63,6 @@ const Footer = () => {
             className="w-3/5 h-0.5  mx-auto"
           ></div>
         </div>
-
-        <p className="text-center mb-5">Build 0xA</p>
       </div>
     </footer>
   );
