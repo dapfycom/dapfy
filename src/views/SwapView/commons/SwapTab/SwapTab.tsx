@@ -1,3 +1,4 @@
+"use client";
 import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
