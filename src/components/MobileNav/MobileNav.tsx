@@ -10,7 +10,8 @@ import useDisclosure from "@/hooks/useDisclosure";
 import { cn } from "@/lib/utils";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
 import { logout } from "@multiversx/sdk-dapp/utils";
-import { Menu } from "lucide-react";
+import { Menu, Monitor, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Fragment } from "react";
 import ConnectComponent from "../Login/ConnectComponent";
@@ -19,7 +20,9 @@ import { Separator } from "../ui/separator";
 
 const MobileNav = () => {
   const { isLoggedIn } = useGetLoginInfo();
-  const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
+  const { isOpen, onClose, onToggle } = useDisclosure();
+  const { setTheme, theme } = useTheme();
+
   const navRoutes = mainSiteRoutes.filter((route) => Boolean(route.path));
   const routes = navRoutes.map((route) => ({
     href: route.path,
@@ -33,8 +36,8 @@ const MobileNav = () => {
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col">
-        <SheetHeader className="mb-12 flex-1">
+      <SheetContent className="flex flex-col ">
+        <SheetHeader className="mb-12 flex-1 pt-4">
           {/* <SheetTitle className="mb-8">Menu</SheetTitle> */}
 
           <div className="flex flex-col gap-3">
@@ -57,7 +60,32 @@ const MobileNav = () => {
             ))}
           </div>
         </SheetHeader>
-        <SheetFooter>
+        <SheetFooter className="flex-col">
+          <div className="flex justify-center mb-4 gap-3">
+            <Button
+              size={"icon"}
+              variant={theme === "light" ? "secondary" : "outline"}
+              onClick={() => setTheme("light")}
+            >
+              <Sun className="h-[1.2rem] w-[1.2rem]   " />
+            </Button>
+            <Button
+              size={"icon"}
+              variant={theme === "dark" ? "secondary" : "outline"}
+              onClick={() => setTheme("dark")}
+            >
+              <Moon className=" h-[1.2rem] w-[1.2rem]" />
+            </Button>
+            <Button
+              size={"icon"}
+              variant={theme === "system" ? "secondary" : "outline"}
+            >
+              <Monitor
+                className=" h-[1.2rem] w-[1.2rem]"
+                onClick={() => setTheme("system")}
+              />
+            </Button>
+          </div>
           {isLoggedIn ? (
             <Button onClick={() => logout()}>Disconnet</Button>
           ) : (
