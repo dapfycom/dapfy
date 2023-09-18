@@ -21,8 +21,8 @@ const Navbar = () => {
               }
             : {}
         }
-        className={` fixed top-0 left-0 right-0 ${
-          hasScrolled ? "bg-[rgba(0,0,0,.5)]" : ""
+        className={` fixed z-10 top-0 left-0 right-0 ${
+          hasScrolled ? "bg-[rgba(0,0,0,0.75)]" : ""
         } before:backdrop-opacity-100 before:w-full before:h-full before:absolute  `}
       >
         <Container className="relative z-20">
