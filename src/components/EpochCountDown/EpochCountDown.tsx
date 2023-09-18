@@ -6,7 +6,7 @@ const EpochCountDown = () => {
 
   return (
     <div className="mt-16 flex justify-center text-center text-muted-foreground">
-      ≈ {secondsToHms(timeUntilNextEpoch)} until next reward epoch
+      ≈ {secondsToHms(timeUntilNextEpoch)} until next reward
     </div>
   );
 };
