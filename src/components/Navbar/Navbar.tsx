@@ -5,11 +5,13 @@ import EpochCountDown from "@/components/EpochCountDown/EpochCountDown";
 import MainNav from "@/components/MainNav/MainNav";
 import NavbarActions from "@/components/NavActions/NavActions";
 import Container from "@/components/ui-system/Container";
+import useDisclosure from "@/hooks/useDisclosure";
 import useScrolled from "@/hooks/useScrolled";
+import PishingWarn from "../PishingWarn/PishingWarn";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
-  console.log("render");
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <>
@@ -25,6 +27,8 @@ const Navbar = () => {
           hasScrolled ? "bg-[rgba(0,0,0,0.75)]" : ""
         } before:backdrop-opacity-100 before:w-full before:h-full before:absolute  `}
       >
+        {!isOpen && <PishingWarn close={onToggle} />}
+
         <Container className="relative z-20">
           <div className="relative  sm:px-6 lg:px-8 flex h-16 items-center">
             <Link href="/" className="ml-[-10px] flex gap-x-2">
