@@ -6,16 +6,18 @@ import { usePathname } from "next/navigation";
 const EpochCountDown = () => {
   const pathname = usePathname();
   const { timeUntilNextEpoch } = useGetTimeUntilNextEpochCountDown();
-  let classNameTop = "mt-16";
+  let mt = "64px";
   const { isLoggedIn } = useAuthentication();
   if (pathname === "/" && !isLoggedIn) {
-    classNameTop = "mt-[104px]";
+    mt = "104px";
   }
   return (
     <div
+      style={{
+        marginTop: mt,
+      }}
       className={cn(
-        "mt-16 flex justify-center text-center text-muted-foreground",
-        classNameTop
+        "mt-16 flex justify-center text-center text-muted-foreground"
       )}
     >
       ≈ {secondsToHms(timeUntilNextEpoch)} until next reward
