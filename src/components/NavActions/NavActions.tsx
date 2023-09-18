@@ -15,12 +15,12 @@ const NavbarActions = () => {
         <Dot size={20} className="text-green-500" /> MultiversX
       </Button>
 
-      <Login />
-
-      <MobileNav />
       <div className="hidden sm:block">
         <ModeToggle />
       </div>
+      <Login />
+
+      <MobileNav />
     </div>
   );
 };
