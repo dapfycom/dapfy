@@ -35,7 +35,7 @@ const ConvertInfo = () => {
           <Loader1 />
         ) : (
           <div className="flex flex-col gap-3">
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-3">
               <p>Minimum {formatTokenI(toTokenToConvert)} to receive</p>
               <div className="flex flex-col">
                 <p>
@@ -57,10 +57,10 @@ const ConvertInfo = () => {
                 </p>
               </div>
             </div>
-            <div className="flex justify-between mb-3">
+            {/* <div className="flex justify-between mb-3">
               <p>Basic protocol fee:</p>
               <p>{formatTokenI(toTokenToConvert) === "BSK" ? "0%" : "3.5%"} </p>
-            </div>
+            </div> */}
 
             <div className="flex justify-between">
               <p>Slipage</p>
