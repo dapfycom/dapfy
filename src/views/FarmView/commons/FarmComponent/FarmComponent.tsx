@@ -2,7 +2,7 @@
 import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { selectedNetwork } from "@/config/network";
 import { routeNames } from "@/config/routes";
 import useDisclosure from "@/hooks/useDisclosure";
@@ -23,8 +23,7 @@ const FarmComponent = () => {
   return (
     <>
       <Card className="w-full mt-10 px-4">
-        <CardHeader />
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-2 pt-6">
           <div
             className="flex justify-between items-center cursor-pointer flex-col sm:flex-row"
             onClick={onToggle}
