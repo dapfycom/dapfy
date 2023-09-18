@@ -24,7 +24,11 @@ const FarmInfo = () => {
   }
 
   return (
-    <div className="flex gap-7  flex-col lg:flex-row">
+    <div
+      className={`flex gap-7  flex-col lg:flex-row flex-1 ${
+        userFarmInfo ? "justify-end" : "justify-center"
+      } `}
+    >
       {userFarmInfo && (
         <>
           <FarmDetail

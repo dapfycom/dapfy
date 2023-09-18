@@ -44,7 +44,7 @@ const FarmComponent = () => {
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-4 flex-col sm:flex-row">
+            <div className="flex items-center gap-7 flex-col sm:flex-row flex-1 justify-end">
               <FarmInfo />
               <FarmMainButtons isOpen={isOpen} />
             </div>
