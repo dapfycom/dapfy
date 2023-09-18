@@ -87,7 +87,7 @@ const ConnectComponent = ({ place }: IProps) => {
           className={`relative ${placeClasess[place].button}`}
         >
           <div className=" z-[-1] blur-sm absolute top-0 left-0 right-0 bottom-0 bg-foreground hover:bg-muted-foreground"></div>
-          Connet
+          Connect
           <Zap size={16} className="ml-2" />
         </Button>
       </DialogTrigger>
