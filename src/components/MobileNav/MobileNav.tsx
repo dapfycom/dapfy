@@ -6,6 +6,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { mainSiteRoutes } from "@/config/routes";
+import useDisclosure from "@/hooks/useDisclosure";
 import { cn } from "@/lib/utils";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
 import { logout } from "@multiversx/sdk-dapp/utils";
@@ -18,7 +19,7 @@ import { Separator } from "../ui/separator";
 
 const MobileNav = () => {
   const { isLoggedIn } = useGetLoginInfo();
-
+  const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
   const navRoutes = mainSiteRoutes.filter((route) => Boolean(route.path));
   const routes = navRoutes.map((route) => ({
     href: route.path,
@@ -26,7 +27,7 @@ const MobileNav = () => {
   }));
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={onToggle}>
       <SheetTrigger asChild>
         <Button size={"icon"} className="md:hidden" variant={"outline"}>
           <Menu className="h-6 w-6" />
@@ -45,6 +46,7 @@ const MobileNav = () => {
                     className={cn(
                       "text-sm font-medium transition-colors text-gray-300 "
                     )}
+                    onClick={onClose}
                   >
                     {route.label}
                   </Link>
