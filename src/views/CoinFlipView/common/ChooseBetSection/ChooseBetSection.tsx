@@ -55,7 +55,7 @@ const ChooseBetSection = () => {
   return (
     <Card className="h-full">
       <CardHeader>
-        <div className="flex pt-3 mb-2">
+        <div className="flex justify-between pt-3 mb-2">
           <p>1. Choose your bet</p>
           <div className="flex">
             <p>
