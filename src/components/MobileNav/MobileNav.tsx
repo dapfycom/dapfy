@@ -46,9 +46,7 @@ const MobileNav = () => {
                 <Button asChild variant={"ghost"} className="justify-start">
                   <Link
                     href={route.href || ""}
-                    className={cn(
-                      "text-sm font-medium transition-colors text-gray-300 "
-                    )}
+                    className={cn("text-sm font-medium transition-colors  ")}
                     onClick={onClose}
                   >
                     {route.label}
