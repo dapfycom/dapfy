@@ -1,4 +1,4 @@
-// import coinFlipReducer from "@/views/CoinFlipView/lib/con-flip-slice";
+import coinFlipReducer from "@/views/CoinFlipView/lib/con-flip-slice";
 import dustReducer from "@/views/DustView/lib/dust-slice";
 import swapReducer from "@/views/SwapView/lib/swap-slice";
 import swapLpReducer from "@/views/SwapView/lib/swapLp-slice";
@@ -11,7 +11,7 @@ export function makeStore() {
       dapp: dappReducer,
       swap: swapReducer,
       swapLp: swapLpReducer,
-      // coinFlip: coinFlipReducer,
+      coinFlip: coinFlipReducer,
       dust: dustReducer,
     },
   });

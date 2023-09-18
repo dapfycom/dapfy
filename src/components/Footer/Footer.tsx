@@ -10,7 +10,7 @@ const Footer = () => {
             <h6 className="text-primary text-3xl md:text-4xl">xBeskar</h6>
           </div>
 
-          <div className="md:ml-auto md:text-center">
+          <div className="text-center md:ml-auto">
             <h6 className="text-white text-md lg:text-lg mb-6">
               Redes Sociales
             </h6>
