@@ -87,7 +87,7 @@ const MobileNav = () => {
             </Button>
           </div>
           {isLoggedIn ? (
-            <Button onClick={() => logout()}>Disconnet</Button>
+            <Button onClick={() => logout()}>Disconnect</Button>
           ) : (
             <ConnectComponent place="drawer" />
           )}
