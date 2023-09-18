@@ -6,8 +6,8 @@ interface IProps {
 }
 const PishingWarn = ({ close }: IProps) => {
   return (
-    <div className="w-full justify-center py-2 bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 px-6 relative hidden md:flex">
-      <div className="rounded-full bg-zinc-800  px-5 py-3 w-full max-w-[900px]">
+    <div className="w-full justify-center py-2 bg-gradient px-6 relative flex">
+      <div className="rounded-full rgba(0,0,0,0.5)  px-5 py-3 w-full max-w-[900px]">
         <p className="text-center text-xs text-white">
           <span className="text-[#86d72f]">PHISHING WARNING:</span> please make
           sure you are visiting{" "}

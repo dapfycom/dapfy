@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import useAuthentication from "@/hooks/useAuthentication";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
@@ -26,7 +27,7 @@ const GameActions = () => {
   const [txData, setTxData] = useState("");
   const [sessionId, setSessionId] = React.useState("");
   const { elrondToken } = useGetElrondToken(tokenStr);
-
+  const { isLoggedIn, handleConnect } = useAuthentication();
   const onSuccess = () => {
     if (transactions) {
       setTxData(transactions.length > 0 ? transactions[0]?.hash || "" : "");
@@ -90,9 +91,11 @@ const GameActions = () => {
                   <Button
                     className="w-full "
                     variant={"secondary"}
-                    onClick={handleFilp}
+                    onClick={isLoggedIn ? handleFilp : handleConnect}
                   >
-                    Place bet and flip coin
+                    {isLoggedIn
+                      ? "Place bet and flip coin"
+                      : "Connect your wallet to flip coin"}
                   </Button>
                 </div>
               </div>
