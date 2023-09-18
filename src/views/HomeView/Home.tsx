@@ -12,7 +12,7 @@ const Home = () => {
   const { handleConnect } = useAuthentication();
   return (
     <Container>
-      <div className="text-center my-20">
+      <div className="text-center mt-10 my-20">
         <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
           xBeskar <br /> Shaping the Future of{" "}
           <span className={styles.gradienteTitle}> Crypto Rewards</span>
