@@ -10,7 +10,8 @@ import BigNumber from "bignumber.js";
 import { betAdapter } from "./functions";
 
 export const fetchUserBetsCount = async (address: string): Promise<number> => {
-  const res = await scQuery("flipWsp", "getMyBetsCount", [
+  const res: any = await scQuery("flipWsp", "getMyBetsCount", [
+    // @ts-ignore
     new AddressValue(new Address(address)),
   ]);
 
@@ -19,28 +20,28 @@ export const fetchUserBetsCount = async (address: string): Promise<number> => {
   return data?.toNumber() || 0;
 };
 export const fetchAllTimeBets = async (): Promise<number> => {
-  const res = await scQuery("flipWsp", "getAllBetsCount");
+  const res: any = await scQuery("flipWsp", "getAllBetsCount");
 
   const { firstValue } = res;
   const data = firstValue?.valueOf();
   return data?.toNumber() || 0;
 };
 export const fetchVolume = async (): Promise<number> => {
-  const res = await scQuery("flipWsp", "getTotalVolume");
+  const res: any = await scQuery("flipWsp", "getTotalVolume");
 
   const { firstValue } = res;
   const data = firstValue?.valueOf();
   return data?.toNumber() || 0;
 };
 export const fetchHouseWinVolume = async (): Promise<number> => {
-  const res = await scQuery("flipWsp", "getTotalHouseWinVolume");
+  const res: any = await scQuery("flipWsp", "getTotalHouseWinVolume");
 
   const { firstValue } = res;
   const data = firstValue?.valueOf();
   return data?.toNumber() || 0;
 };
 export const fetchPlayersCount = async (): Promise<number> => {
-  const res = await scQuery("flipWsp", "getAllUsersCount");
+  const res: any = await scQuery("flipWsp", "getAllUsersCount");
 
   const { firstValue } = res;
   const data = firstValue?.valueOf();
@@ -56,11 +57,13 @@ export const fetchAllPlayersVolume = async (
   }[]
 > => {
   const totalPages = Math.ceil(totalUsers / pageSize);
-  const allUsers = [];
+  const allUsers: any[] = [];
 
   const fetchPage = async (page: number) => {
-    const res = await scQuery("flipWsp", "getAllPaginatedUserVolume", [
+    const res: any = await scQuery("flipWsp", "getAllPaginatedUserVolume", [
+      // @ts-ignore
       new U32Value(new BigNumber(pageSize)),
+      // @ts-ignore
       new U32Value(new BigNumber(page)),
     ]);
 
@@ -68,7 +71,7 @@ export const fetchAllPlayersVolume = async (
     const data = firstValue?.valueOf();
 
     if (data) {
-      const volumeData = data.map((d) => {
+      const volumeData = data.map((d: any) => {
         return {
           address: d[0].bech32(),
           amount: d[1].toString(),

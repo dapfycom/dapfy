@@ -1,26 +1,20 @@
+import Realistic from "@/components/Conffeti/Realistic";
 import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  ModalBody,
-  ModalCloseButton,
-  ModalFooter,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import Realistic from "components/Conffeti/Realistic";
-import MyModal from "components/Modal/Modal";
-import useGetTransactionByHash from "hooks/useGetTransactionByHash";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import useGetTransactionByHash from "@/hooks/useGetTransactionByHash";
 import {
   Base64toString,
   convertToBoolean,
   extractStringsBetweenAts,
-} from "utils/functions/sc";
-import { setHouseSelectionSide } from "views/CoinFlipView/lib/con-flip-slice";
-import { selectChoise } from "views/CoinFlipView/lib/functions";
+} from "@/utils/functions/sc";
+import { setHouseSelectionSide } from "@/views/CoinFlipView/lib/con-flip-slice";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { selectChoise } from "../../lib/functions";
 
 interface IProps {
   isOpen: boolean;
@@ -75,7 +69,51 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
   return (
     <>
       {transaction && isReady && userWin && <Realistic />}
-      <MyModal isOpen={isOpen} onClose={handleClose} py={0}>
+
+      <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Coin Flip Reveal</DialogTitle>
+          </DialogHeader>
+
+          {isLoading ? (
+            <div className="flex items-center justify-center h-72 w-full">
+              <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+            </div>
+          ) : (
+            transaction &&
+            isReady && (
+              <div className="flex flex-col items-center justify-center w-full mt-4">
+                <div className="text-lg font-semibold mb-8 text-primary">
+                  Your Choice
+                </div>
+                <div className="text-xl font-semibold mb-8 text-primary">
+                  {selectChoise(userSelection)}
+                </div>
+                <hr className="border-gray-300 w-full" />
+                <div className="mt-8 text-lg font-semibold mb-8 text-primary">
+                  Coin Result
+                </div>
+                <div className="text-xl font-semibold mb-8 text-primary">
+                  {selectChoise(coinSelection)}
+                </div>
+                <hr className="border-gray-300 w-full" />
+
+                {userWin ? (
+                  <div className="text-2xl font-bold my-8 text-green-500">
+                    You Win!
+                  </div>
+                ) : (
+                  <div className="text-2xl font-bold my-8 text-red-500">
+                    You Loose!
+                  </div>
+                )}
+              </div>
+            )
+          )}
+        </DialogContent>
+      </Dialog>
+      {/* <MyModal isOpen={isOpen} onClose={handleClose} py={0}>
         <ModalCloseButton _focus={{ border: "none" }} right={5} top={6} />
         <ModalBody pt={2} minH={"300px"}>
           {isLoading ? (
@@ -137,7 +175,7 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
             Close
           </Button>
         </ModalFooter>
-      </MyModal>
+      </MyModal> */}
     </>
   );
 };

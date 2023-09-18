@@ -5,8 +5,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface CoinFlipState {
   selectedCoinSide: boolean;
   token: string;
-  amount: string;
-  lastHouseSelection?: boolean;
+  amount: string | null;
+  lastHouseSelection?: boolean | null;
 }
 
 const initialState: CoinFlipState = {

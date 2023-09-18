@@ -15,6 +15,7 @@ import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { mutate } from "swr";
+import ResultModal from "../../ResultModal/ResultModal";
 
 const GameActions = () => {
   const dispatch = useAppDispatch();
@@ -56,7 +57,7 @@ const GameActions = () => {
   return (
     <>
       {" "}
-      {/* <ResultModal isOpen={txSuccess} onClose={handleClose} txHash={txData} /> */}
+      <ResultModal isOpen={txSuccess} onClose={handleClose} txHash={txData} />
       <Card className="text-left pt-6">
         <CardContent>
           <div className="flex flex-col w-full gap-6">
