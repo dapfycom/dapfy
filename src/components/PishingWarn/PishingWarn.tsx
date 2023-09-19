@@ -8,11 +8,11 @@ const PishingWarn = ({ close }: IProps) => {
   return (
     <div className="w-full justify-center py-2 bg-gradient px-6 relative flex">
       <div className="rounded-full rgba(0,0,0,0.5)  px-5 py-3 w-full max-w-[900px]">
-        <p className="text-center text-xs text-white">
+        <p className="text-center text-xs ">
           <span className="text-[#86d72f]">PHISHING WARNING:</span> please make
           sure you are visiting{" "}
-          <span className="text-white">{process.env.REACT_APP_HOST} </span>-
-          check the URL carefully
+          <span className="">{process.env.REACT_APP_HOST} </span>- check the URL
+          carefully
         </p>
       </div>
       <Button

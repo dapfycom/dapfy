@@ -40,11 +40,7 @@ const Navbar = () => {
         </Container>
       </header>
 
-      <div
-        style={{
-          paddingTop: !isOpen ? "56px" : 0,
-        }}
-      >
+      <div className={!isOpen ? "pt-20 md:pt-14" : "0"}>
         <EpochCountDown />
       </div>
     </>
