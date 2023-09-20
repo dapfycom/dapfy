@@ -72,7 +72,7 @@ const ShowcaseNFTs = () => {
           itemsPerPage={9}
           Items={({ currentItems }) => (
             <div className="flex-1">
-              <div className="grid grid-cols-3 gap-x-4 gap-y-8 h-fit">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 h-fit">
                 {currentItems.map((nft) => (
                   <AlbumArtwork
                     key={nft.identifier}
@@ -124,6 +124,8 @@ const AlbumArtwork = ({
             "h-auto w-auto object-cover transition-all hover:scale-105",
             aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
           )}
+          placeholder="blur"
+          blurDataURL="https://placehold.co/400"
         />
       </div>
 

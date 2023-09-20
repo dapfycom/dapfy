@@ -9,7 +9,7 @@ const Dashboard = async () => {
     <Container className="mt-10 flex flex-col gap-10">
       <DashboadHeading />
       <Cards />
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-8 grid-cols-1">
         <ContentTable />
         <ShowcaseNFTs />
       </div>
