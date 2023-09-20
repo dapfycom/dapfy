@@ -20,6 +20,7 @@
 
 export const routeNames = {
   home: "/",
+  dashboard: "/dashboard",
   swap: "/swap",
   swapLp: "/swapLp",
 
@@ -33,6 +34,10 @@ export const routeNames = {
 };
 
 export const mainSiteRoutes = [
+  {
+    path: routeNames.dashboard,
+    title: "Dashboard",
+  },
   {
     path: routeNames.swap,
     title: "Swap",
