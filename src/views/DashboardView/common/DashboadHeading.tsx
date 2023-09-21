@@ -2,20 +2,21 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/PageHeader/PageHeader";
-const DashboadHeading = () => {
+import useGetWalletWorth from "@/hooks/useGetWalletWorth";
+import { formatPrecision } from "@/utils/functions/formatBalance";
+const DashboardHeading = () => {
+  const {netWorth} = useGetWalletWorth();
+  
   return (
-    <>
-      <PageHeaderHeading className="mb-6">
-        Pay less, earn more
-      </PageHeaderHeading>
-      <PageHeaderDescription>
-        We actively pay users to interact with the protocol. Tag 🏷️ = (We have
-        the lowest fees around. PLUS: platform revenue goes back to you for
-        every transaction you make using our protocol. Read our documentation to
-        learn more).
-      </PageHeaderDescription>
-    </>
+    <h1 className="flex justify-center text-center flex-col px-6 mb-6 font-normal">
+      <span className=" text-zinc-300 text-lg mb-2">
+       Net Worth
+      </span>
+      <span className="text-3xl font-bold" >
+        ${formatPrecision(netWorth, 2)}
+      </span>
+    </h1>
   );
 };
 
-export default DashboadHeading;
+export default DashboardHeading;

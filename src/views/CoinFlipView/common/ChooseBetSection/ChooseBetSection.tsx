@@ -21,7 +21,7 @@ const betOptionsInEgld = [
 
 const ChooseBetSection = () => {
   const dispatch = useAppDispatch();
-  const selctedTokenStr = useAppSelector(selectCoinFlipTokenStr);
+   const selctedTokenStr = useAppSelector(selectCoinFlipTokenStr);
   const amount = useAppSelector(selectCoinFlipBetAmount);
   const { pairs } = useGetMaiarPairs();
   const { accountToken } = useGetAccountToken(selctedTokenStr);
