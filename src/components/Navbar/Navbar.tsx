@@ -8,6 +8,7 @@ import Container from "@/components/ui-system/Container";
 import useDisclosure from "@/hooks/useDisclosure";
 import useScrolled from "@/hooks/useScrolled";
 import PishingWarn from "../PishingWarn/PishingWarn";
+import { routeNames } from "@/config/routes";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
@@ -31,7 +32,7 @@ const Navbar = () => {
 
         <Container className="relative z-20">
           <div className="relative  sm:px-6 lg:px-8 flex h-16 items-center">
-            <Link href="/" className="ml-[-10px] flex gap-x-2">
+            <Link href={routeNames.home} className="ml-[-10px] flex gap-x-2">
               <p className="font-bold text-4xl">🔋</p>
             </Link>
             <MainNav className="mx-6 hidden md:flex" />

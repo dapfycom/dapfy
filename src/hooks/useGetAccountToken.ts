@@ -40,7 +40,14 @@ const useGetAccountToken = (identifier: string) => {
 
   const data =
     identifier === "EGLD"
-      ? { identifier, nonce: 0, balance: "0", decimals: 18, ...egldData }
+      ? {
+          identifier,
+          nonce: 0,
+          balance: "0",
+          price: 0,
+          decimals: 18,
+          ...egldData,
+        }
       : elrondTokenData;
 
   return {
@@ -48,6 +55,7 @@ const useGetAccountToken = (identifier: string) => {
       identifier,
       balance: "0",
       nonce: 0,
+      price: 0,
       decimals: 18,
     },
     error: elrondTokenError || egldDataError,
