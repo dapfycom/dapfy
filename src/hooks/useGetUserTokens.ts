@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { fetchElrondData } from "@/services/rest/elrond";
 import { IElrondAccountToken } from "@/types/elrond.interface";
-import { useGetAccountInfo } from "@multiversx/sdk-dapp/hooks";
+import { useGetAccountInfo, useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
 import useSwr from "swr";
 const useGetUserTokens = (
   indentifier?: string,
@@ -21,6 +21,7 @@ const useGetUserTokens = (
     address ? `/accounts/${address}/tokens?size=${size}` : null,
     fetchElrondData
   );
+  const { price } = useGetEgldPrice();
   const acc = useGetAccountInfo();
 
   const [tokens, setTokens] = useState<IElrondAccountToken[]>([]);
@@ -39,6 +40,7 @@ const useGetUserTokens = (
             svgUrl: "/images/egld.svg",
           },
           balance: acc.account?.balance,
+          price: price,
         });
       }
       if (indentifier) {
@@ -47,7 +49,7 @@ const useGetUserTokens = (
       }
       setTokens(newTokens);
     }
-  }, [acc.account?.balance, userTokens, indentifier, onlyEsdt]);
+  }, [acc.account?.balance, userTokens, indentifier, onlyEsdt, price]);
 
   return {
     userTokens: tokens || [],

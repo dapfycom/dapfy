@@ -10,9 +10,11 @@ const Dashboard = () => {
   return (
     <Container className="mt-10 flex flex-col gap-10">
       <DashboardHeading />
-      <RewardsCard />
-      {/* <Cards /> */}
-      <Settings />
+      <div className="grid  gap-8 grid-cols-1 md:grid-cols-2">
+        <RewardsCard />
+        {/* <Cards /> */}
+        <Settings />
+      </div>
       <div className="grid  gap-8 grid-cols-1 md:grid-cols-2">
         <ContentTable />
         <XPaymentCard />

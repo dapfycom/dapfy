@@ -33,6 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { selectedNetwork } from "@/config/network";
+import { routeNames } from "@/config/routes";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { IElrondAccountToken } from "@/types/elrond.interface";
 import {
@@ -42,6 +43,7 @@ import {
 } from "@/utils/functions/formatBalance";
 import { orderBy } from "@/utils/functions/general";
 import { numberWithCommas } from "@/utils/functions/numbers";
+import Link from "next/link";
 
 const data: Payment[] = [
   {
@@ -96,6 +98,11 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
             <TokenImage src={token.assets.svgUrl} size={30} />
           )}
           <p>{token.ticker}</p>
+          {token.identifier === selectedNetwork.tokensID.egld && (
+            <Button variant={"outline"} size={"sm"} className="text-xs">
+              Unwrap
+            </Button>
+          )}
         </div>
       );
     },
@@ -144,15 +151,25 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
       const token = row.original;
 
       return (
-        <div className="font-medium">
-          <div className="flex">
-            <p className="mr-[5px]">{formatBalance(token)}</p>
-            <p>{token.ticker}</p>
+        <div className="flex gap-3">
+          <div className="font-medium">
+            <div className="flex">
+              <p className="mr-[5px]">{formatBalance(token)}</p>
+              <p>{token.ticker}</p>
+            </div>
+            {token.price && (
+              <p className="text-sm text-muted-foreground">
+                ≈ ${formatBalanceDolar(token, token.price)}
+              </p>
+            )}
           </div>
-          {token.price && (
-            <p className="text-sm text-muted-foreground">
-              ≈ ${formatBalanceDolar(token, token.price)}
-            </p>
+
+          {token.identifier === selectedNetwork.tokensID.egld && (
+            <Link href={routeNames.swap}>
+              <Button variant={"outline"} size={"sm"} className="text-xs">
+                Swap
+              </Button>
+            </Link>
           )}
         </div>
       );
@@ -212,6 +229,9 @@ interface IProps {
 
 export function ContentTable() {
   const { userTokens: tokensData } = useGetUserTokens();
+  const { userToken: egldToken } = useGetUserTokens(
+    selectedNetwork.tokensID.egld
+  );
 
   const data = React.useMemo(() => {
     const newData = tokensData.map((token) => {
@@ -236,6 +256,17 @@ export function ContentTable() {
       }
     });
     const data1 = orderBy(newData, "desc", "tokenBalance");
+
+    const egldIndex = data1.findIndex(
+      (token) => token.identifier === selectedNetwork.tokensID.egld
+    );
+    if (egldIndex !== -1) {
+      //remote egld token
+      const egld = data1.splice(egldIndex, 1)[0];
+      //add egld token to first position
+      data1.unshift(egld);
+    }
+
     return data1;
   }, [tokensData.length]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
