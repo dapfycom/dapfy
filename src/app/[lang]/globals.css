@@ -87,3 +87,11 @@
 .dapp-core-component__dappModalStyles__dappModalContent{
   color: black;
 }
+
+
+/* Custom clasess */
+.gradienteTitle {
+  background: linear-gradient(to right, red , rgb(255, 196, 0));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}

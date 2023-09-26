@@ -7,7 +7,6 @@ import Container from "@/components/ui-system/Container";
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import { cn } from "@/lib/utils";
-import styles from "./Home.module.css";
 const Home = () => {
   const { handleConnect } = useAuthentication();
   return (
@@ -15,7 +14,7 @@ const Home = () => {
       <div className="text-center mt-10 mb-5 md:mb-20">
         <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
           xBeskar <br /> Shaping the Future of{" "}
-          <span className={styles.gradienteTitle}> Crypto Rewards</span>
+          <span className={"gradienteTitle"}> Crypto Rewards</span>
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
           Discover a DeFi Revolution: Earn Rewards While You Explore the
