@@ -11,18 +11,18 @@ import {
 const RewardsCard = () => {
   return (
     <Card>
-      <CardHeader className="text-center">
+      <CardHeader>
         <CardTitle>Rewards Center</CardTitle>
         <CardDescription>Claim, Track, and Enjoy Your Benefits</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex  justify-around">
+        <div className="flex flex-col gap-4">
           <Reward reward="Reward Power" value={"3.5 %"} />
           <Reward reward="Overall Rewards" value={"1.2 EGLD"} />
           <Reward reward="Uncollected rewards" value={"4.2 EGLD"} />
         </div>
       </CardContent>
-      <CardFooter className="w-full flex justify-center">
+      <CardFooter className="w-full flex">
         <Button className="min-w-[150px]">Claim</Button>
       </CardFooter>
     </Card>
