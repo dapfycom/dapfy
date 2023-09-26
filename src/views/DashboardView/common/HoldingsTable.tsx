@@ -34,6 +34,9 @@ import {
 } from "@/components/ui/table";
 import { selectedNetwork } from "@/config/network";
 import { routeNames } from "@/config/routes";
+import useGetMaiarPairs, {
+  useFilterMairTokens,
+} from "@/hooks/useGetMaiarPairs";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { IElrondAccountToken } from "@/types/elrond.interface";
 import {
@@ -98,11 +101,6 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
             <TokenImage src={token.assets.svgUrl} size={30} />
           )}
           <p>{token.ticker}</p>
-          {token.identifier === selectedNetwork.tokensID.egld && (
-            <Button variant={"outline"} size={"sm"} className="text-xs">
-              Unwrap
-            </Button>
-          )}
         </div>
       );
     },
@@ -164,7 +162,11 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
             )}
           </div>
 
-          {token.identifier === selectedNetwork.tokensID.egld && (
+          {token.identifier === selectedNetwork.tokensID.egld ? (
+            <Button variant={"outline"} size={"sm"} className="text-xs">
+              Unwrap
+            </Button>
+          ) : (
             <Link href={routeNames.swap}>
               <Button variant={"outline"} size={"sm"} className="text-xs">
                 Swap
@@ -229,12 +231,19 @@ interface IProps {
 
 export function ContentTable() {
   const { userTokens: tokensData } = useGetUserTokens();
-  const { userToken: egldToken } = useGetUserTokens(
-    selectedNetwork.tokensID.egld
+  const maiarTokens = useFilterMairTokens(
+    tokensData.map((token) => token.identifier)
   );
+  const { pairs } = useGetMaiarPairs();
+  console.log("pairs", pairs);
 
   const data = React.useMemo(() => {
-    const newData = tokensData.map((token) => {
+    // filter only maiar tokens
+    const maiarData = tokensData.filter((token) =>
+      maiarTokens.includes(token.identifier)
+    );
+
+    const newData = maiarData.map((token) => {
       if (
         selectedNetwork.tokensID.usdt === token.identifier ||
         selectedNetwork.tokensID.busd === token.identifier
@@ -257,18 +266,17 @@ export function ContentTable() {
     });
     const data1 = orderBy(newData, "desc", "tokenBalance");
 
-    const egldIndex = data1.findIndex(
+    const egldIndex = tokensData.findIndex(
       (token) => token.identifier === selectedNetwork.tokensID.egld
     );
     if (egldIndex !== -1) {
-      //remote egld token
-      const egld = data1.splice(egldIndex, 1)[0];
+      const egld = tokensData[egldIndex];
       //add egld token to first position
       data1.unshift(egld);
     }
 
     return data1;
-  }, [tokensData.length]);
+  }, [tokensData.length, maiarTokens.length]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

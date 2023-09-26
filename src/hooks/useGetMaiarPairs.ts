@@ -41,3 +41,21 @@ const useGetMaiarPairs = () => {
 };
 
 export default useGetMaiarPairs;
+
+export const useIsMaiarToken = (tokenId: string) => {
+  const { pairs } = useGetMaiarPairs();
+  const isMaiarToken = pairs.some(
+    (pair) => pair.baseId === tokenId || pair.quoteId === tokenId
+  );
+
+  return isMaiarToken;
+};
+
+export const useFilterMairTokens = (tokens: string[]) => {
+  const { pairs } = useGetMaiarPairs();
+  const filteredTokens = tokens.filter((token) =>
+    pairs.some((pair) => pair.baseId === token || pair.quoteId === token)
+  );
+
+  return filteredTokens;
+};
