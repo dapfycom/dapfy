@@ -31,6 +31,7 @@ const StakedDetails = () => {
         value={userFarmInfo?.lpActive}
         decimals={18}
         tokenI={selectedNetwork.tokensID.bskwegld}
+        withPrice
       />
       <StakedDetail
         title="BSK Earned"
@@ -49,9 +50,16 @@ interface IStakedDetail {
   value: string;
   decimals: number;
   tokenI: string;
+  withPrice?: boolean;
 }
 
-const StakedDetail = ({ title, value, tokenI, decimals }: IStakedDetail) => {
+const StakedDetail = ({
+  title,
+  value,
+  tokenI,
+  decimals,
+  withPrice,
+}: IStakedDetail) => {
   const [price] = useGetTokenPrice(tokenI);
 
   return (
@@ -62,7 +70,7 @@ const StakedDetail = ({ title, value, tokenI, decimals }: IStakedDetail) => {
         <p className="text-sm">
           {formatBalance({ balance: value, decimals: decimals })}
         </p>
-        {price && (
+        {withPrice && price && (
           <p className="text-sm">
             ≈ $
             {formatBalanceDolar({ balance: value, decimals: decimals }, price)}
