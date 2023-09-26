@@ -272,6 +272,7 @@ export function ContentTable() {
     }
 
     return data1;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokensData.length, maiarTokens.length]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
