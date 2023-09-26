@@ -34,9 +34,7 @@ import {
 } from "@/components/ui/table";
 import { selectedNetwork } from "@/config/network";
 import { routeNames } from "@/config/routes";
-import useGetMaiarPairs, {
-  useFilterMairTokens,
-} from "@/hooks/useGetMaiarPairs";
+import useFilterPopularTokens from "@/hooks/useGetPopularTokens";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { IElrondAccountToken } from "@/types/elrond.interface";
 import {
@@ -231,11 +229,9 @@ interface IProps {
 
 export function ContentTable() {
   const { userTokens: tokensData } = useGetUserTokens();
-  const maiarTokens = useFilterMairTokens(
+  const { popularTokens: maiarTokens } = useFilterPopularTokens(
     tokensData.map((token) => token.identifier)
   );
-  const { pairs } = useGetMaiarPairs();
-  console.log("pairs", pairs);
 
   const data = React.useMemo(() => {
     // filter only maiar tokens
