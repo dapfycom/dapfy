@@ -12,7 +12,9 @@ const CollectRewardsCard = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Collect rewards in</CardTitle>
+        <CardTitle className="text-sm font-medium">
+          Collect rewards in
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex gap-4">
