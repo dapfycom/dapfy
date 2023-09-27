@@ -160,10 +160,19 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
             )}
           </div>
 
-          {token.identifier === selectedNetwork.tokensID.egld ? (
-            <Button variant={"outline"} size={"sm"} className="text-xs">
-              Unwrap
-            </Button>
+          {token.identifier === selectedNetwork.tokensID.egld ||
+          token.identifier === selectedNetwork.tokensID.wegld ? (
+            <>
+              {token.identifier === selectedNetwork.tokensID.egld ? (
+                <Button variant={"outline"} size={"sm"} className="text-xs">
+                  Wrap
+                </Button>
+              ) : (
+                <Button variant={"outline"} size={"sm"} className="text-xs">
+                  Unwrap
+                </Button>
+              )}
+            </>
           ) : (
             <Link href={routeNames.swap}>
               <Button variant={"outline"} size={"sm"} className="text-xs">
