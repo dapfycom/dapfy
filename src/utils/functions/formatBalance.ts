@@ -2,15 +2,14 @@ import BigNumber from "bignumber.js";
 import { numberWithCommas, preventExponetialNotation } from "./numbers";
 
 export const formatBalance = (
-  token: { balance: string | number; decimals?: number },
+  token: { balance: string | number | BigNumber; decimals?: number },
   retrunNumber = false,
   customPrecision?: number,
   withDots?: boolean
 ) => {
   if (token) {
     const strBalance = token.balance;
-    const intBalance = Number(strBalance);
-    const formatedBalance = getRealBalance(intBalance, token.decimals);
+    const formatedBalance = getRealBalance(strBalance, token.decimals);
 
     const finalBinance = formatPrecision(
       formatedBalance as number,
@@ -52,7 +51,7 @@ export const formatBalanceDolar = (
 };
 
 export const getRealBalance = (
-  balance1: string | number = 0,
+  balance1: BigNumber | string | number = 0,
   decimal?: number,
   returnBigNumber: boolean = false
 ) => {
@@ -114,14 +113,13 @@ export const formatNumber = (number?: number | string) => {
 export const setElrondBalance = (
   amount: number,
   decimals: number = 18
-): number => {
+): string => {
   try {
     const elrondBalance = amount * Math.pow(10, decimals);
-    const noDecimalsElrondBalance = Number(
-      new BigNumber(elrondBalance).toFixed(0)
-    );
+    const noDecimalsElrondBalance = new BigNumber(elrondBalance).toFixed(0);
+
     return noDecimalsElrondBalance;
   } catch (err) {
-    return 0;
+    return "0";
   }
 };

@@ -21,8 +21,8 @@ import {
 import { sendTransactions } from "@multiversx/sdk-dapp/services";
 import { SendTransactionReturnType } from "@multiversx/sdk-dapp/types";
 import { refreshAccount } from "@multiversx/sdk-dapp/utils";
+import BigNumber from "bignumber.js";
 import { getInterface } from "..";
-
 export class SmartContractInteraction {
   private contract;
   constructor(smartContractAddress: string, abiFile?: any) {
@@ -32,14 +32,24 @@ export class SmartContractInteraction {
 
   private createTransactionFromInteraction(
     interaction: Interaction,
-    options?: { gasL?: number; val?: number }
+    options?: {
+      gasL?: number;
+      egldVal?: BigNumber.Value;
+      realValue?: BigNumber.Value;
+    }
   ): Transaction {
+    console.log("createTransactionFromInteraction", options);
+
     const sender = store.getState().dapp.userAddress;
     const senderAddress = new Address(sender);
 
     const tx = interaction
       .withSender(senderAddress)
-      .withValue(TokenTransfer.egldFromAmount(options?.val || 0))
+      .withValue(
+        options?.realValue
+          ? TokenTransfer.egldFromBigInteger(options.realValue)
+          : TokenTransfer.egldFromAmount(options?.egldVal || 0)
+      )
       .withGasLimit(options?.gasL || 50000000)
       .withChainID(selectedNetwork.ChainID)
       .buildTransaction();
@@ -150,14 +160,16 @@ export class SmartContractInteraction {
   public EGLDPayment({
     functionName,
     value,
+    realValue,
     arg = [],
     gasL,
   }: IEGLDPaymentProps) {
     let interaction = this.createInteraction(functionName, arg);
+    console.log("EGLDPayment", value);
 
     return this.sendTransaction({
       interaction,
-      options: { gasL, egldVal: value },
+      options: { gasL, egldVal: value, realValue },
     });
   }
 
@@ -228,7 +240,7 @@ export class SmartContractInteraction {
 
     const tx = this.createTransactionFromInteraction(interaction, {
       gasL,
-      val: value,
+      egldVal: value,
     });
 
     return tx;
@@ -297,7 +309,7 @@ export class SmartContractInteraction {
       );
 
       const tx1 = this.createTransactionFromInteraction(wrapInteraction, {
-        val: value,
+        egldVal: value,
       });
 
       //esdt transfer

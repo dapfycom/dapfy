@@ -1,9 +1,11 @@
 import { Interaction } from "@multiversx/sdk-core";
+import BigNumber from "bignumber.js";
 export interface ISendTransactionProps {
   interaction: Interaction;
   options?: {
     gasL?: number;
-    egldVal?: number;
+    egldVal?: BigNumber.Value;
+    realValue?: BigNumber.Value;
   };
 }
 
@@ -22,11 +24,12 @@ export interface IESDTNFTTransferProps extends IScCallProps {
   token: { collection: string; nonce: number };
 }
 export interface IEGLDPaymentProps extends IScCallProps {
-  value: number;
+  value?: BigNumber.Value;
+  realValue?: BigNumber.Value;
 }
 
 export interface IwrapEgldAndEsdtTranferProps extends IScCallProps {
-  value: number;
+  value: BigNumber.Value;
 }
 
 export interface IMultiESDTNFTTransferProps extends IScCallProps {

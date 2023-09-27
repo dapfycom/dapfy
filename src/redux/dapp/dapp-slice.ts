@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppState } from "../store";
 import Cookies from "js-cookie";
+import { AppState } from "../store";
 
 export interface GeneralState {
   isLoginModal: boolean;
@@ -8,6 +8,9 @@ export interface GeneralState {
   sidebarMenu: boolean;
   shard: number;
   slippage: number;
+
+  //dashboard
+  isWrapEgldOpen: boolean;
 }
 
 const initialState: GeneralState = {
@@ -18,6 +21,8 @@ const initialState: GeneralState = {
   slippage: Cookies.get("dapp-slippage")
     ? Number(Cookies.get("dapp-slippage"))
     : 2,
+
+  isWrapEgldOpen: false,
 };
 
 export const dapp = createSlice({
@@ -44,17 +49,25 @@ export const dapp = createSlice({
       });
       state.slippage = action.payload;
     },
+
+    setIsWrapEgldOpen: (state, action: PayloadAction<boolean>) => {
+      state.isWrapEgldOpen = action.payload;
+    },
   },
 });
 
 export const selectIsLoginModal = (state: AppState) => state.dapp.isLoginModal;
 export const selectUserAddress = (state: AppState) => state.dapp.userAddress;
 export const selectDappSlippage = (state: AppState) => state.dapp.slippage;
+
+export const selectIsWrapEgldOpen = (state: AppState) =>
+  state.dapp.isWrapEgldOpen;
 export const {
   openLogin,
   setUserAddress,
   setSidebarMenu,
   setShard,
   updateDappSlippage,
+  setIsWrapEgldOpen,
 } = dapp.actions;
 export default dapp.reducer;
