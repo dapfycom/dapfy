@@ -3,10 +3,10 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ChartCard from "./ChartCard";
 
 const RewardsCard = () => {
   return (
@@ -21,10 +21,13 @@ const RewardsCard = () => {
           <Reward reward="Overall Rewards" value={"1.2 EGLD"} />
           <Reward reward="Uncollected rewards" value={"4.2 EGLD"} />
         </div>
+        <div className="w-full flex mt-4">
+          <Button className="min-w-[150px]">Claim</Button>
+        </div>
+        <div className="mt-8">
+          <ChartCard />
+        </div>
       </CardContent>
-      <CardFooter className="w-full flex">
-        <Button className="min-w-[150px]">Claim</Button>
-      </CardFooter>
     </Card>
   );
 };
