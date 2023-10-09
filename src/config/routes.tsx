@@ -31,6 +31,7 @@ export const routeNames = {
   stake: "/stake",
   play: "/play",
   dust: "/dust",
+  defi: "/defi",
 };
 
 export const mainSiteRoutes = [
@@ -56,5 +57,9 @@ export const mainSiteRoutes = [
   {
     path: routeNames.dust,
     title: "Dust",
+  },
+  {
+    path: routeNames.defi,
+    title: "Defi",
   },
 ];
