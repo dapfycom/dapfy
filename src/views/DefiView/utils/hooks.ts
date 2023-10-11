@@ -2,8 +2,11 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import BigNumber from "bignumber.js";
 import useSwr from "swr";
+import {
+  fetchFarmInfo,
+  fetchUserFarmInfo,
+} from "../../FarmView/utils/services";
 import { calculateFarmReward } from "./functions";
-import { fetchFarmInfo, fetchUserFarmInfo } from "./services";
 export const useGetFarmUserInfo = () => {
   const address = useAppSelector(selectUserAddress);
   const { data, isLoading, error } = useSwr(

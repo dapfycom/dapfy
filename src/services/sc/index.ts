@@ -1,5 +1,6 @@
 import bskFarmAbiUrl from "@/assets/abis/beskar-dao.abi.json";
 import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
+import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { Address } from "@multiversx/sdk-core/out";
@@ -23,7 +24,8 @@ export type WspTypes =
   | "maiarRouterWsp"
   | "bskFarmWsp"
   | "flipWsp"
-  | "dustWsp";
+  | "dustWsp"
+  | "hatomParentWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -74,6 +76,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = dustAbiUrl;
       implementsInterfaces = "DustContract";
       break;
+    case "hatomParentWsp":
+      simpleAddress = selectedNetwork.scAddress.hatomParent;
+      address = new Address(simpleAddress);
+      abiUrl = hatomParentAbiUrl;
+      implementsInterfaces = "HatomParentContract";
+      break;
     default:
       break;
   }
@@ -82,7 +90,7 @@ export const getInterface = (workspace: WspTypes) => {
 };
 
 export const getSmartContractInteraction = (
-  key: WspTypes | string
+  key: WspTypes
 ): SmartContractInteraction => {
   const smartsContractsInteractions: {
     [key: string]: SmartContractInteraction;
@@ -110,6 +118,9 @@ export const getSmartContractInteraction = (
     ),
     dustWsp: new SmartContractInteraction(
       getInterface("dustWsp").simpleAddress
+    ),
+    hatomParentWsp: new SmartContractInteraction(
+      getInterface("hatomParentWsp").simpleAddress
     ),
   };
 

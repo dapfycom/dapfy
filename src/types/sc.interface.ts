@@ -16,7 +16,7 @@ export interface IScCallProps {
 }
 
 export interface IESDTTransferProps extends IScCallProps {
-  value?: number;
+  value?: BigNumber.Value;
   realValue?: string;
   token: { collection: string; decimals: number };
 }

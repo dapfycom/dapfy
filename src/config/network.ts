@@ -68,6 +68,7 @@ const networkConfig = {
       farm: "erd1qqqqqqqqqqqqqpgqhj8um6tv2ul6u2epd2ca4c6z5v4xt9v5pwkq9cdazl",
       flip: "erd1qqqqqqqqqqqqqpgqcg2ay4qhs9g5p9sc550hau5hn9tcul9my26szpd2jn",
       dust: "erd1qqqqqqqqqqqqqpgql3z822nsknxsjttzqs73762u4vltlgfvy26srl0844",
+      hatomParent: "erd1qqqqqqq",
     },
   },
   devnet: {

@@ -1,4 +1,3 @@
-import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,6 +13,7 @@ import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { stakeLP } from "@/views/FarmView/utils/services";
 import { useFormik } from "formik";
+import Image from "next/image";
 import * as yup from "yup";
 interface IProps {
   isOpen: boolean;
@@ -64,8 +64,15 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
           <DialogTitle>
             {" "}
             <div className="flex items-center gap-3">
-              <LpTokenImageV2 lpToken={stakedToken} size={25} />
-              <h3>Stake in BSK-EGLD farm</h3>
+              <div className="w-[35px] h-[35px]">
+                <Image
+                  src={"/images/hatom.png"}
+                  alt="hatom"
+                  width={35}
+                  height={35}
+                />{" "}
+              </div>
+              <h3>Stake hatom protocol</h3>
             </div>
           </DialogTitle>
         </DialogHeader>

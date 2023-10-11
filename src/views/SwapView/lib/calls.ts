@@ -118,6 +118,7 @@ export const lpSwap = async (
       .toFixed(0);
 
     const splitTx: Transaction = getSmartContractInteraction(
+      // @ts-ignore
       swapInfo.sc
     ).ESDTTransferOnlyTx({
       functionName: "swapTokensFixedInput",
@@ -172,6 +173,7 @@ export const lpSwap = async (
     ];
 
     const lpTx: Transaction = getSmartContractInteraction(
+      // @ts-ignore
       swapInfo.sc
     ).MultiESDTNFTTransferOnlyTx({
       functionName: "addLiquidity",
