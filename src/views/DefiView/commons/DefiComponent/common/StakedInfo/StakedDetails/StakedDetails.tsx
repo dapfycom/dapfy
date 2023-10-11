@@ -1,4 +1,3 @@
-import TokenImage from "@/components/TokenImage/TokenImage";
 import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
@@ -11,6 +10,7 @@ import {
   useGetFarmsInfo,
 } from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 const StakedDetails = () => {
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
   const { data: farmInfo } = useGetFarmsInfo();
@@ -27,17 +27,19 @@ const StakedDetails = () => {
   return (
     <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
       <StakedDetail
-        title="BSK-EGLD"
+        title="Staked amount"
         value={userFarmInfo?.lpActive}
         decimals={18}
         tokenI={selectedNetwork.tokensID.bskwegld}
         withPrice
+        logoUrl="/images/hatom.png"
       />
       <StakedDetail
-        title="BSK Earned"
+        title="All time USDC earned"
         value={earnedBsk}
         decimals={16}
         tokenI={selectedNetwork.tokensID.bsk}
+        logoUrl="/images/usdc.svg"
       />
     </div>
   );
@@ -51,6 +53,7 @@ interface IStakedDetail {
   decimals: number;
   tokenI: string;
   withPrice?: boolean;
+  logoUrl: string;
 }
 
 const StakedDetail = ({
@@ -59,12 +62,15 @@ const StakedDetail = ({
   tokenI,
   decimals,
   withPrice,
+  logoUrl,
 }: IStakedDetail) => {
   const [price] = useGetTokenPrice(tokenI);
 
   return (
-    <div className="flex gap-3">
-      <TokenImage tokenI={tokenI} size={40} />{" "}
+    <div className="flex gap-3 items-center">
+      <div className="w-[50px] h-[50px]">
+        <Image src={logoUrl} alt="hatom" width={50} height={50} />{" "}
+      </div>
       <div className="flex flex-col gap-1">
         <p>{title}</p>
         <p className="text-sm">

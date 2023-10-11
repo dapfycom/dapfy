@@ -26,7 +26,7 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
       {isLoggedIn ? (
         <>
           <Button className="text-sm w-full lg:w-auto" onClick={handleDeposit}>
-            Deposit
+            Claim rewards
           </Button>
 
           <span className="text-lg">

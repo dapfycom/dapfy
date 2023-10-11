@@ -32,13 +32,13 @@ const FarmInfo = () => {
       {userFarmInfo && (
         <>
           <FarmDetail
-            title={"Staked LP"}
+            title={"Staked amount"}
             value={userFarmInfo?.lpActive}
             decimals={18}
             tokenI={selectedNetwork.tokensID.bskwegld}
           />
           <FarmDetail
-            title="Earned BSK"
+            title="Earned USDC"
             value={earnedBsk}
             decimals={16}
             tokenI={selectedNetwork.tokensID.bsk}
@@ -85,12 +85,15 @@ const FarmDetail = ({ title, value, decimals, tokenI }: FarmDetailProps) => {
         {title}
       </p>
       <p className="text-[12px] whitespace-nowrap text-muted-foreground">
-        {formatBalance({ balance: value, decimals: decimals })} ≈ ${" "}
-        {formatBalanceDolar(
-          { balance: value, decimals: decimals },
-          price,
-          true
-        )}
+        <div>{formatBalance({ balance: value, decimals: decimals })}</div>
+        <div>
+          ≈ ${" "}
+          {formatBalanceDolar(
+            { balance: value, decimals: decimals },
+            price,
+            true
+          )}
+        </div>
       </p>
     </div>
   );

@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 import { i18n } from "@/i18n-config";
 
@@ -38,6 +38,9 @@ export function middleware(request: NextRequest) {
       "/favicon.ico",
       "/images/bsk-logo.svg",
       "/images/egld.svg",
+      "/images/hatom.png",
+      "/images/usdc.svg",
+
       // Your other files in `public`
     ].includes(pathname)
   )
