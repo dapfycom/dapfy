@@ -7,35 +7,37 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
-import { stakeLP } from "@/views/FarmView/utils/services";
+import { deposit } from "@/views/DefiView/utils/services";
 import { useFormik } from "formik";
 import Image from "next/image";
+import { useContext } from "react";
 import * as yup from "yup";
+import { FarmContext } from "../../DefiComponent";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 const StakeModal = ({ isOpen, onClose }: IProps) => {
+  const { hatomFarm } = useContext(FarmContext);
+
   const { elrondToken: stakedToken, isLoading } = useGetElrondToken(
-    selectedNetwork.tokensID.bskwegld
+    hatomFarm.htokenI
   );
   const { accountToken: userStakedToken } = useGetAccountToken(
-    selectedNetwork.tokensID.bskwegld
+    hatomFarm.htokenI
   );
   const stakeSchema = yup.object({
-    amount: yup
-      .number()
-      .required("This field is required")
-      .min(0, "Negative number")
-      .max(
-        formatBalance(userStakedToken, true, 18) as number,
-        "Insufficient funds"
-      ),
+    amount: yup.number(),
+    // .required("This field is required")
+    // .min(0, "Negative number")
+    // .max(
+    //   formatBalance(userStakedToken, true, stakedToken.decimals) as number,
+    //   "Insufficient funds"
+    // ),
   });
 
   const formik = useFormik({
@@ -44,7 +46,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     },
     onSubmit: (values) => {
       let amount = values.amount;
-      stakeLP(amount, stakedToken);
+      deposit(amount, stakedToken, hatomFarm.childScAddress);
     },
     validationSchema: stakeSchema,
   });

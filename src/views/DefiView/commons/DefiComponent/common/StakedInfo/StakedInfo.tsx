@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
+import { withdraw } from "@/views/DefiView/utils/services";
+import { useContext } from "react";
+import { FarmContext } from "../../DefiComponent";
 import StakeModal from "../Modals/StakeModal";
 import StakedDetails from "./StakedDetails/StakedDetails";
 
 const StakedInfo = () => {
+  const { hatomFarm } = useContext(FarmContext);
+
   const {
     isOpen: isOpenHarvest,
     onClose: onCloseHarvest,
@@ -17,6 +22,10 @@ const StakedInfo = () => {
     onCloseHarvest();
     onOpenHarvest();
   };
+
+  const handleWithdraw = (e: any) => {
+    withdraw(hatomFarm.childScAddress);
+  };
   return (
     <div className="flex w-full px-7 py-8 gap-10 flex-col md:flex-row ">
       {isLoggedIn ? (
@@ -27,7 +36,7 @@ const StakedInfo = () => {
           <div className="flex  items-center h-auto gap-5">
             <Button
               className="w-full md:w-auto text-sm"
-              onClick={handleHarvest}
+              onClick={handleWithdraw}
             >
               {" "}
               withdraw

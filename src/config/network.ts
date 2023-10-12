@@ -68,7 +68,8 @@ const networkConfig = {
       farm: "erd1qqqqqqqqqqqqqpgqhj8um6tv2ul6u2epd2ca4c6z5v4xt9v5pwkq9cdazl",
       flip: "erd1qqqqqqqqqqqqqpgqcg2ay4qhs9g5p9sc550hau5hn9tcul9my26szpd2jn",
       dust: "erd1qqqqqqqqqqqqqpgql3z822nsknxsjttzqs73762u4vltlgfvy26srl0844",
-      hatomParent: "erd1qqqqqqq",
+      hatomParent:
+        "erd1qqqqqqqqqqqqqpgq2hsg0h0e9rljxx8qrs99mxh35mvz86qjvr2slxxkz5",
     },
   },
   devnet: {
@@ -107,6 +108,8 @@ const networkConfig = {
       farm: "",
       flip: "erd1qqqqqqqqqqqqqpgqfg6t4tr5vj70359kws6nltkw7qfv8rv8d8ssj43k4j",
       dust: "erd1qqqqqqqqqqqqqpgq375pvn7af4k2tv34mshm80pqjs0uhl82d8ssdv4qpj",
+      hatomParent:
+        "erd1qqqqqqqqqqqqqpgq2hsg0h0e9rljxx8qrs99mxh35mvz86qjvr2slxxkz5",
     },
   },
   testnet: {
@@ -129,6 +132,6 @@ const networkConfig = {
     scAddress: {},
   },
 };
-export const ENVIROMENT: ENVIROMENTTYPE = "mainnet";
+export const ENVIROMENT: ENVIROMENTTYPE = "devnet";
 
 export const selectedNetwork = networkConfig[ENVIROMENT];

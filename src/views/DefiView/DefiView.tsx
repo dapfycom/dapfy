@@ -1,12 +1,12 @@
 import Container from "@/components/ui-system/Container";
-import FarmComponent from "./commons/DefiComponent/DefiComponent";
 import FarmHeading from "./commons/DefiHeading/DefiHeading";
+import FarmsList from "./commons/FarmsList/FarmsList";
 const DefiView = () => {
   return (
     <Container>
       <div className="flex flex-col items-center text-center mt-5">
         <FarmHeading />
-        <FarmComponent />
+        <FarmsList />
       </div>
     </Container>
   );
