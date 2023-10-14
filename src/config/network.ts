@@ -96,10 +96,10 @@ const networkConfig = {
       ride: "RIDE-6e4c49",
       hodl: "",
       usdc: "USDC-8d4068",
-      rare: "",
+      rare: "RIDE-6e4c49",
       bskwegld: "",
-      usdt: "",
-      busd: "",
+      usdt: "USDT-188935",
+      busd: "BUSD-632f7d",
     },
     scAddress: {
       maiarRouter: "",
