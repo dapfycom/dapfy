@@ -98,6 +98,8 @@ const networkConfig = {
       usdc: "USDC-8d4068",
       rare: "",
       bskwegld: "",
+      usdt: "",
+      busd: "",
     },
     scAddress: {
       maiarRouter: "",
