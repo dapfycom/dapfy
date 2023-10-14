@@ -27,7 +27,9 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
     e.preventDefault();
     e.stopPropagation();
 
-    claimUserRewards(hatomFarm.childScAddress);
+    if (hatomFarm) {
+      claimUserRewards(hatomFarm?.moneyMarket.childScAddress);
+    }
   };
 
   return (
