@@ -173,6 +173,43 @@ export class SmartContractInteraction {
     });
   }
 
+  /**
+   * ESDTorEGLDTransfer
+   */
+  public ESDTorEGLDTransfer({
+    functionName,
+    token,
+    arg = [],
+    gasL,
+    value,
+    realValue,
+  }: IESDTTransferProps) {
+    let interaction = this.createInteraction(functionName, arg);
+
+    if (token.collection === selectedNetwork.tokensID.egld) {
+      return this.sendTransaction({
+        interaction,
+        options: { gasL, egldVal: value, realValue },
+      });
+    } else {
+      interaction.withSingleESDTTransfer(
+        realValue
+          ? TokenTransfer.fungibleFromBigInteger(
+              token.collection,
+              realValue,
+              token.decimals
+            )
+          : TokenTransfer.fungibleFromAmount(
+              token.collection,
+              value || 0,
+              token.decimals
+            )
+      );
+
+      return this.sendTransaction({ interaction, options: { gasL } });
+    }
+  }
+
   // ------BEGINS Transactions only ------
   /**
    * scCallOnlyTx

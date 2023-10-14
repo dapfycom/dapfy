@@ -3,13 +3,16 @@ import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { selectedNetwork } from "@/config/network";
 import { routeNames } from "@/config/routes";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
-import { IMoneyMarket } from "@/types/hatom.interface";
-import { useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
+import {
+  IMoneyMarkeTvl,
+  IMoneyMarketDeposit,
+  IMoneyMarketReward,
+} from "@/types/hatom.interface";
+import { formatBalanceDolar } from "@/utils/functions/formatBalance";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -17,25 +20,37 @@ import FarmInfo from "./common/FarmInfo/FarmInfo";
 import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
 import StakedInfo from "./common/StakedInfo/StakedInfo";
 
-export const FarmContext = React.createContext<{ hatomFarm: IMoneyMarket }>({
-  hatomFarm: {
-    childScAddress: "",
-    htokenI: "",
-    mmScAddress: "",
-    tokenI: "",
-  },
+interface IDefiContext {
+  hatomFarm?: IMoneyMarkeTvl;
+  userRewards?: IMoneyMarketReward;
+  deposits?: IMoneyMarketDeposit[];
+}
+
+export const FarmContext = React.createContext<IDefiContext>({
+  hatomFarm: undefined,
+  userRewards: undefined,
+  deposits: [],
 });
 interface FarmComponentProps {
-  hatomFarm: IMoneyMarket;
+  hatomFarm: IMoneyMarkeTvl;
+  userInfo: {
+    userRewards?: IMoneyMarketReward;
+    deposits?: IMoneyMarketDeposit[];
+  };
 }
-const FarmComponent = ({ hatomFarm }: FarmComponentProps) => {
+const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
   const { isOpen, onToggle } = useDisclosure();
-  const { elrondToken } = useGetElrondToken(hatomFarm.htokenI);
-  const { data: farmInfo } = useGetFarmsInfo();
-  const [price] = useGetTokenPrice(selectedNetwork.tokensID.bskwegld);
+  const { elrondToken } = useGetElrondToken(hatomFarm.moneyMarket.tokenI);
+  const [price] = useGetTokenPrice(hatomFarm.moneyMarket.tokenI);
 
   return (
-    <FarmContext.Provider value={{ hatomFarm }}>
+    <FarmContext.Provider
+      value={{
+        hatomFarm: hatomFarm,
+        userRewards: userInfo.userRewards,
+        deposits: userInfo.deposits,
+      }}
+    >
       <div className="flex gap-2 w-full items-center mt-10 mb-4">
         <Label className="">Protocol: </Label>
         <div className="px-4 py-1 border rounded-md">HATOM</div>
@@ -57,19 +72,22 @@ const FarmComponent = ({ hatomFarm }: FarmComponentProps) => {
                   />{" "}
                 </div>
               )}
-              {/* {farmInfo && (
+              {hatomFarm?.tvl && (
                 <div className="flex flex-col ">
                   <p className="whitespace-nowrap mb-2">Total Value Locked</p>
                   <p className="text-[12px] text-muted-foreground">
                     $
                     {formatBalanceDolar(
-                      { balance: farmInfo.stakedLp, decimals: 18 },
+                      {
+                        balance: hatomFarm.tvl,
+                        decimals: elrondToken.decimals,
+                      },
                       price,
                       true
                     )}
                   </p>
                 </div>
-              )} */}
+              )}
             </div>
             <div className="flex items-center gap-7 flex-col sm:flex-row flex-1 justify-end">
               <FarmInfo />

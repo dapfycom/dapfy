@@ -1,46 +1,51 @@
 import { selectedNetwork } from "@/config/network";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
   formatBalanceDolar,
 } from "@/utils/functions/formatBalance";
-import {
-  useGetBskRewards,
-  useGetFarmUserInfo,
-  useGetFarmsInfo,
-} from "@/views/FarmView/utils/hooks";
+import { calcStakedAmount } from "@/views/DefiView/utils/functions";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import { useContext } from "react";
+import { FarmContext } from "../../../DefiComponent";
 const StakedDetails = () => {
-  const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
-  const { data: farmInfo } = useGetFarmsInfo();
-  const { earnedBsk } = useGetBskRewards();
-  if (isLoading)
+  const { hatomFarm, deposits, userRewards } = useContext(FarmContext);
+  const { elrondToken: depositedToken, isLoading: isloadingDepositToken } =
+    useGetElrondToken(hatomFarm?.moneyMarket.tokenI || null);
+  const { elrondToken: rewardToken, isLoading: isLoadingRewardToken } =
+    useGetElrondToken(selectedNetwork.tokensID.usdc);
+  const staked = deposits ? calcStakedAmount(deposits) : "0";
+
+  if (isLoadingRewardToken || isloadingDepositToken) {
     return (
-      <div className="flex w-full justify-center">
-        <Loader2 className="animate-spin" />
+      <div className="flex justify-center items-center">
+        <Loader2 className="animate-spin" size={50} />
       </div>
     );
-
-  if (!userFarmInfo || !farmInfo) return null;
-
+  }
   return (
     <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
-      <StakedDetail
-        title="Staked amount"
-        value={userFarmInfo?.lpActive}
-        decimals={18}
-        tokenI={selectedNetwork.tokensID.bskwegld}
-        withPrice
-        logoUrl="/images/hatom.png"
-      />
-      <StakedDetail
-        title="All time USDC earned"
-        value={earnedBsk}
-        decimals={16}
-        tokenI={selectedNetwork.tokensID.bsk}
-        logoUrl="/images/usdc.svg"
-      />
+      {depositedToken && (
+        <StakedDetail
+          title="Staked amount"
+          value={staked}
+          decimals={depositedToken.decimals}
+          tokenI={depositedToken.identifier}
+          withPrice
+          logoUrl={depositedToken.assets.svgUrl}
+        />
+      )}
+      {rewardToken && (
+        <StakedDetail
+          title={`Current ${rewardToken.ticker} earned`}
+          value={userRewards?.rewards || "0"}
+          decimals={rewardToken.decimals}
+          tokenI={rewardToken.identifier}
+          logoUrl={rewardToken.assets.svgUrl}
+        />
+      )}
     </div>
   );
 };

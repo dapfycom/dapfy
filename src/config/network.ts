@@ -95,7 +95,7 @@ const networkConfig = {
 
       ride: "RIDE-6e4c49",
       hodl: "",
-      usdc: "",
+      usdc: "USDC-8d4068",
       rare: "",
       bskwegld: "",
     },

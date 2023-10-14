@@ -44,7 +44,11 @@
                     "multi_arg": true
                 }
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
         },
         {
             "name": "upgradeChild",
@@ -116,6 +120,49 @@
             "outputs": []
         },
         {
+            "name": "getTotalRewards",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<MoneyMarketRewards>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getTVL",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<MoneyMarketTVL>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getDepositEntries",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<MoneyMarkeDepositEntry>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
             "name": "getMoneyMarkets",
             "mutability": "readonly",
             "inputs": [],
@@ -154,6 +201,19 @@
     "events": [],
     "hasCallback": false,
     "types": {
+        "MoneyMarkeDepositEntry": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "money_market",
+                    "type": "MoneyMarketDetails"
+                },
+                {
+                    "name": "total_deposited_amount",
+                    "type": "BigUint"
+                }
+            ]
+        },
         "MoneyMarketDetails": {
             "type": "struct",
             "fields": [
@@ -172,6 +232,32 @@
                 {
                     "name": "mm_address",
                     "type": "Address"
+                }
+            ]
+        },
+        "MoneyMarketRewards": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "money_market",
+                    "type": "MoneyMarketDetails"
+                },
+                {
+                    "name": "rewards",
+                    "type": "BigUint"
+                }
+            ]
+        },
+        "MoneyMarketTVL": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "money_market",
+                    "type": "MoneyMarketDetails"
+                },
+                {
+                    "name": "tvl",
+                    "type": "BigUint"
                 }
             ]
         }

@@ -24,7 +24,9 @@ const StakedInfo = () => {
   };
 
   const handleWithdraw = (e: any) => {
-    withdraw(hatomFarm.childScAddress);
+    if (hatomFarm) {
+      withdraw(hatomFarm.moneyMarket.childScAddress);
+    }
   };
   return (
     <div className="flex w-full px-7 py-8 gap-10 flex-col md:flex-row ">

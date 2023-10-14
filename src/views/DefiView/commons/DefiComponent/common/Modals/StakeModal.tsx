@@ -25,10 +25,10 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { hatomFarm } = useContext(FarmContext);
 
   const { elrondToken: stakedToken, isLoading } = useGetElrondToken(
-    hatomFarm.htokenI
+    hatomFarm?.moneyMarket.tokenI || null
   );
   const { accountToken: userStakedToken } = useGetAccountToken(
-    hatomFarm.htokenI
+    hatomFarm?.moneyMarket.tokenI || ""
   );
   const stakeSchema = yup.object({
     amount: yup.number(),
@@ -46,7 +46,9 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     },
     onSubmit: (values) => {
       let amount = values.amount;
-      deposit(amount, stakedToken, hatomFarm.childScAddress);
+      if (hatomFarm) {
+        deposit(amount, stakedToken, hatomFarm?.moneyMarket.childScAddress);
+      }
     },
     validationSchema: stakeSchema,
   });
@@ -74,7 +76,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
                   height={35}
                 />{" "}
               </div>
-              <h3>Stake hatom protocol</h3>
+              <h3>Stake {stakedToken?.ticker} on hatom protocol</h3>
             </div>
           </DialogTitle>
         </DialogHeader>
@@ -96,7 +98,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
             <div className="flex justify-between mt-3 text-xs mb-2">
               <p className="text-red-700">{formik.errors.amount}</p>
               <p className="cursor-pointer" onClick={handleMax}>
-                Balance: {formatBalance(userStakedToken)}
+                Balance: {formatBalance(userStakedToken)} {stakedToken?.ticker}
               </p>
             </div>
           </div>

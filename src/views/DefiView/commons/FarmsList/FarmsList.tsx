@@ -1,15 +1,30 @@
 "use client";
-import { useGetHatomFarms } from "../../utils/hooks";
+import { useGetTvl, useGetUserInfo } from "../../utils/hooks";
 import FarmComponent from "../DefiComponent/DefiComponent";
 
 const FarmsList = () => {
-  const hatomData = useGetHatomFarms();
-  console.log("hatomData", hatomData);
+  // const hatomData = useGetHatomFarms();
+  const userHatomData = useGetUserInfo();
+  const hatomData = useGetTvl();
+
+  // console.log("hatomData", hatomData);
 
   return (
     <div className="w-full">
-      {hatomData.data.map((farm) => {
-        return <FarmComponent key={farm.htokenI} hatomFarm={farm} />;
+      {hatomData.tlvs.map((farm) => {
+        const userReward = userHatomData?.rewards?.find(
+          (reward) => reward.moneyMarket.tokenI === farm.moneyMarket.tokenI
+        );
+        const userDeposits = userHatomData?.deposits?.filter(
+          (deposit) => deposit.moneyMarket.tokenI === farm.moneyMarket.tokenI
+        );
+        return (
+          <FarmComponent
+            key={farm.moneyMarket.htokenI}
+            hatomFarm={farm}
+            userInfo={{ userRewards: userReward, deposits: userDeposits }}
+          />
+        );
       })}
     </div>
   );

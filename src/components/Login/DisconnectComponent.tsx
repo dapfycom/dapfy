@@ -19,7 +19,6 @@ import {
 const DisconnectComponent = () => {
   const address = useAppSelector(selectUserAddress);
   const { account } = useGetAccountInfo();
-  console.log("account", account);
 
   const handleDisconnect = () => {
     logout();
