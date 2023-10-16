@@ -1,13 +1,18 @@
 "use client";
-import { useGetTvl, useGetUserInfo } from "../../utils/hooks";
+import {
+  useGetHatomConfigs,
+  useGetTvl,
+  useGetUserInfo,
+} from "../../utils/hooks";
 import FarmComponent from "../DefiComponent/DefiComponent";
 
 const FarmsList = () => {
   // const hatomData = useGetHatomFarms();
   const userHatomData = useGetUserInfo();
   const hatomData = useGetTvl();
+  const configs = useGetHatomConfigs();
 
-  // console.log("hatomData", hatomData);
+  console.log("configs", configs);
 
   return (
     <div className="w-full">

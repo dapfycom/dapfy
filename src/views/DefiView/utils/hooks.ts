@@ -2,6 +2,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import useSwr from "swr";
 import {
+  fetchHatomConfigs,
   fetchHatomMoneyMarkets,
   fetchUserDeposits,
   fetchUserTotalRewards,
@@ -79,6 +80,19 @@ export const useGetUserInfo = () => {
   return {
     deposits,
     rewards,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetHatomConfigs = () => {
+  const { data, isLoading, error } = useSwr(
+    ["hatomParentWsp:getConfigs"],
+    fetchHatomConfigs
+  );
+
+  return {
+    data: data || [],
     isLoading,
     error,
   };

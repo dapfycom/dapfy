@@ -21,7 +21,7 @@ export const deposit = (
     functionName: "deposit",
     token: { ...lpToken, collection: lpToken.identifier },
     arg: [new AddressValue(new Address(address))],
-    gasL: 300000000,
+    gasL: 600000000,
     value: new BigNumber(amount),
   });
 };
@@ -37,7 +37,7 @@ export const claimUserRewards = (address: string) => {
 export const withdraw = (address: string) => {
   getSmartContractInteraction("hatomParentWsp").scCall({
     functionName: "withdraw",
-    gasL: 50000000,
+    gasL: 600000000,
     arg: [new AddressValue(new Address(address))],
   });
 };
@@ -110,7 +110,29 @@ export const fetctTotalTvl = async (): Promise<IMoneyMarkeTvl[]> => {
       tvl: item.tvl.toString(),
     };
   });
-  console.log("getTVL", paresedData);
+
+  return paresedData;
+};
+
+export const fetchHatomConfigs = async () => {
+  const res: any = await scQuery("hatomParentWsp", "getChildrenConfig", []);
+
+  const { firstValue } = res;
+  const data = firstValue?.valueOf();
+  console.log("data", data);
+
+  const paresedData: IMoneyMarkeTvl[] = data?.map((item: any) => {
+    const data = {
+      moneyMarket: parsMoneyMarket(item.money_market),
+      feePercent: item.fee_percentage.toString(),
+      rewardsTokenId: item.rewards_token_id,
+      minDepositAmount: item.mm_minimum_deposit_amount.toString(),
+      maxBorrowPercentage: item.max_borrow_percentage.toString(),
+      maxBufferPercentage: item.max_buffer_percentage.toString(),
+      maxLoops: item.max_loops.toString(),
+    };
+    return data;
+  });
 
   return paresedData;
 };

@@ -163,6 +163,17 @@
             ]
         },
         {
+            "name": "getChildrenConfig",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<multi<Address,Config>>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
             "name": "getMoneyMarkets",
             "mutability": "readonly",
             "inputs": [],
@@ -201,6 +212,39 @@
     "events": [],
     "hasCallback": false,
     "types": {
+        "Config": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "money_market",
+                    "type": "MoneyMarketDetails"
+                },
+                {
+                    "name": "fee_percentage",
+                    "type": "u64"
+                },
+                {
+                    "name": "rewards_token_id",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "mm_minimum_deposit_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "max_borrow_percentage",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "max_buffer_percentage",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "max_loops",
+                    "type": "u32"
+                }
+            ]
+        },
         "MoneyMarkeDepositEntry": {
             "type": "struct",
             "fields": [
