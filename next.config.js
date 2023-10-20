@@ -8,6 +8,18 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: "/blog",
+        destination: `${process.env.BLOG_URL}`,
+      },
+      {
+        source: "/blog/:path*",
+        destination: `${process.env.BLOG_URL}/:path*`,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
