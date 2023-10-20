@@ -80,7 +80,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
                     {formatBalanceDolar(
                       {
                         balance: hatomFarm.tvl,
-                        decimals: elrondToken.decimals,
+                        decimals: elrondToken?.decimals,
                       },
                       price,
                       true
