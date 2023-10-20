@@ -3,7 +3,6 @@ import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { routeNames } from "@/config/routes";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
@@ -14,7 +13,6 @@ import {
 } from "@/types/hatom.interface";
 import { formatBalanceDolar } from "@/utils/functions/formatBalance";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import FarmInfo from "./common/FarmInfo/FarmInfo";
 import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
@@ -101,13 +99,6 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
           <StakedInfo />
         </Collapse>
       </Card>
-
-      <p className="mt-20">
-        Don&apos;t have any LP tokens? Buy LP{" "}
-        <Link href={routeNames.swapLp} className="text-blue-700">
-          here
-        </Link>
-      </p>
     </FarmContext.Provider>
   );
 };
