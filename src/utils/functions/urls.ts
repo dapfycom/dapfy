@@ -16,3 +16,7 @@ export function checkNestedRoute(passedRoute: string): boolean {
   if (passedRoute === currentRoute) return false;
   return currentRoute.startsWith(passedRoute);
 }
+
+export function isPathOrSubpath(currentPath: string, paths: string[]) {
+  return paths.some((path) => currentPath.startsWith(path));
+}
