@@ -40,6 +40,7 @@ export function middleware(request: NextRequest) {
       "/favicon.ico",
       "/images",
       "/blog",
+      "/docs",
 
       // Your other files in `public`
     ])
