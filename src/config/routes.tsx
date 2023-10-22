@@ -37,10 +37,6 @@ export const routeNames = {
 
 export const mainSiteRoutes = [
   {
-    path: routeNames.swap,
-    title: "Swap",
-  },
-  {
     path: routeNames.aggregator,
     title: "Swap Aggregator",
   },
