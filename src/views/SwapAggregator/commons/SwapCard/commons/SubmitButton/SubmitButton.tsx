@@ -2,11 +2,13 @@ import { Button } from "@/components/ui/button";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { openLogin } from "@/redux/dapp/dapp-slice";
+import { submitSwap } from "@/views/SwapAggregator/lib/calls";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
 import {
   selectFromField,
   selectSlippage,
-} from "@/views/SwapView/lib/swap-slice";
+} from "@/views/SwapAggregator/lib/swap-slice";
+
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks/account/useGetLoginInfo";
 import React, { useState } from "react";
@@ -18,7 +20,7 @@ const SubmitButton = () => {
   const { isLoggedIn } = useGetLoginInfo();
   const fromField = useAppSelector(selectFromField);
   const slippage = useAppSelector(selectSlippage);
-  const { data: swapRoutes } = useGetAggregate();
+  const { data: aggregatorData } = useGetAggregate();
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const [txSuccess, setTxSuccess] = useState(false);
   const { elrondToken: fromElrondToken } = useGetElrondToken(
@@ -45,21 +47,18 @@ const SubmitButton = () => {
     if (!isLoggedIn) {
       dispatch(openLogin(true));
     } else {
-      setTxSuccess(false);
-      // import("@/views/SwapView/lib/calls").then(async (calls) => {
-      //   const res = await calls.submitSwap(
-      //     swapRoutes || [],
-      //     slippage,
-      //     {
-      //       token: fromField.selectedToken,
-      //       value: Number(fromField.value),
-      //     },
+      console.log({ aggregatorData });
 
-      //     fromElrondToken
-      //   );
+      if (aggregatorData) {
+        setTxSuccess(false);
+        const res = await submitSwap(
+          fromField.selectedToken,
+          aggregatorData?.swapAmountWithDecimal,
+          aggregatorData?.swaps
+        );
 
-      //   setSessionId(res?.sessionId);
-      // });
+        setSessionId(res?.sessionId);
+      }
     }
   };
 
@@ -74,24 +73,6 @@ const SubmitButton = () => {
       <Button onClick={handleSwap} className="w-full">
         {buttonText}
       </Button>
-
-      {/* <ActionButton
-        width={"full"}
-        h="auto"
-        py={"20px"}
-        bgColor="rgba(40, 67, 190, 0.3)"
-        _disabled={{
-          "& p": {
-            color: "dark.100 !important",
-          },
-          bg: "dark.400",
-        }}
-        onClick={handleSwap}
-      >
-        <Text color="primary" opacity={1} fontSize={{ xs: "md", lg: "25px" }}>
-          {buttonText}
-        </Text>
-      </ActionButton> */}
     </>
   );
 };

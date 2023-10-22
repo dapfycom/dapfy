@@ -1,7 +1,7 @@
 import { host } from "./urls";
 
 export const defaultMetaTags = {
-  title: "Beskar",
+  title: "Dapfy",
   description: "",
   image: `${host}/Thumbnail.png`,
 };

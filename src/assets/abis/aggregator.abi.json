@@ -1,0 +1,85 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.70.0-nightly",
+            "commitHash": "28a29282f6dde2e4aba6e1e4cfea5c9430a00217",
+            "commitDate": "2023-04-06",
+            "channel": "Nightly",
+            "short": "rustc 1.70.0-nightly (28a29282f 2023-04-06)"
+        },
+        "contractCrate": {
+            "name": "aggregator",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.39.5"
+        }
+    },
+    "docs": [
+        "An empty contract. To be used as a template when starting a new contract from scratch."
+    ],
+    "name": "AggregatorContract",
+    "constructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "bestSwap",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "final_amount_out",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "swap_operations",
+                    "type": "variadic<AggregatorStep>",
+                    "multi_arg": true
+                }
+            ],
+            "outputs": []
+        }
+    ],
+    "events": [],
+    "hasCallback": false,
+    "types": {
+        "AggregatorStep": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "token_in",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "amount_in",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "pool_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "function_name",
+                    "type": "bytes"
+                },
+                {
+                    "name": "arguments",
+                    "type": "List<bytes>"
+                }
+            ]
+        }
+    }
+}

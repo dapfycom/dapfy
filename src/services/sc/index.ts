@@ -1,3 +1,4 @@
+import aggregatorAbiUrl from "@/assets/abis/aggregator.abi.json";
 import bskFarmAbiUrl from "@/assets/abis/beskar-dao.abi.json";
 import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
@@ -25,7 +26,8 @@ export type WspTypes =
   | "bskFarmWsp"
   | "flipWsp"
   | "dustWsp"
-  | "hatomParentWsp";
+  | "hatomParentWsp"
+  | "aggregatorWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -82,6 +84,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = hatomParentAbiUrl;
       implementsInterfaces = "HatomParentContract";
       break;
+    case "aggregatorWsp":
+      simpleAddress = selectedNetwork.scAddress.aggregator;
+      address = new Address(simpleAddress);
+      abiUrl = aggregatorAbiUrl;
+      implementsInterfaces = "AggregatorContract";
+      break;
     default:
       break;
   }
@@ -121,6 +129,9 @@ export const getSmartContractInteraction = (
     ),
     hatomParentWsp: new SmartContractInteraction(
       getInterface("hatomParentWsp").simpleAddress
+    ),
+    aggregatorWsp: new SmartContractInteraction(
+      getInterface("aggregatorWsp").simpleAddress
     ),
   };
 

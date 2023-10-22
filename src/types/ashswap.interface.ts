@@ -38,6 +38,7 @@ export type SorSwapResponse = {
   effectivePriceReserved: number | null;
   priceImpact: number | null;
   swapAmount: string;
+  swapAmountWithDecimal: string;
   returnAmount: string;
   returnAmountWithDecimal: string;
   tokenAddresses: string[];

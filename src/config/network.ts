@@ -70,6 +70,7 @@ const networkConfig = {
       dust: "erd1qqqqqqqqqqqqqpgql3z822nsknxsjttzqs73762u4vltlgfvy26srl0844",
       hatomParent:
         "erd1qqqqqqqqqqqqqpgq2hsg0h0e9rljxx8qrs99mxh35mvz86qjvr2slxxkz5",
+      aggregator: "",
     },
   },
   devnet: {
@@ -104,14 +105,19 @@ const networkConfig = {
     scAddress: {
       maiarRouter: "",
       maiarBskSwap: "",
-      wrapEgld: "",
-      wrapEgldShar1: "",
-      wrapEgldShar2: "",
+      wrapEgld:
+        "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
+      wrapEgldShar1:
+        "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
+      wrapEgldShar2:
+        "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
       farm: "",
       flip: "erd1qqqqqqqqqqqqqpgqfg6t4tr5vj70359kws6nltkw7qfv8rv8d8ssj43k4j",
       dust: "erd1qqqqqqqqqqqqqpgq375pvn7af4k2tv34mshm80pqjs0uhl82d8ssdv4qpj",
       hatomParent:
         "erd1qqqqqqqqqqqqqpgq2hsg0h0e9rljxx8qrs99mxh35mvz86qjvr2slxxkz5",
+      aggregator:
+        "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq",
     },
   },
   testnet: {
