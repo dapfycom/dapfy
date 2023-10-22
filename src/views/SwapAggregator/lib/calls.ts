@@ -12,24 +12,6 @@ export const submitSwap = async (
   final_amount_out: string,
   swap_operations: SorSwap[]
 ) => {
-  const dataToSend: any[] = [
-    BytesValue.fromUTF8(token_out),
-    new BigUIntValue(new BigNumber(final_amount_out)),
-  ];
-
-  const datToSendWithSept: any[] = dataToSend.concat(
-    swap_operations.flatMap((step) => {
-      return [
-        BytesValue.fromUTF8(step.assetIn),
-        BytesValue.fromUTF8(step.assetOut),
-        new BigUIntValue(new BigNumber(step.amount)),
-        BytesValue.fromUTF8(step.poolId),
-        BytesValue.fromUTF8(step.functionName),
-        List.fromItems(step.arguments.map((arg) => BytesValue.fromUTF8(arg))),
-      ];
-    })
-  );
-
   const transactions = [];
   let swapToken = token_out;
   if (token_out === selectedNetwork.tokensID.egld) {
@@ -49,6 +31,24 @@ export const submitSwap = async (
     });
     transactions.push(t0);
   }
+
+  const dataToSend: any[] = [
+    BytesValue.fromUTF8(swapToken),
+    new BigUIntValue(new BigNumber(final_amount_out)),
+  ];
+
+  const datToSendWithSept: any[] = dataToSend.concat(
+    swap_operations.flatMap((step) => {
+      return [
+        BytesValue.fromUTF8(step.assetIn),
+        BytesValue.fromUTF8(step.assetOut),
+        new BigUIntValue(new BigNumber(step.amount)),
+        BytesValue.fromUTF8(step.poolId),
+        BytesValue.fromUTF8(step.functionName),
+        List.fromItems(step.arguments.map((arg) => BytesValue.fromUTF8(arg))),
+      ];
+    })
+  );
 
   const t1 = getSmartContractInteraction("aggregatorWsp").scCallOnlyTx({
     functionName: "bestSwap",
