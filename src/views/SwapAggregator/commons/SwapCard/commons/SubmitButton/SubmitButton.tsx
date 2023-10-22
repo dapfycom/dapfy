@@ -70,7 +70,11 @@ const SubmitButton = () => {
   return (
     <>
       {txSuccess && <Realistic />}
-      <Button onClick={handleSwap} className="w-full">
+      <Button
+        onClick={handleSwap}
+        className="w-full"
+        disabled={!aggregatorData}
+      >
         {buttonText}
       </Button>
     </>
