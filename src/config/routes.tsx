@@ -69,9 +69,11 @@ export const mainSiteRoutes = [
   {
     path: routeNames.docs,
     title: "Docs",
+    isExternal: true,
   },
   {
     path: routeNames.blog,
     title: "Blog",
+    isExternal: true,
   },
 ];

@@ -22,6 +22,7 @@ const MainNav: React.FC<MainNavProps> = ({
     label: route.title,
     active: pathname === route.path,
     soon: route.soon,
+    isExternal: route.isExternal,
   }));
 
   return (
@@ -34,6 +35,12 @@ const MainNav: React.FC<MainNavProps> = ({
           return null;
         }
 
+        const extraProps: any = {};
+        if (route?.isExternal) {
+          extraProps["target"] = "_blank";
+          extraProps["rel"] = "noopener noreferrer";
+        }
+
         return (
           <Link
             key={route.href}
@@ -43,6 +50,7 @@ const MainNav: React.FC<MainNavProps> = ({
                 ? "bg-[hsla(0,0%,100%,.09)]"
                 : "text-muted-foreground"
             }`}
+            {...extraProps}
           >
             {route.label}
           </Link>
