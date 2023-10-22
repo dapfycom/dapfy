@@ -33,6 +33,8 @@ export const routeNames = {
   dust: "/dust",
   aggregator: "/aggregator",
   defi: "/defi",
+  docs: "/docs",
+  blog: "/blog",
 };
 
 export const mainSiteRoutes = [
@@ -40,6 +42,7 @@ export const mainSiteRoutes = [
     path: routeNames.aggregator,
     title: "Swap Aggregator",
   },
+
   {
     path: routeNames.farm,
     title: "Farm",
@@ -62,5 +65,13 @@ export const mainSiteRoutes = [
   {
     path: routeNames.defi,
     title: "Defi",
+  },
+  {
+    path: routeNames.docs,
+    title: "Docs",
+  },
+  {
+    path: routeNames.blog,
+    title: "Blog",
   },
 ];

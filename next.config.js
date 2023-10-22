@@ -18,6 +18,14 @@ const nextConfig = {
         source: "/blog/:path*",
         destination: `${process.env.BLOG_URL}/:path*`,
       },
+      {
+        source: "/docs",
+        destination: `${process.env.DOCS_URL}`,
+      },
+      {
+        source: "/docs/:path*",
+        destination: `${process.env.DOCS_URL}/:path*`,
+      },
     ];
   },
 };
