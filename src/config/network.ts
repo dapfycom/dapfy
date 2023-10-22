@@ -91,7 +91,7 @@ const networkConfig = {
     tokensID: {
       egld: "EGLD",
       wegld: "WEGLD-d7c6bb",
-      bsk: "BSK-207198", // this is wrong, because we don't have a BSK token on devnet
+      bsk: "RIDE-6e4c49",
 
       ride: "RIDE-6e4c49",
       hodl: "",

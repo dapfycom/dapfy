@@ -31,6 +31,7 @@ export const routeNames = {
   stake: "/stake",
   play: "/play",
   dust: "/dust",
+  aggregator: "/aggregator",
   defi: "/defi",
 };
 
@@ -38,6 +39,10 @@ export const mainSiteRoutes = [
   {
     path: routeNames.swap,
     title: "Swap",
+  },
+  {
+    path: routeNames.aggregator,
+    title: "Swap Aggregator",
   },
   {
     path: routeNames.farm,

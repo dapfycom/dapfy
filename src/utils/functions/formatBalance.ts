@@ -111,11 +111,14 @@ export const formatNumber = (number?: number | string) => {
 };
 
 export const setElrondBalance = (
-  amount: number,
-  decimals: number = 18
+  amount: BigNumber.Value,
+  decimals: BigNumber.Value = 18
 ): string => {
+  if (!amount) return "0";
   try {
-    const elrondBalance = amount * Math.pow(10, decimals);
+    const elrondBalance = new BigNumber(amount).multipliedBy(
+      new BigNumber(10).pow(decimals)
+    );
     const noDecimalsElrondBalance = new BigNumber(elrondBalance).toFixed(0);
 
     return noDecimalsElrondBalance;

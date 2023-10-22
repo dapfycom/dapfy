@@ -7,8 +7,9 @@ interface IProps {
   tokenI?: string;
   src?: string;
   size: number;
+  alt?: string;
 }
-const TokenImage = ({ tokenI, src, size }: IProps) => {
+const TokenImage = ({ tokenI, src, alt = "", size }: IProps) => {
   const { elrondToken, isLoading } = useGetElrondToken(
     src ? null : (tokenI as string)
   );
@@ -16,7 +17,7 @@ const TokenImage = ({ tokenI, src, size }: IProps) => {
   if (src) {
     return (
       <div className="flex">
-        <Image src={src} width={size} height={size} alt="" />
+        <Image src={src} width={size} height={size} alt={alt} />
       </div>
     );
   }
@@ -35,7 +36,7 @@ const TokenImage = ({ tokenI, src, size }: IProps) => {
                 width={size}
                 height={size}
                 src={elrondToken.assets.svgUrl}
-                alt=""
+                alt={elrondToken.ticker}
               />
             </div>
           )}
@@ -46,3 +47,14 @@ const TokenImage = ({ tokenI, src, size }: IProps) => {
 };
 
 export default TokenImage;
+
+export const TokenImageSRC = ({ src, alt = "", size }: IProps) => {
+  return (
+    <Image
+      src={src || "/images/token-placehodler.png"}
+      alt={alt}
+      width={size}
+      height={size}
+    />
+  );
+};
