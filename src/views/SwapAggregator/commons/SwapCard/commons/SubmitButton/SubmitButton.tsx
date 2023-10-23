@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { openLogin } from "@/redux/dapp/dapp-slice";
+import { calculateSlipageAmount } from "@/utils/functions/tokens";
 import { submitSwap } from "@/views/SwapAggregator/lib/calls";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
 import {
@@ -48,16 +49,26 @@ const SubmitButton = () => {
       dispatch(openLogin(true));
     } else {
       console.log({ aggregatorData });
-
-      if (aggregatorData) {
-        setTxSuccess(false);
-        const res = await submitSwap(
-          fromField.selectedToken,
-          aggregatorData?.swapAmountWithDecimal,
-          aggregatorData?.swaps
+      const slippage = 20;
+      if (aggregatorData?.returnAmountWithDecimal) {
+        const amountWithSlippage = calculateSlipageAmount(
+          slippage,
+          aggregatorData?.returnAmountWithDecimal
         );
+        if (aggregatorData) {
+          setTxSuccess(false);
+          const res = await submitSwap(
+            aggregatorData.tokenOut,
+            amountWithSlippage.toFixed(0),
+            aggregatorData?.swaps,
+            fromField.selectedToken,
+            aggregatorData.swapAmountWithDecimal
+          );
 
-        setSessionId(res?.sessionId);
+          setSessionId(res?.sessionId);
+        }
+      } else {
+        throw new Error("No return amount with decimals");
       }
     }
   };

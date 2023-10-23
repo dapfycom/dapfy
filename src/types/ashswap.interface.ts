@@ -1,3 +1,4 @@
+import BigNumber from "bignumber.js";
 export type AshToken = {
   id: string;
   coingeckoId: string;
@@ -47,4 +48,13 @@ export type SorSwapResponse = {
   marketSp: string;
   routes?: SorRoute[];
   swaps: SorSwap[];
+};
+
+export type AggregatorStep = {
+  token_in: string;
+  token_out: string;
+  amount_in: BigNumber;
+  pool_address: string;
+  function_name: string;
+  arguments: Buffer[];
 };

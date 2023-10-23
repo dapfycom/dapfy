@@ -27,6 +27,7 @@ export class SmartContractInteraction {
   private contract;
   constructor(smartContractAddress: string, abiFile?: any) {
     const scAddress = new Address(smartContractAddress);
+
     this.contract = new SmartContract({ address: scAddress, abi: abiFile });
   }
 
@@ -132,7 +133,7 @@ export class SmartContractInteraction {
         : TokenTransfer.fungibleFromAmount(
             token.collection,
             value || 0,
-            token.decimals
+            token.decimals!
           )
     );
 
@@ -202,7 +203,7 @@ export class SmartContractInteraction {
           : TokenTransfer.fungibleFromAmount(
               token.collection,
               value || 0,
-              token.decimals
+              token.decimals!
             )
       );
 
@@ -253,7 +254,7 @@ export class SmartContractInteraction {
         : TokenTransfer.fungibleFromAmount(
             token.collection,
             value || 0,
-            token.decimals
+            token.decimals!
           )
     );
 
@@ -272,12 +273,14 @@ export class SmartContractInteraction {
     value,
     arg = [],
     gasL,
+    realValue,
   }: IEGLDPaymentProps): Transaction {
     let interaction = this.createInteraction(functionName, arg);
 
     const tx = this.createTransactionFromInteraction(interaction, {
       gasL,
       egldVal: value,
+      realValue: realValue,
     });
 
     return tx;
