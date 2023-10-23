@@ -119,9 +119,10 @@ export const submitSwap = async (
     transactions.push(t0);
   }
 
-  const tokensAmount = [
-    TokenTransfer.fungibleFromBigInteger(swapToken, amount_for_swap_decimals),
-  ];
+  const tokensAmount = TokenTransfer.fungibleFromBigInteger(
+    swapToken,
+    amount_for_swap_decimals
+  );
 
   const steps: AggregatorStep[] = swap_operations.map((s) => {
     const step: AggregatorStep = {
@@ -145,7 +146,7 @@ export const submitSwap = async (
     ...steps,
   ]);
   interaction
-    .withMultiESDTNFTTransfer(tokensAmount)
+    .withSingleESDTTransfer(tokensAmount)
     .withSender(new Address(store.getState().dapp.userAddress));
   interaction.withGasLimit(600_000_000).withChainID(selectedNetwork.ChainID);
 
