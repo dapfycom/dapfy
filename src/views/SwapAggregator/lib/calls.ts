@@ -1,4 +1,3 @@
-import aggregatorAbiUrl from "@/assets/abis/aggregator.abi.json";
 import { selectedNetwork } from "@/config/network";
 import store from "@/redux/store";
 import { getInterface, getSmartContractInteraction } from "@/services/sc";
@@ -8,7 +7,6 @@ import { getWspOfWrapedEgld } from "@/utils/functions/sc";
 import { Address, TokenTransfer } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 
-import { AbiRegistry, SmartContract } from "@multiversx/sdk-core/out";
 // export const submitSwap = async (
 //   token_out: string,
 //   final_amount_out: string,
@@ -94,11 +92,6 @@ export const submitSwap = async (
   token_for_swap: string,
   amount_for_swap_decimals: string
 ) => {
-  console.log("token_out", token_out);
-  console.log("final_amount_out", final_amount_out);
-  console.log("swap_operations", swap_operations);
-  console.log("token_for_swap", token_for_swap);
-  console.log("amount_for_swap_decimals", amount_for_swap_decimals);
   const transactions = [];
   let swapToken = token_for_swap;
   if (token_for_swap === selectedNetwork.tokensID.egld) {
@@ -135,11 +128,10 @@ export const submitSwap = async (
     };
     return step;
   });
-  const abiRegistry = AbiRegistry.create(aggregatorAbiUrl);
-  const scAddress = new Address(
-    "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq"
-  );
-  const contract = new SmartContract({ address: scAddress, abi: abiRegistry });
+
+  const contactInteracation = getSmartContractInteraction("aggregatorWsp");
+
+  const contract = contactInteracation.getContract();
   let interaction = contract.methods.bestSwap([
     token_out,
     final_amount_out,
@@ -148,7 +140,9 @@ export const submitSwap = async (
   interaction
     .withSingleESDTTransfer(tokensAmount)
     .withSender(new Address(store.getState().dapp.userAddress));
-  interaction.withGasLimit(600_000_000).withChainID(selectedNetwork.ChainID);
+  interaction
+    .withGasLimit(20_000_000 + steps.length * 15_000_000)
+    .withChainID(selectedNetwork.ChainID);
 
   const t1 = interaction.buildTransaction();
   transactions.push(t1);

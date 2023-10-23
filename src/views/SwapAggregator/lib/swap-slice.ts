@@ -29,7 +29,7 @@ const initialState: SwapState = {
     valueDecimals: "",
   },
   rate: 0,
-  slipage: 3,
+  slipage: 5,
 };
 
 export const swapAggregator = createSlice({

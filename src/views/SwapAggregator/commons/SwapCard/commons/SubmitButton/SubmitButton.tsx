@@ -49,7 +49,7 @@ const SubmitButton = () => {
       dispatch(openLogin(true));
     } else {
       console.log({ aggregatorData });
-      const slippage = 20;
+
       if (aggregatorData?.returnAmountWithDecimal) {
         const amountWithSlippage = calculateSlipageAmount(
           slippage,

@@ -4,7 +4,7 @@ import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import { selectedNetwork } from "@/config/network";
-import { Address } from "@multiversx/sdk-core/out";
+import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
 import { ProxyNetworkProvider } from "@multiversx/sdk-network-providers";
 import { SmartContractInteraction } from "./calls/transaction";
 
@@ -131,7 +131,8 @@ export const getSmartContractInteraction = (
       getInterface("hatomParentWsp").simpleAddress
     ),
     aggregatorWsp: new SmartContractInteraction(
-      getInterface("aggregatorWsp").simpleAddress
+      getInterface("aggregatorWsp").simpleAddress,
+      AbiRegistry.create(getInterface("aggregatorWsp").abiUrl)
     ),
   };
 

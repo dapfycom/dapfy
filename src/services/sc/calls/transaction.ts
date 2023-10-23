@@ -31,6 +31,11 @@ export class SmartContractInteraction {
     this.contract = new SmartContract({ address: scAddress, abi: abiFile });
   }
 
+  // get contract
+  public getContract() {
+    return this.contract;
+  }
+
   private createTransactionFromInteraction(
     interaction: Interaction,
     options?: {
