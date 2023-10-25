@@ -7,7 +7,7 @@ import {
   setElrondBalance,
 } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
-import { IElrondAccountToken, IMexPair } from "../../../types/elrond.interface";
+import { IElrondToken, IMexPair } from "../../../types/elrond.interface";
 
 // Delete all this
 export const handleSwap = (value: string, rate: number) => {
@@ -273,12 +273,15 @@ export const changeField = (
     payload: string;
     type: string;
   },
-  token?: IElrondAccountToken
+  token?: IElrondToken
 ) => {
   if (token) {
     store.dispatch(onChangeFieldValue(value));
+    console.log("token in changeField", token);
 
     const valueDecimals = setElrondBalance(value, token.decimals);
+    console.log("valueDecimals", valueDecimals);
+
     store.dispatch(onChangeFieldValueDecimals(valueDecimals.toString()));
   }
 };

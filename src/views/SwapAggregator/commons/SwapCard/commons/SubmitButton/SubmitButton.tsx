@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { openLogin } from "@/redux/dapp/dapp-slice";
+import { SorSwap } from "@/types/ashswap.interface";
+import { setElrondBalance } from "@/utils/functions/formatBalance";
 import { calculateSlipageAmount } from "@/utils/functions/tokens";
 import { submitSwap } from "@/views/SwapAggregator/lib/calls";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
@@ -57,10 +59,39 @@ const SubmitButton = () => {
         );
         if (aggregatorData) {
           setTxSuccess(false);
+
+          if (!aggregatorData?.routes) throw new Error("No routes");
+
+          const sorSwap: SorSwap[] = aggregatorData?.routes[0].hops.map(
+            (hop, index) => {
+              const tokenInDecimals = hop.pool.allTokens.find(
+                (t) => t.address === hop.tokenIn
+              )?.decimal;
+              const tokenOutDecimals = hop.pool.allTokens.find(
+                (t) => t.address === hop.tokenOut
+              )?.decimal;
+
+              const swapItem = aggregatorData.swaps.find(
+                (s, hopIndex) => hopIndex === index
+              );
+              if (!swapItem) throw new Error("No swap item");
+              if (
+                swapItem.assetIn !== hop.tokenIn ||
+                swapItem.assetOut !== hop.tokenOut
+              )
+                throw new Error("Missmatch between routs and swaps");
+
+              const data: SorSwap = {
+                ...swapItem,
+                amount: setElrondBalance(hop.tokenInAmount, tokenInDecimals),
+              };
+              return data;
+            }
+          );
           const res = await submitSwap(
             aggregatorData.tokenOut,
             amountWithSlippage.toFixed(0),
-            aggregatorData?.swaps,
+            sorSwap,
             fromField.selectedToken,
             aggregatorData.swapAmountWithDecimal
           );

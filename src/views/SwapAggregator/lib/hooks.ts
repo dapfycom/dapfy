@@ -18,10 +18,9 @@ export const useGetAggregate = () => {
   const token2 = useAppSelector(selectToFieldSelectedToken);
   const token1Value = useAppSelector(selectFromFieldValueDecimals);
   const dispatch = useDispatch();
-  console.log({ token1 }, { token2 }, { token1Value });
 
   const { data, isLoading, error } = useSWR(
-    token1 && token2 && token1Value
+    token1 && token2 && token1Value && token1Value !== "0"
       ? ["aggregate", token1, token2, token1Value]
       : null,
     async () => {

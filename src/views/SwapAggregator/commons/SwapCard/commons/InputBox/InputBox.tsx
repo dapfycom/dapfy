@@ -18,22 +18,18 @@ import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
-import { IElrondAccountToken } from "@/types/elrond.interface";
+import { IElrondAccountToken, IElrondToken } from "@/types/elrond.interface";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useGetSwapbleAggregatorTokens } from "@/views/SwapAggregator/lib/hooks";
 import { ChevronDownIcon, Loader, Loader2Icon } from "lucide-react";
-import React from "react";
 // const SelectTokenModal = lazy(() => import("../SelectTokenModal"));
 
 interface IProps {
   selectedTokenI: string;
   value: string;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    token?: IElrondAccountToken
-  ) => void;
-  onChangeToken: (t: string) => void;
+  onChange: (val: string, token?: IElrondToken) => void;
+  onChangeToken: (t: IElrondToken) => void;
   isLoadingInput?: boolean;
   disabeledTokenSelection?: boolean;
   onMax?: (t: IElrondAccountToken) => void;
@@ -71,7 +67,7 @@ const InputBox = ({
             type="text"
             className="border-none focus-visible:border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-xl"
             placeholder="0.0"
-            onChange={(e) => onChange(e, accountToken as IElrondAccountToken)}
+            onChange={(e) => onChange(e.target.value, elrondToken)}
             value={value}
             readOnly={readOnly}
           />
@@ -132,7 +128,7 @@ const InputBox = ({
                             <CommandItem key={t.identifier}>
                               <div
                                 className="w-full h-full gap-3 cursor-pointer flex  items-start px-4 py-2"
-                                onClick={() => onChangeToken(t.identifier)}
+                                onClick={() => onChangeToken(t)}
                               >
                                 <TokenImageSRC
                                   size={20}

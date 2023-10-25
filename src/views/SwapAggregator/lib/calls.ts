@@ -92,6 +92,12 @@ export const submitSwap = async (
   token_for_swap: string,
   amount_for_swap_decimals: string
 ) => {
+  console.log("token_out", token_out);
+  console.log("final_amount_out", final_amount_out);
+  console.log("swap_operations", swap_operations);
+  console.log("token_for_swap", token_for_swap);
+  console.log("amount_for_swap_decimals", amount_for_swap_decimals);
+
   const transactions = [];
   let swapToken = token_for_swap;
   if (token_for_swap === selectedNetwork.tokensID.egld) {
@@ -141,7 +147,7 @@ export const submitSwap = async (
     .withSingleESDTTransfer(tokensAmount)
     .withSender(new Address(store.getState().dapp.userAddress));
   interaction
-    .withGasLimit(20_000_000 + steps.length * 15_000_000)
+    .withGasLimit(20_000_000 + steps.length * 20_000_000)
     .withChainID(selectedNetwork.ChainID);
 
   const t1 = interaction.buildTransaction();

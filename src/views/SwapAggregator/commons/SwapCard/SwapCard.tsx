@@ -10,7 +10,7 @@ import {
 import { SwapIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { IElrondAccountToken } from "@/types/elrond.interface";
+import { IElrondAccountToken, IElrondToken } from "@/types/elrond.interface";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import {
   changeFromFieldToken,
@@ -34,41 +34,29 @@ const SwapCard = () => {
   const toField = useAppSelector(selectToField);
   const { isLoading: loadingAggregatorData } = useGetAggregate();
   const dispatch = useAppDispatch();
-  const handleChangeFromField = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    token?: IElrondAccountToken
-  ) => {
+  const handleChangeFromField = (value: string, token?: IElrondToken) => {
     console.log({ token });
 
     changeField(
-      e.target.value,
+      value,
       onChageFromFieldValue,
       onChageFromFieldValueDecimals,
       token
     );
   };
-  const handleChangeToField = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    token?: IElrondAccountToken
-  ) => {
-    changeField(
-      e.target.value,
-      onChangeToField,
-      onChangeToFieldValueDecimals,
-      token
-    );
+  const handleChangeToField = (value: string, token?: IElrondToken) => {
+    changeField(value, onChangeToField, onChangeToFieldValueDecimals, token);
   };
   const swapFileds = () => {
-    console.log("swapFileds", swapFileds);
-
     dispatch(onSwapFields());
   };
 
-  const handleChangeFromToken = (token: string) => {
-    dispatch(changeFromFieldToken(token));
+  const handleChangeFromToken = (token: IElrondToken) => {
+    dispatch(changeFromFieldToken(token.identifier));
+    handleChangeFromField(fromField.value, token);
   };
-  const handleChangeToToken = (token: string) => {
-    dispatch(changeToFieldToken(token));
+  const handleChangeToToken = (token: IElrondToken) => {
+    dispatch(changeToFieldToken(token.identifier));
   };
   const handleMax = (accountToken: IElrondAccountToken) => {
     const userAmount = formatBalance(accountToken, true) as number;
