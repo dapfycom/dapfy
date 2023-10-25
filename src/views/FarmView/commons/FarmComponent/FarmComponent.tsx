@@ -4,7 +4,6 @@ import Divider from "@/components/Divider/Divider";
 import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
 import { Card, CardContent } from "@/components/ui/card";
 import { selectedNetwork } from "@/config/network";
-import { routeNames } from "@/config/routes";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
@@ -59,7 +58,12 @@ const FarmComponent = () => {
 
       <p className="mt-20">
         Don&apos;t have any LP tokens? Buy LP{" "}
-        <Link href={routeNames.swapLp} className="text-blue-700">
+        <Link
+          href={"https://xexchange.com/swap"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-700"
+        >
           here
         </Link>
       </p>
