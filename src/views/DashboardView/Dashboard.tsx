@@ -3,7 +3,6 @@ import Container from "@/components/ui-system/Container";
 import DashboardHeading from "./common/DashboadHeading";
 import { ContentTable } from "./common/HoldingsTable";
 import RewardsCard from "./common/RewardsCard";
-import Settings from "./common/Settings";
 import XPaymentCard from "./common/XPaymentCard";
 
 const Dashboard = () => {
@@ -13,7 +12,7 @@ const Dashboard = () => {
       <div className="grid  gap-8 grid-cols-1 ">
         <RewardsCard />
         {/* <Cards /> */}
-        <Settings />
+        {/* <Settings /> */}
       </div>
       <div className="grid  gap-8 grid-cols-1 ">
         <ContentTable />
