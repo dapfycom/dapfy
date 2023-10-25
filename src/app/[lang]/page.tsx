@@ -2,9 +2,9 @@
 
 import useAuthentication from "@/hooks/useAuthentication";
 import Home from "@/views/HomeView/Home";
-import Swap from "@/views/SwapView/Swap";
+import SwapAggregator from "@/views/SwapAggregator";
 
 export default function HomePage() {
   const { isLoggedIn } = useAuthentication();
-  return <>{isLoggedIn ? <Swap /> : <Home />}</>;
+  return <>{isLoggedIn ? <SwapAggregator /> : <Home />}</>;
 }

@@ -13,17 +13,15 @@ const Home = () => {
     <Container>
       <div className="text-center mt-10 mb-5 md:mb-20">
         <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
-          xBeskar <br /> Shaping the Future of{" "}
-          <span className={"gradienteTitle"}> Crypto Rewards</span>
+          <span className={"gradienteTitle"}>CONNECT. INVEST. EARN.</span>
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
-          Discover a DeFi Revolution: Earn Rewards While You Explore the
-          Multiverse of Crypto Opportunities with xBeskar. Join us and dive into
-          the world of Multiversx, NFTs, DApps, and much more.
+          Dapfy is the platform for crypto users, providing the strategies and
+          interface to effortlessly navigate the decentralized economy.
         </PageHeaderDescription>
 
         <Button className="font-bold" onClick={handleConnect}>
-          Connect wallet to start earning
+          Get up to 100% APY on your crypto in seconds
         </Button>
       </div>
     </Container>
