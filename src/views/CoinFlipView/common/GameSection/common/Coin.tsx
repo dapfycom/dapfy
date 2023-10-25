@@ -61,7 +61,7 @@ const Coin = () => {
               )}
             >
               <Image
-                src={"images/bsk-logo.svg"}
+                src={"/images/bsk-logo.svg"}
                 width={265}
                 height={265}
                 alt=""

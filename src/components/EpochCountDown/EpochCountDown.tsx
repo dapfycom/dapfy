@@ -16,7 +16,7 @@ const EpochCountDown = () => {
   }
 
   const handleClickCountDown = () => {
-    router.push(routeNames.dashboard);
+    router.push(routeNames.rewards);
   };
 
   const extraSpace = pathname === "/" && !isLoggedIn;

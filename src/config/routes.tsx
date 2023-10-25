@@ -19,8 +19,8 @@
 // const DustView = React.lazy(() => import("views/DustView/DustView"));
 
 export const routeNames = {
-  home: "/dashboard",
-  dashboard: "/dashboard",
+  home: "/rewards",
+  rewards: "/rewards",
   swap: "/swap",
   swapLp: "/swapLp",
 

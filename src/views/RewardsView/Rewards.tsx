@@ -5,7 +5,7 @@ import { ContentTable } from "./common/HoldingsTable";
 import RewardsCard from "./common/RewardsCard";
 import XPaymentCard from "./common/XPaymentCard";
 
-const Dashboard = () => {
+const Rewards = () => {
   return (
     <Container className="mt-10 flex flex-col gap-10 max-w-[800px]">
       <DashboardHeading />
@@ -23,4 +23,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Rewards;

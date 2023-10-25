@@ -68,53 +68,6 @@ const FarmComponent = () => {
         </Link>
       </p>
     </>
-    // <Center mb={20} mt={12} flexDir="column">
-    //   <Box maxW="1300px" w="full" borderRadius="md" overflow={"hidden"}>
-    //     <Flex
-    //       gap={10}
-    //       w="full"
-    //       bg="dark.500"
-    //       px={7}
-    //       py={5}
-    //       onClick={onToggle}
-    //       cursor="pointer"
-    //       flexWrap={"wrap"}
-    //       flexDir={{ xs: "column", lg: "row" }}
-    //       alignItems="center"
-    //     >
-    //       <Flex gap={3} flex={1} alignItems="center">
-    //         {elrondToken && <LpTokenImageV2 lpToken={elrondToken} size={40} />}
-    //         {farmInfo && (
-    //           <Flex flexDir={"column"}>
-    //             <Text color="white" mb={2} fontSize="md" whiteSpace={"nowrap"}>
-    //               BSK-EGLD
-    //             </Text>
-    //             <Text fontSize={"lsm"}>
-    //               $
-    //               {formatBalanceDolar(
-    //                 { balance: farmInfo.stakedLp, decimals: 18 },
-    //                 price,
-    //                 true
-    //               )}
-    //             </Text>
-    //           </Flex>
-    //         )}
-    //       </Flex>
-    //       <FarmInfo />
-    //       <FarmMainButtons isOpen={isOpen} />
-    //     </Flex>
-    //     <Collapse in={isOpen}>
-    //       <StakedInfo />
-    //     </Collapse>
-    //   </Box>
-
-    //   <Text mt={20}>
-    //     Don't have any LP tokens? Buy LP{" "}
-    //     <Box as={Link} to={routeNames.swapLp} color="primary">
-    //       here
-    //     </Box>
-    //   </Text>
-    // </Center>
   );
 };
 
