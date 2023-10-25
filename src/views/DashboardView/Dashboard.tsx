@@ -8,7 +8,7 @@ import XPaymentCard from "./common/XPaymentCard";
 
 const Dashboard = () => {
   return (
-    <Container className="mt-10 flex flex-col gap-10">
+    <Container className="mt-10 flex flex-col gap-10 max-w-[800px]">
       <DashboardHeading />
       <div className="grid  gap-8 grid-cols-1 ">
         <RewardsCard />
