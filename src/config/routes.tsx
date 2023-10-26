@@ -19,20 +19,20 @@
 // const DustView = React.lazy(() => import("views/DustView/DustView"));
 
 export const routeNames = {
-  home: "/rewards",
-  rewards: "/rewards",
+  home: "/multiversx/rewards",
+  rewards: "/multiversx/rewards",
   swap: "/swap",
   swapLp: "/swapLp",
 
   // play: "/play",
   // coinFlip: "/play/coin-flip",
   // forge: "/the-forge",
-  farm: "/farm",
-  stake: "/stake",
-  play: "/play",
-  dust: "/dust",
-  aggregator: "/aggregator",
-  defi: "/defi",
+  farm: "/multiversx/farm",
+  stake: "/multiversx/stake",
+  play: "/multiversx/play",
+  dust: "/multiversx/dust",
+  aggregator: "/multiversx/aggregator",
+  defi: "/multiversx/defi",
   docs: "/docs",
   blog: "/blog",
 };
