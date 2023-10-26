@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { mainSiteRoutes } from "@/config/routes";
 import { cn } from "@/lib/utils";
+import { getBasePath } from "@/utils/functions/urls";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 interface MainNavProps
@@ -20,9 +21,9 @@ const MainNav: React.FC<MainNavProps> = ({
   const routes = navRoutes.map((route) => ({
     href: route.path,
     label: route.title,
-    active: pathname === route.path,
+    active: getBasePath(pathname) === route.path,
     soon: route.soon,
-    isExternal: route.isExternal,
+    // isExternal: route.isExternal,
   }));
 
   return (
@@ -36,10 +37,10 @@ const MainNav: React.FC<MainNavProps> = ({
         }
 
         const extraProps: any = {};
-        if (route?.isExternal) {
-          extraProps["target"] = "_blank";
-          extraProps["rel"] = "noopener noreferrer";
-        }
+        // if (route?.isExternal) {
+        //   extraProps["target"] = "_blank";
+        //   extraProps["rel"] = "noopener noreferrer";
+        // }
 
         return (
           <Link

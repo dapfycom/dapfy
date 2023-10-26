@@ -17,6 +17,11 @@ export function checkNestedRoute(passedRoute: string): boolean {
   return currentRoute.startsWith(passedRoute);
 }
 
-export function isPathOrSubpath(currentPath: string, paths: string[]) {
+export function isPathOrSubpath(currentPath: string, paths: string[]): boolean {
   return paths.some((path) => currentPath.startsWith(path));
+}
+
+export function getBasePath(url: string): string {
+  const parts = url.split("/");
+  return `/${parts[parts.length - 1]}`;
 }
