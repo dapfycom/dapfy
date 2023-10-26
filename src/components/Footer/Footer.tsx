@@ -197,7 +197,12 @@ const LinksSections = ({ title, routes }: LinksSectionsProps) => {
       <div className="flex flex-col gap-2 text-muted-foreground">
         {routes.map((route) => {
           return (
-            <LinkItem key={route.href} href={route.href} label={route.label} />
+            <LinkItem
+              key={route.href}
+              href={route.href}
+              isExternal={route.isExternal}
+              label={route.label}
+            />
           );
         })}
       </div>
