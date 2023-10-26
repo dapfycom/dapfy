@@ -1,3 +1,4 @@
+import { routeNames } from "@/config/routes";
 import { Dot } from "lucide-react";
 import Link from "next/link";
 
@@ -59,13 +60,10 @@ const Footer = () => {
         </div>
 
         <div className="mb-10">
-          <div
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(224, 225, 226, 0) 0%, rgb(224, 225, 226) 49.52%, rgba(224, 225, 226, 0) 100%)",
-            }}
-            className="w-3/5 h-0.5  mx-auto"
-          ></div>
+          <div className="flex gap-3">
+            <Link href={routeNames.blog}>Blog</Link>
+            <Link href={routeNames.docs}>Docs</Link>
+          </div>
         </div>
       </div>
     </footer>

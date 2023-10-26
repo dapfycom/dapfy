@@ -66,14 +66,4 @@ export const mainSiteRoutes = [
     path: routeNames.defi,
     title: "Defi",
   },
-  {
-    path: routeNames.docs,
-    title: "Docs",
-    isExternal: true,
-  },
-  {
-    path: routeNames.blog,
-    title: "Blog",
-    isExternal: true,
-  },
 ];
