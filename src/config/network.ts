@@ -115,9 +115,9 @@ const networkConfig = {
       flip: "erd1qqqqqqqqqqqqqpgqfg6t4tr5vj70359kws6nltkw7qfv8rv8d8ssj43k4j",
       dust: "erd1qqqqqqqqqqqqqpgq375pvn7af4k2tv34mshm80pqjs0uhl82d8ssdv4qpj",
       hatomParent:
-        "erd1qqqqqqqqqqqqqpgq2hsg0h0e9rljxx8qrs99mxh35mvz86qjvr2slxxkz5",
-      aggregator:
         "erd1qqqqqqqqqqqqqpgq5fldcnkg7j5333h7u4n8xhewt0pjj76qvr2s0lcyyl",
+      aggregator:
+        "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq",
     },
   },
   testnet: {
