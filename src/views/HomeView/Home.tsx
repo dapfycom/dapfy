@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const Home = () => {
   const { handleConnect } = useAuthentication();
   return (
-    <Container>
+    <Container className="min-h-[40vh]">
       <div className="text-center mt-10 mb-5 md:mb-20">
         <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
           <span className={"gradienteTitle"}>CONNECT. INVEST. EARN.</span>
