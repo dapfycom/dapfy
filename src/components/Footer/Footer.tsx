@@ -64,28 +64,28 @@ const resourcesRoutes = [
 
 const Footer = () => {
   return (
-    <footer className="pt-12 ">
+    <footer className="pt-20 ">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between items-center mb-20 ">
           <div className="text-center ">
-            <div className="flex items-center space-x-5">
-              <Image
-                src={"/images/logo-white.png"}
-                alt="Logo"
-                width={70}
-                height={78}
-                className="hidden dark:block"
-              />
-              <Image
-                src={"/images/logo-black.png"}
-                alt="Logo"
-                width={70}
-                height={78}
-                className="block dark:hidden"
-              />
-
-              <span className="text-3xl font-bold">Dapfy</span>
-            </div>
+            <Link href={routeNames.home}>
+              <div className="flex items-center space-x-5">
+                <Image
+                  src={"/images/logo-v2-white.png"}
+                  alt="Logo"
+                  width={180}
+                  height={50}
+                  className="hidden dark:block"
+                />
+                <Image
+                  src={"/images/logo-v2-black.png"}
+                  alt="Logo"
+                  width={180}
+                  height={50}
+                  className="block dark:hidden"
+                />
+              </div>
+            </Link>
           </div>
           <p className="text-blue-800 font-semibold flex items-center justify-center ">
             <Dot size={60} className="inline-block mr-[-20px]" /> All systems
