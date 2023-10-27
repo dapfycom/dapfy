@@ -29,6 +29,10 @@ const companyRoutes = [
 const productsRoutes = [
   {
     href: routeNames.aggregator,
+    label: "Buy crypto",
+  },
+  {
+    href: routeNames.aggregator,
     label: "Swap Aggregator",
   },
   {
