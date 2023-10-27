@@ -37,6 +37,12 @@ export const routeNames = {
   blog: "/blog",
 };
 
+export const externnalLinks = {
+  twitter: "https://x.com/xBeskar",
+  telegram: "https://t.me/xBeskar",
+  github: "https://github.com/MxBeskar",
+};
+
 export const mainSiteRoutes = [
   {
     path: routeNames.aggregator,

@@ -4,6 +4,7 @@ import Login from "@/components/Login/Login";
 import { Button } from "@/components/ui/button";
 import { Dot } from "lucide-react";
 import Image from "next/image";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import MobileNav from "../MobileNav/MobileNav";
 import { ModeToggle } from "../ModeToggle/ModeToggle";
 
@@ -14,6 +15,8 @@ const NavbarActions = () => {
         <Image src="/images/egld.svg" alt="" width={22} height={22} />
         <Dot size={20} className="text-green-500" /> MultiversX
       </Button>
+
+      <LanguageSelector />
 
       <div className="hidden sm:block">
         <ModeToggle />
