@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { openLogin } from "@/redux/dapp/dapp-slice";
 import { SorSwap } from "@/types/ashswap.interface";
@@ -26,9 +25,7 @@ const SubmitButton = () => {
   const { data: aggregatorData } = useGetAggregate();
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const [txSuccess, setTxSuccess] = useState(false);
-  const { elrondToken: fromElrondToken } = useGetElrondToken(
-    fromField.selectedToken
-  );
+
   const onSuccess = React.useCallback(() => {
     setTxSuccess(true);
     setTimeout(() => {

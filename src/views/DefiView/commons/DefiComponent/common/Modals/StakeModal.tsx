@@ -11,9 +11,10 @@ import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { deposit } from "@/views/DefiView/utils/services";
+import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as yup from "yup";
 import { FarmContext } from "../../DefiComponent";
 interface IProps {
@@ -23,8 +24,9 @@ interface IProps {
 
 const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { hatomFarm } = useContext(FarmContext);
+  const [sessionId, setSessionId] = useState<string | null>("");
 
-  const { elrondToken: stakedToken, isLoading } = useGetElrondToken(
+  const { elrondToken: stakedToken } = useGetElrondToken(
     hatomFarm?.moneyMarket.tokenI || null
   );
   const { accountToken: userStakedToken } = useGetAccountToken(
@@ -32,22 +34,34 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   );
   const stakeSchema = yup.object({
     amount: yup.number(),
-    // .required("This field is required")
-    // .min(0, "Negative number")
-    // .max(
-    //   formatBalance(userStakedToken, true, stakedToken.decimals) as number,
-    //   "Insufficient funds"
-    // ),
+  });
+
+  const onSuccess = () => {
+    onClose();
+  };
+
+  useTrackTransactionStatus({
+    transactionId: sessionId,
+    onSuccess,
+    onFail: (transactionId: string | null, errorMessage?: string) => {
+      console.error("transactionId", transactionId);
+      console.error("errorMessage", errorMessage);
+    },
   });
 
   const formik = useFormik({
     initialValues: {
       amount: "",
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       let amount = values.amount;
       if (hatomFarm) {
-        deposit(amount, stakedToken, hatomFarm?.moneyMarket.childScAddress);
+        const res = await deposit(
+          amount,
+          stakedToken,
+          hatomFarm?.moneyMarket.childScAddress
+        );
+        setSessionId(res?.sessionId);
       }
     },
     validationSchema: stakeSchema,
@@ -109,60 +123,6 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
         </form>
       </DialogContent>
     </Dialog>
-    // <MyModal isOpen={isOpen} onClose={onClose} size="2xl" py={6}>
-    //   {isLoading ? (
-    //     <Spinner />
-    //   ) : (
-    //     <form onSubmit={formik.handleSubmit}>
-    //       <ModalHeader>
-    //         <Flex alignItems={"center"} gap={3}>
-    //           <LpTokenImageV2 lpToken={stakedToken} size={35} />
-    //           <Heading fontSize={"lg"}>Stake in BSK-EGLD farm</Heading>
-    //         </Flex>
-    //       </ModalHeader>
-    //       <ModalBody>
-    //         <InputGroup size={"lg"}>
-    //           <Input
-    //             name="amount"
-    //             type={"number"}
-    //             placeholder="Amount"
-    //             fontSize={"sm"}
-    //             onChange={formik.handleChange}
-    //             value={formik.values.amount}
-    //             isInvalid={
-    //               formik.touched.amount && Boolean(formik.errors.amount)
-    //             }
-    //           />
-    //           <InputRightElement
-    //             pointerEvents="none"
-    //             children={
-    //               <Flex pt={2}>
-    //                 <LpTokenImageV2 lpToken={stakedToken} size={20} />
-    //               </Flex>
-    //             }
-    //           />
-    //         </InputGroup>
-    //         <Flex justifyContent="space-between" mt={3} fontSize={"xs"}>
-    //           <Text color="tomato">{formik.errors.amount}</Text>
-    //           <Text onClick={handleMax} cursor="pointer">
-    //             Balance: {formatBalance(userStakedToken)}
-    //           </Text>
-    //         </Flex>
-    //       </ModalBody>
-
-    //       <ModalFooter>
-    //         <Flex w="full" gap={4}>
-    //           <ActionButton flex={1} bg="dark.500" onClick={onClose}>
-    //             Cancel
-    //           </ActionButton>
-    //           <ActionButton flex={1} type="submit">
-    //             Stake
-    //           </ActionButton>
-    //         </Flex>
-    //       </ModalFooter>
-    //     </form>
-    //   )}
-    // </MyModal>
   );
 };
 

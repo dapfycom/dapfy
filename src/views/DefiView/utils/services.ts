@@ -17,7 +17,7 @@ export const deposit = (
   lpToken: IElrondToken,
   address: string
 ) => {
-  getSmartContractInteraction("hatomParentWsp").ESDTorEGLDTransfer({
+  return getSmartContractInteraction("hatomParentWsp").ESDTorEGLDTransfer({
     functionName: "deposit",
     token: { ...lpToken, collection: lpToken.identifier },
     arg: [new AddressValue(new Address(address))],
