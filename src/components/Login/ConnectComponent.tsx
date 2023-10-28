@@ -33,6 +33,13 @@ const webWalletLoginComponent = (
     Web Wallet{" "}
   </div>
 );
+
+const XAliasLoginComponent = (
+  <div className="flex items-center gap-2 h-full">
+    {" "}
+    <WebWalletIcon mr="14px" fontSize={"21px"} /> XAlias{" "}
+  </div>
+);
 const legerLoginComponent = (
   <div className="flex items-center gap-2 h-full">
     {" "}
@@ -116,7 +123,7 @@ const ConnectComponent = ({ place }: IProps) => {
               {legerLoginComponent}
             </LoginMethod>
             <LoginMethod as={WebWalletLoginButton} {...commonProps}>
-              {webWalletLoginComponent}
+              {XAliasLoginComponent}
             </LoginMethod>
           </div>
         </div>
