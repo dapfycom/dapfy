@@ -2,7 +2,6 @@
 import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
@@ -55,10 +54,6 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
         deposits: userInfo.deposits,
       }}
     >
-      <div className="flex gap-2 w-full items-center mt-10 mb-4">
-        <Label className="">Protocol: </Label>
-        <div className="px-4 py-1 border rounded-md">HATOM</div>
-      </div>
       <Card className="w-full  px-4">
         <CardContent className="space-y-2 pt-6">
           <div

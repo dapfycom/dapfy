@@ -13,7 +13,7 @@ const FarmsList = () => {
   const configs = useGetHatomConfigs();
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-16 mt">
       {hatomData.tlvs.map((farm) => {
         const userReward = userHatomData?.rewards?.find(
           (reward) => reward.moneyMarket.tokenI === farm.moneyMarket.tokenI
