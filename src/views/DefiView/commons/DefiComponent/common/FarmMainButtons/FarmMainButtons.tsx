@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
+import { calcStakedAmount } from "@/views/DefiView/utils/functions";
+import { useStake } from "@/views/DefiView/utils/hooks";
 import { claimUserRewards } from "@/views/DefiView/utils/services";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { MouseEvent, useContext } from "react";
@@ -10,18 +12,9 @@ interface IProps {
 }
 
 const FarmMainButtons = ({ isOpen }: IProps) => {
-  const { hatomFarm } = useContext(FarmContext);
+  const { hatomFarm, deposits } = useContext(FarmContext);
   const { isLoggedIn, handleConnect } = useAuthentication();
-  // const {
-  //   isOpen: isOpenDeposit,
-  //   onClose: onCloseDeposit,
-  //   onOpen: onOpenDeposit,
-  // } = useDisclosure();
-  // const handleDeposit = (e: MouseEvent) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   onOpenDeposit();
-  // };
+  const { StakeButton } = useStake();
 
   const handleClaimRewards = (e: MouseEvent) => {
     e.preventDefault();
@@ -36,12 +29,16 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
     <div className="flex justify-center items-center gap-4 flex-col lg:flex-row">
       {isLoggedIn ? (
         <>
-          <Button
-            className="text-sm w-full lg:w-auto"
-            onClick={handleClaimRewards}
-          >
-            Claim rewards
-          </Button>
+          {deposits && calcStakedAmount(deposits) !== "0" ? (
+            <Button
+              className="text-sm w-full lg:w-auto"
+              onClick={handleClaimRewards}
+            >
+              Claim rewards
+            </Button>
+          ) : (
+            <>{StakeButton}</>
+          )}
 
           <span className="text-lg">
             {isOpen ? <ChevronUp /> : <ChevronDown />}

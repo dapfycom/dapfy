@@ -14,8 +14,10 @@ import {
 import { formatBalanceDolar } from "@/utils/functions/formatBalance";
 import Image from "next/image";
 import React from "react";
+import { useStake } from "../../utils/hooks";
 import FarmInfo from "./common/FarmInfo/FarmInfo";
 import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
+import StakeModal from "./common/Modals/StakeModal";
 import StakedInfo from "./common/StakedInfo/StakedInfo";
 
 interface IDefiContext {
@@ -40,6 +42,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
   const { isOpen, onToggle } = useDisclosure();
   const { elrondToken } = useGetElrondToken(hatomFarm.moneyMarket.tokenI);
   const [price] = useGetTokenPrice(hatomFarm.moneyMarket.tokenI);
+  const { isOpenStake, onCloseStake } = useStake();
 
   return (
     <FarmContext.Provider
@@ -93,6 +96,9 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
             </div>
           </div>
         </CardContent>
+        {isOpenStake && (
+          <StakeModal isOpen={isOpenStake} onClose={onCloseStake} />
+        )}
         {isOpen && <Divider className="mb-4" />}
 
         <Collapse isOpen={isOpen}>

@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import useDisclosure from "@/hooks/useDisclosure";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import useSwr from "swr";
@@ -95,5 +97,33 @@ export const useGetHatomConfigs = () => {
     data: data || [],
     isLoading,
     error,
+  };
+};
+
+export const useStake = () => {
+  const {
+    isOpen: isOpenStake,
+    onClose: onCloseStake,
+    onOpen: onOpenStake,
+  } = useDisclosure();
+  const handleStake = (e: any) => {
+    e.stopPropagation();
+    onCloseStake();
+    onOpenStake();
+  };
+
+  const StakeButton = (
+    <Button className="w-full md:w-auto text-sm" onClick={handleStake}>
+      {" "}
+      Deposit
+    </Button>
+  );
+
+  return {
+    isOpenStake,
+    onCloseStake,
+    onOpenStake,
+    handleStake,
+    StakeButton,
   };
 };

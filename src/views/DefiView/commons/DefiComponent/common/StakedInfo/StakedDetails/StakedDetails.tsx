@@ -14,8 +14,10 @@ const StakedDetails = () => {
   const { hatomFarm, deposits, userRewards } = useContext(FarmContext);
   const { elrondToken: depositedToken, isLoading: isloadingDepositToken } =
     useGetElrondToken(hatomFarm?.moneyMarket.tokenI || null);
+
   const { elrondToken: rewardToken, isLoading: isLoadingRewardToken } =
     useGetElrondToken(selectedNetwork.tokensID.usdc);
+
   const staked = deposits ? calcStakedAmount(deposits) : "0";
 
   if (isLoadingRewardToken || isloadingDepositToken) {

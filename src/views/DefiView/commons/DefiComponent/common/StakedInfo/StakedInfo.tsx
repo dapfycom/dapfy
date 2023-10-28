@@ -1,28 +1,16 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
-import useDisclosure from "@/hooks/useDisclosure";
+import { useStake } from "@/views/DefiView/utils/hooks";
 import { withdraw } from "@/views/DefiView/utils/services";
 import { useContext } from "react";
 import { FarmContext } from "../../DefiComponent";
-import StakeModal from "../Modals/StakeModal";
 import StakedDetails from "./StakedDetails/StakedDetails";
 
 const StakedInfo = () => {
   const { hatomFarm } = useContext(FarmContext);
-
-  const {
-    isOpen: isOpenHarvest,
-    onClose: onCloseHarvest,
-    onOpen: onOpenHarvest,
-  } = useDisclosure();
   const { isLoggedIn } = useAuthentication();
 
-  const handleHarvest = (e: any) => {
-    e.stopPropagation();
-    onCloseHarvest();
-    onOpenHarvest();
-  };
-
+  const { StakeButton } = useStake();
   const handleWithdraw = (e: any) => {
     if (hatomFarm) {
       withdraw(hatomFarm.moneyMarket.childScAddress);
@@ -43,18 +31,8 @@ const StakedInfo = () => {
               {" "}
               withdraw
             </Button>
-            <Button
-              className="w-full md:w-auto text-sm"
-              onClick={handleHarvest}
-            >
-              {" "}
-              Deposit
-            </Button>
+            {StakeButton}
           </div>
-
-          {isOpenHarvest && (
-            <StakeModal isOpen={isOpenHarvest} onClose={onCloseHarvest} />
-          )}
         </>
       ) : (
         <div className="flex w-full text-center justify-center mb-5">
