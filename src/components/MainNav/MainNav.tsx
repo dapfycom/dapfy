@@ -16,6 +16,7 @@ const MainNav: React.FC<MainNavProps> = ({
   ...props
 }: React.HTMLAttributes<HTMLElement>) => {
   const pathname = usePathname();
+  console.log("getBasePath(pathname)", getBasePath(pathname));
 
   const navRoutes = mainSiteRoutes.filter((route) => Boolean(route.path));
   const routes = navRoutes.map((route) => ({

@@ -23,5 +23,7 @@ export function isPathOrSubpath(currentPath: string, paths: string[]): boolean {
 
 export function getBasePath(url: string): string {
   const parts = url.split("/");
-  return `/${parts[parts.length - 1]}`;
+
+  const result = parts.slice(2, parts.length).join("/");
+  return `/${result}`;
 }

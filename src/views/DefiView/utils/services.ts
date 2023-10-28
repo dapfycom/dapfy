@@ -119,7 +119,6 @@ export const fetchHatomConfigs = async () => {
 
   const { firstValue } = res;
   const data = firstValue?.valueOf();
-  console.log("data", data);
 
   const paresedData: IMoneyMarkeTvl[] = data?.map((item: any) => {
     const data = {
