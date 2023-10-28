@@ -1,8 +1,8 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
-import { logout } from "@multiversx/sdk-dapp/utils";
 
 import { selectedNetwork } from "@/config/network";
+import useAuthentication from "@/hooks/useAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { useGetAccountInfo } from "@multiversx/sdk-dapp/hooks";
 import { LogOut } from "lucide-react";
@@ -20,9 +20,7 @@ const DisconnectComponent = () => {
   const address = useAppSelector(selectUserAddress);
   const { account } = useGetAccountInfo();
 
-  const handleDisconnect = () => {
-    logout();
-  };
+  const { handleDisconnect } = useAuthentication();
 
   const avatarUrl = `https://id.maiar.com/users/photos/profile/${address}`;
   const avatarFallback = account?.username

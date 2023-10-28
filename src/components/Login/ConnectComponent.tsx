@@ -5,7 +5,6 @@ import {
   WebWalletIcon,
   XAliasIcon,
 } from "@/components/ui-system/icons/ui-icons";
-import { routeNames } from "@/config/routes";
 import { ChevronRight, Zap } from "lucide-react";
 import React, { ReactNode, useEffect } from "react";
 import { Button } from "../ui/button";
@@ -27,6 +26,8 @@ import { LedgerLoginButton } from "@multiversx/sdk-dapp/UI/ledger/LedgerLoginBut
 import { WalletConnectLoginButton } from "@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton";
 import { WebWalletLoginButton } from "@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton";
 import { XaliasLoginButton } from "@multiversx/sdk-dapp/UI/webWallet/XaliasLoginButton";
+import { OnProviderLoginType } from "@multiversx/sdk-dapp/types";
+import { usePathname } from "next/navigation";
 const webWalletLoginComponent = (
   <div className="flex items-center gap-2 h-full">
     {" "}
@@ -77,14 +78,16 @@ interface IProps {
 }
 
 const ConnectComponent = ({ place }: IProps) => {
-  const commonProps = {
-    callbackRoute: routeNames.aggregator,
-    nativeAuth: true, // optional
-  };
   const dispatch = useAppDispatch();
   const { isLoginModal } = useAuthentication();
+  const path = usePathname();
   const handleChangeModalOpen = (open: boolean) => {
     dispatch(openLogin(open));
+  };
+  const commonProps: OnProviderLoginType = {
+    callbackRoute: path,
+
+    nativeAuth: true, // optional
   };
   return (
     <Dialog open={isLoginModal} onOpenChange={handleChangeModalOpen}>

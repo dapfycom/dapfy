@@ -13,7 +13,7 @@ const useAuthentication = () => {
     dispatch(openLogin(true));
   };
   const handleDisconnect = () => {
-    logout();
+    logout("/");
   };
 
   return {

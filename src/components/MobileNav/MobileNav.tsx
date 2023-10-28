@@ -6,10 +6,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { mainSiteRoutes } from "@/config/routes";
+import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import { cn } from "@/lib/utils";
-import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
-import { logout } from "@multiversx/sdk-dapp/utils";
 import { Menu, Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -19,9 +18,9 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 
 const MobileNav = () => {
-  const { isLoggedIn } = useGetLoginInfo();
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { setTheme, theme } = useTheme();
+  const { handleDisconnect, isLoggedIn } = useAuthentication();
 
   const navRoutes = mainSiteRoutes.filter((route) => Boolean(route.path));
   const routes = navRoutes.map((route) => ({
@@ -85,7 +84,7 @@ const MobileNav = () => {
             </Button>
           </div>
           {isLoggedIn ? (
-            <Button onClick={() => logout()}>Disconnect</Button>
+            <Button onClick={handleDisconnect}>Disconnect</Button>
           ) : (
             <ConnectComponent place="drawer" />
           )}

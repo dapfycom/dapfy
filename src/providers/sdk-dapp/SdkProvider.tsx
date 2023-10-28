@@ -1,6 +1,7 @@
 "use client";
 
 import { ENVIROMENT } from "@/config/network";
+import { routeNames } from "@/config/routes";
 import { AxiosInterceptorContext } from "@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext";
 import dynamic from "next/dynamic";
 import {
@@ -38,6 +39,7 @@ export default function SdkProvider({
           }}
           dappConfig={{
             shouldUseWebViewProvider: true,
+            logoutRoute: routeNames.rewards,
           }}
         >
           <AxiosInterceptorContext.Listener />
