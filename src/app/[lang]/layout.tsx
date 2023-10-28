@@ -1,11 +1,9 @@
 import Layout from "@/layout/MainLayout";
 import RootProviders from "@/providers/rootProviders";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
+import { GeistSans } from "geist/font";
 export const metadata: Metadata = {
   title: {
     template: "Dapfy | %s",
@@ -21,8 +19,8 @@ export default function RootLayout({
   params: { lang: string };
 }) {
   return (
-    <html lang={params.lang}>
-      <body className={inter.className}>
+    <html lang={params.lang} className={GeistSans.className}>
+      <body>
         <RootProviders>
           <Layout>
             <main>{children}</main>
