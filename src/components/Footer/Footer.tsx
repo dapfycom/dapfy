@@ -3,7 +3,7 @@ import { Dot } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const companyRoutes = [
+const companyRoutes: RouteProps[] = [
   {
     href: routeNames.aggregator,
     label: "About",
@@ -24,9 +24,13 @@ const companyRoutes = [
     href: routeNames.defi,
     label: "Terms of Use",
   },
+  {
+    href: routeNames.defi,
+    label: "Open Source",
+  },
 ];
 
-const productsRoutes = [
+const productsRoutes: RouteProps[] = [
   {
     href: routeNames.aggregator,
     label: "Swap Aggregator",
@@ -53,7 +57,7 @@ const productsRoutes = [
   },
 ];
 
-const resourcesRoutes = [
+const resourcesRoutes: RouteProps[] = [
   {
     href: routeNames.blog,
     label: "Blog",
@@ -68,6 +72,10 @@ const resourcesRoutes = [
     href: externnalLinks.github,
     label: "Github",
     isExternal: true,
+  },
+  {
+    href: routeNames.defi,
+    label: "Brand Assets",
   },
 ];
 
@@ -104,9 +112,7 @@ const Footer = () => {
 
         <div className="mb-10">
           <div className="flex flex-wrap justify-between gap-10">
-            {/* @ts-ignore */}
             <LinksSections title="Company" routes={companyRoutes} />
-            {/* @ts-ignore */}
             <LinksSections title="Products" routes={productsRoutes} />
             <LinksSections title="Resources" routes={resourcesRoutes} />
             <div>
@@ -186,19 +192,20 @@ const Footer = () => {
 
 export default Footer;
 
+interface RouteProps {
+  href: string;
+  label: string;
+  isExternal?: boolean;
+}
 interface LinksSectionsProps {
   title: string;
-  routes: {
-    href: string;
-    label: string;
-    isExternal: boolean;
-  }[];
+  routes: RouteProps[];
 }
 
 const LinksSections = ({ title, routes }: LinksSectionsProps) => {
   return (
     <div>
-      <div className="font-bold mb-5">{title}</div>
+      <div className="font-bold mb-5">{title} </div>
       <div className="flex flex-col gap-2 text-muted-foreground">
         {routes.map((route) => {
           return (
@@ -215,15 +222,13 @@ const LinksSections = ({ title, routes }: LinksSectionsProps) => {
   );
 };
 
-const LinkItem = ({
-  href,
-  label,
-  isExternal,
-}: {
+interface LinkItemProps {
   href: string;
   label: string;
   isExternal?: boolean;
-}) => {
+}
+
+const LinkItem = ({ href, label, isExternal }: LinkItemProps) => {
   const isExternalProps = isExternal
     ? {
         target: "_blank",
