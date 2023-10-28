@@ -1,18 +1,14 @@
+import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { i18n } from "@/i18n-config";
 import { Languages } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ReactCountryFlag from "react-country-flag";
 import { Button } from "../ui/button";
-
 const LocaleComponent = {
   en: {
     name: "English",
@@ -29,6 +25,7 @@ const LocaleComponent = {
 };
 
 const LanguageSelector = () => {
+  const router = useRouter();
   const pathName = usePathname();
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";
@@ -37,46 +34,45 @@ const LanguageSelector = () => {
     return segments.join("/");
   };
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Popover>
+      <PopoverTrigger asChild>
         <Button size={"icon"} variant={"outline"}>
           <Languages className="h-4 w-4 text-muted-foreground" />
-        </Button>{" "}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Language Switcher</DialogTitle>
-          <DialogDescription>Make Dapfy speak your language</DialogDescription>
-        </DialogHeader>
-        <div>
-          <ul className="grid grid-cols-2 gap-3">
-            {i18n.locales.map((locale) => {
-              return (
-                <li key={locale}>
-                  <Link href={redirectedPathName(locale)}>
-                    <div className="flex items-center px-[12px] py-[7px] rounded-sm hover:bg-secondary">
-                      <div className="rounded-full overflow-hidden mr-4">
-                        <ReactCountryFlag
-                          countryCode={LocaleComponent[locale].flag}
-                          style={{
-                            width: "2em",
-                            height: "2em",
-                          }}
-                          svg
-                        />
-                      </div>
-                      <span className="text-muted-foreground font-semibold">
-                        {LocaleComponent[locale].name}
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </DialogContent>
-    </Dialog>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandGroup>
+            {i18n.locales.map((locale) => (
+              <CommandItem
+                key={locale}
+                value={locale}
+                className="cursor-pointer"
+                onSelect={(currentValue) => {
+                  router.push(redirectedPathName(currentValue));
+                }}
+              >
+                <div className="flex gap-3">
+                  <div className="rounded-full overflow-hidden mr-4">
+                    <ReactCountryFlag
+                      countryCode={LocaleComponent[locale].flag}
+                      style={{
+                        width: "2em",
+                        height: "2em",
+                      }}
+                      svg
+                    />
+                  </div>
+                  <span className="text-muted-foreground font-semibold">
+                    {LocaleComponent[locale].name}
+                  </span>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
 
