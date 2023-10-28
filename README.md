@@ -1,4 +1,4 @@
-# Dapfy: Decentralized Finance at Your Fingertips
+# Dapfy: Decentralized Application For You
 
 Welcome to Dapfy, a multi-chain platform dedicated to simplifying your decentralized finance (DeFi) experience. Our mission is to empower crypto users by providing intuitive strategies, tools, and interfaces, ensuring seamless navigation through the decentralized economy.
 
