@@ -72,7 +72,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
                 </div>
               )}
               {hatomFarm?.tvl && (
-                <div className="flex gap-5">
+                <div className="flex gap-5 items-center">
                   <div>
                     <p className="whitespace-nowrap mb-2">
                       {formatTokenI(hatomFarm.moneyMarket.tokenI)} POOL
