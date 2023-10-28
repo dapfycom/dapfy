@@ -34,7 +34,6 @@ export default function SdkProvider({
           customNetworkConfig={{
             name: "customConfig",
             apiTimeout: 10000,
-            walletAddress: "https://xalias.com",
             walletConnectV2ProjectId,
           }}
           dappConfig={{

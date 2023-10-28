@@ -3,6 +3,7 @@ import {
   MaiarAppIcon,
   MaiarDefiWalletIcon,
   WebWalletIcon,
+  XAliasIcon,
 } from "@/components/ui-system/icons/ui-icons";
 import { routeNames } from "@/config/routes";
 import { ChevronRight, Zap } from "lucide-react";
@@ -25,7 +26,7 @@ import { ExtensionLoginButton } from "@multiversx/sdk-dapp/UI/extension/Extensio
 import { LedgerLoginButton } from "@multiversx/sdk-dapp/UI/ledger/LedgerLoginButton";
 import { WalletConnectLoginButton } from "@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton";
 import { WebWalletLoginButton } from "@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton";
-
+import { XaliasLoginButton } from "@multiversx/sdk-dapp/UI/webWallet/XaliasLoginButton";
 const webWalletLoginComponent = (
   <div className="flex items-center gap-2 h-full">
     {" "}
@@ -37,7 +38,9 @@ const webWalletLoginComponent = (
 const XAliasLoginComponent = (
   <div className="flex items-center gap-2 h-full">
     {" "}
-    <WebWalletIcon mr="14px" fontSize={"21px"} /> XAlias{" "}
+    <span className="w-[60px]">
+      <XAliasIcon mr="14px" fontSize={"16px"} />
+    </span>
   </div>
 );
 const legerLoginComponent = (
@@ -75,7 +78,7 @@ interface IProps {
 
 const ConnectComponent = ({ place }: IProps) => {
   const commonProps = {
-    callbackRoute: routeNames.swap,
+    callbackRoute: routeNames.aggregator,
     nativeAuth: true, // optional
   };
   const dispatch = useAppDispatch();
@@ -123,6 +126,9 @@ const ConnectComponent = ({ place }: IProps) => {
               {legerLoginComponent}
             </LoginMethod>
             <LoginMethod as={WebWalletLoginButton} {...commonProps}>
+              {webWalletLoginComponent}
+            </LoginMethod>
+            <LoginMethod as={XaliasLoginButton} {...commonProps}>
               {XAliasLoginComponent}
             </LoginMethod>
           </div>

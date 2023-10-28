@@ -186,7 +186,7 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
               )}
             </>
           ) : (
-            <Link href={routeNames.swap}>
+            <Link href={routeNames.aggregator}>
               <Button variant={"outline"} size={"sm"} className="text-xs">
                 Swap
               </Button>

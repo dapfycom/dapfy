@@ -13,7 +13,7 @@
     "@formatjs/intl-localematcher": "^0.4.2",
     "@hookform/resolvers": "^3.3.1",
     "@multiversx/sdk-core": "^12.8.0",
-    "@multiversx/sdk-dapp": "2.18.3",
+    "@multiversx/sdk-dapp": "^2.23.0",
     "@multiversx/sdk-network-providers": "^2.0.0",
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-avatar": "^1.0.3",

@@ -19,7 +19,7 @@ const BskCard = () => {
 
         <MyTooltip content="Get some BSK to interact with our dapp in our swap">
           <Button size={"icon"} variant={"outline"}>
-            <Link href={routeNames.swap}>
+            <Link href={routeNames.aggregator}>
               <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
             </Link>
           </Button>
