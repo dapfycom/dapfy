@@ -103,11 +103,11 @@ const Footer = () => {
         </div>
 
         <div className="mb-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="flex flex-wrap justify-between gap-10">
             {/* @ts-ignore */}
             <LinksSections title="Company" routes={companyRoutes} />
             {/* @ts-ignore */}
-            <LinksSections title="Producs" routes={productsRoutes} />
+            <LinksSections title="Products" routes={productsRoutes} />
             <LinksSections title="Resources" routes={resourcesRoutes} />
             <div>
               <div className="font-bold mb-5">Follow us</div>
