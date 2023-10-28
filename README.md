@@ -33,14 +33,14 @@ We invite you to explore [Dapfy’s GitHub repository](https://github.com/dapfy/
 
 ## Contribute and Grow with Us
 
-We are thrilled to announce that Dapfy is now open-source! We believe in collective innovation, and your contributions are invaluable. Check out our [Contribution Guidelines](https://github.com/dapfy/dapfy/blob/main/CONTRIBUTING.md) and be a part of something revolutionary.
+We are thrilled to announce that Dapfy is now open-source! We believe in collective innovation, and your contributions are invaluable. Check out our [Contribution Guidelines](https://github.com/dapfy/dapfy/blob/main/CONTRIBUTING.md) and be a part of the project.
 
 ## Deploy and Scale
 
-Ready to take your project to the next level? Deploy your Dapfy instance seamlessly with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=dapfy&utm_campaign=dapfy-readme), the birthplace of Next.js.
+Deploy your Dapfy instance seamlessly with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=dapfy&utm_campaign=dapfy-readme), the birthplace of Next.js.
 
 For a smooth deployment process, refer to the [Next.js Deployment Documentation](https://nextjs.org/docs/deployment).
 
 ---
 
-Join us at Dapfy, and let’s revolutionize decentralized finance together. Your journey into seamless and empowering DeFi starts here!
+Join us at Dapfy, and let’s revolutionize decentralized finance together. Your journey into seamless DeFi starts here!
