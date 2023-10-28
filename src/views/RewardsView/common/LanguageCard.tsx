@@ -55,7 +55,7 @@ const LanguageCard = () => {
               <DialogHeader>
                 <DialogTitle>Language Switcher</DialogTitle>
                 <DialogDescription>
-                  Make xBeskar speak your language
+                  Make Dapfy speak your language
                 </DialogDescription>
               </DialogHeader>
               <div>

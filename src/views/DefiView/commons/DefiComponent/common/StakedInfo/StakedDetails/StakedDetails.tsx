@@ -31,7 +31,7 @@ const StakedDetails = () => {
     <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
       {depositedToken && (
         <StakedDetail
-          title="Staked amount"
+          title="My staked amount"
           value={staked}
           decimals={depositedToken.decimals}
           tokenI={depositedToken.identifier}

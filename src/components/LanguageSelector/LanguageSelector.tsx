@@ -46,9 +46,7 @@ const LanguageSelector = () => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Language Switcher</DialogTitle>
-          <DialogDescription>
-            Make xBeskar speak your language
-          </DialogDescription>
+          <DialogDescription>Make Dapfy speak your language</DialogDescription>
         </DialogHeader>
         <div>
           <ul className="grid grid-cols-2 gap-3">

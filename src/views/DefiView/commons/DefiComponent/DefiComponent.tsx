@@ -12,6 +12,7 @@ import {
   IMoneyMarketReward,
 } from "@/types/hatom.interface";
 import { formatBalanceDolar } from "@/utils/functions/formatBalance";
+import { formatTokenI } from "@/utils/functions/tokens";
 import Image from "next/image";
 import React from "react";
 import { useStake } from "../../utils/hooks";
@@ -74,19 +75,26 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
                 </div>
               )}
               {hatomFarm?.tvl && (
-                <div className="flex flex-col ">
-                  <p className="whitespace-nowrap mb-2">Total Value Locked</p>
-                  <p className="text-[12px] text-muted-foreground">
-                    $
-                    {formatBalanceDolar(
-                      {
-                        balance: hatomFarm.tvl,
-                        decimals: elrondToken?.decimals,
-                      },
-                      price,
-                      true
-                    )}
-                  </p>
+                <div className="flex gap-5">
+                  <div>
+                    <p className="whitespace-nowrap mb-2">
+                      {formatTokenI(hatomFarm.moneyMarket.tokenI)} POOL
+                    </p>
+                  </div>
+                  <div className="flex flex-col ">
+                    <p className="whitespace-nowrap mb-2">Total Value Locked</p>
+                    <p className="text-[12px] text-muted-foreground">
+                      $
+                      {formatBalanceDolar(
+                        {
+                          balance: hatomFarm.tvl,
+                          decimals: elrondToken?.decimals,
+                        },
+                        price,
+                        true
+                      )}
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
