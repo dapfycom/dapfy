@@ -1,4 +1,5 @@
 import coinFlipReducer from "@/views/CoinFlipView/lib/con-flip-slice";
+import defiReducer from "@/views/DefiView/utils/defi-slice";
 import dustReducer from "@/views/DustView/lib/dust-slice";
 import swapAggregatorReducer from "@/views/SwapAggregator/lib/swap-slice";
 import swapReducer from "@/views/SwapView/lib/swap-slice";
@@ -15,6 +16,7 @@ export function makeStore() {
       coinFlip: coinFlipReducer,
       dust: dustReducer,
       swapAggregator: swapAggregatorReducer,
+      defi: defiReducer,
     },
   });
 }

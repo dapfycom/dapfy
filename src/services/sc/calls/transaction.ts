@@ -44,8 +44,6 @@ export class SmartContractInteraction {
       realValue?: BigNumber.Value;
     }
   ): Transaction {
-    console.log("createTransactionFromInteraction", options);
-
     const sender = store.getState().dapp.userAddress;
     const senderAddress = new Address(sender);
 
@@ -171,7 +169,6 @@ export class SmartContractInteraction {
     gasL,
   }: IEGLDPaymentProps) {
     let interaction = this.createInteraction(functionName, arg);
-    console.log("EGLDPayment", value);
 
     return this.sendTransaction({
       interaction,

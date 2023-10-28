@@ -89,7 +89,6 @@ export const lpSwap = async (
     let token1 = fromToken.selectedToken;
 
     const transactions = [];
-    console.log("fromToken", fromToken);
 
     if (fromToken.selectedToken === selectedNetwork.tokensID.egld) {
       token1 = selectedNetwork.tokensID.wegld;

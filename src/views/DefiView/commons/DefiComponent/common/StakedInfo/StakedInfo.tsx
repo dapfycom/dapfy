@@ -10,7 +10,7 @@ const StakedInfo = () => {
   const { hatomFarm } = useContext(FarmContext);
   const { isLoggedIn } = useAuthentication();
 
-  const { StakeButton } = useStake();
+  const { StakeButton } = useStake(hatomFarm?.moneyMarket.tokenI || "");
   const handleWithdraw = (e: any) => {
     if (hatomFarm) {
       withdraw(hatomFarm.moneyMarket.childScAddress);

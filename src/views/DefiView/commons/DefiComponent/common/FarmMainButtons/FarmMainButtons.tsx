@@ -14,7 +14,7 @@ interface IProps {
 const FarmMainButtons = ({ isOpen }: IProps) => {
   const { hatomFarm, deposits } = useContext(FarmContext);
   const { isLoggedIn, handleConnect } = useAuthentication();
-  const { StakeButton } = useStake();
+  const { StakeButton } = useStake(hatomFarm?.moneyMarket.tokenI || "");
 
   const handleClaimRewards = (e: MouseEvent) => {
     e.preventDefault();

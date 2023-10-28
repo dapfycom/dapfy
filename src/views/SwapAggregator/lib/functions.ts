@@ -277,10 +277,8 @@ export const changeField = (
 ) => {
   if (token) {
     store.dispatch(onChangeFieldValue(value));
-    console.log("token in changeField", token);
 
     const valueDecimals = setElrondBalance(value, token.decimals);
-    console.log("valueDecimals", valueDecimals);
 
     store.dispatch(onChangeFieldValueDecimals(valueDecimals.toString()));
   }

@@ -72,7 +72,6 @@ export const fetchUserTotalRewards = async (
     };
     return data;
   });
-  console.log("userHatomData", paresedData);
 
   return paresedData;
 };

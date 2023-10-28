@@ -35,8 +35,6 @@ const SwapCard = () => {
   const { isLoading: loadingAggregatorData } = useGetAggregate();
   const dispatch = useAppDispatch();
   const handleChangeFromField = (value: string, token?: IElrondToken) => {
-    console.log({ token });
-
     changeField(
       value,
       onChageFromFieldValue,

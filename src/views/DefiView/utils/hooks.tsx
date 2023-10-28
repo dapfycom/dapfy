@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import useDisclosure from "@/hooks/useDisclosure";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import useSwr from "swr";
+import { selectisDepositModal, updateDepositModalState } from "./defi-slice";
 import {
   fetchHatomConfigs,
   fetchHatomMoneyMarkets,
@@ -100,15 +100,30 @@ export const useGetHatomConfigs = () => {
   };
 };
 
-export const useStake = () => {
-  const {
-    isOpen: isOpenStake,
-    onClose: onCloseStake,
-    onOpen: onOpenStake,
-  } = useDisclosure();
+export const useStake = (tokenI: string) => {
+  const dispatch = useAppDispatch();
+  const modalsStakeState = useAppSelector(selectisDepositModal);
+  const isOpenStake =
+    modalsStakeState.find((modal) => modal.tokenI === tokenI)?.status || false;
+  const onCloseStake = () => {
+    dispatch(
+      updateDepositModalState({
+        status: false,
+        tokenI,
+      })
+    );
+  };
+  const onOpenStake = () => {
+    dispatch(
+      updateDepositModalState({
+        status: true,
+        tokenI,
+      })
+    );
+  };
+
   const handleStake = (e: any) => {
     e.stopPropagation();
-    onCloseStake();
     onOpenStake();
   };
 

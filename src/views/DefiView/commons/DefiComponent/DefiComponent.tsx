@@ -43,7 +43,9 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
   const { isOpen, onToggle } = useDisclosure();
   const { elrondToken } = useGetElrondToken(hatomFarm.moneyMarket.tokenI);
   const [price] = useGetTokenPrice(hatomFarm.moneyMarket.tokenI);
-  const { isOpenStake, onCloseStake } = useStake();
+  const { isOpenStake, onCloseStake } = useStake(
+    hatomFarm.moneyMarket.tokenI || ""
+  );
 
   return (
     <FarmContext.Provider

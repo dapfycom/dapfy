@@ -12,8 +12,6 @@ const FarmsList = () => {
   const hatomData = useGetTvl();
   const configs = useGetHatomConfigs();
 
-  console.log("configs", configs);
-
   return (
     <div className="w-full">
       {hatomData.tlvs.map((farm) => {
