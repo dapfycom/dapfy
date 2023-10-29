@@ -6,7 +6,11 @@ import Container from "@/components/ui-system/Container";
 import BuyCryptoDialog from "./common/BuyCryptoDialog/BuyCryptoDialog";
 import "./upgrade.css";
 const UpgradeView = () => {
-  console.log("log");
+  // sendTokens({
+  //   receiver: "erd1ag6nvusjhcw90ntutyzsn7gntmgx9rv8xz2qczgquy48ltaxqghqxs0rkl",
+  //   amount: 100,
+  //   token: "BSK-207198",
+  // });
 
   return (
     <Container className="min-h-[48vh]">

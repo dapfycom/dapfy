@@ -1,0 +1,54 @@
+generator client {
+    provider = "prisma-client-js"
+    seed     = "ts-node prisma/seed.ts"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// Define the User model
+model User {
+    id               String            @id @default(uuid()) // Unique identifier for each user, generated as a UUID
+    address          String            @unique // Address of the user
+    purchases        Purchase[] // Relation to Purchase model, contains all purchases made by the user
+    createdAt        DateTime          @default(now()) // Timestamp of when the user was created
+    purchaseAttempts PurchaseAttempt[] // Relation to PurchaseAttempt model, contains all purchase attempts by the user
+    updatedAt        DateTime          @updatedAt // Timestamp of the last update to this user record
+}
+
+// Define the Product model
+model Product {
+    id               String            @id @default(uuid()) // Unique identifier for each product, generated as a UUID
+    name             String            @unique // Name of the product, e.g., Bitcoin, Ethereum, BSK
+    stock            Int // Amount of tokens available
+    history          Purchase[] // Relation to Purchase model, contains all purchases made for this product
+    purchaseAttempts PurchaseAttempt[] // Relation to PurchaseAttempt model, contains all purchase attempts for this product
+}
+
+// Define the Purchase model
+model Purchase {
+    id        String   @id @default(uuid()) // Unique identifier for each purchase, generated as a UUID
+    user      User     @relation(fields: [userId], references: [id]) // Relation to User model, refers to the user who made the purchase
+    userId    String // User ID of the user who made the purchase
+    product   Product  @relation(fields: [productId], references: [id]) // Relation to Product model, refers to the product purchased
+    txHash    String
+    productId String // Product ID of the product purchased
+    quantity  Int // Quantity of product purchased
+    totalCost Float // Total cost of the purchase
+    createdAt DateTime @default(now()) // Timestamp of when the purchase was made
+}
+
+model PurchaseAttempt {
+    id           String   @id @default(uuid()) // Unique identifier for each purchase attempt, generated as a UUID
+    user         User     @relation(fields: [userId], references: [id]) // Relation to User model, refers to the user who made the attempt
+    userId       String
+    product      Product  @relation(fields: [productId], references: [id]) // Relation to Product model, refers to the product attempted to purchase
+    productId    String
+    attemptedAt  DateTime @default(now()) // Timestamp of when the purchase attempt was made
+    successful   Boolean // Indicates whether the purchase attempt was successful or not
+    amount       Float // Amount of tokens attempted to purchase
+    dollarAmount Float // User inputted dollar amount of tokens attempted to purchase
+}

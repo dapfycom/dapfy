@@ -92,7 +92,7 @@ const networkConfig = {
     tokensID: {
       egld: "EGLD",
       wegld: "WEGLD-d7c6bb",
-      bsk: "RIDE-6e4c49",
+      bsk: "BSK-207198",
 
       ride: "RIDE-6e4c49",
       hodl: "",

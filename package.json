@@ -7,7 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "prisma:seed": "prisma db seed",
+    "prisma:studio": "prisma studio",
+    "prisma:generate": "prisma generate"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.2",
@@ -15,6 +21,7 @@
     "@multiversx/sdk-core": "^12.8.0",
     "@multiversx/sdk-dapp": "^2.23.0",
     "@multiversx/sdk-network-providers": "^2.0.0",
+    "@prisma/client": "^5.5.2",
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -68,6 +75,7 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "to-hex": "^0.0.18",
+    "tsx": "^3.14.0",
     "typescript": "5.2.2",
     "utf-8-validate": "^5.0.10",
     "yup": "^1.2.0",
@@ -79,6 +87,8 @@
     "@types/jest": "^29.5.4",
     "@types/negotiator": "^0.6.1",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0"
+    "jest-environment-jsdom": "^29.7.0",
+    "prisma": "^5.5.2",
+    "ts-node": "^10.9.1"
   }
 }

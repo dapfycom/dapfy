@@ -5,16 +5,9 @@ import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
-import { ProxyNetworkProvider } from "@multiversx/sdk-network-providers";
 import { SmartContractInteraction } from "./calls/transaction";
 
-export const provider = new ProxyNetworkProvider(
-  selectedNetwork.network.gatewayAddress,
-  {
-    timeout: 30000,
-  }
-);
-
+export { provider } from "./provider";
 export const EGLD_VAL = Math.pow(10, 18);
 
 export type WspTypes =

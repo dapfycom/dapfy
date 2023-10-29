@@ -38,6 +38,7 @@ export function middleware(request: NextRequest) {
       "/images",
       "/blog",
       "/docs",
+      "/alice.pem",
 
       // Your other files in `public`
     ])
