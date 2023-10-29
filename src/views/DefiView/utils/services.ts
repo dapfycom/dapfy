@@ -1,4 +1,5 @@
 import { getSmartContractInteraction } from "@/services/sc";
+import { SmartContractInteraction } from "@/services/sc/calls/transaction";
 import { scQuery } from "@/services/sc/queries";
 import { IElrondToken } from "@/types/elrond.interface";
 import {
@@ -35,11 +36,19 @@ export const claimUserRewards = (address: string) => {
 };
 
 export const withdraw = (address: string) => {
-  getSmartContractInteraction("hatomParentWsp").scCall({
+  const tx1 = getSmartContractInteraction("hatomParentWsp").scCallOnlyTx({
     functionName: "withdraw",
     gasL: 600000000,
     arg: [new AddressValue(new Address(address))],
   });
+
+  const tx2 = getSmartContractInteraction("hatomParentWsp").scCallOnlyTx({
+    functionName: "rebalanceStrategy",
+    gasL: 600000000,
+    arg: [new AddressValue(new Address(address))],
+  });
+
+  SmartContractInteraction.sendMultipleTransactions({ txs: [tx1, tx2] });
 };
 
 // queries

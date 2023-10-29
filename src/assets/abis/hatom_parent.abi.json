@@ -97,6 +97,17 @@
             "outputs": []
         },
         {
+            "name": "rebalanceStrategy",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "child_sc",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
             "name": "claimUserRewards",
             "mutability": "mutable",
             "inputs": [
@@ -115,6 +126,38 @@
                 {
                     "name": "child_sc",
                     "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setFeePercentage",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "child_sc",
+                    "type": "Address"
+                },
+                {
+                    "name": "fee_percentage",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setMaxLoops",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "child_sc",
+                    "type": "Address"
+                },
+                {
+                    "name": "max_loops",
+                    "type": "u32"
                 }
             ],
             "outputs": []
@@ -217,7 +260,7 @@
             "fields": [
                 {
                     "name": "money_market",
-                    "type": "MoneyMarketDetails"
+                    "type": "MoneyMarketDetailsChild"
                 },
                 {
                     "name": "fee_percentage",
@@ -276,6 +319,27 @@
                 {
                     "name": "mm_address",
                     "type": "Address"
+                }
+            ]
+        },
+        "MoneyMarketDetailsChild": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "token_id",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "htoken_id",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "address",
+                    "type": "Address"
+                },
+                {
+                    "name": "collateral_factor",
+                    "type": "BigUint"
                 }
             ]
         },
