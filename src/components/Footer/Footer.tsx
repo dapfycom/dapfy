@@ -56,7 +56,7 @@ const productsRoutes: RouteProps[] = [
     label: "Defi",
   },
   {
-    href: routeNames.aggregator,
+    href: routeNames.upgrade,
     label: "Upgrade",
   },
 ];

@@ -35,6 +35,7 @@ export const routeNames = {
   defi: "/multiversx/defi",
   docs: "/docs",
   blog: "/blog",
+  upgrade: "/upgrade",
 };
 
 export const externnalLinks = {
@@ -72,4 +73,5 @@ export const mainSiteRoutes = [
     path: routeNames.defi,
     title: "Defi",
   },
+  {},
 ];

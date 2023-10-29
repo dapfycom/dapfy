@@ -1,0 +1,18 @@
+@keyframes wave {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .gradient-wave {
+    background: linear-gradient(45deg, #bb2e1b, #b3aa00, #4c0de0, #c5060c);
+    background-size: 200% 200%;
+    animation: wave 3s linear infinite;
+  }
+  
