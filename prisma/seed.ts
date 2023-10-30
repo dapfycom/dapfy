@@ -16,6 +16,25 @@ async function main() {
       },
     });
   }
+
+  const walletName = process.env.WALLET_NAME;
+  const existingWallet = await prisma.wallet.findUnique({
+    where: { name: walletName },
+  });
+
+  if (!existingWallet && walletName) {
+    if (!process.env.BSK_SOURCE_PK_ENCRYPTED) {
+      throw new Error("BSK_SOURCE_PK env variable is not set");
+    }
+    const encryptedPK = process.env.BSK_SOURCE_PK_ENCRYPTED; // only for dev
+
+    await prisma.wallet.create({
+      data: {
+        name: walletName,
+        encryptedSeed: encryptedPK,
+      },
+    });
+  }
 }
 
 main()

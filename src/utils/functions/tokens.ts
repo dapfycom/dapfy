@@ -36,7 +36,7 @@ export const calculateSlipageAmount = (
 export const getTokensByDollarAmount = async (
   tokenId: string,
   dollarAmount: number
-) => {
+): Promise<number> => {
   const mxToken = await fetchTokenById(tokenId);
   const tokenPice = mxToken.price;
   const tokens = dollarAmount / tokenPice;

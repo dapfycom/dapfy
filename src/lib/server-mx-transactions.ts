@@ -1,6 +1,10 @@
 import { fetchTokenById } from "@/services/rest/elrond/tokens";
 import { provider } from "@/services/sc/provider";
 import {
+  decryptPrivateKey,
+  generateEncryptionPassword,
+} from "@/utils/functions/crypto";
+import {
   Account,
   Address,
   GasEstimator,
@@ -10,7 +14,7 @@ import {
 import { UserSecretKey, UserSigner } from "@multiversx/sdk-wallet/out";
 import axios from "axios";
 import * as fs from "fs";
-import * as path from "path";
+import prisma from "./db";
 
 export async function downloadTextFile(url: string) {
   let response = await axios.get(url, {
@@ -95,14 +99,21 @@ export const sendTokens = async ({
 };
 
 export const getPrivateKey = async () => {
-  const testdataPath = path.resolve("src/lib/alice.pem");
-  const pemFileText = await readTestFile(testdataPath);
-  const key = UserSecretKey.fromPem(pemFileText);
-  const secretHex = key.hex();
+  const secret = process.env.SECRET_ENCRPTION_PASSWORD!;
 
-  //
+  const password = generateEncryptionPassword(secret);
 
-  const secretKey = UserSecretKey.fromString(secretHex);
+  const wallet = await prisma.wallet.findUnique({
+    where: { name: process.env.WALLET_NAME! },
+  });
+
+  if (!wallet) {
+    throw new Error("Wallet not found");
+  }
+
+  const descryptedPK = decryptPrivateKey(wallet.encryptedSeed, password);
+
+  const secretKey = UserSecretKey.fromString(descryptedPK);
 
   return secretKey;
 };

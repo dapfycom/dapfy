@@ -37,3 +37,4 @@ bun.lockb
 package-lock.json
 .env
 dumy.js
+prisma/migrations

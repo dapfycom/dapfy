@@ -52,3 +52,9 @@ model PurchaseAttempt {
     amount       Float // Amount of tokens attempted to purchase
     dollarAmount Float // User inputted dollar amount of tokens attempted to purchase
 }
+
+model Wallet {
+    id            String @id @default(uuid()) // Unique identifier for each wallet, generated as a UUID
+    name          String @unique // Name of the wallet, e.g., Coinbase, Binance, Kraken
+    encryptedSeed String // Encrypted seed of the wallet
+}
