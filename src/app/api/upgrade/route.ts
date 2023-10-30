@@ -72,7 +72,8 @@ export async function POST(req: Request) {
         userId: user.id,
         productId: product.id,
         dollarAmount: data.amount,
-        amount: amountToSend,
+        // amount: amountToSend,
+        amount: data.amount * 1000,
       },
     });
 
