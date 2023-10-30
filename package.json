@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watchAll",
+    "postinstall": "prisma generate",
     "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate"
