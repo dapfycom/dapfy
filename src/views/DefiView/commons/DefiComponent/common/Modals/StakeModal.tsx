@@ -118,7 +118,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
           </div>
 
           <DialogFooter>
-            <Button type="submit">Stake</Button>
+            <Button type="submit">Deposit</Button>
           </DialogFooter>
         </form>
       </DialogContent>

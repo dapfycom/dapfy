@@ -73,7 +73,7 @@ export async function POST(req: Request) {
         productId: product.id,
         dollarAmount: data.amount,
         // amount: amountToSend,
-        amount: data.amount * 1000,
+        amount: data.amount * 1000, // fix in prod
       },
     });
 
