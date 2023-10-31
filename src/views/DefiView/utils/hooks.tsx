@@ -100,7 +100,7 @@ export const useGetHatomConfigs = () => {
   };
 };
 
-export const useStake = (tokenI: string) => {
+export const useStake = (tokenI: string, more?: boolean) => {
   const dispatch = useAppDispatch();
   const modalsStakeState = useAppSelector(selectisDepositModal);
   const isOpenStake =
@@ -130,7 +130,7 @@ export const useStake = (tokenI: string) => {
   const StakeButton = (
     <Button className="w-full md:w-auto text-sm" onClick={handleStake}>
       {" "}
-      Deposit
+      Deposit {more ? "more" : ""}
     </Button>
   );
 
