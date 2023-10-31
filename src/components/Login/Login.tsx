@@ -14,7 +14,7 @@ const Login = () => {
   const { address, shard } = useGetAccountInfo();
   useEffect(() => {
     dispatch(
-      setUserAddress(process.env.REACT_APP_CONNECTED_ADDRESS || address)
+      setUserAddress(process.env.NEXT_PUBLIC_CONNECTED_ADDRESS || address)
     );
     dispatch(setShard(shard || 1));
   }, [address, dispatch, shard]);
