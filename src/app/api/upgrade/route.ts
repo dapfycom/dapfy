@@ -9,7 +9,7 @@ import { z } from "zod";
 
 // zod schema for the request body
 const dataSchema = z.object({
-  amount: z.number().min(1),
+  amount: z.number().max(5000).min(1),
   address: z.string().startsWith("erd"),
 });
 

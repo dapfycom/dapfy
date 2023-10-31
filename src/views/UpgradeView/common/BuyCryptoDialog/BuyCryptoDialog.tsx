@@ -10,7 +10,10 @@ import * as Yup from "yup";
 
 // zod schema
 const schema = Yup.object().shape({
-  amount: Yup.number().required("Required"),
+  amount: Yup.number()
+    .max(5000, "The maximun amount allowed is $5000")
+    .min(1, "The minimun amount allowed is $1")
+    .required("Required"),
 });
 function BuyCryptoDialog() {
   const address = useAppSelector(selectUserAddress);
@@ -35,14 +38,21 @@ function BuyCryptoDialog() {
         <form onSubmit={formik.handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="flex w-full justify-center mb-5">
-              <Input
-                className="mt-2 w-full max-w-[350px]"
-                id="amount"
-                placeholder={"Enter amount here, e.g. $300"}
-                name="amount"
-                onChange={formik.handleChange}
-                value={formik.values.amount}
-              />
+              <div>
+                <Input
+                  className="mt-2 w-full max-w-[350px]"
+                  id="amount"
+                  placeholder={"Enter amount here, e.g. $300"}
+                  name="amount"
+                  onChange={formik.handleChange}
+                  value={formik.values.amount}
+                />
+                {formik.errors.amount && formik.touched.amount && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {formik.errors.amount}
+                  </p>
+                )}
+              </div>
             </div>
             <div className="w-full flex justify-center ">
               <Slider
@@ -51,7 +61,7 @@ function BuyCryptoDialog() {
                 onValueChange={(value) =>
                   formik.setFieldValue("amount", value[0])
                 }
-                max={1000}
+                max={5000}
                 step={1}
               />
             </div>
