@@ -9,27 +9,27 @@ import { Button } from "../ui/button";
 
 const companyRoutes: RouteProps[] = [
   {
-    href: routeNames.aggregator,
+    href: routeNames.about,
     label: "About",
   },
   {
-    href: routeNames.farm,
+    href: routeNames.sustainability,
     label: "Sustainability",
   },
   {
-    href: routeNames.play,
+    href: routeNames.sales,
     label: "Contact sales",
   },
   {
-    href: routeNames.dust,
+    href: routeNames.security,
     label: "Security",
   },
   {
-    href: routeNames.defi,
+    href: routeNames.terms,
     label: "Terms of Use",
   },
   {
-    href: routeNames.defi,
+    href: routeNames.openSource,
     label: "Open Source",
   },
 ];

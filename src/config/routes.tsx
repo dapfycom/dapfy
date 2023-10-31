@@ -36,6 +36,14 @@ export const routeNames = {
   docs: "/docs",
   blog: "/blog",
   upgrade: "/upgrade",
+
+  // internals
+  about: "/about",
+  sustainability: "/sustainability",
+  sales: "/sales",
+  security: "/security",
+  terms: "/terms-of-use",
+  openSource: "/open-source",
 };
 
 export const externnalLinks = {
