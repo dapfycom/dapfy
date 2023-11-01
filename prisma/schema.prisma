@@ -51,6 +51,7 @@ model PurchaseAttempt {
     successful   Boolean // Indicates whether the purchase attempt was successful or not
     amount       Float // Amount of tokens attempted to purchase
     dollarAmount Float // User inputted dollar amount of tokens attempted to purchase
+    stripeId     String? // Stripe ID of the purchase attempt
 }
 
 model Wallet {

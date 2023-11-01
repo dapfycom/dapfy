@@ -1,3 +1,4 @@
+import { selectedNetwork } from "@/config/network";
 import { fetchTokenById } from "@/services/rest/elrond/tokens";
 import BigNumber from "bignumber.js";
 import toHex from "to-hex";
@@ -37,12 +38,16 @@ export const getTokensByDollarAmount = async (
   tokenId: string,
   dollarAmount: number
 ): Promise<number> => {
+  if (process.env.NODE_ENV === "development") {
+    return dollarAmount * 10000;
+  }
   const mxToken = await fetchTokenById(tokenId);
   const tokenPice = mxToken.price;
   const tokens = dollarAmount / tokenPice;
 
-  if (process.env.NODE_ENV === "development") {
-    return dollarAmount * 10000;
-  }
   return tokens;
+};
+
+export const buildExplorerHashUrl = (txHash: string) => {
+  return `${selectedNetwork.network.explorerAddress}/transactions/${txHash}`;
 };

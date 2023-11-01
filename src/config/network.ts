@@ -136,10 +136,38 @@ const networkConfig = {
       walletConnectBridgeAddresses: ["https://bridge.walletconnect.org"],
     },
     ChainID: "T",
-    tokensID: {},
-    scAddress: {},
+    tokensID: {
+      egld: "EGLD",
+      wegld: "WEGLD-d7c6bb",
+      bsk: "TEST-311344",
+
+      ride: "RIDE-6e4c49",
+      hodl: "",
+      usdc: "USDC-8d4068",
+      rare: "RIDE-6e4c49",
+      bskwegld: "",
+      usdt: "USDT-188935",
+      busd: "BUSD-632f7d",
+    },
+    scAddress: {
+      maiarRouter: "",
+      maiarBskSwap: "",
+      wrapEgld:
+        "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
+      wrapEgldShar1:
+        "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
+      wrapEgldShar2:
+        "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
+      farm: "",
+      flip: "erd1qqqqqqqqqqqqqpgqfg6t4tr5vj70359kws6nltkw7qfv8rv8d8ssj43k4j",
+      dust: "erd1qqqqqqqqqqqqqpgq375pvn7af4k2tv34mshm80pqjs0uhl82d8ssdv4qpj",
+      hatomParent:
+        "erd1qqqqqqqqqqqqqpgq5fldcnkg7j5333h7u4n8xhewt0pjj76qvr2s0lcyyl",
+      aggregator:
+        "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq",
+    },
   },
 };
-export const ENVIROMENT: ENVIROMENTTYPE = "devnet";
+export const ENVIROMENT: ENVIROMENTTYPE = "testnet";
 
 export const selectedNetwork = networkConfig[ENVIROMENT];

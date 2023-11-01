@@ -4,7 +4,6 @@ import { selectedNetwork } from "@/config/network";
 import { host } from "@/config/urls";
 import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
-import { getTokensByDollarAmount } from "@/utils/functions/tokens";
 import { z } from "zod";
 
 // zod schema for the request body
@@ -60,10 +59,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const amountToSend = await getTokensByDollarAmount(
-      product.name,
-      data.amount
-    );
+    // const amountToSend = await getTokensByDollarAmount(
+    //   product.name,
+    //   data.amount
+    // );
 
     // Create purchage attempt
     const purchaseAttempt = await prisma.purchaseAttempt.create({

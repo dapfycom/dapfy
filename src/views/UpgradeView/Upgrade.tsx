@@ -4,6 +4,7 @@ import {
 } from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
 import BuyCryptoDialog from "./common/BuyCryptoDialog/BuyCryptoDialog";
+import PurchaseTable from "./common/PurchaseTable/PurchaseTable";
 import "./upgrade.css";
 const UpgradeView = () => {
   return (
@@ -17,6 +18,10 @@ const UpgradeView = () => {
         </PageHeaderDescription>
 
         <BuyCryptoDialog />
+
+        <div className="mt-32">
+          <PurchaseTable />
+        </div>
       </div>
     </Container>
   );

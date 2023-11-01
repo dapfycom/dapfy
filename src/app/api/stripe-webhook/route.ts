@@ -6,18 +6,9 @@ import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { z } from "zod";
-
-// zod schema for the request body
-const dataSchema = z.object({
-  amount: z.number().min(1),
-  address: z.string().startsWith("erd"),
-});
 
 export async function POST(req: Request) {
   try {
-    console.log("webhook activated");
-
     const body = await req.text();
     const signature = headers().get("Stripe-Signature") as string;
 

@@ -1,3 +1,4 @@
+import { selectedNetwork } from "@/config/network";
 import { fetchTokenById } from "@/services/rest/elrond/tokens";
 import { provider } from "@/services/sc/provider";
 import {
@@ -61,7 +62,7 @@ export const sendTokens = async ({
       tokenTransfer: transfer1,
       sender: new Address(senderAddress),
       receiver: new Address(receiver),
-      chainID: "D",
+      chainID: selectedNetwork.ChainID,
     });
 
     console.log("Handling nonce for tx");

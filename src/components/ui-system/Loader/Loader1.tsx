@@ -1,19 +1,31 @@
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Loader, Loader2 } from "lucide-react";
 
 interface IProps {
   minHeight?: string;
   iconClassName?: string;
+  iconSize?: string;
 }
-const Loader1 = ({ iconClassName, minHeight }: IProps) => {
+const Loader1 = ({ iconClassName, minHeight, iconSize }: IProps) => {
   return (
     <div
       className="flex items-center justify-center"
       style={minHeight ? { minHeight } : {}}
     >
-      <Loader2 className={cn("animate-spin", iconClassName)} />
+      <Loader2 size={iconSize} className={cn("animate-spin", iconClassName)} />
     </div>
   );
 };
 
 export default Loader1;
+
+export const LoaderV2 = ({ iconClassName, minHeight, iconSize }: IProps) => {
+  return (
+    <div
+      className="flex items-center justify-center"
+      style={minHeight ? { minHeight } : {}}
+    >
+      <Loader size={iconSize} className={cn("animate-spin", iconClassName)} />
+    </div>
+  );
+};
