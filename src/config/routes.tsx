@@ -50,6 +50,8 @@ export const externnalLinks = {
   twitter: "https://x.com/xBeskar",
   telegram: "https://t.me/xBeskar",
   github: "https://github.com/MxBeskar",
+  instagram: "https://www.instagram.com/dapfycom/",
+  facebook: "https://www.facebook.com/profile.php?id=61553057430791",
 };
 
 export const mainSiteRoutes = [
