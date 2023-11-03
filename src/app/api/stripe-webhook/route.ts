@@ -36,6 +36,9 @@ export async function POST(req: Request) {
           status: 400,
         });
       }
+      console.log("session", session);
+
+      const checkout = await stripe.checkout.sessions.retrieve(session.id);
 
       const purchaseAttemp = await prisma.purchaseAttempt.update({
         where: {
@@ -43,6 +46,7 @@ export async function POST(req: Request) {
         },
         data: {
           successful: true,
+          stripeId: checkout.id,
         },
       });
 

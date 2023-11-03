@@ -11,26 +11,32 @@ const companyRoutes: RouteProps[] = [
   {
     href: routeNames.about,
     label: "About",
+    soon: true,
   },
   {
     href: routeNames.sustainability,
     label: "Sustainability",
+    soon: true,
   },
   {
     href: routeNames.sales,
     label: "Contact sales",
+    soon: true,
   },
   {
     href: routeNames.security,
     label: "Security",
+    soon: true,
   },
   {
     href: routeNames.terms,
     label: "Terms of Use",
+    soon: true,
   },
   {
     href: routeNames.openSource,
     label: "Open Source",
+    soon: true,
   },
 ];
 
@@ -80,6 +86,7 @@ const resourcesRoutes: RouteProps[] = [
   {
     href: routeNames.defi,
     label: "Brand Assets",
+    soon: true,
   },
 ];
 
@@ -233,6 +240,7 @@ interface RouteProps {
   href: string;
   label: string;
   isExternal?: boolean;
+  soon?: boolean;
 }
 interface LinksSectionsProps {
   title: string;
@@ -248,6 +256,7 @@ const LinksSections = ({ title, routes }: LinksSectionsProps) => {
           return (
             <LinkItem
               key={route.href}
+              {...route}
               href={route.href}
               isExternal={route.isExternal}
               label={route.label}
@@ -263,9 +272,10 @@ interface LinkItemProps {
   href: string;
   label: string;
   isExternal?: boolean;
+  soon?: boolean;
 }
 
-const LinkItem = ({ href, label, isExternal }: LinkItemProps) => {
+const LinkItem = ({ href, label, isExternal, soon }: LinkItemProps) => {
   const isExternalProps = isExternal
     ? {
         target: "_blank",
@@ -273,9 +283,22 @@ const LinkItem = ({ href, label, isExternal }: LinkItemProps) => {
       }
     : {};
 
+  const soonClasses = soon ? "pointer-events-none" : "";
+  console.log({
+    soonClasses,
+    href,
+    label,
+  });
+
   return (
-    <Link className="hover:text-primary" href={href} {...isExternalProps}>
-      <span className="border-b pb-[2px]">{label}</span>
+    <Link
+      className={`hover:text-primary ${soonClasses}`}
+      href={href}
+      {...isExternalProps}
+    >
+      <span className="border-b pb-[2px]">
+        {label} <span className="text-primary">{soon ? "(soon)" : ""}</span>
+      </span>
     </Link>
   );
 };
