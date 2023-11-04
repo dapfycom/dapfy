@@ -5,7 +5,7 @@ import { formatNumber } from "@/utils/functions/formatBalance";
 import { buildExplorerHashUrl } from "@/utils/functions/tokens";
 import { Dot } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useGetPurchaseData } from "../../lib/hooks";
 type TransactionStatusTypes = "success" | "cancel" | "stale" | "pending";
@@ -16,7 +16,7 @@ const PurchaseTable = () => {
   const [butTxStatus, setButTxStatus] =
     useState<TransactionStatusTypes>("stale");
   const status = searchParams.get("status");
-
+  const router = useRouter();
   useEffect(() => {
     let interValID: any;
     const watchTransaction = async (txHash: any) => {
@@ -61,79 +61,86 @@ const PurchaseTable = () => {
     );
   }
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <div className="flex items-center justify-between pb-4"></div>
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              Hash
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Token
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Date
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Amount paid
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Amount received
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {purchases.map((purchase, i) => {
-            return (
-              <tr
-                key={purchase.id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+    <div className="w-full overflow-auto">
+      <div className="relative overflow-x-auto shadow-md rounded">
+        <table className="w-full text-xs sm:text-sm md:text-base text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-900 dark:text-gray-400">
+            <tr>
+              <th scope="col" className=" px-2 py-3 sm:px-6 sm:py-3">
+                Hash
+              </th>
+              <th scope="col" className="px-2 py-3 sm:px-6 sm:py-3">
+                Token
+              </th>
+              <th scope="col" className="  px-2 py-3 sm:px-6 sm:py-3">
+                Date
+              </th>
+              <th scope="col" className="px-2 py-3 sm:px-6 sm:py-3">
+                Status
+              </th>
+              <th scope="col" className=" px-2 py-3 sm:px-6 sm:py-3">
+                Paid
+              </th>
+              <th scope="col" className="px-2 py-3 sm:px-6 sm:py-3">
+                Received
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {purchases.map((purchase, i) => {
+              return (
+                <tr
+                  key={purchase.id}
+                  className="bg-white border-b cursor-pointer dark:bg-zinc-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-600"
+                  onClick={() => {
+                    const url = buildExplorerHashUrl(purchase.txHash);
+                    window.open(url, "_blank");
+                  }}
                 >
-                  <Link
-                    href={buildExplorerHashUrl(purchase.txHash)}
-                    target="_blank"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  <th
+                    scope="row"
+                    className=" px-3 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {shortenHash(purchase.txHash)}
-                  </Link>
-                </th>
-                <td scope="row" className="px-6 py-4 ">
-                  {purchase.product.name}
-                </td>
-                <td className="px-6 py-4">
-                  {" "}
-                  {new Date(purchase.createdAt).toLocaleString()}
-                </td>
-                <td className="px-6 py-4">
-                  {i === 0 && status === "success" ? (
-                    <StatusColumn status={butTxStatus} />
-                  ) : (
-                    <span className="flex gap-2 items-center">
-                      <Dot
-                        size={"50px"}
-                        className="text-green-600 my-[-20px] mx-[-20px]"
-                      />{" "}
-                      Success
-                    </span>
-                  )}
-                </td>
-                <td className="px-6 py-4">
-                  ${formatNumber(purchase.totalCost)}
-                </td>
-                <td className="px-6 py-4">{formatNumber(purchase.quantity)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                    <Link
+                      href={buildExplorerHashUrl(purchase.txHash)}
+                      target="_blank"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      {shortenHash(purchase.txHash)}
+                    </Link>
+                  </th>
+                  <td scope="row" className="px-3 sm:px-6 py-4 ">
+                    {purchase.product.name}
+                  </td>
+                  <td className="  px-3 sm:px-6 py-4">
+                    {" "}
+                    {new Date(purchase.createdAt).toLocaleString()}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4">
+                    {i === 0 && status === "success" ? (
+                      <StatusColumn status={butTxStatus} />
+                    ) : (
+                      <span className="flex gap-2 items-center">
+                        <Dot
+                          size={"50px"}
+                          className="text-green-600 my-[-20px] mx-[-20px]"
+                        />{" "}
+                        Success
+                      </span>
+                    )}
+                  </td>
+                  <td className=" px-3 sm:px-6 py-4">
+                    ${formatNumber(purchase.totalCost)}
+                  </td>
+                  <td className="px-3 sm:px-6 py-4">
+                    {formatNumber(purchase.quantity)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

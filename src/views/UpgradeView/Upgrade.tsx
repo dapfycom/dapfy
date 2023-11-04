@@ -19,7 +19,7 @@ const UpgradeView = () => {
 
         <BuyCryptoDialog />
 
-        <div className="mt-32">
+        <div className="mt-32 w-full overflow-x-auto">
           <PurchaseTable />
         </div>
       </div>
