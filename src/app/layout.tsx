@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { siteMetadata } from "@/utils/constants/siteMetadata";
 import { GeistSans } from "geist/font";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -55,6 +56,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang} className={GeistSans.className}>
+      <Script
+        src="https://plausible.io/js/script.js"
+        data-domain="dapfy.com"
+        defer
+      />
+
       <body>
         <RootProviders>
           <Layout>
