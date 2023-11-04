@@ -59,3 +59,8 @@ model Wallet {
     name          String @unique // Name of the wallet, e.g., Coinbase, Binance, Kraken
     encryptedSeed String // Encrypted seed of the wallet
 }
+
+model Newsletter {
+    id    String @id @default(uuid())
+    email String @unique
+}
