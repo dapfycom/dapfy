@@ -7,7 +7,7 @@ export const siteMetadata = {
   language: "en-us",
   theme: "system", // system, dark or light
   siteUrl: process.env.NEXT_PUBLIC_BASE_URL || "https://dapfy.com",
-  socialBanner: "/blog/static/images/twitter-card.png",
+  socialBanner: "/images/banner.jpg",
   locale: "en-US",
   analytics: {
     // If you want to use an analytics provider you have to add it to the
