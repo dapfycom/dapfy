@@ -44,7 +44,6 @@ export async function GET(request: Request) {
       id: true,
     },
   });
-  console.log({ userData });
 
   return Response.json(
     { history: userData },

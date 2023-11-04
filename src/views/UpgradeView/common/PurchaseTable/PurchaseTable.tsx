@@ -1,13 +1,52 @@
 "use client";
+import { provider } from "@/services/sc";
 import { shortenHash } from "@/utils/functions/formatAddress";
 import { formatNumber } from "@/utils/functions/formatBalance";
 import { buildExplorerHashUrl } from "@/utils/functions/tokens";
 import { Dot } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useGetPurchaseData } from "../../lib/hooks";
+type TransactionStatusTypes = "success" | "cancel" | "stale" | "pending";
 
 const PurchaseTable = () => {
   const { purchases, error } = useGetPurchaseData();
+  const searchParams = useSearchParams();
+  const [butTxStatus, setButTxStatus] =
+    useState<TransactionStatusTypes>("stale");
+  const status = searchParams.get("status");
+
+  useEffect(() => {
+    let interValID: any;
+    const watchTransaction = async (txHash: any) => {
+      interValID = setInterval(async () => {
+        const tx = await provider.getTransaction(txHash);
+        console.log("tx", tx);
+        setButTxStatus(tx.status.status as TransactionStatusTypes);
+        if (tx.status.status === "success" || tx.status.status === "cancel") {
+          clearInterval(interValID);
+        }
+      }, 5000);
+    };
+
+    if (status) {
+      if (status === "success") {
+        if (purchases.length > 0) {
+          const lastPurchase = purchases[0];
+          watchTransaction(lastPurchase.txHash);
+        }
+      }
+      if (status === "cancel") {
+      }
+    }
+
+    return () => {
+      if (interValID) {
+        clearInterval(interValID);
+      }
+    };
+  }, [status, purchases.length]);
 
   if (purchases.length === 0) {
     return null;
@@ -20,7 +59,6 @@ const PurchaseTable = () => {
       </div>
     );
   }
-
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between pb-4"></div>
@@ -48,7 +86,7 @@ const PurchaseTable = () => {
           </tr>
         </thead>
         <tbody>
-          {purchases.map((purchase) => {
+          {purchases.map((purchase, i) => {
             return (
               <tr
                 key={purchase.id}
@@ -73,12 +111,18 @@ const PurchaseTable = () => {
                   {" "}
                   {new Date(purchase.createdAt).toLocaleString()}
                 </td>
-                <td className="px-6 py-4 flex gap-2 items-center">
-                  <Dot
-                    size={"50px"}
-                    className="text-green-600 my-[-20px] mx-[-20px]"
-                  />{" "}
-                  Success
+                <td className="px-6 py-4">
+                  {i === 0 && status === "success" ? (
+                    <StatusColumn status={butTxStatus} />
+                  ) : (
+                    <span className="flex gap-2 items-center">
+                      <Dot
+                        size={"50px"}
+                        className="text-green-600 my-[-20px] mx-[-20px]"
+                      />{" "}
+                      Success
+                    </span>
+                  )}
                 </td>
                 <td className="px-6 py-4">
                   ${formatNumber(purchase.totalCost)}
@@ -94,3 +138,42 @@ const PurchaseTable = () => {
 };
 
 export default PurchaseTable;
+
+const StatusColumn = ({ status }: { status: TransactionStatusTypes }) => {
+  if (status === "success") {
+    return (
+      <span className="flex gap-2 items-center">
+        <Dot size={"50px"} className="text-green-600 my-[-20px] mx-[-20px]" />{" "}
+        Success
+      </span>
+    );
+  }
+
+  if (status === "pending") {
+    return (
+      <span className="flex gap-2 items-center">
+        <Dot size={"50px"} className="text-yellow-600 my-[-20px] mx-[-20px]" />{" "}
+        Pending
+      </span>
+    );
+  }
+
+  if (status === "cancel") {
+    return (
+      <span className="flex gap-2 items-center">
+        <Dot size={"50px"} className="text-red-600 my-[-20px] mx-[-20px]" />{" "}
+        Cancel
+      </span>
+    );
+  }
+
+  return (
+    <span className="flex gap-2 items-center">
+      <Dot
+        size={"50px"}
+        className="text-blue-600 my-[-20px] mx-[-20px] animate-pulse"
+      />{" "}
+      Validating
+    </span>
+  );
+};

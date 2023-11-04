@@ -42,8 +42,6 @@ const SubmitButton = () => {
   });
 
   const handleSwap = async () => {
-    console.log("fromField", fromField);
-
     if (!isLoggedIn) {
       dispatch(openLogin(true));
     } else {

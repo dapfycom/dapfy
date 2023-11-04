@@ -304,11 +304,6 @@ const LinkItem = ({ href, label, isExternal, soon }: LinkItemProps) => {
     : {};
 
   const soonClasses = soon ? "pointer-events-none" : "";
-  console.log({
-    soonClasses,
-    href,
-    label,
-  });
 
   return (
     <Link
