@@ -9,10 +9,12 @@ import axiosDapfy from "@/services/rest/dapfy-api";
 import { useFormik } from "formik";
 import useSWRMutation from "swr/mutation";
 import * as Yup from "yup";
+import { dollarMaxAmount } from "../../config";
 // zod schema
+
 const schema = Yup.object().shape({
   amount: Yup.number()
-    .max(5000, "The maximun amount allowed is $5000")
+    .max(dollarMaxAmount, `The maximun amount allowed is $${dollarMaxAmount}`)
     .min(1, "The minimun amount allowed is $1")
     .required("Required"),
 });
@@ -64,7 +66,7 @@ function BuyCryptoDialog() {
                   <Input
                     className="mt-2 w-full max-w-[350px]"
                     id="amount"
-                    placeholder={"Enter amount here, e.g. $300"}
+                    placeholder={`Enter amount here, e.g. $${dollarMaxAmount}`}
                     name="amount"
                     onChange={formik.handleChange}
                     value={formik.values.amount}
@@ -83,7 +85,7 @@ function BuyCryptoDialog() {
                   onValueChange={(value) =>
                     formik.setFieldValue("amount", value[0])
                   }
-                  max={5000}
+                  max={dollarMaxAmount}
                   step={1}
                 />
               </div>

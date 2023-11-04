@@ -4,11 +4,12 @@ import { selectedNetwork } from "@/config/network";
 import { host } from "@/config/urls";
 import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
+import { dollarMaxAmount } from "@/views/UpgradeView/config";
 import { z } from "zod";
 
 // zod schema for the request body
 const dataSchema = z.object({
-  amount: z.number().max(5000).min(1),
+  amount: z.number().max(dollarMaxAmount).min(1),
   address: z.string().startsWith("erd"),
 });
 
