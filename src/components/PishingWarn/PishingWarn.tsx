@@ -11,8 +11,8 @@ const PishingWarn = ({ close }: IProps) => {
         <p className="text-center text-xs ">
           <span className="text-[#86d72f]">PHISHING WARNING:</span> please make
           sure you are visiting{" "}
-          <span className="">{process.env.REACT_APP_HOST} </span>- check the URL
-          carefully
+          <span className="">{process.env.NEXT_PUBLIC_BASE_URL} </span>- check
+          the URL carefully
         </p>
       </div>
       <Button
