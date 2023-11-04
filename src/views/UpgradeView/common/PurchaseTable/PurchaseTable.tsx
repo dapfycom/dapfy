@@ -46,6 +46,7 @@ const PurchaseTable = () => {
         clearInterval(interValID);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, purchases.length]);
 
   if (purchases.length === 0) {

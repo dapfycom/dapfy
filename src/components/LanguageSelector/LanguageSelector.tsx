@@ -36,7 +36,11 @@ const LanguageSelector = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size={"icon"} variant={"outline"}>
+        <Button
+          size={"icon"}
+          variant={"outline"}
+          className="pointer-events-none"
+        >
           <Languages className="h-4 w-4 text-muted-foreground" />
         </Button>
       </PopoverTrigger>
