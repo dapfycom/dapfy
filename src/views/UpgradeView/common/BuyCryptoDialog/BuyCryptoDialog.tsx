@@ -46,7 +46,11 @@ function BuyCryptoDialog() {
     },
     validationSchema: schema,
   });
-
+  const handleMax = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    formik.setFieldValue("amount", dollarMaxAmount);
+  };
   return (
     <div className="w-full">
       <div>
@@ -63,14 +67,19 @@ function BuyCryptoDialog() {
             <div className="grid gap-4 py-4">
               <div className="flex w-full justify-center mb-5">
                 <div>
-                  <Input
-                    className="mt-2 w-full max-w-[350px]"
-                    id="amount"
-                    placeholder={`Enter amount here, e.g. $${dollarMaxAmount}`}
-                    name="amount"
-                    onChange={formik.handleChange}
-                    value={formik.values.amount}
-                  />
+                  <div className="flex items-center gap-4">
+                    <Input
+                      className=" w-full max-w-[350px]"
+                      id="amount"
+                      placeholder={`Enter amount here, e.g. $${dollarMaxAmount}`}
+                      name="amount"
+                      onChange={formik.handleChange}
+                      value={formik.values.amount}
+                    />
+                    <Button className="" size={"sm"} onClick={handleMax}>
+                      Max
+                    </Button>
+                  </div>
                   {formik.errors.amount && formik.touched.amount && (
                     <p className="text-sm text-red-600 mt-1">
                       {formik.errors.amount}
