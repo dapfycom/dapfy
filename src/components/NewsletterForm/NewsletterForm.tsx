@@ -35,8 +35,8 @@ const NewsletterForm = () => {
             Sign up for our newsletter
           </h2>
           <p className="mx-auto mb-8 max-w-xl font-light text-gray-500 md:mb-12  dark:text-gray-400">
-            Stay up to date with the roadmap progress, announcements and
-            exclusive discounts feel free to sign up with your email.
+            Stay up to date with the roadmap progress, announcements, and
+            exclusive discounts; sign up with your email to get started.
           </p>
           <form onSubmit={formik.handleSubmit}>
             <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
