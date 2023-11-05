@@ -4,6 +4,7 @@ import { selectedNetwork } from "@/config/network";
 import { host } from "@/config/urls";
 import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
+import { getTokensByDollarAmount } from "@/utils/functions/tokens";
 import { dollarMaxAmount } from "@/views/UpgradeView/config";
 import { z } from "zod";
 
@@ -60,10 +61,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // const amountToSend = await getTokensByDollarAmount(
-    //   product.name,
-    //   data.amount
-    // );
+    const amountToSend = await getTokensByDollarAmount(
+      product.name,
+      data.amount
+    );
 
     // Create purchage attempt
     const purchaseAttempt = await prisma.purchaseAttempt.create({
@@ -72,8 +73,7 @@ export async function POST(req: Request) {
         userId: user.id,
         productId: product.id,
         dollarAmount: data.amount,
-        // amount: amountToSend,
-        amount: data.amount * 1000, // fix in prod
+        amount: amountToSend, // fix in prod
       },
     });
 
