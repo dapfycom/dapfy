@@ -197,6 +197,7 @@ export const KoalaWelcomeEmail = ({
         <Section
           style={{
             fontSize: "14px",
+            textAlign: "center" as const,
           }}
         >
           <Text>
@@ -206,7 +207,11 @@ export const KoalaWelcomeEmail = ({
           </Text>
           <Text>Follow us, tag us, and be a part of the conversation. </Text>
         </Section>
-        <Section>
+        <Section
+          style={{
+            textAlign: "center" as const,
+          }}
+        >
           <Link
             style={footerLink}
             href={externnalLinks.instagram}
@@ -268,11 +273,6 @@ const logo = {
 const paragraph = {
   fontSize: "16px",
   lineHeight: "26px",
-};
-
-const toolsContainer = {
-  display: "flex",
-  flexDirection: "column",
 };
 
 const btnContainer = {
