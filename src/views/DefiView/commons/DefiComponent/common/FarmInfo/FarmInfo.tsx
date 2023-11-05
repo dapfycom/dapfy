@@ -4,21 +4,27 @@ import {
   formatBalance,
   formatBalanceDolar,
 } from "@/utils/functions/formatBalance";
-import {
-  useGetBskRewards,
-  useGetFarmUserInfo,
-} from "@/views/FarmView/utils/hooks";
+
+import useGetElrondToken from "@/hooks/useGetElrondToken";
+import { calcStakedAmount } from "@/views/DefiView/utils/functions";
 import { Loader2 } from "lucide-react";
+import { useContext } from "react";
+import { FarmContext } from "../../DefiComponent";
 
 const FarmInfo = () => {
-  const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
+  const { hatomFarm, deposits, userRewards } = useContext(FarmContext);
+  const { elrondToken: depositedToken, isLoading: isloadingDepositToken } =
+    useGetElrondToken(hatomFarm?.moneyMarket.tokenI || null);
 
-  const { earnedBsk } = useGetBskRewards();
+  const { elrondToken: rewardToken, isLoading: isLoadingRewardToken } =
+    useGetElrondToken(selectedNetwork.tokensID.usdc);
 
-  if (isLoading) {
+  const staked = deposits ? calcStakedAmount(deposits) : "0";
+
+  if (isLoadingRewardToken || isloadingDepositToken) {
     return (
-      <div className="flex justify-center">
-        <Loader2 className="animate-spin" />
+      <div className="flex justify-center items-center">
+        <Loader2 className="animate-spin" size={50} />
       </div>
     );
   }
@@ -26,24 +32,24 @@ const FarmInfo = () => {
   return (
     <div
       className={`flex gap-7  flex-col lg:flex-row flex-1 ${
-        userFarmInfo ? "justify-end" : "justify-center"
+        depositedToken ? "justify-end" : "justify-center"
       } `}
     >
-      {userFarmInfo && (
-        <>
-          <FarmDetail
-            title={"Staked amount"}
-            value={userFarmInfo?.lpActive}
-            decimals={18}
-            tokenI={selectedNetwork.tokensID.bskwegld}
-          />
-          <FarmDetail
-            title="Earned USDC"
-            value={earnedBsk}
-            decimals={16}
-            tokenI={selectedNetwork.tokensID.bsk}
-          />
-        </>
+      {depositedToken && (
+        <FarmDetail
+          title="My staked amount"
+          value={staked}
+          decimals={depositedToken.decimals}
+          tokenI={depositedToken.identifier}
+        />
+      )}
+      {rewardToken && (
+        <FarmDetail
+          title={`Current ${rewardToken.ticker} earned`}
+          value={userRewards?.rewards || "0"}
+          decimals={rewardToken.decimals}
+          tokenI={rewardToken.identifier}
+        />
       )}
       <div className="flex gap-2">
         <Loader2 className="animate-spin" /> Optimising for the best APR

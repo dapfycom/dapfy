@@ -63,7 +63,7 @@ interface IStakedDetail {
   logoUrl: string;
 }
 
-const StakedDetail = ({
+export const StakedDetail = ({
   title,
   value,
   tokenI,
