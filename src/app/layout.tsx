@@ -62,6 +62,12 @@ export default function RootLayout({
         defer
       />
 
+      <Script
+        id="seona-js-plugin"
+        src="https://assets.usestyle.ai/seonajsplugin"
+        type="text/javascript"
+      />
+
       <body>
         <RootProviders>
           <Layout>
