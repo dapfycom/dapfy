@@ -1,4 +1,4 @@
-import { externnalLinks } from "@/config/routes";
+import { externnalLinks, routeNames } from "@/config/routes";
 import { Resend } from "resend";
 import KoalaWelcomeEmail from "../../react-email/emails/welcome";
 
@@ -8,7 +8,10 @@ export const sendWelcomeEmail = async (email: string) => {
     from: `Dapfy <${process.env.EMAIL_HOST}>`,
     to: [email],
     subject: "Welcome to Dapfy 🎉",
-    react: KoalaWelcomeEmail({ externnalLinks: externnalLinks }),
-    text: "Hello world",
+    react: KoalaWelcomeEmail({
+      externnalLinks: externnalLinks,
+      internalLinks: routeNames,
+    }),
+    text: "Welcome to Dapfy 🎉",
   });
 };

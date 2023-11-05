@@ -1,6 +1,7 @@
 import {
   Body,
   Button,
+  Column,
   Container,
   Head,
   Hr,
@@ -8,6 +9,7 @@ import {
   Img,
   Link,
   Preview,
+  Row,
   Section,
   Text,
 } from "@react-email/components";
@@ -20,6 +22,14 @@ interface KoalaWelcomeEmailProps {
     instagram: string;
     facebook: string;
     linkedin: string;
+  };
+  internalLinks: {
+    farm: string;
+    play: string;
+    dust: string;
+    aggregator: string;
+    defi: string;
+    rewards: string;
   };
 }
 
@@ -35,6 +45,15 @@ export const KoalaWelcomeEmail = ({
     linkedin: "",
     telegram: "",
     twitter: "",
+  },
+
+  internalLinks = {
+    aggregator: "",
+    defi: "",
+    dust: "",
+    farm: "",
+    play: "",
+    rewards: "",
   },
 }: KoalaWelcomeEmailProps) => (
   <Html>
@@ -60,20 +79,102 @@ export const KoalaWelcomeEmail = ({
           strategies that make navigating the decentralized economy effortless.
         </Text>
 
-        <Section style={toolsContainer}>
-          <Text>- Swap Aggregator: Optimal trade rates across DEXs.</Text>
-          <Text>- Farming: Stake crypto to earn rewards.</Text>
-          <Text>
-            - On-Chain Gaming: Blockchain games with verified transactions.
-          </Text>
-          <Text>
-            - Dust Converter: Combines small crypto balances into one currency.
-          </Text>
-          <Text>
-            - Pre-Configured DeFi Strategies: Automated DeFi investment
-            management.
-          </Text>
-          <Text>- Rewards Center: Earn rewards for platform engagement.</Text>
+        <Section>
+          <Row
+            style={{
+              margin: "10px 0",
+            }}
+          >
+            <Column>
+              <Link
+                href={internalLinks.aggregator}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - Swap Aggregator: Optimal trade rates across DEXs.
+              </Link>
+            </Column>
+          </Row>
+          <Row
+            style={{
+              margin: "10px 0",
+            }}
+          >
+            <Column>
+              <Link
+                href={internalLinks.farm}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - Farming: Stake crypto to earn rewards.
+              </Link>
+            </Column>
+          </Row>
+
+          <Row
+            style={{
+              margin: "10px 0",
+            }}
+          >
+            <Column>
+              <Link
+                href={internalLinks.play}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - On-Chain Gaming: Blockchain games with verified transactions.
+              </Link>
+            </Column>
+          </Row>
+
+          <Row
+            style={{
+              margin: "10px 0",
+            }}
+          >
+            <Column>
+              <Link
+                href={internalLinks.dust}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - Dust Converter: Combines small crypto balances into one
+                currency.
+              </Link>
+            </Column>
+          </Row>
+
+          <Row
+            style={{
+              margin: "10px 0",
+            }}
+          >
+            <Column>
+              <Link
+                href={internalLinks.defi}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - Pre-Configured DeFi Strategies: Automated DeFi investment
+                management.
+              </Link>
+            </Column>
+          </Row>
+          <Row
+            style={{
+              margin: "10px 0",
+            }}
+          >
+            <Column>
+              <Link
+                href={internalLinks.rewards}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - Rewards Center: Earn rewards for platform engagement.
+              </Link>
+            </Column>
+          </Row>
         </Section>
 
         <Text style={paragraph}>
@@ -169,7 +270,10 @@ const paragraph = {
   lineHeight: "26px",
 };
 
-const toolsContainer = {};
+const toolsContainer = {
+  display: "flex",
+  flexDirection: "column",
+};
 
 const btnContainer = {
   textAlign: "center" as const,
