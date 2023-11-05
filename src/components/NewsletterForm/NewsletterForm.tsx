@@ -42,7 +42,7 @@ const NewsletterForm = () => {
             <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
               <div className="relative w-full">
                 <label
-                  htmlFor="email"
+                  htmlFor="user-email"
                   className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Email address
@@ -62,7 +62,7 @@ const NewsletterForm = () => {
                   className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Enter your email"
                   type="email"
-                  id="email"
+                  id="user-email"
                   name="email"
                   onChange={formik.handleChange}
                   value={formik.values.email}
