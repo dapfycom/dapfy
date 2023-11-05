@@ -35,7 +35,7 @@ export const routeNames = {
   defi: "/multiversx/defi",
   docs: "/docs",
   blog: "/blog",
-  upgrade: "/multiversx/upgrade",
+  // upgrade: "/multiversx/upgrade",
 
   // internals
   about: "/about",

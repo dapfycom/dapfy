@@ -62,10 +62,10 @@ const productsRoutes: RouteProps[] = [
     href: routeNames.defi,
     label: "Defi",
   },
-  {
-    href: routeNames.upgrade,
-    label: "Upgrade",
-  },
+  // {
+  //   href: routeNames.upgrade,
+  //   label: "Upgrade",
+  // },
 ];
 
 const resourcesRoutes: RouteProps[] = [
