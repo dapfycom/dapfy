@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { sendWelcomeEmail } from "@/lib/emails";
 import { z } from "zod";
 
 export const POST = async (req: Request) => {
@@ -20,6 +21,8 @@ export const POST = async (req: Request) => {
         email: email,
       },
     });
+
+    await sendWelcomeEmail(email);
   } catch (error: any) {
     if (error?.code === "P2002") {
       return Response.json({ error: "Email already exist" }, { status: 400 });

@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import toast from "react-hot-toast";
 
 const NewsletterForm = () => {
-  const formilk = useFormik({
+  const formik = useFormik({
     initialValues: {
       email: "",
     },
@@ -16,7 +16,11 @@ const NewsletterForm = () => {
         }),
         {
           loading: "Loading",
-          success: "You are now subscribed!",
+          success: () => {
+            formik.resetForm();
+
+            return "You are now subscribed!";
+          },
           error: (err) => ErrorMessage(err, "Error when subscribing"),
         }
       );
@@ -34,7 +38,7 @@ const NewsletterForm = () => {
             Stay up to date with the roadmap progress, announcements and
             exclusive discounts feel free to sign up with your email.
           </p>
-          <form onSubmit={formilk.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
               <div className="relative w-full">
                 <label
@@ -60,7 +64,8 @@ const NewsletterForm = () => {
                   type="email"
                   id="email"
                   name="email"
-                  onChange={formilk.handleChange}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
                   required
                 />
               </div>
