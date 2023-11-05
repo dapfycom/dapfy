@@ -168,6 +168,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIROMENT: ENVIROMENTTYPE = "testnet";
+export const ENVIROMENT: ENVIROMENTTYPE = "mainnet";
 
 export const selectedNetwork = networkConfig[ENVIROMENT];
