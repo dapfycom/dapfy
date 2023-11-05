@@ -85,9 +85,9 @@ const resourcesRoutes: RouteProps[] = [
     isExternal: true,
   },
   {
-    href: externnalLinks.github,
+    href: externnalLinks.analitics,
     label: "Analytics",
-    soon: true,
+    isExternal: true,
   },
   {
     href: routeNames.defi,

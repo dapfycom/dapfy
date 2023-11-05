@@ -53,6 +53,8 @@ export const externnalLinks = {
   instagram: "https://www.instagram.com/dapfycom/",
   facebook: "https://www.facebook.com/profile.php?id=61553057430791",
   linkedin: "https://www.linkedin.com/in/dapfy-com-8b5428299/",
+
+  analitics: "https://plausible.io/dapfy.com",
 };
 
 export const mainSiteRoutes = [
