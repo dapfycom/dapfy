@@ -69,8 +69,9 @@ const networkConfig = {
       flip: "erd1qqqqqqqqqqqqqpgqcg2ay4qhs9g5p9sc550hau5hn9tcul9my26szpd2jn",
       dust: "erd1qqqqqqqqqqqqqpgql3z822nsknxsjttzqs73762u4vltlgfvy26srl0844",
       hatomParent:
-        "erd1qqqqqqqqqqqqqpgq2hsg0h0e9rljxx8qrs99mxh35mvz86qjvr2slxxkz5",
-      aggregator: "",
+        "erd1qqqqqqqqqqqqqpgq9mpe7jf74uzggju8mrqjrfmnl0p04n7ny26sk4spwh",
+      aggregator:
+        "erd1qqqqqqqqqqqqqpgq5ewyag0rz7hn4yecykckdfpyamw4v8pxy26s33xrf4",
     },
   },
   devnet: {

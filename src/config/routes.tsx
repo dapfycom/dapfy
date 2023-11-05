@@ -49,7 +49,7 @@ export const routeNames = {
 export const externnalLinks = {
   twitter: "https://x.com/xBeskar",
   telegram: "https://t.me/xBeskar",
-  github: "https://github.com/MxBeskar",
+  github: "https://github.com/dapfycom",
   instagram: "https://www.instagram.com/dapfycom/",
   facebook: "https://www.facebook.com/profile.php?id=61553057430791",
   linkedin: "https://www.linkedin.com/in/dapfy-com-8b5428299/",
