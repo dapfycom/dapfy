@@ -8,7 +8,11 @@ export const useGetFarmUserInfo = () => {
   const address = useAppSelector(selectUserAddress);
   const { data, isLoading, error } = useSwr(
     ["bskFarmWsp:viewUserTokenData", address],
-    fetchUserFarmInfo
+    fetchUserFarmInfo,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+    }
   );
 
   return {

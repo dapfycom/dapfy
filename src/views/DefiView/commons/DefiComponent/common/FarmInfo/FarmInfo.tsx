@@ -45,8 +45,10 @@ const FarmInfo = () => {
           />
         </>
       )}
-
-      <div className="flex flex-col">
+      <div className="flex gap-2">
+        <Loader2 className="animate-spin" /> Optimising for the best APR
+      </div>
+      {/* <div className="flex flex-col">
         <p className="whitespace-nowrap mb-2 " color="white">
           APR
         </p>
@@ -62,7 +64,7 @@ const FarmInfo = () => {
         <p className="text-[12px] whitespace-nowrap text-muted-foreground">
           156 %
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };
