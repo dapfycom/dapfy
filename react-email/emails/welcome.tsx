@@ -39,9 +39,7 @@ export const KoalaWelcomeEmail = ({
 }: KoalaWelcomeEmailProps) => (
   <Html>
     <Head />
-    <Preview>
-      The sales intelligence platform that helps you uncover qualified leads.
-    </Preview>
+    <Preview>The platform that helps you simplify DeFi</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
