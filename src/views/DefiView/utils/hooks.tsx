@@ -26,7 +26,7 @@ export const useGetHatomFarms = () => {
 export const useGetUserTotalRewards = () => {
   const address = useAppSelector(selectUserAddress);
   const { data, error, isLoading } = useSwr(
-    ["hatomParentWsp:getUserTotalRewards"],
+    address ? ["hatomParentWsp:getUserTotalRewards"] : null,
     () => fetchUserTotalRewards(address)
   );
 
@@ -40,7 +40,7 @@ export const useGetUserTotalRewards = () => {
 export const useGetUserDeposits = () => {
   const address = useAppSelector(selectUserAddress);
   const { data, error, isLoading } = useSwr(
-    ["hatomParentWsp:getDepositEntries"],
+    address ? ["hatomParentWsp:getDepositEntries"] : null,
     () => fetchUserDeposits(address)
   );
 
