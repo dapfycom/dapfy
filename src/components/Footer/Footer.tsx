@@ -92,6 +92,7 @@ const resourcesRoutes: RouteProps[] = [
   {
     href: routeNames.assets,
     label: "Brand Assets",
+    download: true,
   },
 ];
 
@@ -307,9 +308,16 @@ interface LinkItemProps {
   label: string;
   isExternal?: boolean;
   soon?: boolean;
+  download?: boolean;
 }
 
-const LinkItem = ({ href, label, isExternal, soon }: LinkItemProps) => {
+const LinkItem = ({
+  href,
+  label,
+  isExternal,
+  download,
+  soon,
+}: LinkItemProps) => {
   const isExternalProps = isExternal
     ? {
         target: "_blank",
@@ -318,6 +326,26 @@ const LinkItem = ({ href, label, isExternal, soon }: LinkItemProps) => {
     : {};
 
   const soonClasses = soon ? "pointer-events-none" : "";
+
+  console.log({
+    download,
+    label,
+  });
+
+  if (download) {
+    return (
+      <a
+        className={`hover:text-primary ${soonClasses}`}
+        href={href}
+        {...isExternalProps}
+        download
+      >
+        <span className="border-b pb-[2px]">
+          {label} <span className="text-primary">{soon ? "(soon)" : ""}</span>
+        </span>
+      </a>
+    );
+  }
 
   return (
     <Link
