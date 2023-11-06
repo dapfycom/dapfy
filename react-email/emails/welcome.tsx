@@ -221,6 +221,15 @@ export const KoalaWelcomeEmail = ({
           &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
           <Link
             style={footerLink}
+            href={externnalLinks.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Find us on X
+          </Link>
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          <Link
+            style={footerLink}
             href={externnalLinks.linkedin}
             target="_blank"
             rel="noopener noreferrer"
