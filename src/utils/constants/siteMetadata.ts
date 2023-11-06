@@ -1,5 +1,5 @@
 export const siteMetadata = {
-  title: "Dapfy",
+  title: "Dapfy - Decentralised Application For You",
   author: "Dapfy",
   headerTitle: "Dapfy",
   description:
