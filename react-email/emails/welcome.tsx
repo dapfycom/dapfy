@@ -33,9 +33,7 @@ interface KoalaWelcomeEmailProps {
   };
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
+const baseUrl = "https://dapfy.com";
 
 export const KoalaWelcomeEmail = ({
   externnalLinks = {
@@ -87,7 +85,7 @@ export const KoalaWelcomeEmail = ({
           >
             <Column>
               <Link
-                href={internalLinks.aggregator}
+                href={baseUrl + internalLinks.aggregator}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -102,7 +100,7 @@ export const KoalaWelcomeEmail = ({
           >
             <Column>
               <Link
-                href={internalLinks.farm}
+                href={baseUrl + internalLinks.farm}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -118,7 +116,7 @@ export const KoalaWelcomeEmail = ({
           >
             <Column>
               <Link
-                href={internalLinks.play}
+                href={baseUrl + internalLinks.play}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -134,7 +132,7 @@ export const KoalaWelcomeEmail = ({
           >
             <Column>
               <Link
-                href={internalLinks.dust}
+                href={baseUrl + internalLinks.dust}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -151,7 +149,7 @@ export const KoalaWelcomeEmail = ({
           >
             <Column>
               <Link
-                href={internalLinks.defi}
+                href={baseUrl + internalLinks.defi}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -167,7 +165,7 @@ export const KoalaWelcomeEmail = ({
           >
             <Column>
               <Link
-                href={internalLinks.rewards}
+                href={baseUrl + internalLinks.rewards}
                 target="_blank"
                 rel="noopener noreferrer"
               >
