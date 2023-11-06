@@ -41,6 +41,7 @@ export function middleware(request: NextRequest) {
       "/docs",
       "/alice.pem",
       "/dapfy-assets.zip",
+      "/.well-known",
 
       // Your other files in `public`
     ])
