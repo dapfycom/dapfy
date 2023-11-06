@@ -35,7 +35,7 @@ const FarmInfo = () => {
         depositedToken ? "justify-end" : "justify-center"
       } `}
     >
-      {depositedToken && (
+      {/* {depositedToken && (
         <FarmDetail
           title="My staked amount"
           value={staked}
@@ -50,7 +50,7 @@ const FarmInfo = () => {
           decimals={rewardToken.decimals}
           tokenI={rewardToken.identifier}
         />
-      )}
+      )} */}
       <div className="flex gap-2">
         <Loader2 className="animate-spin" /> Optimising for the best APR
       </div>
