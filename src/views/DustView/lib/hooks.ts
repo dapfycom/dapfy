@@ -60,7 +60,7 @@ export const useSelectableDustTokens = () => {
 
   const { userTokens, isLoading: isLoading2 } = useGetUserTokens();
 
-  const finalTokens = userTokens.filter((userToken) => {
+  const finalTokens1 = userTokens.filter((userToken) => {
     if (
       inputTokens.includes(userToken.identifier) &&
       userToken.identifier !== "EGLD" &&
@@ -75,6 +75,10 @@ export const useSelectableDustTokens = () => {
       return false;
     }
   });
+
+  const finalTokens = finalTokens1.filter(
+    (token) => token.identifier !== "LPAD-84628f"
+  );
 
   return {
     finalTokens: isLoggedIn ? finalTokens : [],

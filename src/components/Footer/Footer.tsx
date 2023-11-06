@@ -327,11 +327,6 @@ const LinkItem = ({
 
   const soonClasses = soon ? "pointer-events-none" : "";
 
-  console.log({
-    download,
-    label,
-  });
-
   if (download) {
     return (
       <a
