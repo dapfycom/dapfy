@@ -90,9 +90,8 @@ const resourcesRoutes: RouteProps[] = [
     isExternal: true,
   },
   {
-    href: routeNames.defi,
+    href: routeNames.assets,
     label: "Brand Assets",
-    soon: true,
   },
 ];
 
@@ -275,6 +274,7 @@ interface RouteProps {
   label: string;
   isExternal?: boolean;
   soon?: boolean;
+  download?: boolean;
 }
 interface LinksSectionsProps {
   title: string;

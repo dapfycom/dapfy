@@ -37,6 +37,7 @@ export const routeNames = {
   blog: "/blog",
   // upgrade: "/multiversx/upgrade",
 
+  assets: "/dapfy-assets.zip",
   // internals
   about: "/about",
   sustainability: "/sustainability",

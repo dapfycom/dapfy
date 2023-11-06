@@ -40,6 +40,7 @@ export function middleware(request: NextRequest) {
       "/blog",
       "/docs",
       "/alice.pem",
+      "/dapfy-assets.zip",
 
       // Your other files in `public`
     ])
