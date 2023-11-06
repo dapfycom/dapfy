@@ -18,7 +18,7 @@ export const DappProvider = dynamic(
   { ssr: false }
 );
 
-export const walletConnectV2ProjectId = "a5e4dd12d896af078bd26e68295a8c94";
+export const walletConnectV2ProjectId = "38bf422714d35fca269a4d5ca11cf809";
 
 export default function SdkProvider({
   children,
