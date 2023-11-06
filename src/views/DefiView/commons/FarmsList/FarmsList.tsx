@@ -11,8 +11,6 @@ const FarmsList = () => {
   const userHatomData = useGetUserInfo();
   const hatomData = useGetTvl();
   const configs = useGetHatomConfigs();
-  console.log("userHatomData", userHatomData);
-  console.log("hatomData", hatomData);
 
   return (
     <div className="w-full flex flex-col gap-16 mt">

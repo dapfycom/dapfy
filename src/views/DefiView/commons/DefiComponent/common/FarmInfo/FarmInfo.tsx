@@ -51,9 +51,9 @@ const FarmInfo = () => {
           tokenI={rewardToken.identifier}
         />
       )} */}
-      <div className="flex gap-2">
+      {/* <div className="flex gap-2">
         <Loader2 className="animate-spin" /> Optimising for the best APR
-      </div>
+      </div> */}
       {/* <div className="flex flex-col">
         <p className="whitespace-nowrap mb-2 " color="white">
           APR
