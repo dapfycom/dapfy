@@ -27,6 +27,8 @@ export const POST = async (req: Request) => {
     if (error?.code === "P2002") {
       return Response.json({ error: "Email already exist" }, { status: 400 });
     }
+    console.log("Prisma error", error);
+
     return Response.json({ error: "Unknow error" }, { status: 500 });
   }
 

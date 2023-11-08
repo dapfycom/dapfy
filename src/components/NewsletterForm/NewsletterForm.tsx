@@ -19,9 +19,12 @@ const NewsletterForm = () => {
           success: () => {
             formik.resetForm();
 
-            return "You are now subscribed!";
+            return "📧 We sent you an email - Check your inbox to confirm the subscription (including the spam folder)";
           },
           error: (err) => ErrorMessage(err, "Error when subscribing"),
+        },
+        {
+          duration: 5000,
         }
       );
     },
