@@ -11,7 +11,7 @@ import { syncXUserWithDapfyUser } from "./services";
 export const useGetUserPoints = () => {
   const { user } = useGetXUser();
   const { data, error, isLoading } = useSWR(
-    user ? `/points/user${user.id}` : null,
+    user ? `/points/user/${user.id}` : null,
     fetchRewardsPoints
   );
 
