@@ -96,3 +96,7 @@
   -webkit-background-clip: text;
   background-clip:text;
 }
+
+body{
+  pointer-events: initial !important;
+}
