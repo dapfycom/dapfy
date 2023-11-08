@@ -63,6 +63,10 @@ export const mainSiteRoutes = [
     path: routeNames.aggregator,
     title: "Swap Aggregator",
   },
+  {
+    path: routeNames.defi,
+    title: "Defi",
+  },
 
   {
     path: routeNames.farm,
@@ -70,22 +74,18 @@ export const mainSiteRoutes = [
   },
 
   {
+    path: routeNames.dust,
+    title: "Dust",
+  },
+  {
     path: routeNames.play,
-    title: "Play",
+    title: "Other",
     soon: false,
   },
 
   {
     title: "The Forge",
     soon: true,
-  },
-  {
-    path: routeNames.dust,
-    title: "Dust",
-  },
-  {
-    path: routeNames.defi,
-    title: "Defi",
   },
   {},
 ];
