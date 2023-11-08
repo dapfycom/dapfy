@@ -6,11 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { cn } from "@/lib/utils";
 import { useGetUserPoints } from "../lib/hooks";
 
 const RewardsCard = () => {
+  const { isLoggedIn } = useAuthentication();
   const { handleLogin, user, isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUserPoints();
 
@@ -22,7 +24,7 @@ const RewardsCard = () => {
       </CardHeader>
       <CardContent>
         {isAuthenticated ? (
-          <div className="flex w-full">
+          <div className="flex w-full flex-col sm:flex-row">
             <div className="flex flex-col gap-4">
               {rewards && (
                 <Reward
@@ -33,10 +35,33 @@ const RewardsCard = () => {
                 />
               )}
             </div>
-            <div className="flex-1 flex justify-center mt-[-20px]">
+            <div className="flex-1 flex flex-col items-center sm:flex-row gap-10 justify-center mt-6 sm:mt-[-20px]">
               <div className="text-center">
                 <div>Welcome</div>
                 <p className="font-bold">@{user?.username}</p>
+              </div>
+              <div>
+                <Button className="gap-1" variant={"secondary"}>
+                  Disconnect{" "}
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      width={"16"}
+                      height="16"
+                      className="hover:scale-110"
+                    >
+                      <g>
+                        <path
+                          fill="currentColor"
+                          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                        ></path>
+                      </g>
+                    </svg>
+                  </span>{" "}
+                </Button>
               </div>
             </div>
           </div>
@@ -53,7 +78,10 @@ const RewardsCard = () => {
 
             <div className="flex-1 flex justify-center ">
               <Button
-                className="min-w-[150px] flex gap-1"
+                className={cn(
+                  "min-w-[150px] flex gap-1",
+                  !isLoggedIn ? "pointer-events-none opacity-70" : ""
+                )}
                 onClick={handleLogin}
               >
                 Connect{" "}
