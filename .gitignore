@@ -39,3 +39,4 @@ package-lock.json
 dumy.js
 prisma/migrations
 src/app/api/email/route.ts
+helpers.txt
