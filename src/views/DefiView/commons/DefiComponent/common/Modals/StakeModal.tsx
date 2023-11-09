@@ -33,7 +33,9 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     hatomFarm?.moneyMarket.tokenI || ""
   );
   const stakeSchema = yup.object({
-    amount: yup.number(),
+    amount: yup
+      .number()
+      .min(1, `The Minimun amount is 1 ${stakedToken?.ticker}`),
   });
 
   const onSuccess = () => {
