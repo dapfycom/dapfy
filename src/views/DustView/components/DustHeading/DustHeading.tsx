@@ -18,10 +18,7 @@ const DustHeading = () => {
             </PageHeaderHeading>
           </TooltipTrigger>
           <TooltipContent>
-            <p>
-              Our Dust Converter offers the smallest fees you&apos;ll find
-              anywhere, outdoing all competitors. 💸🔥
-            </p>
+            <p>The smallest fees on MultiversX, guaranteed. 💸🔥</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
