@@ -49,7 +49,10 @@ const RewardsCard = () => {
             </div>
 
             <div className="flex-1 flex justify-center ">
-              <Button asChild className="min-w-[150px] flex gap-1">
+              <Button
+                asChild
+                className="min-w-[150px] flex gap-1 pointer-events-none opacity-70"
+              >
                 <a href={`${REWARDS_BASE_URL}auth/twitter`}>
                   Connect{" "}
                   <span>
