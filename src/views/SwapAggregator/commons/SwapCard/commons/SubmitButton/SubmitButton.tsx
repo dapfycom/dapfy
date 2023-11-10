@@ -104,13 +104,14 @@ const SubmitButton = () => {
       ? "Confirm"
       : "Enter an amount"
     : "Connect wallet";
+
   return (
     <>
       {txSuccess && <Realistic />}
       <Button
         onClick={handleSwap}
         className="w-full"
-        disabled={!aggregatorData}
+        disabled={!aggregatorData && isLoggedIn}
       >
         {buttonText}
       </Button>
