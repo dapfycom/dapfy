@@ -98,8 +98,8 @@ export const KoalaWelcomeEmail = ({
             src="https://www.dapfy.com/images/logo-text-white.png"
             alt="dapfy"
             style={{
-              width: "40px",
-              height: "40px",
+              width: "70px",
+              height: "auto",
               margin: "auto",
             }}
           />
@@ -154,7 +154,7 @@ export const KoalaWelcomeEmail = ({
                   rel="noopener noreferrer"
                 >
                   <Img
-                    src="https://www.dapfy.com/images/telegram.svg"
+                    src="https://www.dapfy.com/images/telegram.png"
                     style={{
                       height: "27px",
                       width: "27px",
@@ -171,7 +171,7 @@ export const KoalaWelcomeEmail = ({
                   rel="noopener noreferrer"
                 >
                   <Img
-                    src="https://www.dapfy.com/images/x.svg"
+                    src="https://www.dapfy.com/images/x.png"
                     style={{
                       height: "27px",
                       width: "27px",
@@ -199,7 +199,7 @@ const main = {
 
 const container = {
   margin: "0 auto",
-  padding: "20px 0 48px",
+  padding: "20px 20px 48px",
 };
 
 const logo = {
