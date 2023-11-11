@@ -86,9 +86,7 @@ export const KoalaWelcomeEmail = ({
           The Dapfy Team
         </Text>
         {/* <Hr style={hr} /> */}
-        <Text>
-          P.S. Don’t miss out – Follow us on X for the latest updates.
-        </Text>
+
         <Section
           style={{
             margin: "20px 0",
