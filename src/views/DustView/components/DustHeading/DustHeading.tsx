@@ -1,4 +1,7 @@
-import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
+import {
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/PageHeader/PageHeader";
 import {
   Tooltip,
   TooltipContent,
@@ -8,12 +11,12 @@ import {
 
 const DustHeading = () => {
   return (
-    <div>
+    <div className="flex flex-col">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
             {" "}
-            <PageHeaderHeading className="mb-10">
+            <PageHeaderHeading className="mb-6">
               The Dust Converter
             </PageHeaderHeading>
           </TooltipTrigger>
@@ -22,6 +25,10 @@ const DustHeading = () => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+
+      <PageHeaderDescription className="mb-10">
+        Convert tiny balances into EGLD, USDC, or get BSK for zero fees!
+      </PageHeaderDescription>
     </div>
   );
 };

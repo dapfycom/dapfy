@@ -5,10 +5,11 @@ import EpochCountDown from "@/components/EpochCountDown/EpochCountDown";
 import MainNav from "@/components/MainNav/MainNav";
 import NavbarActions from "@/components/NavActions/NavActions";
 import Container from "@/components/ui-system/Container";
+import { routeNames } from "@/config/routes";
 import useDisclosure from "@/hooks/useDisclosure";
 import useScrolled from "@/hooks/useScrolled";
+import Image from "next/image";
 import PishingWarn from "../PishingWarn/PishingWarn";
-import { routeNames } from "@/config/routes";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
@@ -33,7 +34,22 @@ const Navbar = () => {
         <Container className="relative z-20">
           <div className="relative  sm:px-6 lg:px-8 flex h-16 items-center">
             <Link href={routeNames.home} className="ml-[-10px] flex gap-x-2">
-              <p className="font-bold text-4xl">🔋</p>
+              <p className="font-bold text-4xl">
+                <Image
+                  src={"/images/logo-white.png"}
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  className="hidden dark:block"
+                />
+                <Image
+                  src={"/images/logo-black.png"}
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  className="block dark:hidden"
+                />
+              </p>
             </Link>
             <MainNav className="mx-6 hidden md:flex" />
             <NavbarActions />
