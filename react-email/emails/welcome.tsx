@@ -4,7 +4,6 @@ import {
   Column,
   Container,
   Head,
-  Hr,
   Html,
   Img,
   Link,
@@ -31,6 +30,8 @@ interface KoalaWelcomeEmailProps {
     defi: string;
     rewards: string;
   };
+
+  email: string;
 }
 
 const baseUrl = "https://dapfy.com";
@@ -53,6 +54,7 @@ export const KoalaWelcomeEmail = ({
     play: "",
     rewards: "",
   },
+  email = "cesrmartn@yahoo.es",
 }: KoalaWelcomeEmailProps) => (
   <Html>
     <Head />
@@ -60,129 +62,21 @@ export const KoalaWelcomeEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://dapfy.com/_next/image?url=%2Fimages%2Flogo-v2-black.png&w=256&q=75`}
-          width="170"
-          height="50"
+          src={`https://www.dapfy.com/images/banner.png`}
           alt="Dapfy"
           style={logo}
         />
+        <Text style={paragraph}>Hi {email},</Text>
+
         <Text style={paragraph}>
-          We’re incredibly excited to have you here with us!
+          Welcome to Dapfy, the platform that pays users for their interactions.
         </Text>
         <Text style={paragraph}>
-          DeFi can be very complex, but we’re making it simple.
-        </Text>
-        <Text style={paragraph}>
-          Dapfy automates your DeFi experience, offering easy-to-use tools and
-          strategies that make navigating the decentralized economy effortless.
-        </Text>
-
-        <Section>
-          <Row
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            <Column>
-              <Link
-                href={baseUrl + internalLinks.aggregator}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                - Swap Aggregator: Optimal trade rates across DEXs.
-              </Link>
-            </Column>
-          </Row>
-          <Row
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            <Column>
-              <Link
-                href={baseUrl + internalLinks.farm}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                - Farming: Stake crypto to earn rewards.
-              </Link>
-            </Column>
-          </Row>
-
-          <Row
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            <Column>
-              <Link
-                href={baseUrl + internalLinks.play}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                - On-Chain Gaming: Blockchain games with verified transactions.
-              </Link>
-            </Column>
-          </Row>
-
-          <Row
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            <Column>
-              <Link
-                href={baseUrl + internalLinks.dust}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                - Dust Converter: Combines small crypto balances into one
-                currency.
-              </Link>
-            </Column>
-          </Row>
-
-          <Row
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            <Column>
-              <Link
-                href={baseUrl + internalLinks.defi}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                - Pre-Configured DeFi Strategies: Automated DeFi investment
-                management.
-              </Link>
-            </Column>
-          </Row>
-          <Row
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            <Column>
-              <Link
-                href={baseUrl + internalLinks.rewards}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                - Rewards Center: Earn rewards for platform engagement.
-              </Link>
-            </Column>
-          </Row>
-        </Section>
-
-        <Text style={paragraph}>
-          Your passion for DeFi is our passion, and together, we&apos;re not
-          just building a platform; we&apos;re cultivating a community where
-          everyone has a place, including you.{" "}
+          Connect with our community to start earning today.
         </Text>
 
         <Section style={btnContainer}>
-          <Button pX={12} pY={12} style={button} href="https://dapfy.com">
+          <Button pX={12} pY={10} style={button} href="https://www.dapfy.com">
             Get started
           </Button>
         </Section>
@@ -191,69 +85,103 @@ export const KoalaWelcomeEmail = ({
           <br />
           The Dapfy Team
         </Text>
-        <Hr style={hr} />
+        {/* <Hr style={hr} /> */}
+        <Text>
+          P.S. Don’t miss out – Follow us on X for the latest updates.
+        </Text>
         <Section
           style={{
-            fontSize: "14px",
-            textAlign: "center" as const,
+            margin: "20px 0",
           }}
         >
-          <Text>
-            P.S. Don’t miss out – join us on all our social platforms. Connect
-            with us on Twitter, Facebook, Instagram, and LinkedIn for the latest
-            updates.
-          </Text>
-          <Text>Follow us, tag us, and be a part of the conversation. </Text>
+          <Img
+            src="https://www.dapfy.com/images/logo-text-white.png"
+            alt="dapfy"
+            style={{
+              width: "40px",
+              height: "40px",
+              margin: "auto",
+            }}
+          />
         </Section>
         <Section
           style={{
-            textAlign: "center" as const,
+            textAlign: "center",
+            fontSize: "12px",
           }}
         >
-          <Link
-            style={footerLink}
-            href={externnalLinks.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Text
+            style={{
+              fontSize: "12px",
+              fontStyle: "italic",
+            }}
           >
-            Follow us on Instagram
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href={externnalLinks.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
+            Copyright (C) 2023{" "}
+            <Link
+              href="http://dapfy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dapfy.com
+            </Link>
+            . All rights reserved.
+          </Text>
+
+          <Text
+            style={{
+              fontSize: "12px",
+              margin: "30px 0px",
+            }}
           >
-            Find us on X
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href={externnalLinks.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
+            You are receiving this email because you opted in via our website.
+          </Text>
+          <Text>Want to change how you receive these emails?</Text>
+          <Text>
+            You can <Link href="http://dapfy.com/unsubscribe">unsubscribe</Link>{" "}
+            any moment
+          </Text>
+          <Section
+            style={{
+              textAlign: "center" as const,
+            }}
           >
-            Connect on LinkedIn
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href={externnalLinks.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Join our Facebook Community
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href={externnalLinks.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Stay Updated on Telegram
-          </Link>
+            <Row>
+              <Column align="right">
+                <Link
+                  style={footerLink}
+                  href={externnalLinks.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    src="https://www.dapfy.com/images/telegram.svg"
+                    style={{
+                      height: "27px",
+                      width: "27px",
+                      marginRight: "10px",
+                    }}
+                  />
+                </Link>
+              </Column>
+              <Column align="left">
+                <Link
+                  style={footerLink}
+                  href={externnalLinks.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    src="https://www.dapfy.com/images/x.svg"
+                    style={{
+                      height: "27px",
+                      width: "27px",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </Link>
+              </Column>
+            </Row>
+          </Section>
         </Section>
       </Container>
     </Body>
@@ -263,7 +191,8 @@ export const KoalaWelcomeEmail = ({
 export default KoalaWelcomeEmail;
 
 const main = {
-  backgroundColor: "#ffffff",
+  backgroundColor: "black",
+  color: "white",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
@@ -275,6 +204,8 @@ const container = {
 
 const logo = {
   margin: "0 auto",
+  width: "100%",
+  height: "auto",
 };
 
 const paragraph = {
@@ -284,12 +215,13 @@ const paragraph = {
 
 const btnContainer = {
   textAlign: "center" as const,
+  margin: "20px 0px",
 };
 
 const button = {
-  backgroundColor: "#5F51E8",
-  borderRadius: "3px",
-  color: "#fff",
+  backgroundColor: "#fff",
+  borderRadius: "4px",
+  color: "black",
   fontSize: "16px",
   textDecoration: "none",
   textAlign: "center" as const,
@@ -309,4 +241,5 @@ const footer = {
 const footerLink = {
   color: "#b7b7b7",
   textDecoration: "underline",
+  margin: "0 10px",
 };

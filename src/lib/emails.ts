@@ -11,6 +11,7 @@ export const sendWelcomeEmail = async (email: string) => {
     react: KoalaWelcomeEmail({
       externnalLinks: externnalLinks,
       internalLinks: routeNames,
+      email: email,
     }),
     text: "Welcome to Dapfy 🎉",
   });
