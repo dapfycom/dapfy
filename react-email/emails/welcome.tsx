@@ -135,7 +135,10 @@ export const KoalaWelcomeEmail = ({
           </Text>
           <Text>Want to change how you receive these emails?</Text>
           <Text>
-            You can <Link href="http://dapfy.com/unsubscribe">unsubscribe</Link>{" "}
+            You can{" "}
+            <Link href={`http://dapfy.com/unsubscribe?email=${email}`}>
+              unsubscribe
+            </Link>{" "}
             any moment
           </Text>
           <Section
