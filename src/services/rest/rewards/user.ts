@@ -1,7 +1,7 @@
 import { IUserPoints, IUserX } from "@/types/rewards.interface";
 import axiosRewards from ".";
 
-const fakeData = true;
+const fakeData = false;
 
 export const fetchConnectedXUser = async (): Promise<IUserX> => {
   if (fakeData) {
