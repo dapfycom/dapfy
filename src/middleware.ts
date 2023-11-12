@@ -45,6 +45,7 @@ export function middleware(request: NextRequest) {
       "/alice.pem",
       "/dapfy-assets.zip",
       "/.well-known",
+      "/unsubscribe",
 
       // Your other files in `public`
     ])
