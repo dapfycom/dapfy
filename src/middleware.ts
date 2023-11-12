@@ -35,6 +35,9 @@ export function middleware(request: NextRequest) {
   if (
     isPathOrSubpath(pathname, [
       "/manifest.json",
+      "/sitemap.xml",
+      "/feed.xml",
+      "/robots.txt",
       "/favicon.ico",
       "/images",
       "/blog",
