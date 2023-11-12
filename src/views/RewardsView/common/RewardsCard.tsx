@@ -13,7 +13,8 @@ import { useGetUserPoints } from "../lib/hooks";
 
 const RewardsCard = () => {
   const { isLoggedIn } = useAuthentication();
-  const { handleLogin, user, isAuthenticated } = useXAuthentication();
+  const { handleLogin, user, isAuthenticated, handleLogout } =
+    useXAuthentication();
   const { rewards } = useGetUserPoints();
 
   return (
@@ -41,7 +42,11 @@ const RewardsCard = () => {
                 <p className="font-bold">@{user?.username}</p>
               </div>
               <div>
-                <Button className="gap-1" variant={"secondary"}>
+                <Button
+                  className="gap-1"
+                  variant={"secondary"}
+                  onClick={handleLogout}
+                >
                   Disconnect{" "}
                   <span>
                     <svg
