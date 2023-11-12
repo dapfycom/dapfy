@@ -1,4 +1,3 @@
-import { suportedBlockchains } from "@/config/blockchains";
 import { routeNames } from "@/config/routes";
 import { i18n } from "@/i18n-config";
 import { MetadataRoute } from "next";
@@ -15,10 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const locales = i18n.locales;
   const pathWithLocaleAndBlockchain = pagesWithTranslation.flatMap((page) => {
-    return suportedBlockchains.flatMap((blockchain) => {
-      return locales.map((locale) => {
-        return `/${locale}/${blockchain}${page}`;
-      });
+    return locales.map((locale) => {
+      return `/${locale}${page}`;
     });
   });
 
