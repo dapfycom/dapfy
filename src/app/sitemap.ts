@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return `/${locale}`;
   });
 
-  const pathWithNoLocale = [routeNames.about, routeNames.docs];
+  const pathWithNoLocale = [routeNames.blog, routeNames.docs];
 
   const allPath = [
     ...pathWithLocaleAndBlockchain,
