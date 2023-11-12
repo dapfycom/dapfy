@@ -60,8 +60,12 @@ export const externnalLinks = {
 
 export const mainSiteRoutes = [
   {
+    path: routeNames.rewards,
+    title: "Rewards",
+  },
+  {
     path: routeNames.aggregator,
-    title: "Swap Aggregator",
+    title: "Swap",
   },
   {
     path: routeNames.defi,

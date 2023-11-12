@@ -17,6 +17,7 @@ model User {
     createdAt        DateTime          @default(now()) // Timestamp of when the user was created
     purchaseAttempts PurchaseAttempt[] // Relation to PurchaseAttempt model, contains all purchase attempts by the user
     updatedAt        DateTime          @updatedAt // Timestamp of the last update to this user record
+    xAccount         XAcount?
 }
 
 // Define the Product model
@@ -63,4 +64,15 @@ model Wallet {
 model Newsletter {
     id    String @id @default(uuid())
     email String @unique
+}
+
+model XAcount {
+    id                String   @id @default(uuid())
+    xid               String   @unique
+    username          String   @unique
+    name              String   @unique
+    profile_image_url String   @unique
+    user              User     @relation(fields: [userId], references: [id]) // Relation to User model, refers to the user who made the attempt
+    userId            String   @unique
+    updatedAt         DateTime @updatedAt // Timestamp of the last update to this user record
 }
