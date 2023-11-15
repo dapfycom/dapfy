@@ -128,7 +128,6 @@ export const KoalaWelcomeEmail = ({
           <Text
             style={{
               fontSize: "12px",
-              margin: "30px 0px",
             }}
           >
             You are receiving this email because you opted in via our website.
@@ -136,7 +135,7 @@ export const KoalaWelcomeEmail = ({
           <Text>Want to change how you receive these emails?</Text>
           <Text>
             You can{" "}
-            <Link href={`https://dapfy.com/unsubscribe?email=${email}`}>
+            <Link href={`https://www.dapfy.com/unsubscribe?email=${email}`}>
               unsubscribe
             </Link>{" "}
             any moment
@@ -167,7 +166,7 @@ export const KoalaWelcomeEmail = ({
               <Column align="left">
                 <Link
                   style={footerLink}
-                  href={externnalLinks.telegram}
+                  href={externnalLinks.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
