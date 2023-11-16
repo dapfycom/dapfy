@@ -1,3 +1,4 @@
+import { selectedNetwork } from "@/config/network";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
 import { formatBalanceDolar } from "@/utils/functions/formatBalance";
@@ -27,9 +28,9 @@ export const useGetAllowedOutputTokens = () => {
     "dustWsp:getAllowedOutputTokens",
     () => fetchAllowedOutputTokens()
   );
-
+  const toTokens = data || [];
   return {
-    outputTokens: data || [],
+    outputTokens: toTokens.filter((t) => t !== selectedNetwork.tokensID.usdc),
     isLoading,
     error,
   };
