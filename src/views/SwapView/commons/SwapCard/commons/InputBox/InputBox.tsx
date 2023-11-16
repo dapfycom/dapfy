@@ -72,6 +72,7 @@ const InputBox = ({
             value={value}
             readOnly={readOnly}
           />
+
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -153,7 +154,8 @@ const InputBox = ({
         </div>
 
         {accountToken && (
-          <div className="flex justify-end mt-3 text-muted-foreground">
+          <div className="flex justify-between mt-3 text-muted-foreground">
+            <div>$45</div>
             <div className="flex gap-3 items-center">
               {!readOnly && (
                 <Button
