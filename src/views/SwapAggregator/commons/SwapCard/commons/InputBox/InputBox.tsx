@@ -163,8 +163,8 @@ const InputBox = ({
               ≈ $
               {formatBalanceDolar(
                 {
-                  balance: setElrondBalance(value, elrondToken.decimals),
-                  decimals: elrondToken.decimals,
+                  balance: setElrondBalance(value, elrondToken?.decimals),
+                  decimals: elrondToken?.decimals,
                 },
                 elrondToken?.price
               )}
