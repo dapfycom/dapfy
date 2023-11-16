@@ -1,5 +1,7 @@
+import AdminPanelView from "@/views/AdminPanelView/AdminPanelView";
+
 const Admin = () => {
-  return <div>kaka</div>;
+  return <AdminPanelView />;
 };
 
 export default Admin;

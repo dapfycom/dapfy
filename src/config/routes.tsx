@@ -35,6 +35,7 @@ export const routeNames = {
   defi: "/multiversx/defi",
   docs: "/docs",
   blog: "/blog",
+  admin: "/admin",
   // upgrade: "/multiversx/upgrade",
 
   assets: "/dapfy-assets.zip",
@@ -91,5 +92,9 @@ export const mainSiteRoutes = [
     title: "The Forge",
     soon: true,
   },
-  {},
+  {
+    title: "Admin",
+    path: routeNames.admin,
+    onlyAdmin: true,
+  },
 ];
