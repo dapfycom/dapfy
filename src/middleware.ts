@@ -46,7 +46,6 @@ export function middleware(request: NextRequest) {
       "/dapfy-assets.zip",
       "/.well-known",
       "/unsubscribe",
-
       // Your other files in `public`
     ])
   ) {
