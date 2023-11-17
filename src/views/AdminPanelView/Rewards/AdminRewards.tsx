@@ -13,7 +13,7 @@ export function AdminRewards() {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between text-center sm:text-left sm:flex-row flex-col-reverse">
         <div className="space-y-1">
           <h2 className="text-2xl font-semibold tracking-tight">Leaderboard</h2>
           <p className="text-sm text-muted-foreground">
@@ -22,7 +22,7 @@ export function AdminRewards() {
         </div>
 
         {isAuthenticated ? (
-          <div className="text-center text-sm text-yellow-500">
+          <div className="text-center text-sm text-yellow-500 -translate-y-6 sm:translate-y-0">
             Welcome back lobby
           </div>
         ) : (

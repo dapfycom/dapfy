@@ -24,7 +24,7 @@ const AdminLayoute = ({ children }: PropsWithChildren) => {
     );
   }
   return (
-    <div className="hidden md:block">
+    <div>
       <PageHeaderHeading className="text-center my-6">
         Admin panel
       </PageHeaderHeading>

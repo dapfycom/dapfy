@@ -93,7 +93,7 @@ const LeaderboardTable = () => {
   return (
     <div className="flex space-x-4 pb-4 px-3 max-w-[550px] mx-auto">
       <div className="w-full">
-        <div className="flex items-center py-4 gap-3">
+        <div className="flex items-center py-4 gap-3 flex-col  sm:flex-row">
           <Input
             placeholder="Filter usernames..."
             value={
@@ -104,7 +104,7 @@ const LeaderboardTable = () => {
             }
             className="max-w-sm"
           />
-          <div className="flex ml-auto">
+          <div className="flex sm:ml-auto">
             <DatePicker
               presetDays={[
                 {
