@@ -26,7 +26,10 @@ export function AdminRewards() {
             Welcome back lobby
           </div>
         ) : (
-          <Button onClick={handleLogin}>
+          <Button
+            onClick={handleLogin}
+            className="-translate-y-6 sm:translate-y-0"
+          >
             <Twitter className="mr-2 h-4 w-4" />
             Connect with X
           </Button>
