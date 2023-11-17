@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/table";
 import { IUserPoints } from "@/types/rewards.interface";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 import { useGetRewardsLeaderboard } from "./hooks";
 export const columns: ColumnDef<IUserPoints>[] = [
   {
@@ -55,6 +56,7 @@ export const columns: ColumnDef<IUserPoints>[] = [
 ];
 
 const LeaderboardTable = () => {
+  const router = useRouter();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -63,9 +65,7 @@ const LeaderboardTable = () => {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const [filterDate, setFilterDate] = React.useState<string>();
-
-  const { leaderboard: data } = useGetRewardsLeaderboard(filterDate);
+  const { leaderboard: data } = useGetRewardsLeaderboard();
 
   const table = useReactTable({
     data,
@@ -87,9 +87,7 @@ const LeaderboardTable = () => {
   });
   const handleChangeDate = (date: Date) => {
     const formatedDate = format(date, "yyyy-mm-dd");
-    console.log("formatedDate", formatedDate);
-
-    setFilterDate(formatedDate);
+    router.push("?date=" + formatedDate);
   };
 
   return (

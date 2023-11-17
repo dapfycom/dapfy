@@ -36,8 +36,8 @@ export function DatePicker({ presetDays, onChange, defaultValue }: IProps) {
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
   const handleAcceptDate = () => {
     if (date) {
-      setFinalDate(date);
       setOpenDialog(false);
+      setFinalDate(date);
       onChange(date);
     }
   };
