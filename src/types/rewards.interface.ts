@@ -7,8 +7,7 @@ export interface IUserX {
 
 export interface IUserPoints {
   _id: string;
-  id: string;
+  id?: string;
   username: string;
   points: number;
-  __v: number;
 }

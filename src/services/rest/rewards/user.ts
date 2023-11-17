@@ -1,7 +1,5 @@
 import { IUserPoints, IUserX } from "@/types/rewards.interface";
-import axiosRewards from ".";
-
-const fakeData = process.env.NODE_ENV !== "production" && true;
+import axiosRewards, { fakeData } from ".";
 
 export const fetchConnectedXUser = async (): Promise<IUserX> => {
   if (fakeData) {
