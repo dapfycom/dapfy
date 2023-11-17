@@ -13,8 +13,8 @@ const Swap = () => {
           Ultimate Crypto Swap Aggregator
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
-          Discover the Best Swap Rates on Multiversx Across Multiple
-          Decentralized Exchanges Seamlessly
+          Discover the Best Swap Rates and Lowest Fees With The Powerful AshSwap
+          API
         </PageHeaderDescription>
 
         <SwapCard />

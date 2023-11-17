@@ -27,7 +27,7 @@ const DustHeading = () => {
       </TooltipProvider>
 
       <PageHeaderDescription className="mb-10">
-        Convert tiny balances into EGLD, USDC, or get BSK for zero fees!
+        Convert tiny balances into EGLD, PADAWAN, or get BSK for zero fees!
       </PageHeaderDescription>
     </div>
   );
