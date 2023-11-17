@@ -86,7 +86,7 @@ const LeaderboardTable = () => {
     },
   });
   const handleChangeDate = (date: Date) => {
-    const formatedDate = format(date, "yyyy-mm-dd");
+    const formatedDate = format(date, "yyyy-LL-dd");
     router.push("?date=" + formatedDate);
   };
 
