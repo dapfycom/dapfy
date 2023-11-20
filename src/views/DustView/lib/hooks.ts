@@ -1,7 +1,7 @@
 import { selectedNetwork } from "@/config/network";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
-import { formatBalanceDolar } from "@/utils/functions/formatBalance";
+import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
 import useSwr from "swr";
 import { limitDollarAmount, limitDollarAmountMin } from "./contants";
@@ -65,9 +65,9 @@ export const useSelectableDustTokens = () => {
     if (
       inputTokens.includes(userToken.identifier) &&
       userToken.identifier !== "EGLD" &&
-      (formatBalanceDolar(userToken, userToken?.price || 0) as number) <=
+      (formatBalanceDollar(userToken, userToken?.price || 0) as number) <=
         limitDollarAmount &&
-      (formatBalanceDolar(userToken, userToken?.price || 0) as number) >=
+      (formatBalanceDollar(userToken, userToken?.price || 0) as number) >=
         limitDollarAmountMin &&
       userToken.identifier !== toTokenToConvert
     ) {

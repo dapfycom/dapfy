@@ -5,7 +5,7 @@ import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import { useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
 const EgldCard = () => {
@@ -45,7 +45,7 @@ const EgldCard = () => {
           {formatBalance(accountToken)} EGLD
         </div>
         <p className="text-xs text-muted-foreground">
-          ${formatBalanceDolar(accountToken, price || 0)}
+          ${formatBalanceDollar(accountToken, price || 0)}
         </p>
       </CardContent>
     </Card>

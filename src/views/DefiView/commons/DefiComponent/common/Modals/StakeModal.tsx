@@ -35,7 +35,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   const stakeSchema = yup.object({
     amount: yup
       .number()
-      .min(1, `The Minimun amount is 1 ${stakedToken?.ticker}`),
+      .min(1.00001, `The minimum amount is more than 1 ${stakedToken?.ticker}`),
   });
 
   const onSuccess = () => {

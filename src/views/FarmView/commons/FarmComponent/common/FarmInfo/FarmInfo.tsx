@@ -2,7 +2,7 @@ import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import {
   useGetBskRewards,
@@ -77,7 +77,7 @@ const FarmDetail = ({ title, value, decimals, tokenI }: FarmDetailProps) => {
       </p>
       <p className="text-[12px] whitespace-nowrap text-muted-foreground">
         {formatBalance({ balance: value, decimals: decimals })} ≈ ${" "}
-        {formatBalanceDolar(
+        {formatBalanceDollar(
           { balance: value, decimals: decimals },
           price,
           true

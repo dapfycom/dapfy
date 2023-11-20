@@ -5,7 +5,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { selectCoinFlipTokenStr } from "@/views/CoinFlipView/lib/con-flip-slice";
@@ -47,7 +47,7 @@ const StatsSection = () => {
         </p>
         <p className="text-sm mt-1 text-muted-foreground">
           ≈ $
-          {formatBalanceDolar(
+          {formatBalanceDollar(
             { balance: volume, decimals: elrondToken?.decimals },
             elrondToken?.price
           )}
@@ -64,7 +64,7 @@ const StatsSection = () => {
         </p>
         <p className="text-sm mt-1 text-muted-foreground">
           $
-          {formatBalanceDolar(
+          {formatBalanceDollar(
             { balance: houseVolume, decimals: elrondToken?.decimals },
             elrondToken?.price
           )}

@@ -5,7 +5,7 @@ import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import { calculateSlipageAmount, formatTokenI } from "@/utils/functions/tokens";
 import {
@@ -47,7 +47,7 @@ const ConvertInfo = () => {
                 </p>
                 <p className="text-right text-muted-foreground text-sm">
                   ≈ $
-                  {formatBalanceDolar(
+                  {formatBalanceDollar(
                     {
                       balance: receiveAmount,
                       decimals: token?.decimals,

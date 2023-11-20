@@ -21,7 +21,7 @@ import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
 import { IElrondAccountToken, IElrondToken } from "@/types/elrond.interface";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
   setElrondBalance,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
@@ -161,7 +161,7 @@ const InputBox = ({
           <div className="flex justify-between mt-3 text-muted-foreground">
             <div className="px-[12px] -translate-y-3 text-sm">
               ≈ $
-              {formatBalanceDolar(
+              {formatBalanceDollar(
                 {
                   balance: setElrondBalance(value, elrondToken?.decimals),
                   decimals: elrondToken?.decimals,

@@ -28,7 +28,7 @@ export const formatBalance = (
     }
   }
 };
-export const formatBalanceDolar = (
+export const formatBalanceDollar = (
   token: { balance: string | number; decimals?: number },
   price: number,
   toString?: boolean

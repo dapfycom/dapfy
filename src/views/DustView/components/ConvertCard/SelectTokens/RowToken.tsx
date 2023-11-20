@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { IElrondAccountToken } from "@/types/elrond.interface";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { maxAllowedTokensCount } from "@/views/DustView/lib/contants";
@@ -65,7 +65,7 @@ const RowToken = ({ token, checked }: IProps) => {
                 <p>{formatTokenI(token.identifier)}</p>
               </div>
               <div className="flex text-muted-foreground text-sm">
-                ≈ ${formatBalanceDolar(token, token?.price || 0)}
+                ≈ ${formatBalanceDollar(token, token?.price || 0)}
               </div>
             </div>
           </div>

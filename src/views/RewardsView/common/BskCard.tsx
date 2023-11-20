@@ -6,7 +6,7 @@ import { routeNames } from "@/config/routes";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import { ArrowLeftRight } from "lucide-react";
 import Link from "next/link";
@@ -30,7 +30,7 @@ const BskCard = () => {
           {formatBalance(accountToken)} BSK
         </div>
         <p className="text-xs text-muted-foreground">
-          ≈ ${formatBalanceDolar(accountToken, accountToken?.price || 0)}
+          ≈ ${formatBalanceDollar(accountToken, accountToken?.price || 0)}
         </p>
       </CardContent>
     </Card>

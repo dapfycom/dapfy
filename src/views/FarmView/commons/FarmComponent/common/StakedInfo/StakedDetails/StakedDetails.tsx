@@ -3,7 +3,7 @@ import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import {
   useGetBskRewards,
@@ -73,7 +73,7 @@ const StakedDetail = ({
         {withPrice && price && (
           <p className="text-sm">
             ≈ $
-            {formatBalanceDolar({ balance: value, decimals: decimals }, price)}
+            {formatBalanceDollar({ balance: value, decimals: decimals }, price)}
           </p>
         )}
       </div>
