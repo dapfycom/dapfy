@@ -22,6 +22,11 @@ interface IProps {
   onClose: () => void;
 }
 
+const minAmounts = {
+  "USDC" : 10,
+  "EGLD":1
+}
+
 const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { hatomFarm } = useContext(FarmContext);
   const [sessionId, setSessionId] = useState<string | null>("");
@@ -35,7 +40,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   const stakeSchema = yup.object({
     amount: yup
       .number()
-      .min(1.00001, `The minimum amount is more than 1 ${stakedToken?.ticker}`),
+      .min((stakedToken?.ticker === "EGLD" || stakedToken?.ticker === "USDC" ? minAmounts[stakedToken?.ticker]: 0) + 0.00001, `The minimum amount is more than ${stakedToken?.ticker === "EGLD" || stakedToken?.ticker === "USDC" ? minAmounts[stakedToken?.ticker]: 0} ${stakedToken?.ticker}`),
   });
 
   const onSuccess = () => {
