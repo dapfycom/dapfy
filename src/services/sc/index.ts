@@ -6,7 +6,7 @@ import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
 import { SmartContractInteraction } from "./calls/transaction";
-
+import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json"
 export { provider } from "./provider";
 export const EGLD_VAL = Math.pow(10, 18);
 
@@ -20,7 +20,8 @@ export type WspTypes =
   | "flipWsp"
   | "dustWsp"
   | "hatomParentWsp"
-  | "aggregatorWsp";
+  | "aggregatorWsp"
+  | "ashSwapFarmWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -83,6 +84,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = aggregatorAbiUrl;
       implementsInterfaces = "AggregatorContract";
       break;
+    case "ashSwapFarmWsp":
+      simpleAddress = selectedNetwork.scAddress.ashSwapFarm;
+      address = new Address(simpleAddress);
+      abiUrl = ashSwapFarmAbiUrl;
+      implementsInterfaces = "FarmClickContract";
+      break;
     default:
       break;
   }
@@ -126,6 +133,10 @@ export const getSmartContractInteraction = (
     aggregatorWsp: new SmartContractInteraction(
       getInterface("aggregatorWsp").simpleAddress,
       AbiRegistry.create(getInterface("aggregatorWsp").abiUrl)
+    ),
+    ashSwapFarmWsp: new SmartContractInteraction(
+      getInterface("ashSwapFarmWsp").simpleAddress,
+      AbiRegistry.create(getInterface("ashSwapFarmWsp").abiUrl)
     ),
   };
 

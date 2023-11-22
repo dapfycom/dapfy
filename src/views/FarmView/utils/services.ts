@@ -1,5 +1,5 @@
 import { getSmartContractInteraction } from "@/services/sc";
-import { scQueryByFieldsDefinitions } from "@/services/sc/queries";
+import { scQuery, scQueryByFieldsDefinitions } from "@/services/sc/queries";
 import { IElrondToken } from "@/types/elrond.interface";
 import { IFarmInfo, IUserFarmInfo } from "@/types/farm.interface";
 import { setElrondBalance } from "@/utils/functions/formatBalance";
@@ -169,3 +169,16 @@ export const fetchFarmInfo = async () => {
 
   return data;
 };
+
+/* New data  */
+
+export const fetchAshSwapFarms =async ()=>{
+  const res: any = await scQueryByFieldsDefinitions("ashSwapFarmWsp", "getFarms");
+
+  // const { firstValue } = res;
+  // const data = firstValue?.valueOf();
+
+  console.log("data",{res});
+  
+  return res.response;
+}

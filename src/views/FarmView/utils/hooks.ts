@@ -3,7 +3,8 @@ import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import BigNumber from "bignumber.js";
 import useSwr from "swr";
 import { calculateFarmReward } from "./functions";
-import { fetchFarmInfo, fetchUserFarmInfo } from "./services";
+import { fetchAshSwapFarms, fetchFarmInfo, fetchUserFarmInfo } from "./services";
+import { fetchScSimpleData } from "@/services/sc/queries";
 export const useGetFarmUserInfo = () => {
   const address = useAppSelector(selectUserAddress);
   const { data, isLoading, error } = useSwr(
@@ -94,3 +95,22 @@ export const useNFTsStoped = () => {
     isNFTsStoped: isNFTsStoped,
   };
 };
+
+
+// new 
+
+export const useGetAshSwapFarms = ()=>{
+  const { data, isLoading, error } = useSwr(
+    "ashSwapFarmWsp:getFarms",
+    fetchScSimpleData
+  );
+
+  console.log( "useGetAshSwapFarms",data, isLoading, error);
+  
+
+  return {
+    farms: data || [],
+    isLoading,
+    error,
+  };
+}

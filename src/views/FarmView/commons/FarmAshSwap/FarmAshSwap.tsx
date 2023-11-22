@@ -8,19 +8,22 @@ import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
-import { useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
+import { useGetAshSwapFarms, useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
 import Link from "next/link";
 import FarmInfo from "./common/FarmInfo/FarmInfo";
 import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
 import StakedInfo from "./common/StakedInfo/StakedInfo";
-const FarmComponent = () => {
+const FarmAshSwap = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { elrondToken } = useGetElrondToken(selectedNetwork.tokensID.bskwegld);
   const { data: farmInfo } = useGetFarmsInfo();
   const [price] = useGetTokenPrice(selectedNetwork.tokensID.bskwegld);
 
+
+  // new data
+  const {  farms } = useGetAshSwapFarms();
   return (
-    <>
+    <div>
       <Card className="w-full mt-10 px-4">
         <CardContent className="space-y-2 pt-6">
           <div
@@ -55,21 +58,10 @@ const FarmComponent = () => {
           <StakedInfo />
         </Collapse>
       </Card>
-      
 
-      {/* <p className="mt-20">
-        Don&apos;t have any LP tokens? Buy LP{" "}
-        <Link
-          href={"https://xexchange.com/swap"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-700"
-        >
-          here
-        </Link>
-      </p> */}
-    </>
+    </div>
+
   );
 };
 
-export default FarmComponent;
+export default FarmAshSwap;

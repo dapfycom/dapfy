@@ -45,6 +45,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
 
   const onSuccess = () => {
     onClose();
+  
   };
 
   useTrackTransactionStatus({
