@@ -12,18 +12,19 @@ import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
-import { stakeLP } from "@/views/FarmView/utils/services";
+import { stakeLP } from "@/views/FarmView/commons/FarmAshSwap/utils/services";
 import { useFormik } from "formik";
+import { useContext } from "react";
 import * as yup from "yup";
+import { AshFarmContext } from "../../FarmAshSwap";
+import { formatTokenI } from "@/utils/functions/tokens";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 const StakeModal = ({ isOpen, onClose }: IProps) => {
-  const { elrondToken: stakedToken, isLoading } = useGetElrondToken(
-    selectedNetwork.tokensID.bskwegld
-  );
+  const { farm } = useContext(AshFarmContext);
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.bskwegld
   );
@@ -44,7 +45,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     },
     onSubmit: (values) => {
       let amount = values.amount;
-      stakeLP(amount, stakedToken);
+      // stakeLP(amount, stakedToken);
     },
     validationSchema: stakeSchema,
   });
@@ -56,7 +57,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     );
     formik.setFieldValue("amount", value.toString());
   };
-
+  if (!farm) return null;
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
@@ -64,8 +65,11 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
           <DialogTitle>
             {" "}
             <div className="flex items-center gap-3">
-              <LpTokenImageV2 lpToken={stakedToken} size={25} />
-              <h3>Stake in BSK-EGLD farm</h3>
+              <LpTokenImageV2 lpToken={userStakedToken} size={25} />
+              <h3>
+                Stake in {formatTokenI(farm.first_token_id)}-
+                {formatTokenI(farm.second_token_id)} farm
+              </h3>
             </div>
           </DialogTitle>
         </DialogHeader>
@@ -98,60 +102,6 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
         </form>
       </DialogContent>
     </Dialog>
-    // <MyModal isOpen={isOpen} onClose={onClose} size="2xl" py={6}>
-    //   {isLoading ? (
-    //     <Spinner />
-    //   ) : (
-    //     <form onSubmit={formik.handleSubmit}>
-    //       <ModalHeader>
-    //         <Flex alignItems={"center"} gap={3}>
-    //           <LpTokenImageV2 lpToken={stakedToken} size={35} />
-    //           <Heading fontSize={"lg"}>Stake in BSK-EGLD farm</Heading>
-    //         </Flex>
-    //       </ModalHeader>
-    //       <ModalBody>
-    //         <InputGroup size={"lg"}>
-    //           <Input
-    //             name="amount"
-    //             type={"number"}
-    //             placeholder="Amount"
-    //             fontSize={"sm"}
-    //             onChange={formik.handleChange}
-    //             value={formik.values.amount}
-    //             isInvalid={
-    //               formik.touched.amount && Boolean(formik.errors.amount)
-    //             }
-    //           />
-    //           <InputRightElement
-    //             pointerEvents="none"
-    //             children={
-    //               <Flex pt={2}>
-    //                 <LpTokenImageV2 lpToken={stakedToken} size={20} />
-    //               </Flex>
-    //             }
-    //           />
-    //         </InputGroup>
-    //         <Flex justifyContent="space-between" mt={3} fontSize={"xs"}>
-    //           <Text color="tomato">{formik.errors.amount}</Text>
-    //           <Text onClick={handleMax} cursor="pointer">
-    //             Balance: {formatBalance(userStakedToken)}
-    //           </Text>
-    //         </Flex>
-    //       </ModalBody>
-
-    //       <ModalFooter>
-    //         <Flex w="full" gap={4}>
-    //           <ActionButton flex={1} bg="dark.500" onClick={onClose}>
-    //             Cancel
-    //           </ActionButton>
-    //           <ActionButton flex={1} type="submit">
-    //             Stake
-    //           </ActionButton>
-    //         </Flex>
-    //       </ModalFooter>
-    //     </form>
-    //   )}
-    // </MyModal>
   );
 };
 

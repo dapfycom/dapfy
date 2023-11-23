@@ -8,59 +8,47 @@ import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
-import { useGetAshSwapFarms, useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
+import {
+  useGetAshSwapFarms,
+  useGetFarmsInfo,
+} from "@/views/FarmView/commons/FarmAshSwap/utils/hooks";
 import Link from "next/link";
 import FarmInfo from "./common/FarmInfo/FarmInfo";
 import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
 import StakedInfo from "./common/StakedInfo/StakedInfo";
+import { createContext } from "react";
+import { IAshFarm } from "@/types/farm.interface";
+import FarmItem from "./FarmItem";
+
+interface IAshFarmContext {
+  farm?: IAshFarm;
+}
+
+export const AshFarmContext = createContext<IAshFarmContext>({
+  farm: undefined,
+});
+
 const FarmAshSwap = () => {
-  const { isOpen, onToggle } = useDisclosure();
-  const { elrondToken } = useGetElrondToken(selectedNetwork.tokensID.bskwegld);
-  const { data: farmInfo } = useGetFarmsInfo();
-  const [price] = useGetTokenPrice(selectedNetwork.tokensID.bskwegld);
-
-
   // new data
-  const {  farms } = useGetAshSwapFarms();
+  const { farms } = useGetAshSwapFarms();
+
   return (
     <div>
-      <Card className="w-full mt-10 px-4">
-        <CardContent className="space-y-2 pt-6">
-          <div
-            className="flex justify-between items-center cursor-pointer flex-col sm:flex-row"
-            onClick={onToggle}
+      {farms.map((f) => {
+        console.log("f", f);
+
+        return (
+          <AshFarmContext.Provider
+            key={f.farm_click_id}
+            value={{
+              farm: f,
+            }}
           >
-            <div className="flex items-center gap-4">
-              <LpTokenImageV2 lpToken={elrondToken} size={40} />
-              {farmInfo && (
-                <div className="flex flex-col ">
-                  <p className="whitespace-nowrap mb-2">BSK-EGLD</p>
-                  <p className="text-[12px] text-muted-foreground">
-                    $
-                    {formatBalanceDollar(
-                      { balance: farmInfo.stakedLp, decimals: 18 },
-                      price,
-                      true
-                    )}
-                  </p>
-                </div>
-              )}
-            </div>
-            <div className="flex items-center gap-7 flex-col sm:flex-row flex-1 justify-end">
-              <FarmInfo />
-              <FarmMainButtons isOpen={isOpen} />
-            </div>
-          </div>
-        </CardContent>
-        {isOpen && <Divider className="mb-4" />}
-
-        <Collapse isOpen={isOpen}>
-          <StakedInfo />
-        </Collapse>
-      </Card>
-
+            <FarmItem />
+          </AshFarmContext.Provider>
+        );
+      })}
     </div>
-
   );
 };
 

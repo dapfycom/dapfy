@@ -3,6 +3,9 @@ import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import WithdrawModal from "../Modals/WithdrawModal";
 import StakedDetails from "./StakedDetails/StakedDetails";
+import { withdraw } from "../../utils/services";
+import { useContext } from "react";
+import { AshFarmContext } from "../../FarmAshSwap";
 
 const StakedInfo = () => {
   const {
@@ -11,11 +14,12 @@ const StakedInfo = () => {
     onOpen: onOpenHarvest,
   } = useDisclosure();
   const { isLoggedIn } = useAuthentication();
+  const { farm } = useContext(AshFarmContext);
 
+  if (!farm) return null;
   const handleHarvest = (e: any) => {
     e.stopPropagation();
-    onCloseHarvest();
-    onOpenHarvest();
+    withdraw(farm?.farm_click_id);
   };
   return (
     <div className="flex w-full px-7 py- gap-10 flex-col md:flex-row pb-4 sm:pb-0">

@@ -1,7 +1,16 @@
 import { getSmartContractInteraction } from "@/services/sc";
-import { scQueryByFieldsDefinitions } from "@/services/sc/queries";
+import {
+  fetchScSimpleData,
+  scQuery,
+  scQueryByFieldsDefinitions,
+} from "@/services/sc/queries";
 import { IElrondToken } from "@/types/elrond.interface";
-import { IFarmInfo, IUserFarmInfo } from "@/types/farm.interface";
+import {
+  IAshFarm,
+  IAshFarmScResponse,
+  IFarmInfo,
+  IUserFarmInfo,
+} from "@/types/farm.interface";
 import { setElrondBalance } from "@/utils/functions/formatBalance";
 import {
   Address,
@@ -10,7 +19,13 @@ import {
   List,
   ListType,
   U64Type,
+  BigUIntType,
+  BinaryCodec,
+  FieldDefinition,
+  StructType,
   U64Value,
+  AddressType,
+  BytesType,
 } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 import { getFarmNftIdentifier } from "./functions";
@@ -54,13 +69,6 @@ export const stop = (lpAmount: string | number, nonces: number[]) => {
   //   50000000
   // );
 };
-export const withdraw = () => {
-  getSmartContractInteraction("bskFarmWsp").scCall({
-    functionName: "withdraw",
-    gasL: 50000000,
-  });
-  // scCall("bskFarmWsp", "withdraw", [], 50000000);
-};
 
 //queries
 export const fetchUserFarmInfo = async ([key, address]: [string, string]) => {
@@ -92,7 +100,6 @@ export const fetchUserFarmInfo = async ([key, address]: [string, string]) => {
     lock: new BigNumber(0),
   };
 
-  // @ts-ignore
   parsed.forEach((item, index) => {
     scdata[dataFields[index][0]] = item.valueOf();
   });
@@ -148,7 +155,6 @@ export const fetchFarmInfo = async () => {
     block: "0",
   };
 
-  // @ts-ignore
   parsed.forEach((item, index) => {
     const value = item.valueOf();
 
@@ -170,4 +176,44 @@ export const fetchFarmInfo = async () => {
   });
 
   return data;
+};
+
+/* New data  */
+// Calls
+export const harvest = () => {};
+
+export const withdraw = (farmClick: number) => {
+  getSmartContractInteraction("ashSwapFarmWsp").scCall({
+    functionName: "withdraw",
+    arg: [new BigUIntValue(new BigNumber(farmClick))],
+  });
+};
+
+// Queries
+export const fetchAshSwapFarms = async (
+  scInfo: string
+): Promise<IAshFarm[]> => {
+  const data = await fetchScSimpleData<IAshFarmScResponse[]>(scInfo);
+
+  const farms: IAshFarm[] = data.map((f) => {
+    const farm: IAshFarm = {
+      farm_address: f.farm_address.bech32(),
+      farm_click_id: f.farm_click_id.toNumber(),
+      farm_token: f.farm_token,
+      farm_token_nonce: f.farm_token_nonce.toNumber(),
+      first_token_id: f.first_token_id,
+      lp_token_id: f.lp_token_id,
+      pool_address: f.pool_address.bech32(),
+      reward_token: f.reward_token,
+      second_token_id: f.second_token_id,
+      total_deposited_amount: f.total_deposited_amount.toString(),
+      total_deposited_farm_amount: f.total_deposited_farm_amount.toString(),
+      total_deposited_lp_amount: f.total_deposited_lp_amount.toString(),
+      total_farm_rewards: f.total_farm_rewards.toString(),
+      total_weighted_block: f.total_weighted_block.toString(),
+    };
+    return farm;
+  });
+
+  return farms;
 };

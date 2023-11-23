@@ -9,11 +9,13 @@ import {
   useGetFarmUserInfo,
 } from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
+import { useContext } from "react";
+import { AshFarmContext } from "../../FarmAshSwap";
+import { formatTokenI } from "@/utils/functions/tokens";
 
 const FarmInfo = () => {
+  const { farm } = useContext(AshFarmContext);
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
-
-  const { earnedBsk } = useGetBskRewards();
 
   if (isLoading) {
     return (
@@ -22,38 +24,42 @@ const FarmInfo = () => {
       </div>
     );
   }
-
+  if (!farm) return null;
   return (
     <div
       className={`flex gap-7  flex-col lg:flex-row flex-1 ${
         userFarmInfo ? "justify-end" : "justify-center"
       } `}
     >
-      {userFarmInfo && (
+      {farm && (
         <>
           <FarmDetail
-            title={"Staked LP"}
-            value={userFarmInfo?.lpActive}
+            title={`Staked ${formatTokenI(farm.first_token_id)}`}
+            value={farm.total_deposited_amount}
             decimals={18}
-            tokenI={selectedNetwork.tokensID.bskwegld}
+            tokenI={farm.first_token_id}
           />
           <FarmDetail
+            title={`Staked ${formatTokenI(farm.second_token_id)}`}
+            value={farm.total_deposited_farm_amount}
+            decimals={18}
+            tokenI={farm.second_token_id}
+          />
+
+          <FarmDetail
+            title={`Staked ${formatTokenI(farm.lp_token_id)}`}
+            value={farm.total_deposited_lp_amount}
+            decimals={18}
+            tokenI={farm.lp_token_id}
+          />
+          {/* <FarmDetail
             title="Earned BSK"
             value={earnedBsk}
             decimals={16}
             tokenI={selectedNetwork.tokensID.bsk}
-          />
+          /> */}
         </>
       )}
-
-      <div className="flex flex-col">
-        <p className="whitespace-nowrap mb-2 " color="white">
-          APR
-        </p>
-        <p className="text-[12px] whitespace-nowrap text-muted-foreground">
-          100 %
-        </p>
-      </div>
     </div>
   );
 };

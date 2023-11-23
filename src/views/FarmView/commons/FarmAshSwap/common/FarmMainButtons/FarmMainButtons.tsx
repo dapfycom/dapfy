@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
-import { withdraw } from "@/views/FarmView/utils/services";
+import { harvest } from "@/views/FarmView/commons/FarmAshSwap/utils/services";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { MouseEvent } from "react";
 import StakeModal from "../Modals/StakeModal";
@@ -26,16 +26,13 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
   const handleHarvest = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    withdraw();
+    harvest();
   };
 
   return (
     <div className="flex justify-center items-center gap-4 flex-col lg:flex-row">
       {isLoggedIn ? (
         <>
-          <Button className="text-sm w-full lg:w-auto" onClick={handleHarvest}>
-            Harvest
-          </Button>
           <Button className="text-sm w-full lg:w-auto" onClick={handleStakeLp}>
             Stake LP
           </Button>

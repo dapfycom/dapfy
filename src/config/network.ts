@@ -73,7 +73,7 @@ const networkConfig = {
       aggregator:
         "erd1qqqqqqqqqqqqqpgq5ewyag0rz7hn4yecykckdfpyamw4v8pxy26s33xrf4",
 
-        ashSwapFarm:""
+      ashSwapFarm: "",
     },
   },
   devnet: {
@@ -121,7 +121,8 @@ const networkConfig = {
         "erd1qqqqqqqqqqqqqpgq5fldcnkg7j5333h7u4n8xhewt0pjj76qvr2s0lcyyl",
       aggregator:
         "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq",
-        ashSwapFarm:"erd1qqqqqqqqqqqqqpgqsaczyw6tqcnz8nn9nxwx7ttjwzsp72jyvr2s6dkwj3"
+      ashSwapFarm:
+        "erd1qqqqqqqqqqqqqpgqct2vdncdw5jrnw9t33k0z0qs9cjcp4y7vr2szde39g",
     },
   },
   testnet: {
