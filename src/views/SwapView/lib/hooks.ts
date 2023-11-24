@@ -2,7 +2,7 @@ import useGetMaiarPairs from "@/hooks/useGetMaiarPairs";
 import useGetToken1AndToken2OfLpToken from "@/hooks/useGetToken1AndToken2OfLpToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { IElrondToken } from "@/types/elrond.interface";
-import { formatBalanceDolar } from "@/utils/functions/formatBalance";
+import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
 import { useEffect } from "react";
 import useSWR from "swr";
@@ -87,7 +87,7 @@ export const useSwapLpRate = () => {
     if (pair && data) {
       const swapInfo = data[0];
       const token1TokenDollarAmount = new BigNumber(
-        formatBalanceDolar(
+        formatBalanceDollar(
           { balance: swapInfo.token1Amount, decimals: 0 },
           pair.baseId === swapInfo.token1 ? pair.basePrice : pair.quotePrice,
           false

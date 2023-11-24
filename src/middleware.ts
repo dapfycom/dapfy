@@ -35,6 +35,9 @@ export function middleware(request: NextRequest) {
   if (
     isPathOrSubpath(pathname, [
       "/manifest.json",
+      "/sitemap.xml",
+      "/feed.xml",
+      "/robots.txt",
       "/favicon.ico",
       "/images",
       "/blog",
@@ -42,7 +45,8 @@ export function middleware(request: NextRequest) {
       "/alice.pem",
       "/dapfy-assets.zip",
       "/.well-known",
-
+      "/unsubscribe",
+      "/admin",
       // Your other files in `public`
     ])
   ) {

@@ -10,7 +10,7 @@ import {
   IMoneyMarketDeposit,
   IMoneyMarketReward,
 } from "@/types/hatom.interface";
-import { formatBalanceDolar } from "@/utils/functions/formatBalance";
+import { formatBalanceDollar  } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import Image from "next/image";
 import React from "react";
@@ -85,7 +85,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
               <p className="whitespace-nowrap mb-2">Total Value Locked</p>
               <p className="text-[12px] text-muted-foreground">
                 $
-                {formatBalanceDolar(
+                {formatBalanceDollar(
                   {
                     balance: hatomFarm.tvl,
                     decimals: elrondToken?.decimals,

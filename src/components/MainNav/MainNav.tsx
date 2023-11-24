@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { mainSiteRoutes } from "@/config/routes";
+import useAuthentication from "@/hooks/useAuthentication";
 import { cn } from "@/lib/utils";
 import { getBasePath } from "@/utils/functions/urls";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
@@ -16,6 +17,7 @@ const MainNav: React.FC<MainNavProps> = ({
   ...props
 }: React.HTMLAttributes<HTMLElement>) => {
   const pathname = usePathname();
+  const { isAdmin } = useAuthentication();
 
   const navRoutes = mainSiteRoutes.filter((route) => Boolean(route.path));
   const routes = navRoutes.map((route) => ({
@@ -23,6 +25,7 @@ const MainNav: React.FC<MainNavProps> = ({
     label: route.title,
     active: getBasePath(pathname) === route.path,
     soon: route.soon,
+    ...route,
     // isExternal: route.isExternal,
   }));
 
@@ -33,6 +36,10 @@ const MainNav: React.FC<MainNavProps> = ({
     >
       {routes.map((route) => {
         if (!route.href) {
+          return null;
+        }
+
+        if (!isAdmin && route.onlyAdmin) {
           return null;
         }
 

@@ -1,6 +1,6 @@
 "use client";
 import { externnalLinks, routeNames } from "@/config/routes";
-import { Dot, Facebook, Instagram, Monitor, Moon, Sun } from "lucide-react";
+import { Dot, Facebook, Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -207,15 +207,7 @@ const Footer = () => {
                         />
                       </svg>
                     </Link>
-                    {/* Instagram */}
-                    <Link
-                      href={externnalLinks.instagram}
-                      className=" hover:text-primary transition duration-300"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Instagram size={"20px"} className="hover:scale-110" />
-                    </Link>
+
                     {/* Facebook */}
                     <Link
                       href={externnalLinks.facebook}

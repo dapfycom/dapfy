@@ -3,7 +3,7 @@ import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 import { calcStakedAmount } from "@/views/DefiView/utils/functions";
 import { Loader2 } from "lucide-react";
@@ -86,7 +86,7 @@ export const StakedDetail = ({
         {withPrice && price && (
           <p className="text-sm">
             ≈ $
-            {formatBalanceDolar({ balance: value, decimals: decimals }, price)}
+            {formatBalanceDollar({ balance: value, decimals: decimals }, price)}
           </p>
         )}
       </div>

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["media.elrond.com", "placehold.co"],
+    domains: ["media.elrond.com", "placehold.co", "images.unsplash.com"],
   },
   transpilePackages: ["@multiversx/sdk-dapp"],
   webpack: (config) => {

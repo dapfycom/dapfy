@@ -86,9 +86,6 @@ export const KoalaWelcomeEmail = ({
           The Dapfy Team
         </Text>
         {/* <Hr style={hr} /> */}
-        <Text>
-          P.S. Don’t miss out – Follow us on X for the latest updates.
-        </Text>
         <Section
           style={{
             margin: "20px 0",
@@ -98,8 +95,8 @@ export const KoalaWelcomeEmail = ({
             src="https://www.dapfy.com/images/logo-text-white.png"
             alt="dapfy"
             style={{
-              width: "40px",
-              height: "40px",
+              width: "70px",
+              height: "auto",
               margin: "auto",
             }}
           />
@@ -130,14 +127,16 @@ export const KoalaWelcomeEmail = ({
           <Text
             style={{
               fontSize: "12px",
-              margin: "30px 0px",
             }}
           >
             You are receiving this email because you opted in via our website.
           </Text>
           <Text>Want to change how you receive these emails?</Text>
           <Text>
-            You can <Link href="http://dapfy.com/unsubscribe">unsubscribe</Link>{" "}
+            You can{" "}
+            <Link href={`https://www.dapfy.com/unsubscribe?email=${email}`}>
+              unsubscribe
+            </Link>{" "}
             any moment
           </Text>
           <Section
@@ -154,7 +153,7 @@ export const KoalaWelcomeEmail = ({
                   rel="noopener noreferrer"
                 >
                   <Img
-                    src="https://www.dapfy.com/images/telegram.svg"
+                    src="https://www.dapfy.com/images/telegram.png"
                     style={{
                       height: "27px",
                       width: "27px",
@@ -166,12 +165,12 @@ export const KoalaWelcomeEmail = ({
               <Column align="left">
                 <Link
                   style={footerLink}
-                  href={externnalLinks.telegram}
+                  href={externnalLinks.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Img
-                    src="https://www.dapfy.com/images/x.svg"
+                    src="https://www.dapfy.com/images/x.png"
                     style={{
                       height: "27px",
                       width: "27px",
@@ -199,7 +198,7 @@ const main = {
 
 const container = {
   margin: "0 auto",
-  padding: "20px 0 48px",
+  padding: "20px 20px 48px",
 };
 
 const logo = {

@@ -1,6 +1,5 @@
 import Realistic from "@/components/Conffeti/Realistic";
 import { Button } from "@/components/ui/button";
-import { selectedNetwork } from "@/config/network";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
 import {
@@ -24,15 +23,15 @@ const ConvertButton = () => {
 
   const onSuccess = () => {
     mutate();
-    if (toToken === selectedNetwork.tokensID.bsk) {
-      setconffeti(true);
-    }
+    setconffeti(true);
   };
   useTrackTransactionStatus({
     transactionId: sessionId,
     onSuccess,
   });
   const handleSubmit = async () => {
+    setconffeti(false);
+
     const slippage = 1;
 
     const bnAmountOut = new BigNumber(data?.amountOut || 0);
@@ -58,7 +57,6 @@ const ConvertButton = () => {
   return (
     <>
       {conffeti && <Realistic />}
-
       <Button className="w-full" onClick={handleSubmit}>
         Convert tokens
       </Button>

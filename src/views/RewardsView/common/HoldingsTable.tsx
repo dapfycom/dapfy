@@ -42,7 +42,7 @@ import { setIsWrapEgldOpen } from "@/redux/dapp/dapp-slice";
 import { IElrondAccountToken } from "@/types/elrond.interface";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
   formatPrecision,
 } from "@/utils/functions/formatBalance";
 import { orderBy } from "@/utils/functions/general";
@@ -162,7 +162,7 @@ export const columns: ColumnDef<IElrondAccountToken>[] = [
             </div>
             {token.price && (
               <p className="text-sm text-muted-foreground">
-                ≈ ${formatBalanceDolar(token, token.price)}
+                ≈ ${formatBalanceDollar(token, token.price)}
               </p>
             )}
           </div>
@@ -270,14 +270,14 @@ export function ContentTable() {
         //force price for usdt and busd
         const price = 1;
         return {
-          tokenBalance: formatBalanceDolar(token, price),
+          tokenBalance: formatBalanceDollar(token, price),
           ...token,
           price: price,
         };
       } else {
         return {
           tokenBalance: token.price
-            ? formatBalanceDolar(token, token.price)
+            ? formatBalanceDollar(token, token.price)
             : 0,
           ...token,
         };

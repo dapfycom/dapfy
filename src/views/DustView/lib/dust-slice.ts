@@ -92,6 +92,7 @@ export const dust = createSlice({
 export const selectConvertInfo = (state: AppState) => state.dust.convertInfo;
 
 export const selectToTokenDust = (state: AppState) => state.dust.toToken;
+
 export const selectDustSlippage = (state: AppState) => state.dust.slipage;
 
 // Action creators are generated for each case reducer function

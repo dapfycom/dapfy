@@ -7,7 +7,7 @@ import { selectedNetwork } from "@/config/network";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
-import { formatBalanceDolar } from "@/utils/functions/formatBalance";
+import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import { useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
 import Link from "next/link";
 import FarmInfo from "./common/FarmInfo/FarmInfo";
@@ -34,7 +34,7 @@ const FarmComponent = () => {
                   <p className="whitespace-nowrap mb-2">BSK-EGLD</p>
                   <p className="text-[12px] text-muted-foreground">
                     $
-                    {formatBalanceDolar(
+                    {formatBalanceDollar(
                       { balance: farmInfo.stakedLp, decimals: 18 },
                       price,
                       true

@@ -2,7 +2,7 @@ import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
-  formatBalanceDolar,
+  formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
 
 import useGetElrondToken from "@/hooks/useGetElrondToken";
@@ -96,7 +96,7 @@ const FarmDetail = ({ title, value, decimals, tokenI }: FarmDetailProps) => {
         <div>{formatBalance({ balance: value, decimals: decimals })}</div>
         <div>
           ≈ ${" "}
-          {formatBalanceDolar(
+          {formatBalanceDollar(
             { balance: value, decimals: decimals },
             price,
             true

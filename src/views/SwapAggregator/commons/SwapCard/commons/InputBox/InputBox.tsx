@@ -19,7 +19,11 @@ import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
 import { IElrondAccountToken, IElrondToken } from "@/types/elrond.interface";
-import { formatBalance } from "@/utils/functions/formatBalance";
+import {
+  formatBalance,
+  formatBalanceDollar,
+  setElrondBalance,
+} from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useGetSwapbleAggregatorTokens } from "@/views/SwapAggregator/lib/hooks";
 import { ChevronDownIcon, Loader, Loader2Icon } from "lucide-react";
@@ -59,6 +63,9 @@ const InputBox = ({
     useGetMultipleElrondTokens(tokensToSwap);
 
   const readOnly = !Boolean(onMax);
+
+  console.log("value", value);
+
   return (
     <>
       <div className="flex flex-col border w-full py-5 pb-4 px-5 rounded-lg">
@@ -151,7 +158,18 @@ const InputBox = ({
         </div>
 
         {accountToken && (
-          <div className="flex justify-end mt-3 text-muted-foreground">
+          <div className="flex justify-between mt-3 text-muted-foreground">
+            <div className="px-[12px] -translate-y-3 text-sm">
+              ≈ $
+              {formatBalanceDollar(
+                {
+                  balance: setElrondBalance(value, elrondToken?.decimals),
+                  decimals: elrondToken?.decimals,
+                },
+                elrondToken?.price
+              )}
+            </div>
+
             <div className="flex gap-3 items-center">
               {!readOnly && (
                 <Button
