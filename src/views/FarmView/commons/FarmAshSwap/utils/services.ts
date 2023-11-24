@@ -189,6 +189,15 @@ export const withdraw = (farmClick: number) => {
   });
 };
 
+export const stake = (amount: string, farmClick: number) => {
+  getSmartContractInteraction("ashSwapFarmWsp").EGLDPayment({
+    functionName: "deposit",
+    arg: [new BigUIntValue(new BigNumber(farmClick))],
+    value: amount,
+    gasL: 200_000_000,
+  });
+};
+
 // Queries
 export const fetchAshSwapFarms = async (
   scInfo: string

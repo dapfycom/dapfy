@@ -12,7 +12,10 @@ import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
-import { stakeLP } from "@/views/FarmView/commons/FarmAshSwap/utils/services";
+import {
+  stake,
+  stakeLP,
+} from "@/views/FarmView/commons/FarmAshSwap/utils/services";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
@@ -26,18 +29,9 @@ interface IProps {
 const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { farm } = useContext(AshFarmContext);
   const { accountToken: userStakedToken } = useGetAccountToken(
-    selectedNetwork.tokensID.bskwegld
+    selectedNetwork.tokensID.egld
   );
-  const stakeSchema = yup.object({
-    amount: yup
-      .number()
-      .required("This field is required")
-      .min(0, "Negative number")
-      .max(
-        formatBalance(userStakedToken, true, 18) as number,
-        "Insufficient funds"
-      ),
-  });
+  console.log("farm", farm);
 
   const formik = useFormik({
     initialValues: {
@@ -45,9 +39,11 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     },
     onSubmit: (values) => {
       let amount = values.amount;
-      // stakeLP(amount, stakedToken);
+      if (farm?.farm_click_id) {
+        stake(amount, farm.farm_click_id);
+      }
     },
-    validationSchema: stakeSchema,
+    // validationSchema: stakeSchema,
   });
   const handleMax = () => {
     const value = getRealBalance(
@@ -91,7 +87,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
             <div className="flex justify-between mt-3 text-xs mb-2">
               <p className="text-red-700">{formik.errors.amount}</p>
               <p className="cursor-pointer" onClick={handleMax}>
-                Balance: {formatBalance(userStakedToken)}
+                Balance: {formatBalance(userStakedToken)} EGLD
               </p>
             </div>
           </div>
