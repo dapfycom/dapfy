@@ -63,6 +63,7 @@ export const fetchAmountOut = async (
     amountOut: new BigNumber(0),
   };
 
+  // @ts-ignore
   parsed.forEach((item, index) => {
     scdata[dataFields[index][0]] = item.valueOf();
   });

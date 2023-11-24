@@ -18,7 +18,7 @@ import {
   useLpStoped,
   useNFTsStoped,
 } from "@/views/FarmView/utils/hooks";
-import { stop, harvest } from "@/views/FarmView/utils/services";
+import { stop } from "@/views/FarmView/utils/services";
 import { useFormik } from "formik";
 import { AlertCircle } from "lucide-react";
 import * as yup from "yup";
@@ -172,7 +172,6 @@ const WithdrawModal = ({ isOpen, onClose }: IProps) => {
                       className="w-full"
                       onClick={() => {
                         onClose();
-                        harvest();
                       }}
                       disabled={isLpStoped && isNFTsStoped}
                     >

@@ -100,6 +100,7 @@ export const fetchUserFarmInfo = async ([key, address]: [string, string]) => {
     lock: new BigNumber(0),
   };
 
+  // @ts-ignore
   parsed.forEach((item, index) => {
     scdata[dataFields[index][0]] = item.valueOf();
   });
@@ -155,6 +156,7 @@ export const fetchFarmInfo = async () => {
     block: "0",
   };
 
+  // @ts-ignore
   parsed.forEach((item, index) => {
     const value = item.valueOf();
 
