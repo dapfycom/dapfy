@@ -27,7 +27,7 @@ const LpTokenImage = ({ lpToken }: IProps) => {
 export default LpTokenImage;
 
 interface ILpTokenImageV2Props {
-  lpToken?: IElrondToken;
+  lpToken?: { identifier: string };
   size: number;
 }
 export const LpTokenImageV2 = ({ lpToken, size }: ILpTokenImageV2Props) => {

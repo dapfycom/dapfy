@@ -1,3 +1,4 @@
+import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,72 +8,42 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
-import { deposit } from "@/views/DefiView/utils/services";
-import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
+import {
+  stake,
+  stakeLP,
+} from "@/views/FarmView/commons/FarmAshSwap/utils/services";
 import { useFormik } from "formik";
-import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import * as yup from "yup";
-import { FarmContext } from "../../DefiComponent";
+import { AshFarmContext } from "../../FarmAshSwap";
+import { formatTokenI } from "@/utils/functions/tokens";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const minAmounts = {
-  "USDC" : 10,
-  "EGLD":1
-}
-
 const StakeModal = ({ isOpen, onClose }: IProps) => {
-  const { hatomFarm } = useContext(FarmContext);
-  const [sessionId, setSessionId] = useState<string | null>("");
-
-  const { elrondToken: stakedToken } = useGetElrondToken(
-    hatomFarm?.moneyMarket.tokenI || null
-  );
+  const { farm } = useContext(AshFarmContext);
   const { accountToken: userStakedToken } = useGetAccountToken(
-    hatomFarm?.moneyMarket.tokenI || ""
+    selectedNetwork.tokensID.egld
   );
-  const stakeSchema = yup.object({
-    amount: yup
-      .number()
-      .min((stakedToken?.ticker === "EGLD" || stakedToken?.ticker === "USDC" ? minAmounts[stakedToken?.ticker]: 0) + 0.00001, `The minimum amount is more than ${stakedToken?.ticker === "EGLD" || stakedToken?.ticker === "USDC" ? minAmounts[stakedToken?.ticker]: 0} ${stakedToken?.ticker}`),
-  });
-
-  const onSuccess = () => {
-    onClose();
-  
-  };
-
-  useTrackTransactionStatus({
-    transactionId: sessionId,
-    onSuccess,
-    onFail: (transactionId: string | null, errorMessage?: string) => {
-      console.error("transactionId", transactionId);
-      console.error("errorMessage", errorMessage);
-    },
-  });
+  console.log("farm", farm);
 
   const formik = useFormik({
     initialValues: {
       amount: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       let amount = values.amount;
-      if (hatomFarm) {
-        const res = await deposit(
-          amount,
-          stakedToken,
-          hatomFarm?.moneyMarket.childScAddress
-        );
-        setSessionId(res?.sessionId);
+      if (farm?.farm_click_id) {
+        stake(amount, farm.farm_click_id);
       }
     },
-    validationSchema: stakeSchema,
+    // validationSchema: stakeSchema,
   });
   const handleMax = () => {
     const value = getRealBalance(
@@ -82,7 +53,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
     );
     formik.setFieldValue("amount", value.toString());
   };
-
+  if (!farm) return null;
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
@@ -90,15 +61,11 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
           <DialogTitle>
             {" "}
             <div className="flex items-center gap-3">
-              <div className="w-[35px] h-[35px]">
-                <Image
-                  src={"/images/hatom.png"}
-                  alt="hatom"
-                  width={35}
-                  height={35}
-                />{" "}
-              </div>
-              <h3>Stake {stakedToken?.ticker} on hatom protocol</h3>
+              <LpTokenImageV2 lpToken={userStakedToken} size={25} />
+              <h3>
+                Stake in {formatTokenI(farm.first_token_id)}-
+                {formatTokenI(farm.second_token_id)} farm
+              </h3>
             </div>
           </DialogTitle>
         </DialogHeader>
@@ -120,13 +87,13 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
             <div className="flex justify-between mt-3 text-xs mb-2">
               <p className="text-red-700">{formik.errors.amount}</p>
               <p className="cursor-pointer" onClick={handleMax}>
-                Balance: {formatBalance(userStakedToken)} {stakedToken?.ticker}
+                Balance: {formatBalance(userStakedToken)} EGLD
               </p>
             </div>
           </div>
 
           <DialogFooter>
-            <Button type="submit">Deposit</Button>
+            <Button type="submit">Stake</Button>
           </DialogFooter>
         </form>
       </DialogContent>

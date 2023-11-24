@@ -55,8 +55,9 @@ const FarmComponent = () => {
           <StakedInfo />
         </Collapse>
       </Card>
+      
 
-      <p className="mt-20">
+      {/* <p className="mt-20">
         Don&apos;t have any LP tokens? Buy LP{" "}
         <Link
           href={"https://xexchange.com/swap"}
@@ -66,7 +67,7 @@ const FarmComponent = () => {
         >
           here
         </Link>
-      </p>
+      </p> */}
     </>
   );
 };

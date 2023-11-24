@@ -12,35 +12,21 @@ import {
 } from "@multiversx/sdk-core/out";
 import { WspTypes, getInterface, provider } from "../index";
 
-// export const scQuery = async (
-//   workspace: WspTypes,
-//   funcName = "",
-//   args = [],
-//   endpointDef?: string
-// ) => {
-//   try {
-//     const { address, abiUrl, implementsInterfaces } = getInterface(workspace);
-//     const abiRegistry = await AbiRegistry.create(abiUrl);
-//     const abi = new SmartContractAbi(abiRegistry, [implementsInterfaces]);
-//     const contract = new SmartContract({
-//       address: address,
-//       abi: abi,
-//     });
 
-//     const query = contract.createQuery({
-//       func: new ContractFunction(funcName),
-//       args: args,
-//     });
-//     const queryResponse = await provider.queryContract(query);
-//     const endpointDefinition = contract.getEndpoint(endpointDef || funcName);
-//     const parser = new ResultsParser();
-//     const data = parser.parseQueryResponse(queryResponse, endpointDefinition);
+export const fetchScSimpleData = async <T>(scInfo:string) =>{
+  const scInfoArr = scInfo.split(":");
+  const scWsp   = scInfoArr[0] as WspTypes;
+  const funcName = scInfoArr[1];
 
-//     return data;
-//   } catch (error) {
-//     console.log(`query error for ${funcName}  : `, error);
-//   }
-// };
+  const res: any = await scQuery(scWsp, funcName);
+
+  const { firstValue } = res;
+  const data : T = firstValue?.valueOf();
+
+ return data
+
+}
+
 export const scQuery = async (
   workspace: WspTypes,
   funcName = "",
@@ -57,6 +43,11 @@ export const scQuery = async (
     let interaction = contract.methods[funcName](args);
     const query = interaction.check().buildQuery();
     const queryResponse = await provider.queryContract(query);
+    if(workspace === "ashSwapFarmWsp"){
+
+      console.log("endpoint", interaction.getEndpoint()	);
+    }
+    
     const data = new ResultsParser().parseQueryResponse(
       queryResponse,
       interaction.getEndpoint()
@@ -99,7 +90,7 @@ export const scQueryByFieldsDefinitions = async (
   workspace: WspTypes,
   funcName = "",
   args: any[] = [],
-  dataFields?: any
+  dataFields?: any[]
 ) => {
   const { address: scAddress, abiUrl } = getInterface(workspace);
   const abiRegistry = await AbiRegistry.create(abiUrl);
@@ -122,6 +113,9 @@ export const scQueryByFieldsDefinitions = async (
   const typeParser = new TypeExpressionParser();
   const typeMapper = new TypeMapper();
 
+  if(!dataFields){
+    return {response, queryResponse};
+  }
   const fieldDefinitions = dataFields.map(
     ([name, expression]: [string, string]) =>
       new EndpointParameterDefinition(

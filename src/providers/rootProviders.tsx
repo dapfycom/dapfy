@@ -1,5 +1,6 @@
 import ReduxProvider from "./redux/ReduxProvider";
 import SdkProvider from "./sdk-dapp/SdkProvider";
+import SwrProvider from "./swr/SwrProvider";
 import { ThemeProvider } from "./theme-provider/ThemeProvider";
 
 export default function RootProviders({
@@ -10,7 +11,9 @@ export default function RootProviders({
   return (
     <ReduxProvider>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        <SdkProvider>{children}</SdkProvider>
+        <SdkProvider>
+          <SwrProvider>{children}</SwrProvider>
+        </SdkProvider>
       </ThemeProvider>
     </ReduxProvider>
   );
