@@ -23,6 +23,7 @@ const useAuthentication = () => {
 
   return {
     isLoggedIn,
+    address: currentAddress,
     isAdmin:
       process.env.NODE_ENV !== "production" || admins?.includes(currentAddress),
     isLoginModal: isOpenLoginModal,

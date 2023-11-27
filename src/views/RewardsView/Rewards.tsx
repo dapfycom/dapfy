@@ -5,23 +5,28 @@ import { ContentTable } from "./common/HoldingsTable";
 import RewardsCard from "./common/RewardsCard";
 import XPaymentCard from "./common/XPaymentCard";
 import { useBindXUserWithDapfyUser } from "./lib/hooks";
+import LoginButton from "./common/LogginButton";
+import Participants from "./common/Participants";
+import AllTimeEarned from "./common/AllTimeEarned";
+import CollectedEgld from "./common/CollectedEgld";
+import EmailReports from "./common/EmailReports";
 
 const Rewards = () => {
   useBindXUserWithDapfyUser();
 
   return (
-    <Container className="mt-10 flex flex-col gap-10 max-w-[800px]">
+    <Container className="mt-10 flex flex-col gap-10 max-w-[800px] text-center">
       <DashboardHeading />
-      <div className="grid  gap-8 grid-cols-1 ">
-        <RewardsCard />
-        {/* <Cards /> */}
-        {/* <Settings /> */}
-      </div>
-      <div className="grid  gap-8 grid-cols-1 ">
-        <ContentTable />
-        <XPaymentCard />
-        {/* <ShowcaseNFTs /> */}
-      </div>
+
+      <LoginButton />
+
+      <Participants />
+
+      <AllTimeEarned />
+
+      <CollectedEgld />
+
+      <EmailReports />
     </Container>
   );
 };
