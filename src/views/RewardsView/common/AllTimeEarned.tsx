@@ -60,7 +60,7 @@ const AllTimeEarned = () => {
           </li>
           <li className="flex gap-3">
             <Circle className="text-green-500 " />
-            nteract with one of our useful DeFi tools <ArrowRight />
+            Interact with one of our useful DeFi tools <ArrowRight />
           </li>
         </ul>
       </div>
