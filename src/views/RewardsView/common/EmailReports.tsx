@@ -1,15 +1,22 @@
 import { Switch } from "@/components/ui/switch";
+import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { useFormik } from "formik";
 import { Trash2 } from "lucide-react";
 import React from "react";
 
 const EmailReports = () => {
+  const { isAuthenticated } = useXAuthentication();
+
   const formik = useFormik({
     initialValues: {
       email: "",
     },
     onSubmit: (values) => {},
   });
+
+  if (!isAuthenticated) {
+    return null;
+  }
   return (
     <div className="w-full text-left">
       <h4 className="text-2xl mb-2">Email reports</h4>

@@ -15,7 +15,11 @@ import React from "react";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
-  const { user } = useXAuthentication();
+  const { user, isAuthenticated } = useXAuthentication();
+
+  if (!isAuthenticated) {
+    return null;
+  }
   return (
     <div className="mt-8 mb-8">
       <h3 className="text-4xl text-orange-700 mb-2">All time Earned Rewards</h3>
