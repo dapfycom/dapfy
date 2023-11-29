@@ -14,3 +14,5 @@ export const HatomConfigs = {
     SEGLD: 1,
   },
 };
+
+export const hiddenPools = ["BUSD"];
