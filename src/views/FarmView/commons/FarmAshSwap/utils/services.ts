@@ -1,16 +1,6 @@
 import { getSmartContractInteraction } from "@/services/sc";
-import {
-  fetchScSimpleData,
-  scQuery,
-  scQueryByFieldsDefinitions,
-} from "@/services/sc/queries";
-import { IElrondToken } from "@/types/elrond.interface";
-import {
-  IAshFarm,
-  IAshFarmScResponse,
-  IFarmInfo,
-  IUserFarmInfo,
-} from "@/types/farm.interface";
+import { fetchScSimpleData } from "@/services/sc/queries";
+import { IAshFarm, IAshFarmScResponse } from "@/types/farm.interface";
 import { BigUIntValue } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 

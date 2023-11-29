@@ -1,11 +1,11 @@
 "use client";
-import { IAshFarm } from "@/types/farm.interface";
+import { IOnDexFarm } from "@/types/farm.interface";
 import { useGetAshSwapFarms } from "@/views/FarmView/commons/FarmOneDex/utils/hooks";
 import { createContext } from "react";
 import FarmItem from "./FarmItem";
 
 interface IAshFarmContext {
-  farm?: IAshFarm;
+  farm?: IOnDexFarm;
 }
 
 export const AshFarmContext = createContext<IAshFarmContext>({

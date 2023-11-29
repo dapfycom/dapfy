@@ -1,17 +1,13 @@
-import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
   formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
-import {
-  useGetBskRewards,
-  useGetFarmUserInfo,
-} from "@/views/FarmView/utils/hooks";
+import { formatTokenI } from "@/utils/functions/tokens";
+import { useGetFarmUserInfo } from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
 import { useContext } from "react";
 import { AshFarmContext } from "../../FarmOneDex";
-import { formatTokenI } from "@/utils/functions/tokens";
 
 const FarmInfo = () => {
   const { farm } = useContext(AshFarmContext);
@@ -41,7 +37,7 @@ const FarmInfo = () => {
           />
           <FarmDetail
             title={`Staked ${formatTokenI(farm.second_token_id)}`}
-            value={farm.total_deposited_farm_amount}
+            value={farm.total_deposited_amount}
             decimals={18}
             tokenI={farm.second_token_id}
           />

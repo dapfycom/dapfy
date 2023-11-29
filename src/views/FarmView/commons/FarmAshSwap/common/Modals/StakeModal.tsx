@@ -10,17 +10,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
-import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
-import {
-  stake,
-  stakeLP,
-} from "@/views/FarmView/commons/FarmAshSwap/utils/services";
+import { formatTokenI } from "@/utils/functions/tokens";
+import { stake } from "@/views/FarmView/commons/FarmAshSwap/utils/services";
 import { useFormik } from "formik";
 import { useContext } from "react";
-import * as yup from "yup";
 import { AshFarmContext } from "../../FarmAshSwap";
-import { formatTokenI } from "@/utils/functions/tokens";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
