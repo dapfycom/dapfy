@@ -62,7 +62,7 @@ export const KoalaWelcomeEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://www.dapfy.com/images/banner.png`}
+          src={`https://www.dapfy.com/images/email-banner.png`}
           alt="Dapfy"
           style={logo}
         />
@@ -71,20 +71,14 @@ export const KoalaWelcomeEmail = ({
         <Text style={paragraph}>
           Welcome to Dapfy, the platform that pays users for their interactions.
         </Text>
-        <Text style={paragraph}>
-          Connect with our community to start earning today.
-        </Text>
+        <Text style={paragraph}>Here’s how you can start earning today:</Text>
 
-        <Section style={btnContainer}>
-          <Button pX={12} pY={10} style={button} href="https://www.dapfy.com">
-            Get started
-          </Button>
-        </Section>
-        <Text style={paragraph}>
-          Best,
-          <br />
-          The Dapfy Team
-        </Text>
+        <Row>
+          <Column>✅ Connect your X account</Column>
+          <Column>✅ Like, comment, retweet our posts</Column>
+          <Column>✅ Use at least one of our DeFi tools</Column>
+        </Row>
+
         {/* <Hr style={hr} /> */}
         <Section
           style={{
