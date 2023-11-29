@@ -23,15 +23,15 @@ const DashboardHeading = () => {
           height={80}
         />
       </div>
-      <h1 className="text-6xl gradienteTitle mb-5">
+      <h1 className="text-4xl sm:text-6xl gradienteTitle mb-5">
         Get Rewarded For Your Interactions
       </h1>
-      <h3 className="flex items-center text-2xl">
-        Built for 𝕏, powered by{" "}
-        <span className="ml-[-25px]">
+      <div className="items-center justify-center text-center  sm:text-2xl flex flex-col sm:flex-row">
+        <div>Built for 𝕏, powered by</div>
+        <span className=" mx-auto sm:m-0 w-fit">
           <svg
-            width="200"
-            height="32"
+            width="140"
+            height="20"
             viewBox="0 0 200 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,7 @@ const DashboardHeading = () => {
             ></path>
           </svg>
         </span>
-      </h3>
+      </div>
     </div>
   );
 };
