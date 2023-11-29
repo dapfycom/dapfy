@@ -21,7 +21,7 @@ const betOptionsInEgld = [
 
 const ChooseBetSection = () => {
   const dispatch = useAppDispatch();
-   const selctedTokenStr = useAppSelector(selectCoinFlipTokenStr);
+  const selctedTokenStr = useAppSelector(selectCoinFlipTokenStr);
   const amount = useAppSelector(selectCoinFlipBetAmount);
   const { pairs } = useGetMaiarPairs();
   const { accountToken } = useGetAccountToken(selctedTokenStr);
@@ -55,10 +55,10 @@ const ChooseBetSection = () => {
   return (
     <Card className="h-full">
       <CardHeader>
-        <div className="flex justify-between pt-3 mb-2">
+        <div className="flex flex-col sm:flex-row justify-between pt-3 mb-2">
           <p>1. Choose your bet</p>
-          <div className="flex">
-            <p>
+          <div className="flex w-full sm:w-fit ">
+            <p className="text-sm text-muted-foreground">
               Balance : {formatBalance(accountToken)}{" "}
               {formatTokenI(selctedTokenStr)}
             </p>
