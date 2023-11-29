@@ -17,19 +17,18 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 import * as yup from "yup";
 import { FarmContext } from "../../DefiComponent";
+import { HatomConfigs } from "@/views/DefiView/utils/constants";
+import { formatTokenI } from "@/utils/functions/tokens";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const minAmounts = {
-  "USDC" : 10,
-  "EGLD":1
-}
-
 const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { hatomFarm } = useContext(FarmContext);
   const [sessionId, setSessionId] = useState<string | null>("");
+
+  const minAmounts = HatomConfigs.minDeposit;
 
   const { elrondToken: stakedToken } = useGetElrondToken(
     hatomFarm?.moneyMarket.tokenI || null
@@ -37,15 +36,24 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { accountToken: userStakedToken } = useGetAccountToken(
     hatomFarm?.moneyMarket.tokenI || ""
   );
+
+  const ticker = hatomFarm?.moneyMarket.tokenI
+    ? formatTokenI(hatomFarm?.moneyMarket.tokenI)
+    : "";
+  // @ts-ignore
+  const minAmountToStake = minAmounts[ticker] || 0.00001;
+
   const stakeSchema = yup.object({
     amount: yup
       .number()
-      .min((stakedToken?.ticker === "EGLD" || stakedToken?.ticker === "USDC" ? minAmounts[stakedToken?.ticker]: 0) + 0.00001, `The minimum amount is more than ${stakedToken?.ticker === "EGLD" || stakedToken?.ticker === "USDC" ? minAmounts[stakedToken?.ticker]: 0} ${stakedToken?.ticker}`),
+      .min(
+        minAmountToStake + 0.00001,
+        `The minimum amount is more than ${minAmountToStake} ${ticker}`
+      ),
   });
 
   const onSuccess = () => {
     onClose();
-  
   };
 
   useTrackTransactionStatus({
@@ -126,7 +134,15 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
           </div>
 
           <DialogFooter>
-            <Button type="submit">Deposit</Button>
+            <Button
+              type="submit"
+              disabled={
+                (formatBalance(userStakedToken, true) as number) <
+                minAmountToStake
+              }
+            >
+              Deposit
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

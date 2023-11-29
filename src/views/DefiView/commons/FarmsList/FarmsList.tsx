@@ -28,6 +28,48 @@ const FarmsList = () => {
           />
         );
       })}
+
+      {hatomData.isLoading && (
+        // skeleton
+
+        <>
+          <div className="w-full mt-10">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-4 py-1">
+                <div className="h-36 bg-zinc-800 rounded w-full"></div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full mt-10">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-4 py-1">
+                <div className="h-36 bg-zinc-800 rounded w-full"></div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full mt-10">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-4 py-1">
+                <div className="h-36 bg-zinc-800 rounded w-full"></div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full mt-10">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-4 py-1">
+                <div className="h-36 bg-zinc-800 rounded w-full"></div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full mt-10">
+            <div className="animate-pulse flex space-x-4">
+              <div className="flex-1 space-y-4 py-1">
+                <div className="h-36 bg-zinc-800 rounded w-full"></div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

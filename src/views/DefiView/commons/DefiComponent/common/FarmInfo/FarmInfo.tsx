@@ -10,7 +10,7 @@ import { calcStakedAmount } from "@/views/DefiView/utils/functions";
 import { Loader2 } from "lucide-react";
 import { useContext } from "react";
 import { FarmContext } from "../../DefiComponent";
-import { HatomAPY } from "@/views/DefiView/utils/constants";
+import { HatomConfigs } from "@/views/DefiView/utils/constants";
 import { formatTokenI } from "@/utils/functions/tokens";
 
 const FarmInfo = () => {
@@ -33,7 +33,7 @@ const FarmInfo = () => {
   }
 
   // @ts-ignore
-  const apy = HatomAPY[formatTokenI(hatomFarm?.moneyMarket.tokenI)];
+  const apy = HatomConfigs.apy[formatTokenI(hatomFarm?.moneyMarket.tokenI)];
 
   return (
     <div
