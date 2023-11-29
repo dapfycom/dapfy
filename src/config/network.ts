@@ -71,7 +71,7 @@ const networkConfig = {
       hatomParent:
         "erd1qqqqqqqqqqqqqpgq9mpe7jf74uzggju8mrqjrfmnl0p04n7ny26sk4spwh",
       aggregator:
-        "erd1qqqqqqqqqqqqqpgq5ewyag0rz7hn4yecykckdfpyamw4v8pxy26s33xrf4",
+        "erd1qqqqqqqqqqqqqpgqcc69ts8409p3h77q5chsaqz57y6hugvc4fvs64k74v",
 
       ashSwapFarm: "",
     },

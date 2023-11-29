@@ -36,7 +36,6 @@ export type SorRoute = {
 };
 export type SorSwapResponse = {
   effectivePrice: number | null;
-  effectivePriceReserved: number | null;
   priceImpact: number | null;
   swapAmount: string;
   swapAmountWithDecimal: string;
