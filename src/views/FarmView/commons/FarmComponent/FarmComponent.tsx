@@ -21,7 +21,7 @@ const FarmComponent = () => {
 
   return (
     <>
-      <Card className="w-full mt-10 px-4">
+      <Card className="w-full mt-10 px-4 pb-4">
         <CardContent className="space-y-2 pt-6">
           <div
             className="flex justify-between items-center cursor-pointer flex-col sm:flex-row"
@@ -55,7 +55,6 @@ const FarmComponent = () => {
           <StakedInfo />
         </Collapse>
       </Card>
-      
 
       {/* <p className="mt-20">
         Don&apos;t have any LP tokens? Buy LP{" "}

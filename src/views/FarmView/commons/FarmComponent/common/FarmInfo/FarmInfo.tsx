@@ -47,10 +47,14 @@ const FarmInfo = () => {
       )}
 
       <div className="flex flex-col">
-        <p className="whitespace-nowrap mb-2 " color="white">
-          APR
+        <p className="whitespace-nowrap  " color="white">
+          APR{" "}
         </p>
-        <p className="text-[12px] whitespace-nowrap text-muted-foreground">
+        <span className="text-muted-foreground mb-2">
+          {" "}
+          (for a limited time only)
+        </span>
+        <p className="text-[12px] font-bold whitespace-nowrap text-muted-foreground">
           100 %
         </p>
       </div>
