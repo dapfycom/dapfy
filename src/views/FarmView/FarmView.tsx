@@ -4,7 +4,7 @@ import FarmHeading from "./commons/FarmHeading/FarmHeading";
 import FarmAshSwap from "./commons/FarmAshSwap/FarmAshSwap";
 const FarmView = () => {
   return (
-    <Container>
+    <Container className="xl:max-w-[1000px]">
       <div className="flex flex-col items-center text-center mt-5">
         <FarmHeading />
         <div className="flex flex-col gap-3 w-full">
