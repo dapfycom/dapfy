@@ -65,7 +65,7 @@ export const KoalaWelcomeEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://www.dapfy.com/images/email-banner.png`}
+          src={`https://www.dapfy.com/images/banner.png`}
           alt="Dapfy"
           style={logo}
         />
@@ -93,86 +93,141 @@ export const KoalaWelcomeEmail = ({
 
         <Section
           style={{
-            textAlign: "center" as const,
+            margin: "20px 0",
           }}
         >
-          <Row
+          <Img
+            src="https://www.dapfy.com/images/logo-text-white.png"
+            alt="dapfy"
             style={{
-              width: "200px",
+              width: "70px",
+              height: "auto",
               margin: "auto",
             }}
+          />
+        </Section>
+        <Section
+          style={{
+            textAlign: "center",
+            fontSize: "12px",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: "12px",
+              fontStyle: "italic",
+            }}
           >
-            <Column align="center">
-              <Link
-                style={footerLink}
-                href={externnalLinks.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Img
-                  src="https://www.dapfy.com/images/telegram.png"
-                  style={{
-                    height: "27px",
-                    width: "27px",
-                    marginRight: "10px",
-                  }}
-                />
-              </Link>
-            </Column>
-            <Column align="center">
-              <Link
-                style={footerLink}
-                href={externnalLinks.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Img
-                  src="https://www.dapfy.com/images/x.png"
-                  style={{
-                    height: "27px",
-                    width: "27px",
-                    marginLeft: "10px",
-                  }}
-                />
-              </Link>
-            </Column>
+            Copyright (C) 2023{" "}
+            <Link
+              href="http://dapfy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dapfy.com
+            </Link>
+            . All rights reserved.
+          </Text>
 
-            <Column align="center">
-              <Link
-                style={footerLink}
-                href={externnalLinks.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Img
-                  src="https://www.dapfy.com/images/youtube.png"
-                  style={{
-                    height: "27px",
-                    width: "27px",
-                    marginLeft: "10px",
-                  }}
-                />
-              </Link>
-            </Column>
+          <Text
+            style={{
+              fontSize: "12px",
+              margin: "30px 0px",
+            }}
+          >
+            You are receiving this email because you opted in via our website.
+          </Text>
+          <Text>Want to change how you receive these emails?</Text>
+          <Text>
+            You can{" "}
+            <Link href={`https://dapfy.com/unsubscribe?email=${email}`}>
+              unsubscribe
+            </Link>{" "}
+            any moment
+          </Text>
+          <Section
+            style={{
+              textAlign: "center" as const,
+            }}
+          >
+            <Row
+              style={{
+                width: "200px",
+                margin: "auto",
+              }}
+            >
+              <Column align="center">
+                <Link
+                  style={footerLink}
+                  href={externnalLinks.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    src="https://www.dapfy.com/images/telegram.png"
+                    style={{
+                      height: "27px",
+                      width: "27px",
+                      marginRight: "10px",
+                    }}
+                  />
+                </Link>
+              </Column>
+              <Column align="center">
+                <Link
+                  style={footerLink}
+                  href={externnalLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    src="https://www.dapfy.com/images/x.png"
+                    style={{
+                      height: "27px",
+                      width: "27px",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </Link>
+              </Column>
 
-            <Column align="left">
-              <Link
-                style={footerLink}
-                href={externnalLinks.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Img
-                  src="https://www.dapfy.com/images/tiktok.png"
-                  style={{
-                    height: "27px",
-                    width: "27px",
-                    marginLeft: "10px",
-                  }}
-                />
-              </Link>
-            </Column>
-          </Row>
+              <Column align="center">
+                <Link
+                  style={footerLink}
+                  href={externnalLinks.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    src="https://www.dapfy.com/images/youtube.png"
+                    style={{
+                      height: "27px",
+                      width: "27px",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </Link>
+              </Column>
+
+              <Column align="left">
+                <Link
+                  style={footerLink}
+                  href={externnalLinks.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Img
+                    src="https://www.dapfy.com/images/tiktok.png"
+                    style={{
+                      height: "27px",
+                      width: "27px",
+                      marginLeft: "10px",
+                    }}
+                  />
+                </Link>
+              </Column>
+            </Row>
+          </Section>
         </Section>
       </Container>
     </Body>
