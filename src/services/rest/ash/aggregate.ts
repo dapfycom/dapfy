@@ -1,8 +1,8 @@
 import { selectedNetwork } from "@/config/network";
-import { SorSwapResponse } from "@/types/ashswap.interface";
 import { isValidNumber } from "@/utils/functions/validations";
+import { agService } from "@/views/SwapAggregator/lib/constants";
+import { SorSwapResponse } from "@ashswap/ash-sdk-js/out";
 import axiosAshswap from ".";
-import { Aggregator, ChainId } from "@ashswap/ash-sdk-js";
 
 export const fetchAggregateOld = async ({
   from,
@@ -45,14 +45,6 @@ export const fetchAggregate = async ({
   if (!isValidNumber(amount)) {
     throw new Error("Invalid amount");
   }
-
-  const integrator =
-    "erd1085h6wdckzfkvfftq837mwt2a780dv0p8wcjjpauku7at0dlqswszewvjn"; // your fee wallet address
-
-  const agService = new Aggregator({
-    chainId: selectedNetwork.ChainID as ChainId.Mainnet | ChainId.Devnet,
-    protocol: integrator,
-  });
 
   console.log({
     fromToken: from,

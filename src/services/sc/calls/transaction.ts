@@ -36,7 +36,7 @@ export class SmartContractInteraction {
     return this.contract;
   }
 
-  private createTransactionFromInteraction(
+  private static createTransactionFromInteraction(
     interaction: Interaction,
     options?: {
       gasL?: number;
@@ -61,11 +61,14 @@ export class SmartContractInteraction {
     return tx;
   }
 
-  private async sendTransaction({
+  public static async sendTransaction({
     interaction,
     options,
   }: ISendTransactionProps) {
-    const tx = this.createTransactionFromInteraction(interaction, options);
+    const tx = SmartContractInteraction.createTransactionFromInteraction(
+      interaction,
+      options
+    );
 
     await refreshAccount();
 
@@ -108,7 +111,7 @@ export class SmartContractInteraction {
 
     let interaction = new Interaction(this.contract, contractFunction, arg);
 
-    return this.sendTransaction({
+    return SmartContractInteraction.sendTransaction({
       interaction,
       options: {
         gasL,
@@ -140,7 +143,10 @@ export class SmartContractInteraction {
           )
     );
 
-    return this.sendTransaction({ interaction, options: { gasL } });
+    return SmartContractInteraction.sendTransaction({
+      interaction,
+      options: { gasL },
+    });
   }
 
   public ESDTNFTTransfer({
@@ -155,7 +161,10 @@ export class SmartContractInteraction {
       TokenTransfer.nonFungible(token.collection, token.nonce)
     );
 
-    return this.sendTransaction({ interaction, options: { gasL } });
+    return SmartContractInteraction.sendTransaction({
+      interaction,
+      options: { gasL },
+    });
   }
 
   /**
@@ -170,7 +179,7 @@ export class SmartContractInteraction {
   }: IEGLDPaymentProps) {
     let interaction = this.createInteraction(functionName, arg);
 
-    return this.sendTransaction({
+    return SmartContractInteraction.sendTransaction({
       interaction,
       options: { gasL, egldVal: value, realValue },
     });
@@ -190,7 +199,7 @@ export class SmartContractInteraction {
     let interaction = this.createInteraction(functionName, arg);
 
     if (token.collection === selectedNetwork.tokensID.egld) {
-      return this.sendTransaction({
+      return SmartContractInteraction.sendTransaction({
         interaction,
         options: { gasL, egldVal: value, realValue },
       });
@@ -209,7 +218,10 @@ export class SmartContractInteraction {
             )
       );
 
-      return this.sendTransaction({ interaction, options: { gasL } });
+      return SmartContractInteraction.sendTransaction({
+        interaction,
+        options: { gasL },
+      });
     }
   }
 
@@ -226,9 +238,12 @@ export class SmartContractInteraction {
 
     let interaction = new Interaction(this.contract, contractFunction, arg);
 
-    const tx = this.createTransactionFromInteraction(interaction, {
-      gasL,
-    });
+    const tx = SmartContractInteraction.createTransactionFromInteraction(
+      interaction,
+      {
+        gasL,
+      }
+    );
 
     return tx;
   }
@@ -260,9 +275,12 @@ export class SmartContractInteraction {
           )
     );
 
-    const tx = this.createTransactionFromInteraction(interaction, {
-      gasL,
-    });
+    const tx = SmartContractInteraction.createTransactionFromInteraction(
+      interaction,
+      {
+        gasL,
+      }
+    );
 
     return tx;
   }
@@ -279,11 +297,14 @@ export class SmartContractInteraction {
   }: IEGLDPaymentProps): Transaction {
     let interaction = this.createInteraction(functionName, arg);
 
-    const tx = this.createTransactionFromInteraction(interaction, {
-      gasL,
-      egldVal: value,
-      realValue: realValue,
-    });
+    const tx = SmartContractInteraction.createTransactionFromInteraction(
+      interaction,
+      {
+        gasL,
+        egldVal: value,
+        realValue: realValue,
+      }
+    );
 
     return tx;
   }
@@ -319,9 +340,12 @@ export class SmartContractInteraction {
 
     interaction.withMultiESDTNFTTransfer(tokensToTransfer);
 
-    const tx = this.createTransactionFromInteraction(interaction, {
-      gasL,
-    });
+    const tx = SmartContractInteraction.createTransactionFromInteraction(
+      interaction,
+      {
+        gasL,
+      }
+    );
 
     return tx;
   }
@@ -350,9 +374,12 @@ export class SmartContractInteraction {
         wrapeEgldContract
       );
 
-      const tx1 = this.createTransactionFromInteraction(wrapInteraction, {
-        egldVal: value,
-      });
+      const tx1 = SmartContractInteraction.createTransactionFromInteraction(
+        wrapInteraction,
+        {
+          egldVal: value,
+        }
+      );
 
       //esdt transfer
 
@@ -363,7 +390,7 @@ export class SmartContractInteraction {
       esdtTranferInteraction.withSingleESDTTransfer(
         TokenTransfer.fungibleFromAmount(tokenIdentifier, value || 0, 18)
       );
-      const tx2 = this.createTransactionFromInteraction(
+      const tx2 = SmartContractInteraction.createTransactionFromInteraction(
         esdtTranferInteraction,
         {
           gasL,
@@ -414,7 +441,7 @@ export class SmartContractInteraction {
 
     interaction.withMultiESDTNFTTransfer(tokensToTransfer);
 
-    return this.sendTransaction({
+    return SmartContractInteraction.sendTransaction({
       interaction,
       options: {
         gasL,

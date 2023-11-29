@@ -6,13 +6,18 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { formatNumber } from "@/utils/functions/formatBalance";
 import { calculateSlipageAmount, formatTokenI } from "@/utils/functions/tokens";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
-import { selectSlippage } from "@/views/SwapAggregator/lib/swap-slice";
+import {
+  selectFromFieldValue,
+  selectSlippage,
+} from "@/views/SwapAggregator/lib/swap-slice";
 import { ArrowRight } from "lucide-react";
 
 const SwapInfo = () => {
   const slippage = useAppSelector(selectSlippage);
   const { data } = useGetAggregate();
   const { isOpen, onToggle } = useDisclosure(false);
+  const token1Value = useAppSelector(selectFromFieldValue);
+
   if (!data) return null;
   return (
     <div className="border px-3 py-5 rounded">
@@ -21,7 +26,7 @@ const SwapInfo = () => {
           <span className="text-sm text-gray-400">
             {formatTokenI(data.tokenIn)}
           </span>
-          <span className="text-lg">{data.swapAmount}</span>
+          <span className="text-lg">{token1Value}</span>
         </div>
         {/* Icon arrow right */}
         <ArrowRight className="w-6 h-6 text-gray-400" />
@@ -48,11 +53,13 @@ const SwapInfo = () => {
               </span>
             </div>
           </div>
+          {/* @ts-ignore */}
           {data?.effectivePriceReserved && (
             <div className="flex justify-between">
               <div className="flex flex-col">
                 <span className="text-sm text-gray-400">Price</span>
                 <span className="text-lg">
+                  {/* @ts-ignore */}
                   {formatNumber(data.effectivePriceReserved)}
                 </span>
               </div>

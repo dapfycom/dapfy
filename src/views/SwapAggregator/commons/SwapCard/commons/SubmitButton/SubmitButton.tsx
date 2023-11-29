@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { openLogin } from "@/redux/dapp/dapp-slice";
-import { SorSwap } from "@/types/ashswap.interface";
-import { setElrondBalance } from "@/utils/functions/formatBalance";
-import { calculateSlipageAmount } from "@/utils/functions/tokens";
 import { submitSwap } from "@/views/SwapAggregator/lib/calls";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
 import {
@@ -47,52 +44,10 @@ const SubmitButton = () => {
     if (!isLoggedIn) {
       dispatch(openLogin(true));
     } else {
-      if (aggregatorData?.returnAmountWithDecimal) {
-        const amountWithSlippage = calculateSlipageAmount(
-          slippage,
-          aggregatorData?.returnAmountWithDecimal
-        );
-        if (aggregatorData) {
-          setTxSuccess(false);
+      if (aggregatorData && aggregatorData?.returnAmountWithDecimal) {
+        const res = await submitSwap(aggregatorData, slippage);
 
-          if (!aggregatorData?.routes) throw new Error("No routes");
-
-          const sorSwap: SorSwap[] = aggregatorData?.routes[0].hops.map(
-            (hop, index) => {
-              const tokenInDecimals = hop.pool.allTokens.find(
-                (t) => t.address === hop.tokenIn
-              )?.decimal;
-              const tokenOutDecimals = hop.pool.allTokens.find(
-                (t) => t.address === hop.tokenOut
-              )?.decimal;
-
-              const swapItem = aggregatorData.swaps.find(
-                (s, hopIndex) => hopIndex === index
-              );
-              if (!swapItem) throw new Error("No swap item");
-              if (
-                swapItem.assetIn !== hop.tokenIn ||
-                swapItem.assetOut !== hop.tokenOut
-              )
-                throw new Error("Missmatch between routs and swaps");
-
-              const data: SorSwap = {
-                ...swapItem,
-                amount: setElrondBalance(hop.tokenInAmount, tokenInDecimals),
-              };
-              return data;
-            }
-          );
-          const res = await submitSwap(
-            aggregatorData.tokenOut,
-            amountWithSlippage.toFixed(0),
-            sorSwap,
-            fromField.selectedToken,
-            aggregatorData.swapAmountWithDecimal
-          );
-
-          setSessionId(res?.sessionId);
-        }
+        setSessionId(res?.sessionId);
       } else {
         throw new Error("No return amount with decimals");
       }
