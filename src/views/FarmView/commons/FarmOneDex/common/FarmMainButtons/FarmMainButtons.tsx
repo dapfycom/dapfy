@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
-import { harvest } from "@/views/FarmView/commons/FarmAshSwap/utils/services";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { MouseEvent } from "react";
 import StakeModal from "../Modals/StakeModal";
@@ -21,12 +20,6 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
     e.preventDefault();
     e.stopPropagation();
     onOpenStake();
-  };
-
-  const handleHarvest = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    harvest();
   };
 
   return (

@@ -10,17 +10,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
-import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
-import {
-  stake,
-  stakeLP,
-} from "@/views/FarmView/commons/FarmAshSwap/utils/services";
+import { formatTokenI } from "@/utils/functions/tokens";
+import { stake } from "@/views/FarmView/commons/FarmOneDex/utils/services";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
 import { AshFarmContext } from "../../FarmOneDex";
-import { formatTokenI } from "@/utils/functions/tokens";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
@@ -31,7 +27,6 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.egld
   );
-  console.log("farm", farm);
 
   const formik = useFormik({
     initialValues: {
@@ -43,7 +38,20 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
         stake(amount, farm.farm_click_id);
       }
     },
-    // validationSchema: stakeSchema,
+    validationSchema: yup.object().shape({
+      amount: yup
+        .number()
+        .required("Amount is required")
+        .min(1, "Amount must be greater than 1 EGLD")
+        .max(
+          getRealBalance(
+            userStakedToken.balance,
+            userStakedToken.decimals,
+            true
+          ) as number,
+          "Amount must be less than balance"
+        ),
+    }),
   });
   const handleMax = () => {
     const value = getRealBalance(

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
-import WithdrawModal from "../Modals/WithdrawModal";
-import StakedDetails from "./StakedDetails/StakedDetails";
-import { withdraw } from "../../utils/services";
 import { useContext } from "react";
 import { AshFarmContext } from "../../FarmOneDex";
+import { withdraw } from "../../utils/services";
+import WithdrawModal from "../Modals/WithdrawModal";
+import StakedDetails from "./StakedDetails/StakedDetails";
 
 const StakedInfo = () => {
   const {
@@ -48,39 +48,6 @@ const StakedInfo = () => {
         </div>
       )}
     </div>
-    // <Flex
-    //   w="full"
-    //   px={7}
-    //   py={5}
-    //   bg="dark.800"
-    //   gap={10}
-    //   flexDir={{ xs: "column", tablet: "row" }}
-    // >
-    //   {isLoggedIn ? (
-    //     <>
-    //       <Flex flex={1}>
-    //         <StakedDetails />
-    //       </Flex>
-    //       <Flex h="full" alignItems={"center"} height="auto">
-    //         <Button
-    //           bg="dark.100"
-    //           w={{ xs: "full", tablet: "auto" }}
-    //           fontSize={"lsm"}
-    //           onClick={handleHarvest}
-    //         >
-    //           {" "}
-    //           withdraw
-    //         </Button>
-    //       </Flex>
-
-    //       {isOpenHarvest && (
-    //         <HarvestModal isOpen={isOpenHarvest} onClose={onCloseHarvest} />
-    //       )}
-    //     </>
-    //   ) : (
-    //     <Center w="full">Please connect your wallet first</Center>
-    //   )}
-    // </Flex>
   );
 };
 

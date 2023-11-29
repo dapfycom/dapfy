@@ -8,14 +8,14 @@ import BigNumber from "bignumber.js";
 export const harvest = () => {};
 
 export const withdraw = (farmClick: number) => {
-  getSmartContractInteraction("ashSwapFarmWsp").scCall({
+  getSmartContractInteraction("oneDexFarmWsp").scCall({
     functionName: "withdraw",
     arg: [new BigUIntValue(new BigNumber(farmClick))],
   });
 };
 
 export const stake = (amount: string, farmClick: number) => {
-  getSmartContractInteraction("ashSwapFarmWsp").EGLDPayment({
+  getSmartContractInteraction("oneDexFarmWsp").EGLDPayment({
     functionName: "deposit",
     arg: [new BigUIntValue(new BigNumber(farmClick))],
     value: amount,
@@ -27,27 +27,23 @@ export const stake = (amount: string, farmClick: number) => {
 export const fetchOneDexFarms = async (
   scInfo: string
 ): Promise<IOnDexFarm[]> => {
-  console.log("fetchOneDexFarms", fetchOneDexFarms);
-
   const data = await fetchScSimpleData<IOnDexScResponse[]>(scInfo);
-  console.log("data", data);
 
   const farms: IOnDexFarm[] = data.map((f) => {
     const farm: IOnDexFarm = {
-      farm_address: f.farm_address.bech32(),
       farm_click_id: f.farm_click_id.toNumber(),
-      farm_token: f.farm_token,
-      farm_token_nonce: f.farm_token_nonce.toNumber(),
-      first_token_id: f.first_token_id,
-      lp_token_id: f.lp_token_id,
       pool_address: f.pool_address.bech32(),
-      reward_token: f.reward_token,
+      pool_id: f.pool_id.toNumber(),
+      first_token_id: f.first_token_id,
       second_token_id: f.second_token_id,
+      lp_token_id: f.lp_token_id,
+      farm_address: f.farm_address.bech32(),
+      farm_id: f.farm_id.toNumber(),
+      reward_token: f.reward_token,
       total_deposited_amount: f.total_deposited_amount.toString(),
-      total_deposited_farm_amount: f.total_deposited_farm_amount.toString(),
       total_deposited_lp_amount: f.total_deposited_lp_amount.toString(),
-      total_farm_rewards: f.total_farm_rewards.toString(),
       total_weighted_block: f.total_weighted_block.toString(),
+      total_lp_rewards: f.total_lp_rewards.toString(),
     };
     return farm;
   });
