@@ -1,4 +1,7 @@
-import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
+import {
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
 import {
   Tooltip,
@@ -16,20 +19,14 @@ const CoinFlipView = () => {
   return (
     <>
       <Container>
-        <div className="flex flex-col items-center text-center mt-5">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                {" "}
-                <PageHeaderHeading className="mb-10">
-                  The Coin Flip Game
-                </PageHeaderHeading>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>50-50 odds, 100% on chain transparency 🍀</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+        <div className="flex flex-col items-center text-center mt-5 mb-10">
+          <PageHeaderHeading className="mb-5">
+            The Coin Flip Game
+          </PageHeaderHeading>
+
+          <PageHeaderDescription>
+            50-50 odds, 100% on chain transparency
+          </PageHeaderDescription>
         </div>
         <div className="grid grid-cols-1 gap-x-[20px] gap-y-[40px] w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-10">
