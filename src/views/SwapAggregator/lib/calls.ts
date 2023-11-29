@@ -4,10 +4,12 @@ import { getSmartContractInteraction } from "@/services/sc";
 import { SmartContractInteraction } from "@/services/sc/calls/transaction";
 import { AggregatorStep, SorSwap } from "@/types/ashswap.interface";
 import { getWspOfWrapedEgld } from "@/utils/functions/sc";
+import { SorSwapResponse } from "@ashswap/ash-sdk-js/out";
 import { Address, TokenTransfer } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
+import { agService } from "./constants";
 
-export const submitSwap = async (
+export const submitSwapOld = async (
   token_out: string,
   final_amount_out: string,
   swap_operations: SorSwap[],
@@ -66,5 +68,40 @@ export const submitSwap = async (
 
   return await SmartContractInteraction.sendMultipleTransactions({
     txs: transactions,
+  });
+};
+export const submitSwap = async (
+  sorswap: SorSwapResponse,
+  slippage: number
+) => {
+  if (!sorswap) throw new Error(`Could not find any paths for EGLD to ASH`);
+  const transactions = [];
+
+  // @ts-ignore
+  if (sorswap.__from === selectedNetwork.tokensID.egld) {
+    const shard = store.getState().dapp.shard;
+    const wrapedWsp = getWspOfWrapedEgld(shard);
+
+    // const t0 = await EGLDPaymentOnlyTx(wrapedWsp, "wrapEgld", fromToken.value);
+    const t0 = getSmartContractInteraction(wrapedWsp).EGLDPaymentOnlyTx({
+      functionName: "wrapEgld",
+      realValue: sorswap.swapAmountWithDecimal,
+    });
+    transactions.push(t0);
+  }
+
+  const interaction = await agService.aggregateFromPaths(
+    sorswap,
+    slippage * 100
+  );
+
+  const tx1 = interaction
+    .withSender(new Address(store.getState().dapp.userAddress))
+    .check()
+    .buildTransaction();
+  transactions.push(tx1);
+
+  return await SmartContractInteraction.sendMultipleTransactions({
+    txs: transactions as any,
   });
 };

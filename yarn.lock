@@ -25,6 +25,15 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@ashswap/ash-sdk-js@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@ashswap/ash-sdk-js/-/ash-sdk-js-2.0.3.tgz#fe12cb6449ca30384f7418809a81c8f06e02ab40"
+  integrity sha512-QL/gpGRXJaJso7ruR9Ho1UHqsUOqzFtCCzxDGX2QAjLNetNDVqSsa6VYFY+ZhAHGInhv5ia+zU/iQRfYJgDKnA==
+  dependencies:
+    "@multiversx/sdk-core" "12.6.0"
+    "@multiversx/sdk-network-providers" "1.5.0"
+    lodash.chunk "^4.2.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.22.13":
   version "7.22.13"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.22.13.tgz#e3c1c099402598483b7a8c46a721d1038803755e"
@@ -5845,6 +5854,11 @@ lodash-es@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
+
+lodash.chunk@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.chunk/-/lodash.chunk-4.2.0.tgz#66e5ce1f76ed27b4303d8c6512e8d1216e8106bc"
+  integrity sha512-ZzydJKfUHJwHa+hF5X66zLFCBrWn5GeF28OHEr4WVWtNDXlQ/IjWKPBiikqKo2ne0+v6JgCgJ0GzJp8k8bHC7w==
 
 lodash.debounce@4.0.8:
   version "4.0.8"

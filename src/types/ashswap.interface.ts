@@ -34,21 +34,6 @@ export type SorRoute = {
   tokenOut: string;
   tokenOutAmount: string;
 };
-export type SorSwapResponse = {
-  effectivePrice: number | null;
-  effectivePriceReserved: number | null;
-  priceImpact: number | null;
-  swapAmount: string;
-  swapAmountWithDecimal: string;
-  returnAmount: string;
-  returnAmountWithDecimal: string;
-  tokenAddresses: string[];
-  tokenIn: string;
-  tokenOut: string;
-  marketSp: string;
-  routes?: SorRoute[];
-  swaps: SorSwap[];
-};
 
 export type AggregatorStep = {
   token_in: string;

@@ -64,8 +64,6 @@ const InputBox = ({
 
   const readOnly = !Boolean(onMax);
 
-  console.log("value", value);
-
   return (
     <>
       <div className="flex flex-col border w-full py-5 pb-4 px-5 rounded-lg">
