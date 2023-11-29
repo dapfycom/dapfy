@@ -59,7 +59,7 @@ const Navbar = () => {
         </Container>
       </header>
 
-      <div className={!isOpen ? "pt-20 md:pt-14" : "0"}>
+      <div className={!isOpen ? "pt-24 md:pt-20" : "pt-6"}>
         <EpochCountDown />
       </div>
     </>

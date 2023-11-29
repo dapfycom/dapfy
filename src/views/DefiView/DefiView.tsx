@@ -7,7 +7,7 @@ import FarmsList from "./commons/FarmsList/FarmsList";
 import Image from "next/image";
 const DefiView = () => {
   return (
-    <Container className="min-h-[60vh] xl:max-w-[1000px]">
+    <Container className="min-h-[60vh] xs:px-16 xl:max-w-[1000px]">
       <div className="flex flex-col items-center text-center mt-5">
         <FarmHeading />
 
