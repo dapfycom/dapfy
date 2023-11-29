@@ -29,7 +29,7 @@ const DefiView = () => {
               className="block dark:hidden"
             />
           </div>
-          <MyTooltip content="Apy will be show soon, we are optimizing for the best APY">
+          <MyTooltip content="APYs % may change on a daily basis">
             <Info className="text-muted-foreground" />
           </MyTooltip>
         </div>
