@@ -1,23 +1,7 @@
 "use client";
-import Collapse from "@/components/Collapse/Collapse";
-import Divider from "@/components/Divider/Divider";
-import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
-import { Card, CardContent } from "@/components/ui/card";
-import { selectedNetwork } from "@/config/network";
-import useDisclosure from "@/hooks/useDisclosure";
-import useGetElrondToken from "@/hooks/useGetElrondToken";
-import useGetTokenPrice from "@/hooks/useGetTokenPrice";
-import { formatBalanceDollar } from "@/utils/functions/formatBalance";
-import {
-  useGetAshSwapFarms,
-  useGetFarmsInfo,
-} from "@/views/FarmView/commons/FarmAshSwap/utils/hooks";
-import Link from "next/link";
-import FarmInfo from "./common/FarmInfo/FarmInfo";
-import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
-import StakedInfo from "./common/StakedInfo/StakedInfo";
-import { createContext } from "react";
 import { IAshFarm } from "@/types/farm.interface";
+import { useGetAshSwapFarms } from "@/views/FarmView/commons/FarmOneDex/utils/hooks";
+import { createContext } from "react";
 import FarmItem from "./FarmItem";
 
 interface IAshFarmContext {
@@ -28,7 +12,7 @@ export const AshFarmContext = createContext<IAshFarmContext>({
   farm: undefined,
 });
 
-const FarmAshSwap = () => {
+const FarmOneDex = () => {
   // new data
   const { farms } = useGetAshSwapFarms();
 
@@ -56,4 +40,4 @@ const FarmAshSwap = () => {
   );
 };
 
-export default FarmAshSwap;
+export default FarmOneDex;
