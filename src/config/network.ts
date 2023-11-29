@@ -122,7 +122,9 @@ const networkConfig = {
       aggregator:
         "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq",
       ashSwapFarm:
-        "erd1qqqqqqqqqqqqqpgqct2vdncdw5jrnw9t33k0z0qs9cjcp4y7vr2szde39g",
+        "erd1qqqqqqqqqqqqqpgqg5uax0mmx36q68z2ksuh9ehzsf36d7jfvr2shnsrck",
+      oneDexFarm:
+        "erd1qqqqqqqqqqqqqpgq7p7dnazynjakfe044n3fj8a8mt6hztyavr2swekvkd",
     },
   },
   testnet: {
@@ -173,6 +175,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIROMENT: ENVIROMENTTYPE = "mainnet";
+export const ENVIROMENT: ENVIROMENTTYPE = "devnet";
 
 export const selectedNetwork = networkConfig[ENVIROMENT];
