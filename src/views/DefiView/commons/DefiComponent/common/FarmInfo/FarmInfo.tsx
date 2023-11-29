@@ -10,6 +10,8 @@ import { calcStakedAmount } from "@/views/DefiView/utils/functions";
 import { Loader2 } from "lucide-react";
 import { useContext } from "react";
 import { FarmContext } from "../../DefiComponent";
+import { HatomAPY } from "@/views/DefiView/utils/constants";
+import { formatTokenI } from "@/utils/functions/tokens";
 
 const FarmInfo = () => {
   const { hatomFarm, deposits, userRewards } = useContext(FarmContext);
@@ -20,6 +22,7 @@ const FarmInfo = () => {
     useGetElrondToken(selectedNetwork.tokensID.usdc);
 
   const staked = deposits ? calcStakedAmount(deposits) : "0";
+  console.log("hatomFarm", hatomFarm);
 
   if (isLoadingRewardToken || isloadingDepositToken) {
     return (
@@ -28,6 +31,9 @@ const FarmInfo = () => {
       </div>
     );
   }
+
+  // @ts-ignore
+  const apy = HatomAPY[formatTokenI(hatomFarm?.moneyMarket.tokenI)];
 
   return (
     <div
@@ -54,23 +60,16 @@ const FarmInfo = () => {
       {/* <div className="flex gap-2">
         <Loader2 className="animate-spin" /> Optimising for the best APR
       </div> */}
-      {/* <div className="flex flex-col">
-        <p className="whitespace-nowrap mb-2 " color="white">
-          APR
-        </p>
-        <p className="text-[12px] whitespace-nowrap text-muted-foreground">
-          245 %
-        </p>
-      </div>
-
-      <div className="flex flex-col">
-        <p className="whitespace-nowrap mb-2 " color="white">
-          APY
-        </p>
-        <p className="text-[12px] whitespace-nowrap text-muted-foreground">
-          156 %
-        </p>
-      </div> */}
+      {apy && (
+        <div className="flex flex-col">
+          <p className="whitespace-nowrap mb-2 " color="white">
+            APY
+          </p>
+          <p className="text-[12px] whitespace-nowrap text-muted-foreground">
+            ≈ {apy} %
+          </p>
+        </div>
+      )}
     </div>
   );
 };
