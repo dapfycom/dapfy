@@ -10,11 +10,10 @@ const Swap = () => {
     <Container>
       <div className="flex flex-col items-center text-center mt-5">
         <PageHeaderHeading className="mb-6">
-          Ultimate Crypto Swap Aggregator
+          The Ultimate Swap Aggregator
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
-          Discover the Best Swap Rates and Lowest Fees With The Powerful AshSwap
-          API
+          Best Rates, Lowest Fees
         </PageHeaderDescription>
 
         <SwapCard />
