@@ -55,7 +55,8 @@ export const externnalLinks = {
   instagram: "https://www.instagram.com/dapfycom/",
   facebook: "https://www.facebook.com/profile.php?id=61553057430791",
   linkedin: "https://www.linkedin.com/in/dapfy-com-8b5428299/",
-
+  youtube: "https://www.youtube.com/@DapfyCom",
+  tiktok: "https://www.tiktok.com/@dapfy.com?_t=8hktnFd9Ha3&_r=1",
   analitics: "https://plausible.io/dapfy.com",
 };
 
