@@ -34,7 +34,7 @@ const FarmAshSwap = () => {
 
   return (
     <div className="mt-10">
-      <div className="text-left mb-2 text-yellow-700"> Ash Farms</div>
+      <div className="text-left mb-2 text-yellow-700"> OneDex Farms</div>
 
       <div className="flex flex-col gap-8">
         {farms.map((f) => {

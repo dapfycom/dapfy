@@ -17,7 +17,7 @@ import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
 import StakedInfo from "./common/StakedInfo/StakedInfo";
 import { createContext, useContext } from "react";
 import { IAshFarm } from "@/types/farm.interface";
-import { AshFarmContext } from "./FarmAshSwap";
+import { AshFarmContext } from "./FarmOneDex";
 import { formatTokenI } from "@/utils/functions/tokens";
 
 const FarmItem = () => {

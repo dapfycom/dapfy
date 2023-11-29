@@ -9,7 +9,7 @@ const FarmView = () => {
         <FarmHeading />
         <div className="flex flex-col gap-3 w-full">
           <FarmComponent />
-          {/* <FarmAshSwap /> */}
+          <FarmAshSwap />
         </div>
       </div>
     </Container>
