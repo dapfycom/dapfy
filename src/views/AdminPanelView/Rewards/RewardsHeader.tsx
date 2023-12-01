@@ -1,6 +1,6 @@
-import { TwitterIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
+import { TwitterIcon } from "lucide-react";
 
 const RewardsHeader = () => {
   const { handleLogin, isAuthenticated, user, error } = useXAuthentication();
