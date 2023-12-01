@@ -39,7 +39,7 @@ const webWalletLoginComponent = (
 const XAliasLoginComponent = (
   <div className="flex items-center gap-2 h-full">
     {" "}
-    <XAliasIcon mr="14px" fontSize={"16px"} /> xAlias
+    <XAliasIcon mr="14px" fontSize={"16px"} /> Login with Google
   </div>
 );
 const legerLoginComponent = (
