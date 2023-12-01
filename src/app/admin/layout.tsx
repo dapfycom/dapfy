@@ -32,7 +32,7 @@ const AdminLayoute = ({ children }: PropsWithChildren) => {
         <div className="bg-background">
           <div className="grid lg:grid-cols-5">
             <Sidebar className="hidden lg:block" />
-            <div className="col-span-3 lg:col-span-4 lg:border-l">
+            <div className="col-span-3 lg:col-span-4 lg:border-l min-h-[70vh]">
               {children}
             </div>
           </div>

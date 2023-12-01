@@ -1,23 +1,9 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { adminRoutes } from "@/config/routes";
 import { cn } from "@/lib/utils";
-import { Table2 } from "lucide-react";
-
-export type Playlist = (typeof playlists)[number];
-
-export const playlists = [
-  "Recently Added",
-  "Recently Played",
-  "Top Songs",
-  "Top Albums",
-  "Top Artists",
-  "Logic Discography",
-  "Bedtime Beats",
-  "Feeling Happy",
-  "I miss Y2K Pop",
-  "Runtober",
-  "Mellow Days",
-  "Eminem Essentials",
-];
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -29,14 +15,34 @@ export function Sidebar({ className }: SidebarProps) {
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Menu
           </h2>
-          <div className="space-y-1">
-            <Button variant="secondary" className="w-full justify-start">
-              <Table2 className="mr-1" />
-              Rewards
-            </Button>
-          </div>
+          <MenuLinks />
         </div>
       </div>
     </div>
   );
 }
+
+export const MenuLinks = () => {
+  const pathname = usePathname();
+
+  return (
+    <div className="space-y-1">
+      {adminRoutes.map((r) => {
+        const active = pathname === r.path;
+        return (
+          <Button
+            key={r.path}
+            asChild
+            variant={active ? "secondary" : "ghost"}
+            className="w-full justify-start"
+          >
+            <Link href={r.path}>
+              {r.icon}
+              <span className="ml-2">{r.title}</span>
+            </Link>
+          </Button>
+        );
+      })}
+    </div>
+  );
+};

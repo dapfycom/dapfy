@@ -12,20 +12,18 @@ import {
 } from "@multiversx/sdk-core/out";
 import { WspTypes, getInterface, provider } from "../index";
 
-
-export const fetchScSimpleData = async <T>(scInfo:string) =>{
+export const fetchScSimpleData = async <T>(scInfo: string, args?: any[]) => {
   const scInfoArr = scInfo.split(":");
-  const scWsp   = scInfoArr[0] as WspTypes;
+  const scWsp = scInfoArr[0] as WspTypes;
   const funcName = scInfoArr[1];
 
-  const res: any = await scQuery(scWsp, funcName);
+  const res: any = await scQuery(scWsp, funcName, args);
 
   const { firstValue } = res;
-  const data : T = firstValue?.valueOf();
+  const data: T = firstValue?.valueOf();
 
- return data
-
-}
+  return data;
+};
 
 export const scQuery = async (
   workspace: WspTypes,
@@ -43,11 +41,10 @@ export const scQuery = async (
     let interaction = contract.methods[funcName](args);
     const query = interaction.check().buildQuery();
     const queryResponse = await provider.queryContract(query);
-    if(workspace === "ashSwapFarmWsp"){
-
-      console.log("endpoint", interaction.getEndpoint()	);
+    if (workspace === "ashSwapFarmWsp") {
+      console.log("endpoint", interaction.getEndpoint());
     }
-    
+
     const data = new ResultsParser().parseQueryResponse(
       queryResponse,
       interaction.getEndpoint()
@@ -113,8 +110,8 @@ export const scQueryByFieldsDefinitions = async (
   const typeParser = new TypeExpressionParser();
   const typeMapper = new TypeMapper();
 
-  if(!dataFields){
-    return {response, queryResponse};
+  if (!dataFields) {
+    return { response, queryResponse };
   }
   const fieldDefinitions = dataFields.map(
     ([name, expression]: [string, string]) =>

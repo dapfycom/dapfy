@@ -1,12 +1,13 @@
 import aggregatorAbiUrl from "@/assets/abis/aggregator.abi.json";
+import ashSwapAggregatorAbiUrl from "@/assets/abis/ashswap-aggregator.abi.json";
 import bskFarmAbiUrl from "@/assets/abis/beskar-dao.abi.json";
 import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
+import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
 import { SmartContractInteraction } from "./calls/transaction";
-import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json"
 export { provider } from "./provider";
 export const EGLD_VAL = Math.pow(10, 18);
 
@@ -21,7 +22,8 @@ export type WspTypes =
   | "dustWsp"
   | "hatomParentWsp"
   | "aggregatorWsp"
-  | "ashSwapFarmWsp";
+  | "ashSwapFarmWsp"
+  | "ashSwapAggregatorWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -90,7 +92,15 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = ashSwapFarmAbiUrl;
       implementsInterfaces = "FarmClickContract";
       break;
+    case "ashSwapAggregatorWsp":
+      simpleAddress = selectedNetwork.scAddress.ashSwapAggregator;
+      address = new Address(simpleAddress);
+      abiUrl = ashSwapAggregatorAbiUrl;
+      implementsInterfaces = "FarmClickContract";
+      break;
     default:
+      simpleAddress = workspace;
+      address = new Address(simpleAddress);
       break;
   }
 
@@ -137,6 +147,10 @@ export const getSmartContractInteraction = (
     ashSwapFarmWsp: new SmartContractInteraction(
       getInterface("ashSwapFarmWsp").simpleAddress,
       AbiRegistry.create(getInterface("ashSwapFarmWsp").abiUrl)
+    ),
+    ashSwapAggregatorWsp: new SmartContractInteraction(
+      getInterface("ashSwapAggregatorWsp").simpleAddress,
+      AbiRegistry.create(getInterface("ashSwapAggregatorWsp").abiUrl)
     ),
   };
 

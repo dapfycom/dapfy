@@ -41,7 +41,7 @@ export const useGetXUser = () => {
   const isAuthenticated = !!data?.id;
 
   return {
-    user: data,
+    user: data || null,
     isAuthenticated,
     error,
     isLoading,

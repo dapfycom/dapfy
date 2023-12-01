@@ -1,7 +1,7 @@
-import AdminPanelView from "@/views/AdminPanelView/AdminPanelView";
+import RewardsView from "@/views/AdminPanelView/Rewards/RewardsView";
 
 const Admin = () => {
-  return <AdminPanelView />;
+  return <RewardsView />;
 };
 
 export default Admin;

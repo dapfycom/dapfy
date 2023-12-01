@@ -9,6 +9,9 @@
 // import React from "react";
 // import { RouteObject } from "react-router-dom";
 
+import { SwapIcon } from "@/components/ui-system/icons/ui-icons";
+import { Table2 } from "lucide-react";
+
 // const SwapView = React.lazy(() => import("views/SwapView"));
 // const PlayView = React.lazy(() => import("views/PlayView"));
 // const TheForgeView = React.lazy(() => import("views/TheForgeView"));
@@ -97,5 +100,18 @@ export const mainSiteRoutes = [
     title: "Admin",
     path: routeNames.admin,
     onlyAdmin: true,
+  },
+];
+
+export const adminRoutes = [
+  {
+    path: routeNames.admin,
+    title: "Rewards",
+    icon: <Table2 />,
+  },
+  {
+    path: routeNames.admin + "/aggregator",
+    title: "Aggregator",
+    icon: <SwapIcon />,
   },
 ];

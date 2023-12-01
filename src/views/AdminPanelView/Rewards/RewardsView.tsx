@@ -1,7 +1,7 @@
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { AdminRewards } from "./Rewards/AdminRewards";
+import { AdminRewards } from "./AdminRewards";
 
-const AdminPanelView = () => {
+const RewardsView = () => {
   return (
     <div className="h-full px-4 py-6 lg:px-8">
       <Tabs defaultValue="music" className="h-full space-y-6">
@@ -24,4 +24,4 @@ const AdminPanelView = () => {
   );
 };
 
-export default AdminPanelView;
+export default RewardsView;
