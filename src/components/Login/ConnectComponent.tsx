@@ -39,9 +39,7 @@ const webWalletLoginComponent = (
 const XAliasLoginComponent = (
   <div className="flex items-center gap-2 h-full">
     {" "}
-    <span className="w-[60px]">
-      <XAliasIcon mr="14px" fontSize={"16px"} />
-    </span>
+    <XAliasIcon mr="14px" fontSize={"16px"} /> xAlias
   </div>
 );
 const legerLoginComponent = (
