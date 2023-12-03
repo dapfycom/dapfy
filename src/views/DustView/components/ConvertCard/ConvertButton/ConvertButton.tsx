@@ -7,7 +7,7 @@ import {
   selectToTokenDust,
 } from "@/views/DustView/lib/dust-slice";
 import { useGetAmountOut } from "@/views/DustView/lib/hooks";
-import { converTokens } from "@/views/DustView/lib/services";
+import { convertTokens } from "@/views/DustView/lib/services";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import BigNumber from "bignumber.js";
 import { useState } from "react";
@@ -17,30 +17,30 @@ const ConvertButton = () => {
   const toToken = useAppSelector(selectToTokenDust);
   const { data } = useGetAmountOut(selectedTokens);
   const [sessionId, setSessionId] = useState("");
-  const [conffeti, setconffeti] = useState(false);
+  const [confetti, setConfetti] = useState(false);
 
   const { mutate } = useGetUserTokens();
 
   const onSuccess = () => {
     mutate();
-    setconffeti(true);
+    setConfetti(true);
   };
   useTrackTransactionStatus({
     transactionId: sessionId,
     onSuccess,
   });
   const handleSubmit = async () => {
-    setconffeti(false);
+    setConfetti(false);
 
     const slippage = 1;
 
     const bnAmountOut = new BigNumber(data?.amountOut || 0);
-    const amountWithSlipage = new BigNumber(bnAmountOut).minus(
+    const amountWithSlippage = new BigNumber(bnAmountOut).minus(
       new BigNumber(slippage / 100).multipliedBy(bnAmountOut)
     );
-    const res = await converTokens(
+    const res = await convertTokens(
       data?.tokenIdentifier || "",
-      amountWithSlipage.toFixed(0),
+      amountWithSlippage.toFixed(0),
       selectedTokens.map((token) => {
         return {
           collection: token.identifier,
@@ -56,7 +56,7 @@ const ConvertButton = () => {
 
   return (
     <>
-      {conffeti && <Realistic />}
+      {confetti && <Realistic />}
       <Button className="w-full" onClick={handleSubmit}>
         Convert tokens
       </Button>

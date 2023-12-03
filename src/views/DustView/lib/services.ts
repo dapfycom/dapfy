@@ -76,7 +76,7 @@ export const fetchAmountOut = async (
 };
 
 // calls
-export const converTokens = async (
+export const convertTokens = async (
   tokenToReceive: string,
   minAmountToReceive: string | number,
   tokensToSend: {
