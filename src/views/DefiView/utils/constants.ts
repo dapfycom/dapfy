@@ -1,10 +1,10 @@
 export const HatomConfigs = {
   apy: {
-    EGLD: 4.7,
-    USDC: 11.0,
-    USDT: 12.3,
-    BUSD: 15.7,
-    SEGLD: 1.8,
+    EGLD: 3.4,
+    USDC: 14.1,
+    USDT: 9.7,
+    BUSD: 20.7,
+    SEGLD: 1.9,
   },
   minDeposit: {
     EGLD: 1,
@@ -15,4 +15,4 @@ export const HatomConfigs = {
   },
 };
 
-export const hiddenPools = ["BUSD", "SEGLD"];
+export const hiddenPools = ["BUSD"];
