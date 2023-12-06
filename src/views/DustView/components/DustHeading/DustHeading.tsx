@@ -17,7 +17,7 @@ const DustHeading = () => {
           <TooltipTrigger>
             {" "}
             <PageHeaderHeading className="mb-6">
-              The Dust Converter
+              <span className={"gradienteTitle"}>The Dust Converter</span>
             </PageHeaderHeading>
           </TooltipTrigger>
           <TooltipContent>

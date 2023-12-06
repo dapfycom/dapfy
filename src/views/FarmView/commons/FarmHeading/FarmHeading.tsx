@@ -6,7 +6,9 @@ import {
 const FarmHeading = () => {
   return (
     <div>
-      <PageHeaderHeading className="mb-6">Farm</PageHeaderHeading>
+      <PageHeaderHeading className="mb-6">
+        <span className={"gradienteTitle"}>Farm</span>
+      </PageHeaderHeading>
       <PageHeaderDescription>
         Stake tokens to earn more rewards
       </PageHeaderDescription>

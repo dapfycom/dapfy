@@ -10,7 +10,7 @@ const Swap = () => {
     <Container>
       <div className="flex flex-col items-center text-center mt-5">
         <PageHeaderHeading className="mb-6">
-          The Ultimate Swap Aggregator
+          <span className={"gradienteTitle"}>The Ultimate Swap Aggregator</span>
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
           Best Rates, Lowest Fees

@@ -3,12 +3,6 @@ import {
   PageHeaderHeading,
 } from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import ChooseBetSection from "./common/ChooseBetSection/ChooseBetSection";
 import Coin from "./common/GameSection/common/Coin";
 import GameActions from "./common/GameSection/common/GameActions";
@@ -21,7 +15,7 @@ const CoinFlipView = () => {
       <Container>
         <div className="flex flex-col items-center text-center mt-5 mb-10">
           <PageHeaderHeading className="mb-5">
-            The Coin Flip Game
+            <span className={"gradienteTitle"}>The Coin Flip Game</span>
           </PageHeaderHeading>
 
           <PageHeaderDescription>

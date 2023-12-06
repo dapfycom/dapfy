@@ -6,7 +6,9 @@ import {
 const FarmHeading = () => {
   return (
     <div>
-      <PageHeaderHeading className="mb-6">Defi</PageHeaderHeading>
+      <PageHeaderHeading className="mb-6">
+        <span className={"gradienteTitle"}>Defi</span>
+      </PageHeaderHeading>
       <PageHeaderDescription>Earn by lending your assets</PageHeaderDescription>
     </div>
     // <Center textAlign={"center"} flexDir="column">
