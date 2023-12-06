@@ -96,21 +96,7 @@ export const KoalaWelcomeEmail = ({
             Start earning
           </Button>
         </Section>
-        <Section
-          style={{
-            margin: "20px 0",
-          }}
-        >
-          <Img
-            src="https://www.dapfy.com/images/logo-text-white.png"
-            alt="dapfy"
-            style={{
-              width: "70px",
-              height: "auto",
-              margin: "auto",
-            }}
-          />
-        </Section>
+
         <Section
           style={{
             textAlign: "center",
