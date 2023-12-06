@@ -1,5 +1,6 @@
 import {
   Body,
+  Button,
   Column,
   Container,
   Head,
@@ -78,19 +79,23 @@ export const KoalaWelcomeEmail = ({
 
         <Section style={{ marginBottom: "20px" }}>
           <Text style={{ marginBottom: "-10px" }}>
-            ✅ Connect your X account
+            ➜ Connect your X account
           </Text>
           <Text style={{ marginBottom: "-10px" }}>
-            ✅ Like, comment, retweet our posts
+            ➜ Like, comment, retweet our posts
           </Text>
           <Text style={{ marginBottom: "-10px" }}>
-            ✅ Use at least one of our DeFi tools
+            ➜ Use at least one of our DeFi tools
           </Text>
           <Text style={{ marginBottom: "-10px" }}>
             🎉 Receive daily rewards
           </Text>
         </Section>
-
+        <Section style={btnContainer}>
+          <Button pX={12} pY={12} style={button} href="https://dapfy.com">
+            Start earning
+          </Button>
+        </Section>
         <Section
           style={{
             margin: "20px 0",
