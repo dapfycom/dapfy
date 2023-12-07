@@ -14,8 +14,8 @@ const Swap = () => {
           <span className={"gradienteTitle"}>The Ultimate Swap Aggregator</span>
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
-          <span className="flex gap-2 items-end">
-            Best Rates, Lowest Fees. Powered by{" "}
+          <span className="flex gap-2 sm:items-end items-center flex-col sm:flex-row">
+            Powered by{" "}
             <Image
               src={"/images/AshSwap-logo.png"}
               alt="AshSwap"
