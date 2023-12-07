@@ -3,6 +3,7 @@ import {
   PageHeaderHeading,
 } from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
+import Image from "next/image";
 import SwapCard from "./commons/SwapCard";
 
 const Swap = () => {
@@ -13,7 +14,16 @@ const Swap = () => {
           <span className={"gradienteTitle"}>The Ultimate Swap Aggregator</span>
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
-          Best Rates, Lowest Fees
+          <span className="flex gap-2 items-end">
+            Best Rates, Lowest Fees. Powered by{" "}
+            <Image
+              src={"/images/AshSwap-logo.png"}
+              alt="AshSwap"
+              width={2000}
+              height={1074}
+              className="w-[70px]"
+            />
+          </span>
         </PageHeaderDescription>
 
         <SwapCard />
