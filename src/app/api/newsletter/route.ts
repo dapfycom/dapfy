@@ -3,8 +3,6 @@ import { sendWelcomeEmail } from "@/lib/emails";
 import { z } from "zod";
 
 export const POST = async (req: Request) => {
-  try {
-  } catch (error) {}
   let email;
   try {
     email = z
