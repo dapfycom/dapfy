@@ -73,9 +73,10 @@ export const KoalaWelcomeEmail = ({
         <Text style={paragraph}>Hi {email},</Text>
 
         <Text style={paragraph}>
-          Welcome to Dapfy, the platform that pays users for their interactions.
+          Welcome to Dapfy - the easy-to-use interface for swapping, farming,
+          and earning rewards.
         </Text>
-        <Text style={paragraph}>Here’s how you can start earning today:</Text>
+        <Text style={paragraph}>Here’s how it works:</Text>
 
         <Section style={{ marginBottom: "20px" }}>
           <Text style={{ marginBottom: "-10px" }}>➜ Connect your wallet</Text>
@@ -99,25 +100,9 @@ export const KoalaWelcomeEmail = ({
         <Section
           style={{
             textAlign: "center",
-            fontSize: "12px",
           }}
         >
-          <Text>Follow Dapfy :</Text>
-          <Text
-            style={{
-              fontSize: "12px",
-              margin: "30px 0px",
-            }}
-          >
-            You are receiving this email because you opted in via our website.
-          </Text>
-          <Text>
-            You can{" "}
-            <Link href={`https://dapfy.com/unsubscribe?email=${email}`}>
-              unsubscribe
-            </Link>{" "}
-            any moment
-          </Text>
+          <Text>Follow Dapfy:</Text>
           <Section
             style={{
               textAlign: "center" as const,
@@ -201,6 +186,16 @@ export const KoalaWelcomeEmail = ({
               </Column>
             </Row>
           </Section>
+          <Text>
+            You are receiving this email because you opted in via our website.
+          </Text>
+          <Text>
+            You can{" "}
+            <Link href={`https://dapfy.com/unsubscribe?email=${email}`}>
+              unsubscribe
+            </Link>{" "}
+            any moment
+          </Text>
 
           <Text
             style={{
