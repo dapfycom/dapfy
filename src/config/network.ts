@@ -96,16 +96,12 @@ const networkConfig = {
     ChainID: "D",
     tokensID: {
       egld: "EGLD",
-      wegld: "WEGLD-d7c6bb",
-      bsk: "BSK-207198",
-
-      ride: "RIDE-6e4c49",
-      hodl: "",
-      usdc: "USDC-8d4068",
+      wegld: "WEGLD-a28c59",
+      bsk: "WEGLD-a28c59",
+      ride: "RIDE-05b1bb",
+      usdc: "USDC-350c4e",
       rare: "RIDE-6e4c49",
-      bskwegld: "",
-      usdt: "USDT-188935",
-      busd: "BUSD-632f7d",
+      utk: "UTK-14d57d",
     },
     scAddress: {
       maiarRouter: "",

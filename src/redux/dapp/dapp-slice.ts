@@ -8,6 +8,7 @@ export interface GeneralState {
   sidebarMenu: boolean;
   shard: number;
   slippage: number;
+  isStreakModal: boolean;
 
   //dashboard
   isWrapEgldOpen: boolean;
@@ -18,6 +19,7 @@ const initialState: GeneralState = {
   userAddress: "",
   sidebarMenu: false,
   shard: 1,
+  isStreakModal: false,
   slippage: Cookies.get("dapp-slippage")
     ? Number(Cookies.get("dapp-slippage"))
     : 2,
@@ -53,12 +55,19 @@ export const dapp = createSlice({
     setIsWrapEgldOpen: (state, action: PayloadAction<boolean>) => {
       state.isWrapEgldOpen = action.payload;
     },
+
+    setIsStreakModal: (state, action: PayloadAction<boolean>) => {
+      state.isStreakModal = action.payload;
+    },
   },
 });
 
 export const selectIsLoginModal = (state: AppState) => state.dapp.isLoginModal;
 export const selectUserAddress = (state: AppState) => state.dapp.userAddress;
 export const selectDappSlippage = (state: AppState) => state.dapp.slippage;
+
+export const selectIsStreakModal = (state: AppState) =>
+  state.dapp.isStreakModal;
 
 export const selectIsWrapEgldOpen = (state: AppState) =>
   state.dapp.isWrapEgldOpen;
@@ -69,5 +78,6 @@ export const {
   setShard,
   updateDappSlippage,
   setIsWrapEgldOpen,
+  setIsStreakModal,
 } = dapp.actions;
 export default dapp.reducer;
