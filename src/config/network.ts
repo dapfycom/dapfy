@@ -102,6 +102,9 @@ const networkConfig = {
       usdc: "USDC-350c4e",
       rare: "RIDE-6e4c49",
       utk: "UTK-14d57d",
+      bskwegld: "",
+      busd: "",
+      usdt: "",
     },
     scAddress: {
       maiarRouter: "",
