@@ -1,11 +1,13 @@
 "use client";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { SWRConfig } from "swr";
 
 const SwrProvider = ({ children }: PropsWithChildren) => {
   return (
     <SWRConfig
       value={{
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
         onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
           console.log("error", error);
           console.log("key", key);

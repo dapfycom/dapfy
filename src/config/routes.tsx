@@ -9,6 +9,9 @@
 // import React from "react";
 // import { RouteObject } from "react-router-dom";
 
+import { SwapIcon } from "@/components/ui-system/icons/ui-icons";
+import { SendIcon, Table2 } from "lucide-react";
+
 // const SwapView = React.lazy(() => import("views/SwapView"));
 // const PlayView = React.lazy(() => import("views/PlayView"));
 // const TheForgeView = React.lazy(() => import("views/TheForgeView"));
@@ -63,30 +66,26 @@ export const externnalLinks = {
 export const mainSiteRoutes = [
   {
     path: routeNames.rewards,
-    title: "Rewards",
+    title: "Earn",
   },
   {
     path: routeNames.aggregator,
     title: "Swap",
   },
   {
-    path: routeNames.defi,
-    title: "Defi",
-  },
-
-  {
     path: routeNames.farm,
     title: "Farm",
   },
 
   {
-    path: routeNames.dust,
-    title: "Dust",
-  },
-  {
     path: routeNames.play,
-    title: "Other",
+    title: "Play",
     soon: false,
+  },
+
+  {
+    path: routeNames.dust,
+    title: "Convert Dust",
   },
 
   {
@@ -97,5 +96,23 @@ export const mainSiteRoutes = [
     title: "Admin",
     path: routeNames.admin,
     onlyAdmin: true,
+  },
+];
+
+export const adminRoutes = [
+  {
+    path: routeNames.admin,
+    title: "Rewards",
+    icon: <Table2 />,
+  },
+  {
+    path: routeNames.admin + "/aggregator",
+    title: "Aggregator",
+    icon: <SwapIcon />,
+  },
+  {
+    path: routeNames.admin + "/newsletter",
+    title: "Newsletter",
+    icon: <SendIcon />,
   },
 ];

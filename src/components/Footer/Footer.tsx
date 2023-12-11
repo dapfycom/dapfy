@@ -1,6 +1,6 @@
 "use client";
 import { externnalLinks, routeNames } from "@/config/routes";
-import { Dot, Facebook, Monitor, Moon, Sun } from "lucide-react";
+import { Dot, Facebook, Monitor, Moon, Sun, Youtube } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -217,10 +217,41 @@ const Footer = () => {
                     >
                       <Facebook size={"20px"} className="hover:scale-110" />
                     </Link>
+
+                    {/* Tiktok */}
+                    <Link
+                      href={externnalLinks.tiktok}
+                      className=" hover:text-primary transition duration-300"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="20"
+                        width="17"
+                        viewBox="0 0 448 512"
+                        className="hover:scale-110"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"
+                        />
+                      </svg>{" "}
+                    </Link>
+
+                    {/* Youtube */}
+                    <Link
+                      href={externnalLinks.youtube}
+                      className=" hover:text-primary transition duration-300"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Youtube size={"22px"} className="hover:scale-110" />
+                    </Link>
                   </div>
                 </div>
               </div>
-              <LinksSections title="Company" routes={companyRoutes} />
+              {/* <LinksSections title="Company" routes={companyRoutes} /> */}
               <LinksSections title="Products" routes={productsRoutes} />
               <LinksSections title="Resources" routes={resourcesRoutes} />
 

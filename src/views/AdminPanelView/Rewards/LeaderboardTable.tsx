@@ -55,7 +55,7 @@ export const columns: ColumnDef<IUserPoints>[] = [
   },
 ];
 
-const LeaderboardTable = () => {
+const LeaderboardTable = ({ data }: { data: IUserPoints[] }) => {
   const router = useRouter();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -65,7 +65,7 @@ const LeaderboardTable = () => {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const { leaderboard: data } = useGetRewardsLeaderboard();
+  console.log({ data });
 
   const table = useReactTable({
     data,
@@ -85,6 +85,7 @@ const LeaderboardTable = () => {
       rowSelection,
     },
   });
+
   const handleChangeDate = (date: Date) => {
     const formatedDate = format(date, "yyyy-LL-dd");
     router.push("?date=" + formatedDate);
@@ -205,4 +206,9 @@ const LeaderboardTable = () => {
   );
 };
 
-export default LeaderboardTable;
+const TableContainer = () => {
+  const { leaderboard: data } = useGetRewardsLeaderboard();
+  return <LeaderboardTable data={data} />;
+};
+
+export default TableContainer;

@@ -2,6 +2,7 @@
 import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import { Card, CardContent } from "@/components/ui/card";
+import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
@@ -10,7 +11,7 @@ import {
   IMoneyMarketDeposit,
   IMoneyMarketReward,
 } from "@/types/hatom.interface";
-import { formatBalanceDollar  } from "@/utils/functions/formatBalance";
+import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import Image from "next/image";
 import React from "react";
@@ -46,6 +47,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
     hatomFarm.moneyMarket.tokenI || ""
   );
 
+  const { isAdmin } = useAuthentication();
   return (
     <FarmContext.Provider
       value={{
@@ -81,20 +83,22 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
                 </div>
               )}
             </div>
-            <div className="flex flex-col my-5">
-              <p className="whitespace-nowrap mb-2">Total Value Locked</p>
-              <p className="text-[12px] text-muted-foreground">
-                $
-                {formatBalanceDollar(
-                  {
-                    balance: hatomFarm.tvl,
-                    decimals: elrondToken?.decimals,
-                  },
-                  price,
-                  true
-                )}
-              </p>
-            </div>
+            {isAdmin && (
+              <div className="flex flex-col my-5">
+                <p className="whitespace-nowrap mb-2">Total Value Locked</p>
+                <p className="text-[12px] text-muted-foreground">
+                  $
+                  {formatBalanceDollar(
+                    {
+                      balance: hatomFarm.tvl,
+                      decimals: elrondToken?.decimals,
+                    },
+                    price,
+                    true
+                  )}
+                </p>
+              </div>
+            )}
             <div className="flex items-center gap-7 flex-col md:flex-row flex-1 justify-end">
               <FarmInfo />
               <FarmMainButtons isOpen={isOpen} />

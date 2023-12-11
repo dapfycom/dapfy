@@ -1,5 +1,6 @@
 import {
   Body,
+  Button,
   Column,
   Container,
   Head,
@@ -72,79 +73,36 @@ export const KoalaWelcomeEmail = ({
         <Text style={paragraph}>Hi {email},</Text>
 
         <Text style={paragraph}>
-          Welcome to Dapfy, the platform that pays users for their interactions.
+          Welcome to Dapfy - the easy-to-use interface for swapping, farming,
+          and earning rewards.
         </Text>
-        <Text style={paragraph}>Here’s how you can start earning today:</Text>
+        <Text style={paragraph}>Here’s how it works:</Text>
 
         <Section style={{ marginBottom: "20px" }}>
+          <Text style={{ marginBottom: "-10px" }}>➜ Connect your wallet</Text>
           <Text style={{ marginBottom: "-10px" }}>
-            ✅ Connect your X account
+            ➜ Connect your 𝕏 account
           </Text>
           <Text style={{ marginBottom: "-10px" }}>
-            ✅ Like, comment, retweet our posts
+            ➜ Like, comment, retweet our posts
           </Text>
-          <Text style={{ marginBottom: "-10px" }}>
-            ✅ Use at least one of our DeFi tools
+          <Text>➜ Use at least one of our DeFi tools</Text>
+          <Text style={{ marginTop: "5px" }}>
+            🎉 Congrats, you’re now eligible for rewards! 🎉
           </Text>
-          <Text style={{ marginBottom: "-10px" }}>
-            🎉 Receive daily rewards
-          </Text>
+        </Section>
+        <Section style={btnContainer}>
+          <Button pX={12} pY={12} style={button} href="https://dapfy.com">
+            Start Earning Now
+          </Button>
         </Section>
 
-        <Section
-          style={{
-            margin: "20px 0",
-          }}
-        >
-          <Img
-            src="https://www.dapfy.com/images/logo-text-white.png"
-            alt="dapfy"
-            style={{
-              width: "70px",
-              height: "auto",
-              margin: "auto",
-            }}
-          />
-        </Section>
         <Section
           style={{
             textAlign: "center",
-            fontSize: "12px",
           }}
         >
-          <Text
-            style={{
-              fontSize: "12px",
-              fontStyle: "italic",
-            }}
-          >
-            Copyright (C) 2023{" "}
-            <Link
-              href="http://dapfy.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Dapfy.com
-            </Link>
-            . All rights reserved.
-          </Text>
-
-          <Text
-            style={{
-              fontSize: "12px",
-              margin: "30px 0px",
-            }}
-          >
-            You are receiving this email because you opted in via our website.
-          </Text>
-          <Text>Want to change how you receive these emails?</Text>
-          <Text>
-            You can{" "}
-            <Link href={`https://dapfy.com/unsubscribe?email=${email}`}>
-              unsubscribe
-            </Link>{" "}
-            any moment
-          </Text>
+          <Text>Follow Dapfy:</Text>
           <Section
             style={{
               textAlign: "center" as const,
@@ -228,6 +186,33 @@ export const KoalaWelcomeEmail = ({
               </Column>
             </Row>
           </Section>
+          <Text>
+            You are receiving this email because you opted in via our website.
+          </Text>
+          <Text>
+            You can{" "}
+            <Link href={`https://dapfy.com/unsubscribe?email=${email}`}>
+              unsubscribe
+            </Link>{" "}
+            any moment
+          </Text>
+
+          <Text
+            style={{
+              fontSize: "12px",
+              fontStyle: "italic",
+            }}
+          >
+            Copyright (C) 2023{" "}
+            <Link
+              href="http://dapfy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dapfy.com
+            </Link>
+            . All rights reserved.
+          </Text>
         </Section>
       </Container>
     </Body>

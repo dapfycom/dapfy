@@ -69,7 +69,8 @@ export const useSelectableDustTokens = () => {
         limitDollarAmount &&
       (formatBalanceDollar(userToken, userToken?.price || 0) as number) >=
         limitDollarAmountMin &&
-      userToken.identifier !== toTokenToConvert
+      userToken.identifier !== toTokenToConvert &&
+      userToken.identifier !== selectedNetwork.tokensID.busd
     ) {
       return true;
     } else {

@@ -9,11 +9,10 @@ import { routeNames } from "@/config/routes";
 import useDisclosure from "@/hooks/useDisclosure";
 import useScrolled from "@/hooks/useScrolled";
 import Image from "next/image";
-import PishingWarn from "../PishingWarn/PishingWarn";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen } = useDisclosure();
 
   return (
     <>
@@ -31,7 +30,7 @@ const Navbar = () => {
             : ""
         } before:backdrop-opacity-100 before:w-full before:h-full before:absolute  `}
       >
-        {!isOpen && <PishingWarn close={onToggle} />}
+        {/* {!isOpen && <PishingWarn close={onToggle} />} */}
 
         <Container className="relative z-20">
           <div className="relative  sm:px-6 lg:px-8 flex h-16 items-center">
@@ -59,7 +58,7 @@ const Navbar = () => {
         </Container>
       </header>
 
-      <div className={!isOpen ? "pt-24 md:pt-20" : "pt-6"}>
+      <div className={"pt-6"}>
         <EpochCountDown />
       </div>
     </>
