@@ -47,6 +47,7 @@ export function middleware(request: NextRequest) {
       "/.well-known",
       "/unsubscribe",
       "/admin",
+      "/gifs",
       // Your other files in `public`
     ])
   ) {

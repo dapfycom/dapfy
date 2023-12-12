@@ -4,10 +4,9 @@ import {
 } from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
 import { Button } from "@/components/ui/button";
-import useAuthentication from "@/hooks/useAuthentication";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 import { routeNames } from "@/config/routes";
 const Home = () => {
@@ -18,22 +17,58 @@ const Home = () => {
           <span className={"gradienteTitle"}>CONNECT. INVEST. EARN.</span>
         </PageHeaderHeading>
         <div className="text-center">
-          <PageHeaderDescription className="mb-10 text-center">
-            Welcome to Dapfy, the platform that pays users for their
-            interactions.
+          <PageHeaderDescription className="mb-20 text-center">
+            The easy-to-use interface for swapping, farming, playing and earning
+            rewards.
           </PageHeaderDescription>
         </div>
         <div className="text-left w-fit  m-auto">
-          <h3 className="mb-3 text-xl">
-            Here’s how you can start earning today:
-          </h3>
-          <ul className="flex flex-col gap-1">
-            <li>✅ Connect your X account</li>
-            <li>✅ Like, comment, retweet our posts</li>
+          <ul className="flex flex-col gap-10">
+            <li className="flex flex-col gap-2">
+              <span className="text-2xl">1 - Connect your wallet</span>
+              <Image
+                alt=""
+                src={"/gifs/connect-wallet.gif"}
+                width={800}
+                height={100}
+                className="overflow-hidden rounded"
+              />
+            </li>
+            <li className="flex flex-col gap-2">
+              <span className="text-2xl">2 -Connect your X account</span>
+              <Image
+                alt=""
+                src={"/gifs/connect-X-account.gif"}
+                width={800}
+                height={100}
+                className="overflow-hidden rounded"
+              />
+            </li>
+            <li className="flex flex-col gap-2">
+              <span className="text-2xl">
+                3 -Like, comment, retweet our posts
+              </span>
+              <Image
+                alt=""
+                src={"/gifs/like-comment-retweet.gif"}
+                width={800}
+                height={100}
+                className="overflow-hidden rounded"
+              />
+            </li>
 
-            <li>✅ Use at least one of our DeFi tools</li>
-
-            <li>🎉 Receive daily rewards</li>
+            <li className="flex flex-col gap-2">
+              <span className="text-2xl">
+                4 -Use at least one of our DeFi tools
+              </span>
+              <Image
+                alt=""
+                src={"/gifs/use-tools.gif"}
+                width={800}
+                height={100}
+                className="overflow-hidden rounded"
+              />
+            </li>
           </ul>
         </div>
 
@@ -55,7 +90,7 @@ const Home = () => {
                 height={20}
                 className="block dark:hidden"
               />{" "}
-              Get started
+              Start Earning Now
             </Link>
           </Button>
         </div>
