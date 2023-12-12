@@ -34,7 +34,7 @@ export async function writeTweet(tweet: { text: string }) {
     const request = await fetch(url, {
       method: "POST",
       body: JSON.stringify(tweet),
-      responseType: "json",
+
       headers: {
         Authorization: headers["Authorization"],
         "user-agent": "V2CreateTweetJS",
