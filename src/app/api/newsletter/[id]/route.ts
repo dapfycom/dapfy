@@ -13,7 +13,7 @@ export const DELETE = async (
       },
     });
   } catch (error) {
-    console.log("Prisma error", error);
+    console.log("Prisma on error", error);
 
     return Response.json({ error: "Unknow error" }, { status: 500 });
   }
