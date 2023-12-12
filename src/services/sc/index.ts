@@ -98,6 +98,7 @@ export const getInterface = (workspace: WspTypes) => {
       simpleAddress = selectedNetwork.scAddress.oneDexFarm;
       address = new Address(simpleAddress);
       abiUrl = onDexFarmAbiUrl;
+      break;
     case "ashSwapAggregatorWsp":
       simpleAddress = selectedNetwork.scAddress.ashSwapAggregator;
       address = new Address(simpleAddress);
