@@ -76,6 +76,7 @@ const networkConfig = {
       ashSwapFarm: "",
       ashSwapAggregator:
         "erd1qqqqqqqqqqqqqpgqcc69ts8409p3h77q5chsaqz57y6hugvc4fvs64k74v",
+      oneDexFarm: "",
     },
   },
   devnet: {
