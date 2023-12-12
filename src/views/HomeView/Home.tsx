@@ -73,7 +73,10 @@ const Home = () => {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <Button className="flex gap-2 rounded-full px-7 w-fit" asChild>
+          <Button
+            className="flex gap-3 rounded-full px-7 w-fit text-xl h-fit"
+            asChild
+          >
             <Link href={routeNames.rewards}>
               {" "}
               <Image
