@@ -13,8 +13,8 @@ const Home = () => {
   return (
     <Container className="min-h-[40vh]">
       <div className=" flex flex-col text-center mt-10 mb-5 md:mb-20">
-        <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
-          <span className={"gradienteTitle"}>CONNECT. INVEST. EARN.</span>
+        <PageHeaderHeading className={cn("mb-10 md:text-6xl")}>
+          <span className={""}>CONNECT. INVEST. EARN.</span>
         </PageHeaderHeading>
         <div className="text-center">
           <PageHeaderDescription className="mb-20 text-center">
@@ -22,8 +22,8 @@ const Home = () => {
             rewards.
           </PageHeaderDescription>
         </div>
-        <div className="text-left w-fit  m-auto">
-          <ul className="flex flex-col gap-10">
+        <div className="w-fit  m-auto text-center">
+          <ul className="flex flex-col gap-16">
             <li className="flex flex-col gap-2">
               <span className="text-2xl text-muted-foreground">
                 Connect your wallet
