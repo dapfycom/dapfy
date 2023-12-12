@@ -13,8 +13,8 @@ const Home = () => {
   return (
     <Container className="min-h-[40vh]">
       <div className=" flex flex-col text-center mt-10 mb-5 md:mb-20">
-        <PageHeaderHeading className={cn("mb-10 md:text-6xl")}>
-          <span className={""}>CONNECT. INVEST. EARN.</span>
+        <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
+          <span className={"gradienteTitle"}>CONNECT. INVEST. EARN.</span>
         </PageHeaderHeading>
         <div className="text-center">
           <PageHeaderDescription className="mb-20 text-center">
@@ -22,34 +22,30 @@ const Home = () => {
             rewards.
           </PageHeaderDescription>
         </div>
-        <div className="w-fit  m-auto text-center">
-          <ul className="flex flex-col gap-16">
+        <div className="text-center w-fit  m-auto">
+          <ul className="flex flex-col gap-20">
             <li className="flex flex-col gap-2">
-              <span className="text-2xl text-muted-foreground">
-                Connect your wallet
-              </span>
+              <span className="text-4xl">Connect your wallet</span>
               <Image
                 alt=""
                 src={"/gifs/connect-wallet.gif"}
                 width={800}
                 height={100}
-                className="overflow-hidden rounded"
+                className="overflow-hidden rounded-2xl"
               />
             </li>
             <li className="flex flex-col gap-2">
-              <span className="text-2xl text-muted-foreground">
-                Connect your X account
-              </span>
+              <span className="text-4xl ">Connect your X account</span>
               <Image
                 alt=""
                 src={"/gifs/connect-X-account.gif"}
                 width={800}
                 height={100}
-                className="overflow-hidden rounded"
+                className="overflow-hidden rounded-2xl"
               />
             </li>
             <li className="flex flex-col gap-2">
-              <span className="text-2xl text-muted-foreground">
+              <span className="text-4xl ">
                 Like, comment, retweet our posts
               </span>
               <Image
@@ -57,12 +53,12 @@ const Home = () => {
                 src={"/gifs/like-comment-retweet.gif"}
                 width={800}
                 height={100}
-                className="overflow-hidden rounded"
+                className="overflow-hidden rounded-2xl"
               />
             </li>
 
             <li className="flex flex-col gap-2">
-              <span className="text-2xl text-muted-foreground">
+              <span className="text-4xl ">
                 Use at least one of our DeFi tools
               </span>
               <Image
@@ -70,7 +66,7 @@ const Home = () => {
                 src={"/gifs/use-tools.gif"}
                 width={800}
                 height={100}
-                className="overflow-hidden rounded"
+                className="overflow-hidden rounded-2xl"
               />
             </li>
           </ul>
