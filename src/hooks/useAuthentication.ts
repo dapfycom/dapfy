@@ -12,7 +12,8 @@ const useAuthentication = () => {
   const dispatch = useAppDispatch();
   const isOpenLoginModal = useAppSelector(selectIsLoginModal);
   const currentAddress = useAppSelector(selectUserAddress);
-  const { isLoggedIn } = useGetLoginInfo();
+  const { isLoggedIn, tokenLogin } = useGetLoginInfo();
+  console.log("tokenLogin", tokenLogin);
 
   const handleConnect = () => {
     dispatch(openLogin(true));
@@ -21,8 +22,17 @@ const useAuthentication = () => {
     logout("/");
   };
 
+  const data = tokenLogin?.nativeAuthToken;
+  const signature = tokenLogin?.signature;
+
+  console.log({
+    currentAddress: currentAddress,
+    ...tokenLogin,
+  });
+
   return {
     isLoggedIn,
+    tokenLogin,
     address: currentAddress,
     isAdmin:
       process.env.NODE_ENV !== "production" || admins?.includes(currentAddress),
