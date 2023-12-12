@@ -25,7 +25,9 @@ const Home = () => {
         <div className="text-left w-fit  m-auto">
           <ul className="flex flex-col gap-10">
             <li className="flex flex-col gap-2">
-              <span className="text-2xl">1 - Connect your wallet</span>
+              <span className="text-2xl text-muted-foreground">
+                Connect your wallet
+              </span>
               <Image
                 alt=""
                 src={"/gifs/connect-wallet.gif"}
@@ -35,7 +37,9 @@ const Home = () => {
               />
             </li>
             <li className="flex flex-col gap-2">
-              <span className="text-2xl">2 -Connect your X account</span>
+              <span className="text-2xl text-muted-foreground">
+                Connect your X account
+              </span>
               <Image
                 alt=""
                 src={"/gifs/connect-X-account.gif"}
@@ -45,8 +49,8 @@ const Home = () => {
               />
             </li>
             <li className="flex flex-col gap-2">
-              <span className="text-2xl">
-                3 -Like, comment, retweet our posts
+              <span className="text-2xl text-muted-foreground">
+                Like, comment, retweet our posts
               </span>
               <Image
                 alt=""
@@ -58,8 +62,8 @@ const Home = () => {
             </li>
 
             <li className="flex flex-col gap-2">
-              <span className="text-2xl">
-                4 -Use at least one of our DeFi tools
+              <span className="text-2xl text-muted-foreground">
+                Use at least one of our DeFi tools
               </span>
               <Image
                 alt=""
