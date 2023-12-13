@@ -5,11 +5,15 @@ const useTxNotification = () => {
   const { toast } = useToast();
   const handleToast = () => {
     toast({
+      title: "Notification",
+      duration: 10000,
       description: (
         <span>
           💡 Like, comment and retweet{" "}
-          <a href={externnalLinks.twitter}>@dapfycom</a> posts on X to be
-          eligible for rewards!
+          <a href={externnalLinks.twitter} className="text-blue-500">
+            @dapfycom
+          </a>{" "}
+          posts on X to be eligible for rewards!
         </span>
       ),
     });
