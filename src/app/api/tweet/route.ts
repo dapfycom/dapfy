@@ -32,20 +32,29 @@ export const POST = async (req: Request) => {
       }
     );
   }
-
-  writeTweet({
-    text: text,
-  });
-  return Response.json(
-    {
-      message: "success",
-      data: {
-        token,
-        isValid: ok,
+  try {
+    const data = await writeTweet({
+      text: text,
+    });
+    return Response.json(
+      {
+        message: data.detail,
+        data,
       },
-    },
-    {
-      status: 200,
-    }
-  );
+      {
+        status: data.status,
+      }
+    );
+  } catch (error) {
+    console.log("Error", error);
+    return Response.json(
+      {
+        message: "Error",
+        error,
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 };

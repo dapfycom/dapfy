@@ -23,7 +23,8 @@ const SubmitButton = () => {
   const { data: aggregatorData } = useGetAggregate();
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const [txSuccess, setTxSuccess] = useState(false);
-  const { delayedToastTxNotification } = useTxNotification();
+  const { delayedToastTxNotification, toastTxNotification } =
+    useTxNotification();
 
   const onSuccess = React.useCallback(() => {
     setTxSuccess(true);
