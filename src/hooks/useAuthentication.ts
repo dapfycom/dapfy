@@ -14,7 +14,6 @@ const useAuthentication = () => {
   const isOpenLoginModal = useAppSelector(selectIsLoginModal);
   const currentAddress = useAppSelector(selectUserAddress);
   const { isLoggedIn, tokenLogin } = useGetLoginInfo();
-  console.log("tokenLogin", tokenLogin);
 
   const handleConnect = () => {
     dispatch(openLogin(true));
