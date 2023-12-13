@@ -1,17 +1,29 @@
 import { sendWelcomeEmail } from "@/lib/emails";
+import { verifyAdmins } from "@/lib/mx-utils";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  let { email, token } = await req.json();
+  let { email } = await req.json();
 
-  if (token !== process.env.ADMIN_TOKEN) {
-    return NextResponse.json(
-      {},
+  // authorization user to this route
+  const token = req.headers.get("Authorization")?.split(" ")[1];
+  const ok = verifyAdmins(token || "");
+  if (!ok) {
+    return Response.json(
       {
-        status: 404,
+        message: "invalid signature",
+        data: {
+          token,
+          isValid: ok,
+        },
+      },
+      {
+        status: 403,
       }
     );
   }
+  // end authorization
+
   if (!email) {
     email = "armandoc9943@gmail.com";
   }

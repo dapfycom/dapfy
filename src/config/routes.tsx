@@ -10,7 +10,7 @@
 // import { RouteObject } from "react-router-dom";
 
 import { SwapIcon } from "@/components/ui-system/icons/ui-icons";
-import { SendIcon, Table2 } from "lucide-react";
+import { SendIcon, Table2, Twitter } from "lucide-react";
 
 // const SwapView = React.lazy(() => import("views/SwapView"));
 // const PlayView = React.lazy(() => import("views/PlayView"));
@@ -114,5 +114,10 @@ export const adminRoutes = [
     path: routeNames.admin + "/newsletter",
     title: "Newsletter",
     icon: <SendIcon />,
+  },
+  {
+    path: routeNames.admin + "/twitter",
+    title: "Twitter",
+    icon: <Twitter />,
   },
 ];

@@ -6,6 +6,7 @@ import {
 import { admins } from "@/views/AdminPanelView/data";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
 import { logout } from "@multiversx/sdk-dapp/utils";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./useRedux";
 
 const useAuthentication = () => {
@@ -22,13 +23,13 @@ const useAuthentication = () => {
     logout("/");
   };
 
-  const data = tokenLogin?.nativeAuthToken;
-  const signature = tokenLogin?.signature;
-
-  console.log({
-    currentAddress: currentAddress,
-    ...tokenLogin,
-  });
+  useEffect(() => {
+    // set authToken on localStorage
+    if (tokenLogin?.loginToken && tokenLogin.signature) {
+      const authToken = tokenLogin.loginToken + ":" + tokenLogin.signature;
+      localStorage.setItem("authToken", authToken);
+    }
+  }, [tokenLogin?.loginToken, tokenLogin?.signature]);
 
   return {
     isLoggedIn,
