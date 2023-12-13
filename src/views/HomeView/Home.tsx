@@ -63,7 +63,7 @@ const Home = () => {
               </span>
               <Image
                 alt=""
-                src={"/gifs/use-tools.gif"}
+                src={"/gifs/use-tools.png"}
                 width={800}
                 height={100}
                 className="overflow-hidden rounded-2xl"
