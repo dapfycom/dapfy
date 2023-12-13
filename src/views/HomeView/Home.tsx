@@ -66,7 +66,14 @@ const Home = () => {
                 src={"/gifs/use-tools.png"}
                 width={800}
                 height={100}
-                className="overflow-hidden rounded-2xl"
+                className="overflow-hidden rounded-2xl hidden dark:block"
+              />
+              <Image
+                alt=""
+                src={"/gifs/use-tools-black.png"}
+                width={800}
+                height={100}
+                className="overflow-hidden rounded-2xl block dark:hidden"
               />
             </li>
           </ul>
