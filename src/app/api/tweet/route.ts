@@ -1,20 +1,9 @@
 import { writeTweet } from "@/lib/twitter";
 import { verifyAdmins } from "../../../lib/mx-utils";
 export const POST = async (req: Request) => {
-  let { token, text } = await req.json();
-
-  if (!token || !text) {
-    return Response.json(
-      {
-        message: "No text or token found",
-      },
-      {
-        status: 400,
-      }
-    );
-  }
-
-  const ok = verifyAdmins(token);
+  // authorization user to this route
+  const token = req.headers.get("Authorization")?.split(" ")[1];
+  const ok = verifyAdmins(token || "");
   if (!ok) {
     return Response.json(
       {
@@ -26,6 +15,20 @@ export const POST = async (req: Request) => {
       },
       {
         status: 403,
+      }
+    );
+  }
+  // end authorization
+
+  let { text } = await req.json();
+
+  if (!text) {
+    return Response.json(
+      {
+        message: "No text found",
+      },
+      {
+        status: 400,
       }
     );
   }

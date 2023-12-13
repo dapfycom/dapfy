@@ -1,13 +1,10 @@
 import { routeNames } from "@/config/routes";
 import useAuthentication from "@/hooks/useAuthentication";
-import { useGetTimeUntilNextEpochCountDown } from "@/hooks/useGetStats";
-import { cn } from "@/lib/utils";
-import { secondsToHms } from "@/utils/functions/dates";
 import { usePathname, useRouter } from "next/navigation";
+import CountDown from "./CountDown";
 const EpochCountDown = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { timeUntilNextEpoch } = useGetTimeUntilNextEpochCountDown();
   let mt = "64px";
 
   const { isLoggedIn } = useAuthentication();
@@ -21,19 +18,10 @@ const EpochCountDown = () => {
 
   const extraSpace = pathname === "/" && !isLoggedIn;
   return (
-    <div
-      // style={{
-      //   marginTop: mt,
-      // }}
-      className={cn(
-        `${
-          extraSpace ? "mt-[80px] md:mt-[104px] " : "mt-[64px]"
-        } flex justify-center text-center text-muted-foreground cursor-pointer`
-      )}
-      onClick={handleClickCountDown}
-    >
-      ≈ {secondsToHms(timeUntilNextEpoch)} until next reward
-    </div>
+    <CountDown
+      extraSpace={extraSpace}
+      handleClickCountDown={handleClickCountDown}
+    />
   );
 };
 
