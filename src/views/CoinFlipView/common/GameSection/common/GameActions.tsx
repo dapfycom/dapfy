@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import useAuthentication from "@/hooks/useAuthentication";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import useTxNotification from "@/hooks/useTxNotification";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { flipCoin } from "@/views/CoinFlipView/lib/calls";
 import {
@@ -28,9 +29,12 @@ const GameActions = () => {
   const [sessionId, setSessionId] = React.useState("");
   const { elrondToken } = useGetElrondToken(tokenStr);
   const { isLoggedIn, handleConnect } = useAuthentication();
+  const { delayedToastTxNotification } = useTxNotification();
+
   const onSuccess = () => {
     if (transactions) {
       setTxData(transactions.length > 0 ? transactions[0]?.hash || "" : "");
+      delayedToastTxNotification();
       mutate([tokenStr, userAddress]);
     }
   };
@@ -40,10 +44,8 @@ const GameActions = () => {
     onSuccess,
   });
 
-  const handleFilp = async () => {
+  const handleFlip = async () => {
     if (betAmount) {
-      console.log("elrondToken", elrondToken);
-
       const res = await flipCoin(selectedSide, elrondToken, betAmount);
       setSessionId(res?.sessionId);
     }
@@ -93,7 +95,7 @@ const GameActions = () => {
                   <Button
                     className="w-full "
                     variant={"secondary"}
-                    onClick={isLoggedIn ? handleFilp : handleConnect}
+                    onClick={isLoggedIn ? handleFlip : handleConnect}
                   >
                     {isLoggedIn
                       ? "Place bet and flip coin"

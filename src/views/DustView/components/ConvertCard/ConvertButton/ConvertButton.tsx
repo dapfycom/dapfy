@@ -19,8 +19,7 @@ const ConvertButton = () => {
   const { data } = useGetAmountOut(selectedTokens);
   const [sessionId, setSessionId] = useState("");
   const [confetti, setConfetti] = useState(false);
-  const { delayedToastTxNotification, toastTxNotification } =
-    useTxNotification();
+  const { delayedToastTxNotification } = useTxNotification();
   const { mutate } = useGetUserTokens();
 
   const onSuccess = () => {
@@ -35,7 +34,6 @@ const ConvertButton = () => {
   });
   const handleSubmit = async () => {
     setConfetti(false);
-    toastTxNotification();
     const slippage = 1;
 
     const bnAmountOut = new BigNumber(data?.amountOut || 0);
