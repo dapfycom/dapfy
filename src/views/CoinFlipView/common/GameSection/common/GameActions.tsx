@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import useAuthentication from "@/hooks/useAuthentication";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { selectUserAddress, setIsStreakModal } from "@/redux/dapp/dapp-slice";
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { flipCoin } from "@/views/CoinFlipView/lib/calls";
 import {
   changeUserCoinSide,
@@ -32,8 +32,6 @@ const GameActions = () => {
     if (transactions) {
       setTxData(transactions.length > 0 ? transactions[0]?.hash || "" : "");
       mutate([tokenStr, userAddress]);
-
-      dispatch(setIsStreakModal(true));
     }
   };
 
