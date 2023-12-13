@@ -2,6 +2,7 @@ import Realistic from "@/components/Conffeti/Realistic";
 import { Button } from "@/components/ui/button";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
+import useTxNotification from "@/hooks/useTxNotification";
 import {
   selectConvertInfo,
   selectToTokenDust,
@@ -18,12 +19,15 @@ const ConvertButton = () => {
   const { data } = useGetAmountOut(selectedTokens);
   const [sessionId, setSessionId] = useState("");
   const [confetti, setConfetti] = useState(false);
-
+  const { delayedToastTxNotification, toastTxNotification } =
+    useTxNotification();
   const { mutate } = useGetUserTokens();
 
   const onSuccess = () => {
     mutate();
     setConfetti(true);
+
+    delayedToastTxNotification();
   };
   useTrackTransactionStatus({
     transactionId: sessionId,
@@ -31,7 +35,7 @@ const ConvertButton = () => {
   });
   const handleSubmit = async () => {
     setConfetti(false);
-
+    toastTxNotification();
     const slippage = 1;
 
     const bnAmountOut = new BigNumber(data?.amountOut || 0);

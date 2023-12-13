@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import useTxNotification from "@/hooks/useTxNotification";
 import { openLogin } from "@/redux/dapp/dapp-slice";
 import { submitSwap } from "@/views/SwapAggregator/lib/calls";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
@@ -22,12 +23,11 @@ const SubmitButton = () => {
   const { data: aggregatorData } = useGetAggregate();
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const [txSuccess, setTxSuccess] = useState(false);
+  const { delayedToastTxNotification } = useTxNotification();
 
   const onSuccess = React.useCallback(() => {
     setTxSuccess(true);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1200);
+    delayedToastTxNotification(2000);
   }, []);
 
   useTrackTransactionStatus({
