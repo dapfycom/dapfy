@@ -22,7 +22,6 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { walletConnectV2ProjectId } from "@/providers/sdk-dapp/SdkProvider";
 import { openLogin } from "@/redux/dapp/dapp-slice";
 import { ExtensionLoginButton } from "@multiversx/sdk-dapp/UI/extension/ExtensionLoginButton";
-import { LedgerLoginButton } from "@multiversx/sdk-dapp/UI/ledger/LedgerLoginButton";
 import { WalletConnectLoginButton } from "@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton";
 import { WebWalletLoginButton } from "@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton";
 import { XaliasLoginButton } from "@multiversx/sdk-dapp/UI/webWallet/XaliasLoginButton";
@@ -123,9 +122,9 @@ const ConnectComponent = ({ place }: IProps) => {
             >
               {mobileLoginComponent}
             </LoginMethod>
-            <LoginMethod as={LedgerLoginButton} {...commonProps}>
+            {/* <LoginMethod as={LedgerLoginButton} {...commonProps}>
               {legerLoginComponent}
-            </LoginMethod>
+            </LoginMethod> */}
             <LoginMethod as={WebWalletLoginButton} {...commonProps}>
               {webWalletLoginComponent}
             </LoginMethod>
