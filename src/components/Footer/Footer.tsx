@@ -1,6 +1,6 @@
 "use client";
 import { externnalLinks, routeNames } from "@/config/routes";
-import { Dot, Facebook, Monitor, Moon, Sun, Youtube } from "lucide-react";
+import { Dot, Facebook, Mail, Monitor, Moon, Sun, Youtube } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -247,6 +247,15 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <Youtube size={"22px"} className="hover:scale-110" />
+                    </Link>
+                    {/* Email */}
+                    <Link
+                      href={externnalLinks.email}
+                      className=" hover:text-primary transition duration-300"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Mail size={"22px"} className="hover:scale-110" />
                     </Link>
                   </div>
                 </div>

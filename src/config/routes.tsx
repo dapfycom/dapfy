@@ -61,6 +61,8 @@ export const externnalLinks = {
   youtube: "https://www.youtube.com/@DapfyCom",
   tiktok: "https://www.tiktok.com/@dapfy.com?_t=8hktnFd9Ha3&_r=1",
   analitics: "https://plausible.io/dapfy.com",
+
+  email: "mailto:hello@dapfy.com",
 };
 
 export const mainSiteRoutes = [

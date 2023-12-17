@@ -29,6 +29,8 @@ const SubmitButton = () => {
   const onSuccess = React.useCallback(() => {
     setTxSuccess(true);
     delayedToastTxNotification(2000);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useTrackTransactionStatus({
