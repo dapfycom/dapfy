@@ -6,11 +6,8 @@ import {
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { Loader2 } from "lucide-react";
-import { useContext } from "react";
-import { AshFarmContext } from "../../../FarmAshSwap";
 import { useGetAshSwapDepositEntries } from "../../../utils/hooks";
 const StakedDetails = () => {
-  const { farm } = useContext(AshFarmContext);
   const { depositEntries, isLoading } = useGetAshSwapDepositEntries();
 
   if (isLoading)
@@ -42,7 +39,7 @@ const StakedDetails = () => {
         title={`Earned ${formatTokenI(depositEntries.lp_id)}`}
         value={depositEntries.rewards}
         decimals={16}
-        tokenI={depositEntries.deposited_lp_amount}
+        tokenI={depositEntries.lp_id}
       />
     </div>
   );

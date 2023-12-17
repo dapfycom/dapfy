@@ -16,6 +16,7 @@ export const withdraw = (farmClick: number) => {
   getSmartContractInteraction("ashSwapFarmWsp").scCall({
     functionName: "withdraw",
     arg: [new BigUIntValue(new BigNumber(farmClick))],
+    gasL: 200_000_000,
   });
 };
 
