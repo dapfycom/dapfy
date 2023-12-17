@@ -16,14 +16,14 @@ import { stake } from "@/views/FarmView/commons/FarmOneDex/utils/services";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
-import { AshFarmContext } from "../../FarmOneDex";
+import { OneDexFarmContext } from "../../FarmOneDex";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 const StakeModal = ({ isOpen, onClose }: IProps) => {
-  const { farm } = useContext(AshFarmContext);
+  const { farm } = useContext(OneDexFarmContext);
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.egld
   );

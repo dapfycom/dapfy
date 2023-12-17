@@ -1,7 +1,12 @@
 import { getSmartContractInteraction } from "@/services/sc";
 import { fetchScSimpleData } from "@/services/sc/queries";
-import { IOnDexFarm, IOnDexScResponse } from "@/types/farm.interface";
-import { BigUIntValue } from "@multiversx/sdk-core/out";
+import {
+  IOnDexEntries,
+  IOnDexEntriesScResponse,
+  IOnDexFarm,
+  IOnDexScResponse,
+} from "@/types/farm.interface";
+import { Address, BigUIntValue, U64Value } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 
 // Calls
@@ -49,4 +54,33 @@ export const fetchOneDexFarms = async (
   });
 
   return farms;
+};
+
+export const fetchOneDexDepositEntries = async (
+  scInfo: string
+): Promise<IOnDexEntries> => {
+  const key = scInfo[0];
+  const address = scInfo[1];
+  const farmId = scInfo[2];
+
+  const data = await fetchScSimpleData<IOnDexEntriesScResponse>(key, [
+    new Address(address),
+    new U64Value(new BigNumber(farmId)),
+  ]);
+
+  console.log({
+    data,
+  });
+
+  const finalData: IOnDexEntries = {
+    deposited_amount: data.deposited_amount.toString(),
+    deposited_lp_amount: data.deposited_lp_amount.toString(),
+    farm_click_id: data.farm_click_id.toNumber(),
+    lp_id: data.lp_id,
+    token_id: data.token_id,
+    block_start_staking: data.block_start_staking.toString(),
+    rewards: data.rewards.toString(),
+  };
+
+  return finalData;
 };

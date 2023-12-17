@@ -1,20 +1,20 @@
 import TokenImage from "@/components/TokenImage/TokenImage";
-import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
   formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
-import {
-  useGetBskRewards,
-  useGetFarmUserInfo,
-  useGetFarmsInfo,
-} from "@/views/FarmView/utils/hooks";
+import { formatTokenI } from "@/utils/functions/tokens";
 import { Loader2 } from "lucide-react";
+import { useGetOneDexDepositEntries } from "../../../utils/hooks";
 const StakedDetails = () => {
-  const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
-  const { data: farmInfo } = useGetFarmsInfo();
-  const { earnedBsk } = useGetBskRewards();
+  const { depositEntries, isLoading, error } = useGetOneDexDepositEntries();
+
+  console.log({
+    depositEntries,
+    error,
+  });
+
   if (isLoading)
     return (
       <div className="flex w-full justify-center">
@@ -22,22 +22,29 @@ const StakedDetails = () => {
       </div>
     );
 
-  if (!userFarmInfo || !farmInfo) return null;
+  if (!depositEntries) return null;
 
   return (
     <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
       <StakedDetail
-        title="BSK-EGLD"
-        value={userFarmInfo?.lpActive}
+        title={`Deposited ${depositEntries.token_id}`}
+        value={depositEntries?.deposited_amount}
         decimals={18}
-        tokenI={selectedNetwork.tokensID.bskwegld}
+        tokenI={depositEntries.token_id}
         withPrice
       />
       <StakedDetail
-        title="BSK Earned"
-        value={earnedBsk}
+        title={`Deposited ${formatTokenI(depositEntries.lp_id)}`}
+        value={depositEntries?.deposited_lp_amount}
+        decimals={18}
+        tokenI={depositEntries.lp_id}
+        withPrice
+      />
+      <StakedDetail
+        title={`Earned ${formatTokenI(depositEntries.lp_id)}`}
+        value={depositEntries.rewards}
         decimals={16}
-        tokenI={selectedNetwork.tokensID.bsk}
+        tokenI={depositEntries.deposited_lp_amount}
       />
     </div>
   );

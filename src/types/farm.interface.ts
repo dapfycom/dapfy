@@ -59,6 +59,27 @@ export interface IAshFarmScResponse {
   total_weighted_block: BigNumber;
   total_farm_rewards: BigNumber;
 }
+export interface IAshFarmEntriesScResponse {
+  farm_click_id: BigNumber;
+  token_id: string;
+  deposited_amount: BigNumber;
+  block_start_staking: BigNumber;
+  lp_id: string;
+  deposited_lp_amount: BigNumber;
+  deposited_farm_amount: BigNumber;
+  rewards: BigNumber;
+}
+
+export interface IAshFarmEntries {
+  farm_click_id: number;
+  token_id: string;
+  deposited_amount: string;
+  block_start_staking: string;
+  lp_id: string;
+  deposited_lp_amount: string;
+  deposited_farm_amount: string;
+  rewards: string;
+}
 export interface IOnDexFarm {
   farm_click_id: number;
   pool_address: string;
@@ -89,4 +110,24 @@ export interface IOnDexScResponse {
   total_deposited_lp_amount: BigNumber;
   total_weighted_block: BigNumber;
   total_lp_rewards: BigNumber;
+}
+
+export interface IOnDexEntriesScResponse {
+  farm_click_id: BigNumber;
+  token_id: string;
+  deposited_amount: BigNumber;
+  block_start_staking: BigNumber;
+  lp_id: string;
+  deposited_lp_amount: BigNumber;
+  rewards: BigNumber;
+}
+
+export interface IOnDexEntries {
+  farm_click_id: number;
+  token_id: string;
+  deposited_amount: string;
+  block_start_staking: string;
+  lp_id: string;
+  deposited_lp_amount: string;
+  rewards: string;
 }

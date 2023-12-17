@@ -7,10 +7,10 @@ import { formatTokenI } from "@/utils/functions/tokens";
 import { useGetFarmUserInfo } from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
 import { useContext } from "react";
-import { AshFarmContext } from "../../FarmOneDex";
+import { OneDexFarmContext } from "../../FarmOneDex";
 
 const FarmInfo = () => {
-  const { farm } = useContext(AshFarmContext);
+  const { farm } = useContext(OneDexFarmContext);
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
 
   if (isLoading) {

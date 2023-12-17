@@ -8,13 +8,13 @@ import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useContext } from "react";
-import { AshFarmContext } from "./FarmOneDex";
+import { OneDexFarmContext } from "./FarmOneDex";
 import FarmInfo from "./common/FarmInfo/FarmInfo";
 import FarmMainButtons from "./common/FarmMainButtons/FarmMainButtons";
 import StakedInfo from "./common/StakedInfo/StakedInfo";
 
 const FarmItem = () => {
-  const { farm } = useContext(AshFarmContext);
+  const { farm } = useContext(OneDexFarmContext);
 
   const lpTokenIdentifier = farm?.lp_token_id || "";
 
