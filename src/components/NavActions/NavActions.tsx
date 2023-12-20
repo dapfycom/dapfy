@@ -16,7 +16,9 @@ const NavbarActions = () => {
         <Dot size={20} className="text-green-500" /> MultiversX
       </Button>
 
-      <LanguageSelector />
+      <div className="hidden sm:block">
+        <LanguageSelector />
+      </div>
 
       <div className="hidden sm:block">
         <ModeToggle />
