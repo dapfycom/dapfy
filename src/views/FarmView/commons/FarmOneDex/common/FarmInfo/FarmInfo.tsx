@@ -1,3 +1,4 @@
+import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
@@ -12,6 +13,16 @@ import { OneDexFarmContext } from "../../FarmOneDex";
 const FarmInfo = () => {
   const { farm } = useContext(OneDexFarmContext);
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
+
+  const { elrondToken: firstToken } = useGetElrondToken(
+    farm?.first_token_id || null
+  );
+  const { elrondToken: secondToken } = useGetElrondToken(
+    farm?.second_token_id || null
+  );
+  const { elrondToken: lpToken } = useGetElrondToken(
+    farm?.second_token_id || null
+  );
 
   if (isLoading) {
     return (
@@ -32,20 +43,20 @@ const FarmInfo = () => {
           <FarmDetail
             title={`Staked ${formatTokenI(farm.first_token_id)}`}
             value={farm.total_deposited_amount}
-            decimals={18}
+            decimals={firstToken?.decimals}
             tokenI={farm.first_token_id}
           />
           <FarmDetail
             title={`Staked ${formatTokenI(farm.second_token_id)}`}
             value={farm.total_deposited_amount}
-            decimals={18}
+            decimals={secondToken?.decimals}
             tokenI={farm.second_token_id}
           />
 
           <FarmDetail
             title={`Staked ${formatTokenI(farm.lp_token_id)}`}
             value={farm.total_deposited_lp_amount}
-            decimals={18}
+            decimals={lpToken?.decimals}
             tokenI={farm.lp_token_id}
           />
           {/* <FarmDetail
