@@ -1,4 +1,5 @@
 import TokenImage from "@/components/TokenImage/TokenImage";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
@@ -9,7 +10,12 @@ import { Loader2 } from "lucide-react";
 import { useGetAshSwapDepositEntries } from "../../../utils/hooks";
 const StakedDetails = () => {
   const { depositEntries, isLoading } = useGetAshSwapDepositEntries();
-
+  const { elrondToken: lpToken } = useGetElrondToken(
+    depositEntries?.lp_id || null
+  );
+  const { elrondToken: tokenId } = useGetElrondToken(
+    depositEntries?.token_id || null
+  );
   if (isLoading)
     return (
       <div className="flex w-full justify-center">
@@ -24,21 +30,21 @@ const StakedDetails = () => {
       <StakedDetail
         title={`Deposited ${depositEntries.token_id}`}
         value={depositEntries?.deposited_amount}
-        decimals={18}
+        decimals={tokenId?.decimals}
         tokenI={depositEntries.token_id}
         withPrice
       />
       <StakedDetail
         title={`Deposited ${formatTokenI(depositEntries.lp_id)}`}
         value={depositEntries?.deposited_lp_amount}
-        decimals={18}
+        decimals={lpToken?.decimals}
         tokenI={depositEntries.lp_id}
         withPrice
       />
       <StakedDetail
         title={`Earned ${formatTokenI(depositEntries.lp_id)}`}
-        value={depositEntries.rewards}
-        decimals={16}
+        value={depositEntries?.deposited_lp_amount + depositEntries.rewards}
+        decimals={lpToken?.decimals}
         tokenI={depositEntries.lp_id}
       />
     </div>
