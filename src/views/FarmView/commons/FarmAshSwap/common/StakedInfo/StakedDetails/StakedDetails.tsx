@@ -43,7 +43,7 @@ const StakedDetails = () => {
       />
       <StakedDetail
         title={`Earned ${formatTokenI(depositEntries.lp_id)}`}
-        value={depositEntries?.deposited_lp_amount + depositEntries.rewards}
+        value={depositEntries.rewards}
         decimals={lpToken?.decimals}
         tokenI={depositEntries.lp_id}
       />
