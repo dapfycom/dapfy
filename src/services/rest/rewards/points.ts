@@ -2,8 +2,6 @@ import { IUserPoints } from "@/types/rewards.interface";
 import axios from "axios";
 import axiosRewards, { fakeData } from ".";
 export const fetchLeaderboardPoints = async (date?: string) => {
-  console.log("date", date);
-
   if (fakeData) {
     const { data } = await axios.get<{ leaderboard: IUserPoints[] }>(
       "http://localhost:5000/points",

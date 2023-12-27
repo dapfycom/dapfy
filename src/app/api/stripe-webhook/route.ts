@@ -29,14 +29,11 @@ export async function POST(req: Request) {
     const session = event.data.object as Stripe.Checkout.Session;
 
     if (event.type === "checkout.session.completed") {
-      console.log({ data: event.data });
-
       if (!session?.metadata?.purchaseAttemptId) {
         return new NextResponse("PurchaseAttempt id is required", {
           status: 400,
         });
       }
-      console.log("session", session);
 
       const checkout = await stripe.checkout.sessions.retrieve(session.id);
 

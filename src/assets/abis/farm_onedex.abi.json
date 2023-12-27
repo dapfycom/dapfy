@@ -47,16 +47,6 @@
     },
     "endpoints": [
         {
-            "name": "ttgas",
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
             "name": "setFeePercentage",
             "onlyOwner": true,
             "mutability": "mutable",
@@ -159,6 +149,17 @@
             "outputs": []
         },
         {
+            "name": "getFarms",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<FarmClickView>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
             "name": "getDepositEntry",
             "mutability": "readonly",
             "inputs": [
@@ -178,9 +179,14 @@
             ]
         },
         {
-            "name": "getDepositAccounts",
+            "name": "getDepositAccountsByFarm",
             "mutability": "readonly",
-            "inputs": [],
+            "inputs": [
+                {
+                    "name": "farm_click_id",
+                    "type": "u64"
+                }
+            ],
             "outputs": [
                 {
                     "type": "variadic<Address>",
@@ -219,17 +225,6 @@
             "outputs": [
                 {
                     "type": "bool"
-                }
-            ]
-        },
-        {
-            "name": "getFarms",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "variadic<FarmClick>",
-                    "multi_result": true
                 }
             ]
         },
@@ -318,7 +313,7 @@
                 }
             ]
         },
-        "FarmClick": {
+        "FarmClickView": {
             "type": "struct",
             "fields": [
                 {
@@ -371,6 +366,18 @@
                 },
                 {
                     "name": "total_lp_rewards",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "apr_yearly_reward_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "apr_first_token_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "apr_lp_token_supply",
                     "type": "BigUint"
                 }
             ]

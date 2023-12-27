@@ -41,9 +41,6 @@ export const scQuery = async (
     let interaction = contract.methods[funcName](args);
     const query = interaction.check().buildQuery();
     const queryResponse = await provider.queryContract(query);
-    if (workspace === "ashSwapFarmWsp") {
-      console.log("endpoint", interaction.getEndpoint());
-    }
 
     const data = new ResultsParser().parseQueryResponse(
       queryResponse,
@@ -53,6 +50,7 @@ export const scQuery = async (
     return data;
   } catch (error) {
     console.log(`query error for ${funcName}  : `, error);
+    throw error;
   }
 };
 export const scSimpleQuery = async (

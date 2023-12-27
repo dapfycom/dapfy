@@ -59,6 +59,7 @@ const FarmInfo = () => {
           />
         </>
       )}
+      {/* apr {calculateAPR(farm)}% */}
     </div>
   );
 };

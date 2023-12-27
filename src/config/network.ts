@@ -127,6 +127,8 @@ const networkConfig = {
       oneDexFarm:
         "erd1qqqqqqqqqqqqqpgq7p7dnazynjakfe044n3fj8a8mt6hztyavr2swekvkd",
       ashSwapAggregator: "",
+      originalOneDex:
+        "erd1qqqqqqqqqqqqqpgqhnmuen6gx7unfmqsjwx0ul7ezjyg2ndfvcqsa4nqax",
     },
   },
   testnet: {

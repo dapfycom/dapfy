@@ -50,6 +50,9 @@ export const fetchOneDexFarms = async (
       total_deposited_lp_amount: f.total_deposited_lp_amount.toString(),
       total_weighted_block: f.total_weighted_block.toString(),
       total_lp_rewards: f.total_lp_rewards.toString(),
+      apr_first_token_reserve: f.apr_first_token_reserve.toString(),
+      apr_lp_token_supply: f.apr_lp_token_supply.toString(),
+      apr_yearly_reward_amount: f.apr_yearly_reward_amount.toString(),
     };
     return farm;
   });
@@ -59,21 +62,21 @@ export const fetchOneDexFarms = async (
 
 export const fetchOneDexDepositEntries = async (
   scInfo: string
-): Promise<IOnDexEntries> => {
+): Promise<IOnDexEntries | undefined> => {
   const key = scInfo[0];
   const address = scInfo[1];
   const farmId = scInfo[2];
 
-  const data = await fetchScSimpleData<IOnDexEntriesScResponse>(key, [
-    new Address(address),
-    new U64Value(new BigNumber(farmId)),
-  ]);
+  const data = await fetchScSimpleData<IOnDexEntriesScResponse | undefined>(
+    key,
+    [new Address(address), new U64Value(new BigNumber(farmId))]
+  );
 
   console.log({
     data,
   });
 
-  const finalData: IOnDexEntries = {
+  const finalData: IOnDexEntries | undefined = data && {
     deposited_amount: data.deposited_amount.toString(),
     deposited_lp_amount: data.deposited_lp_amount.toString(),
     farm_click_id: data.farm_click_id.toNumber(),
