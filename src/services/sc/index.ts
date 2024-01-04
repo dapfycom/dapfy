@@ -5,6 +5,7 @@ import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
 import onDexFarmAbiUrl from "@/assets/abis/farm_onedex.abi.json";
 import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
+import originalOneDexAbiUrl from "@/assets/abis/original_OneDex.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
@@ -25,7 +26,8 @@ export type WspTypes =
   | "aggregatorWsp"
   | "ashSwapFarmWsp"
   | "oneDexFarmWsp"
-  | "ashSwapAggregatorWsp";
+  | "ashSwapAggregatorWsp"
+  | "originalOneDexWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -98,11 +100,18 @@ export const getInterface = (workspace: WspTypes) => {
       simpleAddress = selectedNetwork.scAddress.oneDexFarm;
       address = new Address(simpleAddress);
       abiUrl = onDexFarmAbiUrl;
+      break;
     case "ashSwapAggregatorWsp":
       simpleAddress = selectedNetwork.scAddress.ashSwapAggregator;
       address = new Address(simpleAddress);
       abiUrl = ashSwapAggregatorAbiUrl;
       implementsInterfaces = "FarmClickContract";
+      break;
+    case "originalOneDexWsp":
+      simpleAddress = selectedNetwork.scAddress.originalOneDex;
+      address = new Address(simpleAddress);
+      abiUrl = originalOneDexAbiUrl;
+      implementsInterfaces = "OneDex";
       break;
     default:
       simpleAddress = workspace;
@@ -161,6 +170,10 @@ export const getSmartContractInteraction = (
     ashSwapAggregatorWsp: new SmartContractInteraction(
       getInterface("ashSwapAggregatorWsp").simpleAddress,
       AbiRegistry.create(getInterface("ashSwapAggregatorWsp").abiUrl)
+    ),
+    originalOneDexWsp: new SmartContractInteraction(
+      getInterface("originalOneDexWsp").simpleAddress,
+      AbiRegistry.create(getInterface("originalOneDexWsp").abiUrl)
     ),
   };
 

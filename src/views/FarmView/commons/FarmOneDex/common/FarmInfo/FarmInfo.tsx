@@ -1,17 +1,32 @@
+import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import {
   formatBalance,
   formatBalanceDollar,
+  formatNumber,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useGetFarmUserInfo } from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
 import { useContext } from "react";
-import { AshFarmContext } from "../../FarmOneDex";
+import { OneDexFarmContext } from "../../FarmOneDex";
+import { useGetApr } from "../../utils/hooks";
 
 const FarmInfo = () => {
-  const { farm } = useContext(AshFarmContext);
+  const { farm } = useContext(OneDexFarmContext);
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
+
+  const { elrondToken: firstToken } = useGetElrondToken(
+    farm?.first_token_id || null
+  );
+  const { elrondToken: secondToken } = useGetElrondToken(
+    farm?.second_token_id || null
+  );
+  const { elrondToken: lpToken } = useGetElrondToken(
+    farm?.second_token_id || null
+  );
+
+  const { apr, error, isLoading: isLoadingApr } = useGetApr();
 
   if (isLoading) {
     return (
@@ -32,29 +47,34 @@ const FarmInfo = () => {
           <FarmDetail
             title={`Staked ${formatTokenI(farm.first_token_id)}`}
             value={farm.total_deposited_amount}
-            decimals={18}
+            decimals={firstToken?.decimals}
             tokenI={farm.first_token_id}
           />
           <FarmDetail
             title={`Staked ${formatTokenI(farm.second_token_id)}`}
             value={farm.total_deposited_amount}
-            decimals={18}
+            decimals={secondToken?.decimals}
             tokenI={farm.second_token_id}
           />
 
           <FarmDetail
             title={`Staked ${formatTokenI(farm.lp_token_id)}`}
             value={farm.total_deposited_lp_amount}
-            decimals={18}
+            decimals={lpToken?.decimals}
             tokenI={farm.lp_token_id}
           />
-          {/* <FarmDetail
-            title="Earned BSK"
-            value={earnedBsk}
-            decimals={16}
-            tokenI={selectedNetwork.tokensID.bsk}
-          /> */}
         </>
+      )}
+
+      {apr?.gt(0) && (
+        <div className="flex flex-col">
+          <p className="whitespace-nowrap mb-2 " color="white">
+            APR
+          </p>
+          <p className="text-[12px] whitespace-nowrap text-muted-foreground">
+            {formatNumber(apr?.toString())} %
+          </p>
+        </div>
       )}
     </div>
   );

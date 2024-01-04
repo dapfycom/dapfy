@@ -10,7 +10,7 @@ const FarmsList = () => {
   const hatomData = useGetTvl();
 
   return (
-    <div className="w-full flex flex-col gap-16 mt">
+    <div className="w-full flex flex-col gap-8 mt">
       {hatomData.tlvs
         .filter(
           (f) => !hiddenPools.includes(formatTokenI(f.moneyMarket.tokenI))
