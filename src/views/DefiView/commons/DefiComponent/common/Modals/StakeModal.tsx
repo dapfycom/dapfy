@@ -7,9 +7,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
-import { getRealBalance } from "@/utils/functions/formatBalance";
+import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { HatomConfigs } from "@/views/DefiView/utils/constants";
 import { deposit } from "@/views/DefiView/utils/services";
@@ -48,6 +49,10 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
       .min(
         minAmountToStake + 0.00001,
         `The minimum amount is more than ${minAmountToStake} ${ticker}`
+      )
+      .max(
+        formatBalance(userStakedToken, true, 18) as number,
+        "Insufficient funds"
       ),
   });
 
@@ -111,6 +116,15 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
         <form onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2 mb-4">
             {/* <Label htmlFor="amount-bskegld">BSK-EGLD Amount</Label> */}
+            <div className="flex justify-between">
+              <Label htmlFor="amount-bskegld">Deposit Amount</Label>
+              <div className="flex justify-between text-xs">
+                <p className="cursor-pointer" onClick={handleMax}>
+                  Balance: {formatBalance(userStakedToken)}{" "}
+                  {formatTokenI(userStakedToken.identifier)}
+                </p>
+              </div>
+            </div>
             <Input
               id="amount-bskegld"
               name="amount"
@@ -122,12 +136,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
                 Boolean(formik.touched.amount) && Boolean(formik.errors.amount)
               }
             />
-            {/* <div className="flex justify-between mt-3 text-xs mb-2">
-              <p className="text-red-700">{formik.errors.amount}</p>
-              <p className="cursor-pointer" onClick={handleMax}>
-                Balance: {formatBalance(userStakedToken)} {stakedToken?.ticker}
-              </p>
-            </div> */}
+            <p className="text-red-700 text-xs">{formik.errors.amount}</p>
           </div>
 
           <DialogFooter>

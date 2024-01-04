@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
-import { getRealBalance } from "@/utils/functions/formatBalance";
+import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
+import { formatTokenI } from "@/utils/functions/tokens";
 import { stake } from "@/views/FarmView/commons/FarmOneDex/utils/services";
 import { useFormik } from "formik";
 import { useContext } from "react";
@@ -81,7 +82,15 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
 
         <form onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2 mb-4">
-            <Label htmlFor="amount-bskegld">Deposit Amount</Label>
+            <div className="flex justify-between">
+              <Label htmlFor="amount-bskegld">Deposit Amount</Label>
+              <div className="flex justify-between text-xs">
+                <p className="cursor-pointer" onClick={handleMax}>
+                  Balance: {formatBalance(userStakedToken)}{" "}
+                  {formatTokenI(userStakedToken.identifier)}
+                </p>
+              </div>
+            </div>
             <Input
               id="amount-bskegld"
               name="amount"
@@ -93,12 +102,7 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
                 Boolean(formik.touched.amount) && Boolean(formik.errors.amount)
               }
             />
-            {/* <div className="flex justify-between mt-3 text-xs mb-2">
-              <p className="text-red-700">{formik.errors.amount}</p>
-              <p className="cursor-pointer" onClick={handleMax}>
-                Balance: {formatBalance(userStakedToken)} EGLD
-              </p>
-            </div> */}
+            <p className="text-red-700 text-xs">{formik.errors.amount}</p>
           </div>
 
           <DialogFooter>
