@@ -76,6 +76,10 @@ const networkConfig = {
       ashSwapFarm: "",
       ashSwapAggregator:
         "erd1qqqqqqqqqqqqqpgqcc69ts8409p3h77q5chsaqz57y6hugvc4fvs64k74v",
+      oneDexFarm:
+        "erd1qqqqqqqqqqqqqpgqwtqs3f42fmmwrm378df5n6ta9v06w45ey26s9e7lly",
+      originalOneDex:
+        "erd1qqqqqqqqqqqqqpgqqz6vp9y50ep867vnr296mqf3dduh6guvmvlsu3sujc",
     },
   },
   devnet: {
@@ -124,9 +128,9 @@ const networkConfig = {
         "erd1qqqqqqqqqqqqqpgqza440n5lu0x4ych736putfv0ppjgs8jevr2s5scvyq",
       ashSwapFarm:
         "erd1qqqqqqqqqqqqqpgqg5uax0mmx36q68z2ksuh9ehzsf36d7jfvr2shnsrck",
+      ashSwapAggregator: "",
       oneDexFarm:
         "erd1qqqqqqqqqqqqqpgq7p7dnazynjakfe044n3fj8a8mt6hztyavr2swekvkd",
-      ashSwapAggregator: "",
       originalOneDex:
         "erd1qqqqqqqqqqqqqpgqhnmuen6gx7unfmqsjwx0ul7ezjyg2ndfvcqsa4nqax",
     },
@@ -179,6 +183,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIROMENT: ENVIROMENTTYPE = "devnet";
+export const ENVIROMENT: ENVIROMENTTYPE = "mainnet";
 
 export const selectedNetwork = networkConfig[ENVIROMENT];
