@@ -9,16 +9,15 @@ import {
 import { Input } from "@/components/ui/input";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
-import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
+import { getRealBalance } from "@/utils/functions/formatBalance";
+import { formatTokenI } from "@/utils/functions/tokens";
+import { HatomConfigs } from "@/views/DefiView/utils/constants";
 import { deposit } from "@/views/DefiView/utils/services";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
-import Image from "next/image";
 import { useContext, useState } from "react";
 import * as yup from "yup";
 import { FarmContext } from "../../DefiComponent";
-import { HatomConfigs } from "@/views/DefiView/utils/constants";
-import { formatTokenI } from "@/utils/functions/tokens";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
@@ -93,26 +92,24 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
+      <DialogContent className="max-w-[24rem]">
         <DialogHeader>
           <DialogTitle>
             {" "}
-            <div className="flex items-center gap-3">
-              <div className="w-[35px] h-[35px]">
-                <Image
-                  src={"/images/hatom.png"}
-                  alt="hatom"
-                  width={35}
-                  height={35}
-                />{" "}
-              </div>
-              <h3>Stake {stakedToken?.ticker} on hatom protocol</h3>
-            </div>
+            <h3 className="text-lg font-semibold mb-4">
+              Auto-Compounded DeFi Farming
+            </h3>
           </DialogTitle>
         </DialogHeader>
 
+        <p className="text-sm text-green-600 mb-1">Active</p>
+        <p className="text-sm font-medium mb-4">
+          10% - 1000% Annual Yield (Subject to Market Variations)
+        </p>
+        <p className="text-sm mb-6">Higher APY, potentially higher risk.</p>
+
         <form onSubmit={formik.handleSubmit}>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 mb-4">
             {/* <Label htmlFor="amount-bskegld">BSK-EGLD Amount</Label> */}
             <Input
               id="amount-bskegld"
@@ -125,25 +122,28 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
                 Boolean(formik.touched.amount) && Boolean(formik.errors.amount)
               }
             />
-            <div className="flex justify-between mt-3 text-xs mb-2">
+            {/* <div className="flex justify-between mt-3 text-xs mb-2">
               <p className="text-red-700">{formik.errors.amount}</p>
               <p className="cursor-pointer" onClick={handleMax}>
                 Balance: {formatBalance(userStakedToken)} {stakedToken?.ticker}
               </p>
-            </div>
+            </div> */}
           </div>
 
           <DialogFooter>
-            <Button
-              type="submit"
-              disabled={
-                (formatBalance(userStakedToken, true) as number) <
-                minAmountToStake
-              }
-            >
-              Deposit
+            <Button type="submit" className="w-full">
+              Deposit Funds
             </Button>
           </DialogFooter>
+
+          <p
+            className="text-sm italic mt-4"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            No lock period, you can withdraw anytime.
+          </p>
         </form>
       </DialogContent>
     </Dialog>

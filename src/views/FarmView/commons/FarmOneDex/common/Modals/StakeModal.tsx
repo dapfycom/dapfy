@@ -103,9 +103,18 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
 
           <DialogFooter>
             <Button type="submit" className="w-full">
-              Stake
+              Deposit Funds
             </Button>
           </DialogFooter>
+
+          <p
+            className="text-sm italic mt-4"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            No lock period, you can withdraw anytime.
+          </p>
         </form>
       </DialogContent>
     </Dialog>
