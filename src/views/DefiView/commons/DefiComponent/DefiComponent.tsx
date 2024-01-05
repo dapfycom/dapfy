@@ -187,9 +187,9 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
               <Button
                 key="1"
                 type="submit"
-                className="bg-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                className="bg-[#ff9900] text-white hover:text-[#ff9900] px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
               >
-                <PointerIcon className="text-white h-6 w-6" />
+                <PointerIcon className="h-6 w-6" />
                 <span>Deposit now with 1-Click®</span>
               </Button>
             </DialogFooter>
@@ -214,14 +214,14 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
           <Divider className="my-4" />
           <div className="grid gap-3">
             <Button
-              className="text-sm w-full bg-green-600 text-white"
+              className="text-sm w-full bg-green-600 text-white hover:text-green-500"
               onClick={handleClaimRewards}
             >
               Claim rewards
             </Button>
 
             <Button
-              className="w-full md:w-auto text-sm bg-red-500 text-white"
+              className="w-full md:w-auto text-sm hover:text-red-700 bg-red-500 text-white"
               onClick={handleWithdraw}
             >
               {" "}

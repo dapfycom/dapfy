@@ -127,9 +127,9 @@ const FarmItem = () => {
           <div>
             <Button
               key="1"
-              className="bg-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+              className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
             >
-              <PointerIcon className="text-white h-6 w-6" />
+              <PointerIcon className="h-6 w-6" />
               <span>Deposit now with 1-Click®</span>
             </Button>
           </div>
@@ -153,7 +153,7 @@ const FarmItem = () => {
         <Divider className="my-4" />
         <div className="grid gap-3">
           <Button
-            className="w-full md:w-auto text-sm bg-red-500 text-white"
+            className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
             onClick={handleHarvest}
           >
             {" "}
