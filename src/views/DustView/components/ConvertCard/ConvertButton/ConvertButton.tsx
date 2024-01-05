@@ -60,7 +60,7 @@ const ConvertButton = () => {
     <>
       {confetti && <Realistic />}
       <Button className="w-full" onClick={handleSubmit}>
-        Convert tokens
+        Convert dust now with one-click
       </Button>
     </>
   );
