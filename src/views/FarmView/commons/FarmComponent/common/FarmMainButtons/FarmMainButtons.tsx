@@ -33,10 +33,16 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
     <div className="flex justify-center items-center gap-4 flex-col lg:flex-row">
       {isLoggedIn ? (
         <>
-          <Button className="text-sm w-full lg:w-auto" onClick={handleHarvest}>
+          <Button
+            className="text-sm w-full lg:w-auto bg-green-600 hover:text-green-500 text-white"
+            onClick={handleHarvest}
+          >
             Harvest
           </Button>
-          <Button className="text-sm w-full lg:w-auto" onClick={handleStakeLp}>
+          <Button
+            className="text-sm w-full lg:w-auto bg-[#ff9900] hover:text-[#ff9900] text-white"
+            onClick={handleStakeLp}
+          >
             Stake LP
           </Button>
 

@@ -26,7 +26,7 @@ const StakedInfo = () => {
           </div>
           <div className="flex  items-center h-auto">
             <Button
-              className="w-full md:w-auto text-sm"
+              className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-500"
               onClick={handleHarvest}
             >
               {" "}
