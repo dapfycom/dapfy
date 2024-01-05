@@ -1,5 +1,6 @@
 "use client";
 import Divider from "@/components/Divider/Divider";
+import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -148,8 +149,13 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
             </div>
 
             <DialogFooter>
-              <Button type="submit" className="w-full">
-                Deposit Funds
+              <Button
+                key="1"
+                type="submit"
+                className="bg-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+              >
+                <PointerIcon className="text-white h-6 w-6" />
+                <span>Deposit now with 1-Click®</span>
               </Button>
             </DialogFooter>
 
