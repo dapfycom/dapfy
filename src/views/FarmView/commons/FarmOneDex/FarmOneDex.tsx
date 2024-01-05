@@ -1,5 +1,4 @@
 "use client";
-import { Label } from "@/components/ui/label";
 import { IOnDexFarm } from "@/types/farm.interface";
 import { useGetOneDexFarms } from "@/views/FarmView/commons/FarmOneDex/utils/hooks";
 import { createContext } from "react";
@@ -19,8 +18,6 @@ const FarmOneDex = () => {
 
   return (
     <div className="mt-10 grid">
-      <Label className="w-full text-left  mb-6"> Protocol: OneDex</Label>
-
       <div className="flex flex-col gap-8">
         {farms.map((f) => {
           return (

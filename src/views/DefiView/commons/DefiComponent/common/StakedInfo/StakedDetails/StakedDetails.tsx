@@ -1,6 +1,7 @@
 import { selectedNetwork } from "@/config/network";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
+import { cn } from "@/lib/utils";
 import {
   formatBalance,
   formatBalanceDollar,
@@ -10,7 +11,12 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useContext } from "react";
 import { FarmContext } from "../../../DefiComponent";
-const StakedDetails = () => {
+
+interface IProps {
+  onModal?: boolean;
+}
+
+const StakedDetails = ({ onModal }: IProps) => {
   const { hatomFarm, deposits, userRewards } = useContext(FarmContext);
   const { elrondToken: depositedToken, isLoading: isloadingDepositToken } =
     useGetElrondToken(hatomFarm?.moneyMarket.tokenI || null);
@@ -28,7 +34,12 @@ const StakedDetails = () => {
     );
   }
   return (
-    <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
+    <div
+      className={cn(
+        "pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center",
+        onModal ? "lg:flex-col items-baseline" : ""
+      )}
+    >
       {depositedToken && (
         <StakedDetail
           title="My staked amount"

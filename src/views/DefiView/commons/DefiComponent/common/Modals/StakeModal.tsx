@@ -1,3 +1,4 @@
+import Divider from "@/components/Divider/Divider";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,6 +20,7 @@ import { useFormik } from "formik";
 import { useContext, useState } from "react";
 import * as yup from "yup";
 import { FarmContext } from "../../DefiComponent";
+import StakedDetails from "../StakedInfo/StakedDetails/StakedDetails";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
@@ -153,6 +155,14 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
           >
             No lock period, you can withdraw anytime.
           </p>
+
+          <Divider className="mt-4" />
+
+          <div className="my-3">
+            <div className="mb-2">My positions</div>
+
+            <StakedDetails onModal={true} />
+          </div>
         </form>
       </DialogContent>
     </Dialog>

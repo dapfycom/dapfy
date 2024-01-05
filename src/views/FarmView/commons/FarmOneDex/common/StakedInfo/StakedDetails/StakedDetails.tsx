@@ -1,6 +1,7 @@
 import TokenImage from "@/components/TokenImage/TokenImage";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
+import { cn } from "@/lib/utils";
 import {
   formatBalance,
   formatBalanceDollar,
@@ -8,7 +9,12 @@ import {
 import { formatTokenI } from "@/utils/functions/tokens";
 import { Loader2 } from "lucide-react";
 import { useGetOneDexDepositEntries } from "../../../utils/hooks";
-const StakedDetails = () => {
+
+interface IProps {
+  onModal?: boolean;
+}
+
+const StakedDetails = ({ onModal }: IProps) => {
   const { depositEntries, isLoading, error } = useGetOneDexDepositEntries();
 
   const { elrondToken: lpToken } = useGetElrondToken(
@@ -28,7 +34,12 @@ const StakedDetails = () => {
   if (!depositEntries) return null;
 
   return (
-    <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
+    <div
+      className={cn(
+        "pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center",
+        onModal ? "lg:flex-col items-baseline" : ""
+      )}
+    >
       <StakedDetail
         title={`Deposited ${depositEntries.token_id}`}
         value={depositEntries?.deposited_amount}
