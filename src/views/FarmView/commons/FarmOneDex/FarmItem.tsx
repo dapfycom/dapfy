@@ -80,7 +80,7 @@ const FarmItem = () => {
               {formatTokenI(farm.first_token_id)}-
               {formatTokenI(farm.second_token_id)}
             </h3>
-            <LpTokenImage lpToken={elrondToken} />
+            {elrondToken && <LpTokenImage lpToken={elrondToken} />}
           </div>
         </div>
 
