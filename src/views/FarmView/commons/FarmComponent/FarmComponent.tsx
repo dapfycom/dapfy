@@ -128,14 +128,6 @@ const FarmComponent = () => {
               </Button>
             </DialogFooter>
           </form>
-          <p
-            className="text-sm italic mt-4"
-            style={{
-              textAlign: "center",
-            }}
-          >
-            No lock period, you can withdraw anytime.
-          </p>
 
           <Divider className="mt-4" />
           <div className="my-3">
