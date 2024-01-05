@@ -7,14 +7,18 @@ import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
+import { useAppSelector } from "@/hooks/useRedux";
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import {
   formatBalance,
   formatNumber,
   getRealBalance,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
+import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { mutate } from "swr";
 import * as yup from "yup";
 import { OneDexFarmContext } from "./FarmOneDex";
 import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
@@ -23,22 +27,37 @@ import { stake, withdraw } from "./utils/services";
 
 const FarmItem = () => {
   const { farm } = useContext(OneDexFarmContext);
+  const address = useAppSelector(selectUserAddress);
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.egld
   );
   const lpTokenIdentifier = farm?.lp_token_id || "";
+  const [sessionId, setSessionId] = useState<string | null>("");
 
   const { elrondToken } = useGetElrondToken(lpTokenIdentifier);
   const { apr, error, isLoading: isLoadingApr } = useGetApr();
+  const onSuccess = () => {
+    mutate([
+      "oneDexFarmWsp:getTotalRewardsPerFarm",
+      address,
+      farm?.farm_click_id,
+    ]);
+  };
+
+  useTrackTransactionStatus({
+    transactionId: sessionId,
+    onSuccess,
+  });
 
   const formik = useFormik({
     initialValues: {
       amount: "",
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       let amount = values.amount;
       if (farm?.farm_click_id) {
-        stake(amount, farm.farm_click_id);
+        const res = await stake(amount, farm.farm_click_id);
+        setSessionId(res?.sessionId);
       }
     },
     validationSchema: yup.object().shape({
@@ -70,6 +89,7 @@ const FarmItem = () => {
     e.stopPropagation();
     withdraw(farm?.farm_click_id);
   };
+
   return (
     <div className="px-4 pb-5 text-left">
       <div className="max-w-[24rem] border rounded-lg p-6">
@@ -97,7 +117,6 @@ const FarmItem = () => {
             </div>
           )}
         </p>
-        <p className="text-sm mb-6">Higher APY, potentially higher risk.</p>
 
         <form onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2 mb-4">

@@ -6,7 +6,6 @@ import {
   formatBalance,
   formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
-import { formatTokenI } from "@/utils/functions/tokens";
 import { Loader2 } from "lucide-react";
 import { useGetOneDexDepositEntries } from "../../../utils/hooks";
 
@@ -47,15 +46,15 @@ const StakedDetails = ({ onModal }: IProps) => {
         tokenI={depositEntries.token_id}
         withPrice
       />
-      <StakedDetail
+      {/* <StakedDetail
         title={`Deposited ${formatTokenI(depositEntries.lp_id)}`}
         value={depositEntries?.deposited_lp_amount}
         decimals={lpToken?.decimals}
         tokenI={depositEntries.lp_id}
         withPrice
-      />
+      /> */}
       <StakedDetail
-        title={`Earned ${formatTokenI(depositEntries.lp_id)}`}
+        title={`Earned LP Rewards (auto-compounded)`}
         value={depositEntries.rewards}
         decimals={lpToken?.decimals}
         tokenI={depositEntries.deposited_lp_amount}
@@ -88,15 +87,20 @@ const StakedDetail = ({
       <TokenImage tokenI={tokenI} size={40} />{" "}
       <div className="flex flex-col gap-1">
         <p>{title}</p>
-        <p className="text-sm">
-          {formatBalance({ balance: value, decimals: decimals })}
-        </p>
-        {withPrice && price && (
+        <div className="flex gap-2">
           <p className="text-sm">
-            ≈ $
-            {formatBalanceDollar({ balance: value, decimals: decimals }, price)}
+            {formatBalance({ balance: value, decimals: decimals })}
           </p>
-        )}
+          {withPrice && price && (
+            <p className="text-sm">
+              ≈ $
+              {formatBalanceDollar(
+                { balance: value, decimals: decimals },
+                price
+              )}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

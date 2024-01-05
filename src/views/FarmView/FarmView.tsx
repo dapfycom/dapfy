@@ -20,7 +20,9 @@ const FarmView = () => {
         <div className="flex flex-col gap-3 w-full">
           <FarmComponent />
 
-          <div className="text-3xl mt-8 mb-4">Auto-Compounded DeFi Farming</div>
+          <div className="text-4xl font-bold mt-8 mb-4">
+            Auto-Compounded DeFi Farming
+          </div>
 
           <div className="flex gap-3 items-center">
             <div>Protocols : </div>

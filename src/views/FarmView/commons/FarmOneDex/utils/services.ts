@@ -21,7 +21,7 @@ export const withdraw = (farmClick: number) => {
 };
 
 export const stake = (amount: string, farmClick: number) => {
-  getSmartContractInteraction("oneDexFarmWsp").EGLDPayment({
+  return getSmartContractInteraction("oneDexFarmWsp").EGLDPayment({
     functionName: "deposit",
     arg: [new BigUIntValue(new BigNumber(farmClick))],
     value: amount,
