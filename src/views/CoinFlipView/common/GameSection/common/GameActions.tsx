@@ -1,4 +1,5 @@
 "use client";
+import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import useAuthentication from "@/hooks/useAuthentication";
@@ -93,13 +94,19 @@ const GameActions = () => {
               <div className="flex flex-col gap-2 flex-1">
                 <div className="flex w-full gap-4">
                   <Button
-                    className="w-full "
+                    className="w-full  bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
                     variant={"secondary"}
                     onClick={isLoggedIn ? handleFlip : handleConnect}
                   >
-                    {isLoggedIn
-                      ? "Place bet and flip coin"
-                      : "Connect your wallet to flip coin"}
+                    {isLoggedIn ? (
+                      <>
+                        {" "}
+                        <PointerIcon className="h-6 w-6" />
+                        Place bet and flip coin
+                      </>
+                    ) : (
+                      "Connect your wallet to flip coin"
+                    )}
                   </Button>
                 </div>
               </div>
