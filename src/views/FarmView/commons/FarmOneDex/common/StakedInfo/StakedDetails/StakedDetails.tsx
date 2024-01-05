@@ -1,20 +1,28 @@
 import TokenImage from "@/components/TokenImage/TokenImage";
-import { selectedNetwork } from "@/config/network";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
+import { cn } from "@/lib/utils";
 import {
   formatBalance,
   formatBalanceDollar,
 } from "@/utils/functions/formatBalance";
-import {
-  useGetBskRewards,
-  useGetFarmUserInfo,
-  useGetFarmsInfo,
-} from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
-const StakedDetails = () => {
-  const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
-  const { data: farmInfo } = useGetFarmsInfo();
-  const { earnedBsk } = useGetBskRewards();
+import { useGetOneDexDepositEntries } from "../../../utils/hooks";
+
+interface IProps {
+  onModal?: boolean;
+}
+
+const StakedDetails = ({ onModal }: IProps) => {
+  const { depositEntries, isLoading, error } = useGetOneDexDepositEntries();
+
+  const { elrondToken: lpToken } = useGetElrondToken(
+    depositEntries?.lp_id || null
+  );
+  const { elrondToken: tokenId } = useGetElrondToken(
+    depositEntries?.token_id || null
+  );
+
   if (isLoading)
     return (
       <div className="flex w-full justify-center">
@@ -22,22 +30,34 @@ const StakedDetails = () => {
       </div>
     );
 
-  if (!userFarmInfo || !farmInfo) return null;
+  if (!depositEntries) return null;
 
   return (
-    <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
+    <div
+      className={cn(
+        "pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center",
+        onModal ? "lg:flex-col items-baseline" : ""
+      )}
+    >
       <StakedDetail
-        title="BSK-EGLD"
-        value={userFarmInfo?.lpActive}
-        decimals={18}
-        tokenI={selectedNetwork.tokensID.bskwegld}
+        title={`Deposited ${depositEntries.token_id}`}
+        value={depositEntries?.deposited_amount}
+        decimals={tokenId?.decimals}
+        tokenI={depositEntries.token_id}
         withPrice
       />
+      {/* <StakedDetail
+        title={`Deposited ${formatTokenI(depositEntries.lp_id)}`}
+        value={depositEntries?.deposited_lp_amount}
+        decimals={lpToken?.decimals}
+        tokenI={depositEntries.lp_id}
+        withPrice
+      /> */}
       <StakedDetail
-        title="BSK Earned"
-        value={earnedBsk}
-        decimals={16}
-        tokenI={selectedNetwork.tokensID.bsk}
+        title={`Earned LP Rewards (auto-compounded)`}
+        value={depositEntries.rewards}
+        decimals={lpToken?.decimals}
+        tokenI={depositEntries.deposited_lp_amount}
       />
     </div>
   );
@@ -67,15 +87,20 @@ const StakedDetail = ({
       <TokenImage tokenI={tokenI} size={40} />{" "}
       <div className="flex flex-col gap-1">
         <p>{title}</p>
-        <p className="text-sm">
-          {formatBalance({ balance: value, decimals: decimals })}
-        </p>
-        {withPrice && price && (
+        <div className="flex gap-2">
           <p className="text-sm">
-            ≈ $
-            {formatBalanceDollar({ balance: value, decimals: decimals }, price)}
+            {formatBalance({ balance: value, decimals: decimals })}
           </p>
-        )}
+          {withPrice && price && (
+            <p className="text-sm">
+              ≈ $
+              {formatBalanceDollar(
+                { balance: value, decimals: decimals },
+                price
+              )}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

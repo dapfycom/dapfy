@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import { useContext } from "react";
-import { AshFarmContext } from "../../FarmOneDex";
+import { OneDexFarmContext } from "../../FarmOneDex";
 import { withdraw } from "../../utils/services";
 import WithdrawModal from "../Modals/WithdrawModal";
 import StakedDetails from "./StakedDetails/StakedDetails";
@@ -14,7 +14,7 @@ const StakedInfo = () => {
     onOpen: onOpenHarvest,
   } = useDisclosure();
   const { isLoggedIn } = useAuthentication();
-  const { farm } = useContext(AshFarmContext);
+  const { farm } = useContext(OneDexFarmContext);
 
   if (!farm) return null;
   const handleHarvest = (e: any) => {

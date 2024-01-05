@@ -22,6 +22,19 @@ const TokenImage = ({ tokenI, src, alt = "", size }: IProps) => {
     );
   }
 
+  if (!elrondToken || !elrondToken.assets?.svgUrl) {
+    return (
+      <div className="flex">
+        <Image
+          src="/images/token-placehodler.png"
+          width={size || 40}
+          height={size * 1.2 || 48}
+          alt={alt}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex">
       {isLoading ? (

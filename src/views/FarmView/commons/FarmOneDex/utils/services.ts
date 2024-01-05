@@ -1,7 +1,12 @@
 import { getSmartContractInteraction } from "@/services/sc";
 import { fetchScSimpleData } from "@/services/sc/queries";
-import { IOnDexFarm, IOnDexScResponse } from "@/types/farm.interface";
-import { BigUIntValue } from "@multiversx/sdk-core/out";
+import {
+  IOnDexEntries,
+  IOnDexEntriesScResponse,
+  IOnDexFarm,
+  IOnDexScResponse,
+} from "@/types/farm.interface";
+import { Address, BigUIntValue, U64Value } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 
 // Calls
@@ -11,11 +16,12 @@ export const withdraw = (farmClick: number) => {
   getSmartContractInteraction("oneDexFarmWsp").scCall({
     functionName: "withdraw",
     arg: [new BigUIntValue(new BigNumber(farmClick))],
+    gasL: 200_000_000,
   });
 };
 
 export const stake = (amount: string, farmClick: number) => {
-  getSmartContractInteraction("oneDexFarmWsp").EGLDPayment({
+  return getSmartContractInteraction("oneDexFarmWsp").EGLDPayment({
     functionName: "deposit",
     arg: [new BigUIntValue(new BigNumber(farmClick))],
     value: amount,
@@ -44,9 +50,41 @@ export const fetchOneDexFarms = async (
       total_deposited_lp_amount: f.total_deposited_lp_amount.toString(),
       total_weighted_block: f.total_weighted_block.toString(),
       total_lp_rewards: f.total_lp_rewards.toString(),
+      apr_first_token_reserve: f.apr_first_token_reserve.toString(),
+      apr_lp_token_supply: f.apr_lp_token_supply.toString(),
+      apr_yearly_reward_amount: f.apr_yearly_reward_amount.toString(),
     };
     return farm;
   });
 
   return farms;
+};
+
+export const fetchOneDexDepositEntries = async (
+  scInfo: string
+): Promise<IOnDexEntries | undefined> => {
+  const key = scInfo[0];
+  const address = scInfo[1];
+  const farmId = scInfo[2];
+
+  const data = await fetchScSimpleData<IOnDexEntriesScResponse | undefined>(
+    key,
+    [new Address(address), new U64Value(new BigNumber(farmId))]
+  );
+
+  console.log({
+    data,
+  });
+
+  const finalData: IOnDexEntries | undefined = data && {
+    deposited_amount: data.deposited_amount.toString(),
+    deposited_lp_amount: data.deposited_lp_amount.toString(),
+    farm_click_id: data.farm_click_id.toNumber(),
+    lp_id: data.lp_id,
+    token_id: data.token_id,
+    block_start_staking: data.block_start_staking.toString(),
+    rewards: data.rewards.toString(),
+  };
+
+  return finalData;
 };

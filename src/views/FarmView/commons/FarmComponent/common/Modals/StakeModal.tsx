@@ -1,4 +1,3 @@
-import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,10 +7,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
+import { formatTokenI } from "@/utils/functions/tokens";
 import { stakeLP } from "@/views/FarmView/utils/services";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -59,20 +60,34 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
+      <DialogContent className="max-w-[24rem]">
         <DialogHeader>
           <DialogTitle>
             {" "}
-            <div className="flex items-center gap-3">
-              <LpTokenImageV2 lpToken={stakedToken} size={25} />
-              <h3>Stake in BSK-EGLD farm</h3>
-            </div>
+            <h3 className="text-lg font-semibold mb-4">
+              Auto-Compounded DeFi Farming
+            </h3>
           </DialogTitle>
         </DialogHeader>
 
+        <p className="text-sm text-green-600 mb-1">Active</p>
+        <p className="text-sm font-medium mb-4">
+          10% - 1000% Annual Yield (Subject to Market Variations)
+        </p>
+        <p className="text-sm mb-6">Higher APY, potentially higher risk.</p>
+
         <form onSubmit={formik.handleSubmit}>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 mb-4">
             {/* <Label htmlFor="amount-bskegld">BSK-EGLD Amount</Label> */}
+            <div className="flex justify-between">
+              <Label htmlFor="amount-bskegld">Deposit Amount</Label>
+              <div className="flex justify-between text-xs">
+                <p className="cursor-pointer" onClick={handleMax}>
+                  Balance: {formatBalance(userStakedToken)}{" "}
+                  {formatTokenI(userStakedToken.identifier)}
+                </p>
+              </div>
+            </div>
             <Input
               id="amount-bskegld"
               name="amount"
@@ -84,17 +99,23 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
                 Boolean(formik.touched.amount) && Boolean(formik.errors.amount)
               }
             />
-            <div className="flex justify-between mt-3 text-xs mb-2">
-              <p className="text-red-700">{formik.errors.amount}</p>
-              <p className="cursor-pointer" onClick={handleMax}>
-                Balance: {formatBalance(userStakedToken)}
-              </p>
-            </div>
+            <p className="text-red-700 text-xs">{formik.errors.amount}</p>
           </div>
 
           <DialogFooter>
-            <Button type="submit">Stake</Button>
+            <Button type="submit" className="w-full">
+              Deposit Funds
+            </Button>
           </DialogFooter>
+
+          <p
+            className="text-sm italic mt-4"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            No lock period, you can withdraw anytime.
+          </p>
         </form>
       </DialogContent>
     </Dialog>

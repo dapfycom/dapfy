@@ -258,4 +258,11 @@ export const pairs = [
     token1lp: "ZPAY-247875",
     token2lp: "WEGLD-bd4d79",
   },
+  {
+    lpname: "ONEWEGLDLP",
+    lpidentifier: "ONEWEGLD-892244",
+    lpprice: "117.451",
+    token1lp: "ONE-f9954f",
+    token2lp: "WEGLD-bd4d79",
+  },
 ];
