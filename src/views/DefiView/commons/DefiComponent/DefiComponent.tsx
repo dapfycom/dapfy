@@ -15,10 +15,11 @@ import {
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useFormik } from "formik";
+import Image from "next/image";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { HatomConfigs } from "../../utils/constants";
-import { deposit } from "../../utils/services";
+import { claimUserRewards, deposit } from "../../utils/services";
 import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
 
 interface IDefiContext {
@@ -41,6 +42,7 @@ interface FarmComponentProps {
 }
 const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
   const [sessionId, setSessionId] = useState<string | null>("");
+  const { elrondToken } = useGetElrondToken(hatomFarm.moneyMarket.tokenI);
 
   const minAmounts = HatomConfigs.minDeposit;
 
@@ -96,6 +98,17 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
     formik.setFieldValue("amount", value.toString());
   };
 
+  const handleClaimRewards = () => {
+    console.log("handleClaimRewards");
+
+    if (hatomFarm) {
+      claimUserRewards(hatomFarm?.moneyMarket.childScAddress);
+    }
+  };
+
+  // @ts-ignore
+  const apy = HatomConfigs.apy[formatTokenI(hatomFarm?.moneyMarket.tokenI)];
+
   return (
     <FarmContext.Provider
       value={{
@@ -107,19 +120,37 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
       <div className="w-full text-left">
         <div className="w-full rounded-lg border p-6">
           <div>
-            <div>
+            <div className="flex items-center gap-3">
               {" "}
-              <h3 className="text-lg font-semibold mb-4">
-                Auto-Compounded DeFi Farming
+              <h3 className="text-lg font-semibold">
+                {formatTokenI(hatomFarm.moneyMarket.tokenI)} Pool
               </h3>
+              {elrondToken?.assets?.svgUrl && (
+                <div className="w-[40px] h-[40px]">
+                  <Image
+                    src={elrondToken.assets.svgUrl}
+                    alt="hatom"
+                    width={40}
+                    height={40}
+                  />{" "}
+                </div>
+              )}
             </div>
           </div>
 
           <p className="text-sm text-green-600 mb-1">Active</p>
           <p className="text-sm font-medium mb-4">
-            10% - 1000% Annual Yield (Subject to Market Variations)
+            {apy && (
+              <div className="flex gap-3">
+                <p className="whitespace-nowrap mb-2 " color="white">
+                  APY
+                </p>
+                <p className="whitespace-nowrap text-muted-foreground">
+                  ≈ {apy} %
+                </p>
+              </div>
+            )}
           </p>
-          <p className="text-sm mb-6">Higher APY, potentially higher risk.</p>
 
           <form onSubmit={formik.handleSubmit}>
             <div className="flex flex-col gap-2 mb-4">
@@ -158,24 +189,29 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
                 <span>Deposit now with 1-Click®</span>
               </Button>
             </DialogFooter>
-
-            <p
-              className="text-sm italic mt-4"
-              style={{
-                textAlign: "center",
-              }}
-            >
-              No lock period, you can withdraw anytime.
-            </p>
-
-            <Divider className="mt-4" />
-
-            <div className="my-3">
-              <div className="mb-2">My positions</div>
-
-              <StakedDetails onModal={true} />
-            </div>
           </form>
+
+          <p
+            className="text-sm italic mt-4"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            No lock period, you can withdraw anytime.
+          </p>
+
+          <Divider className="mt-4" />
+
+          <div className="my-3">
+            <div className="mb-2">My positions</div>
+
+            <StakedDetails onModal={true} />
+          </div>
+          <Divider className="my-4" />
+
+          <Button className="text-sm w-full" onClick={handleClaimRewards}>
+            Claim rewards
+          </Button>
         </div>
       </div>
     </FarmContext.Provider>
