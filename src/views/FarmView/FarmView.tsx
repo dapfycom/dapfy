@@ -12,7 +12,7 @@ const FarmsList = dynamic(
   () => import("../DefiView/commons/FarmsList/FarmsList")
 );
 const FarmView = () => {
-  const [selectedProtocol, setSelectedProtocol] = useState<number>(-1);
+  const [selectedProtocol, setSelectedProtocol] = useState<number>(0);
   return (
     <Container className="xl:max-w-[1200px]">
       <div className="flex flex-col items-center text-center mt-5">
