@@ -58,10 +58,7 @@ const productsRoutes: RouteProps[] = [
     href: routeNames.dust,
     label: "Dust",
   },
-  {
-    href: routeNames.defi,
-    label: "Defi",
-  },
+
   // {
   //   href: routeNames.upgrade,
   //   label: "Upgrade",
