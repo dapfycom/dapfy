@@ -1,4 +1,5 @@
 import Realistic from "@/components/Conffeti/Realistic";
+import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -59,8 +60,12 @@ const ConvertButton = () => {
   return (
     <>
       {confetti && <Realistic />}
-      <Button className="w-full" onClick={handleSubmit}>
-        Convert dust now with one-click
+      <Button
+        className="w-full bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
+        onClick={handleSubmit}
+      >
+        <PointerIcon className="h-6 w-6" />
+        Convert dust now with 1-Click®
       </Button>
     </>
   );

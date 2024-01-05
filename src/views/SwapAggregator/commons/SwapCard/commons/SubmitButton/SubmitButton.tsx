@@ -1,3 +1,4 @@
+import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import useTxNotification from "@/hooks/useTxNotification";
@@ -57,18 +58,25 @@ const SubmitButton = () => {
     }
   };
 
-  let buttonText = isLoggedIn
-    ? fromField.value !== ""
-      ? "Confirm"
-      : "Enter an amount"
-    : "Connect wallet";
+  let buttonText = isLoggedIn ? (
+    fromField.value !== "" ? (
+      <>
+        {" "}
+        <PointerIcon className="h-6 w-6" /> Swap now with 1-Click®
+      </>
+    ) : (
+      "Enter an amount"
+    )
+  ) : (
+    "Connect wallet"
+  );
 
   return (
     <>
       {txSuccess && <Realistic />}
       <Button
         onClick={handleSwap}
-        className="w-full"
+        className="w-full  bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
         disabled={!aggregatorData && isLoggedIn}
       >
         {buttonText}
