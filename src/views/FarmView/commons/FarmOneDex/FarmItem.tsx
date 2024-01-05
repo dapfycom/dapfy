@@ -132,7 +132,7 @@ const FarmItem = () => {
             <Input
               id="amount-bskegld"
               name="amount"
-              placeholder="$0.00"
+              placeholder={formatTokenI(userStakedToken.identifier)}
               type="number"
               onChange={formik.handleChange}
               value={formik.values.amount}

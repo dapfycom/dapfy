@@ -171,7 +171,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
               <Input
                 id="amount-bskegld"
                 name="amount"
-                placeholder="Amount"
+                placeholder={formatTokenI(userStakedToken.identifier)}
                 type="number"
                 onChange={formik.handleChange}
                 value={formik.values.amount}
