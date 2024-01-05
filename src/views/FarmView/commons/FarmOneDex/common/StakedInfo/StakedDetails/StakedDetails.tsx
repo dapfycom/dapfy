@@ -1,3 +1,4 @@
+import { LpTokenImageV2 } from "@/components/LpTokenImage/LpTokenImage";
 import TokenImage from "@/components/TokenImage/TokenImage";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
@@ -31,6 +32,9 @@ const StakedDetails = ({ onModal }: IProps) => {
     );
 
   if (!depositEntries) return null;
+  console.log({
+    depositEntries,
+  });
 
   return (
     <div
@@ -57,7 +61,8 @@ const StakedDetails = ({ onModal }: IProps) => {
         title={`Earned LP Rewards (auto-compounded)`}
         value={depositEntries.rewards}
         decimals={lpToken?.decimals}
-        tokenI={depositEntries.deposited_lp_amount}
+        tokenI={depositEntries.lp_id}
+        isLp
       />
     </div>
   );
@@ -71,6 +76,7 @@ interface IStakedDetail {
   decimals: number;
   tokenI: string;
   withPrice?: boolean;
+  isLp?: boolean;
 }
 
 const StakedDetail = ({
@@ -79,14 +85,19 @@ const StakedDetail = ({
   tokenI,
   decimals,
   withPrice,
+  isLp,
 }: IStakedDetail) => {
   const [price] = useGetTokenPrice(tokenI);
-
+  const { elrondToken } = useGetElrondToken(tokenI);
   return (
     <div className="flex gap-3">
-      <TokenImage tokenI={tokenI} size={40} />{" "}
+      {isLp ? (
+        <LpTokenImageV2 lpToken={elrondToken} size={40} />
+      ) : (
+        <TokenImage tokenI={tokenI} size={40} />
+      )}
       <div className="flex flex-col gap-1">
-        <p>{title}</p>
+        <p className="text-sm">{title}</p>
         <div className="flex gap-2">
           <p className="text-sm">
             {formatBalance({ balance: value, decimals: decimals })}
