@@ -1,24 +1,35 @@
 import Divider from "@/components/Divider/Divider";
+import LpTokenImage from "@/components/LpTokenImage/LpTokenImage";
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
-import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
+import {
+  formatBalance,
+  formatNumber,
+  getRealBalance,
+} from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import * as yup from "yup";
 import { OneDexFarmContext } from "./FarmOneDex";
 import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
-import { stake } from "./utils/services";
+import { useGetApr } from "./utils/hooks";
+import { stake, withdraw } from "./utils/services";
 
 const FarmItem = () => {
   const { farm } = useContext(OneDexFarmContext);
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.egld
   );
+  const lpTokenIdentifier = farm?.lp_token_id || "";
+
+  const { elrondToken } = useGetElrondToken(lpTokenIdentifier);
+  const { apr, error, isLoading: isLoadingApr } = useGetApr();
 
   const formik = useFormik({
     initialValues: {
@@ -53,23 +64,38 @@ const FarmItem = () => {
     );
     formik.setFieldValue("amount", value.toString());
   };
-  if (!farm) return null;
 
+  if (!farm) return null;
+  const handleHarvest = (e: any) => {
+    e.stopPropagation();
+    withdraw(farm?.farm_click_id);
+  };
   return (
     <div className="px-4 pb-5 text-left">
       <div className="max-w-[24rem] border rounded-lg p-6">
         <div>
-          <div>
+          <div className="flex items-center gap-3">
             {" "}
-            <h3 className="text-lg font-semibold mb-4">
-              Auto-Compounded DeFi Farming
+            <h3 className="text-lg font-semibold ">
+              {formatTokenI(farm.first_token_id)}-
+              {formatTokenI(farm.second_token_id)}
             </h3>
+            <LpTokenImage lpToken={elrondToken} />
           </div>
         </div>
 
         <p className="text-sm text-green-600 mb-1">Active</p>
         <p className="text-sm font-medium mb-4">
-          10% - 1000% Annual Yield (Subject to Market Variations)
+          {apr?.gt(0) && (
+            <div className="flex gap-3">
+              <p className="whitespace-nowrap mb-2 " color="white">
+                APR
+              </p>
+              <p className=" whitespace-nowrap text-muted-foreground">
+                ≈ {formatNumber(apr?.toString())} %
+              </p>
+            </div>
+          )}
         </p>
         <p className="text-sm mb-6">Higher APY, potentially higher risk.</p>
 
@@ -107,23 +133,33 @@ const FarmItem = () => {
               <span>Deposit now with 1-Click®</span>
             </Button>
           </div>
-
-          <p
-            className="text-sm italic mt-4"
-            style={{
-              textAlign: "center",
-            }}
-          >
-            No lock period, you can withdraw anytime.
-          </p>
-
-          <Divider className="mt-4" />
-          <div className="my-3">
-            <div className="mb-2">My positions</div>
-
-            <StakedDetails onModal />
-          </div>
         </form>
+
+        <p
+          className="text-sm italic mt-4"
+          style={{
+            textAlign: "center",
+          }}
+        >
+          No lock period, you can withdraw anytime.
+        </p>
+
+        <Divider className="mt-4" />
+        <div className="my-3">
+          <div className="mb-2">My positions</div>
+
+          <StakedDetails onModal />
+        </div>
+        <Divider className="my-4" />
+        <div className="grid gap-3">
+          <Button
+            className="w-full md:w-auto text-sm bg-red-500 text-white"
+            onClick={handleHarvest}
+          >
+            {" "}
+            withdraw
+          </Button>
+        </div>
       </div>
     </div>
   );

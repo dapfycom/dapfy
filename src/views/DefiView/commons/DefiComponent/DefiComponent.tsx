@@ -19,7 +19,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { HatomConfigs } from "../../utils/constants";
-import { claimUserRewards, deposit } from "../../utils/services";
+import { claimUserRewards, deposit, withdraw } from "../../utils/services";
 import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
 
 interface IDefiContext {
@@ -99,10 +99,14 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
   };
 
   const handleClaimRewards = () => {
-    console.log("handleClaimRewards");
-
     if (hatomFarm) {
       claimUserRewards(hatomFarm?.moneyMarket.childScAddress);
+    }
+  };
+
+  const handleWithdraw = (e: any) => {
+    if (hatomFarm) {
+      withdraw(hatomFarm.moneyMarket.childScAddress);
     }
   };
 
@@ -208,10 +212,22 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
             <StakedDetails onModal={true} />
           </div>
           <Divider className="my-4" />
+          <div className="grid gap-3">
+            <Button
+              className="text-sm w-full bg-green-600 text-white"
+              onClick={handleClaimRewards}
+            >
+              Claim rewards
+            </Button>
 
-          <Button className="text-sm w-full" onClick={handleClaimRewards}>
-            Claim rewards
-          </Button>
+            <Button
+              className="w-full md:w-auto text-sm bg-red-500 text-white"
+              onClick={handleWithdraw}
+            >
+              {" "}
+              withdraw
+            </Button>
+          </div>
         </div>
       </div>
     </FarmContext.Provider>
