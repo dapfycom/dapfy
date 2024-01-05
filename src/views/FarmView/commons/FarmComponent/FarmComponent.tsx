@@ -14,6 +14,7 @@ import useGetTokenPrice from "@/hooks/useGetTokenPrice";
 import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
+import { withdraw } from "@/views/FarmView/utils/services";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { stakeLP } from "../../utils/services";
@@ -66,9 +67,13 @@ const FarmComponent = () => {
     formik.setFieldValue("amount", value.toString());
   };
 
-  const handleHarvest = (e: any) => {
+  const handleHarvest = () => {
     onCloseHarvest();
     onOpenHarvest();
+  };
+
+  const handleWithdraw = () => {
+    withdraw();
   };
   return (
     <>
@@ -140,6 +145,12 @@ const FarmComponent = () => {
           </div>
           <Divider className="my-4" />
           <div className="grid gap-3">
+            <Button
+              className="text-sm w-full lg:w-auto bg-green-600 hover:text-green-500 text-white"
+              onClick={handleWithdraw}
+            >
+              Harvest
+            </Button>
             <Button
               className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
               onClick={handleHarvest}
