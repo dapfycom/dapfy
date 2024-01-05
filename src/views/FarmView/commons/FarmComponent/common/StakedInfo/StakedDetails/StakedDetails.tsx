@@ -1,6 +1,7 @@
 import TokenImage from "@/components/TokenImage/TokenImage";
 import { selectedNetwork } from "@/config/network";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
+import { cn } from "@/lib/utils";
 import {
   formatBalance,
   formatBalanceDollar,
@@ -11,7 +12,12 @@ import {
   useGetFarmsInfo,
 } from "@/views/FarmView/utils/hooks";
 import { Loader2 } from "lucide-react";
-const StakedDetails = () => {
+
+interface IProps {
+  onModal?: boolean;
+}
+
+const StakedDetails = ({ onModal }: IProps) => {
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
   const { data: farmInfo } = useGetFarmsInfo();
   const { earnedBsk } = useGetBskRewards();
@@ -25,7 +31,12 @@ const StakedDetails = () => {
   if (!userFarmInfo || !farmInfo) return null;
 
   return (
-    <div className="pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center">
+    <div
+      className={cn(
+        "pb-6 flex w-full gap-7 justify-between flex-col lg:flex-row items-center",
+        onModal ? "lg:flex-col items-baseline" : ""
+      )}
+    >
       <StakedDetail
         title="BSK-EGLD"
         value={userFarmInfo?.lpActive}
