@@ -11,7 +11,11 @@ import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetTokenPrice from "@/hooks/useGetTokenPrice";
-import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
+import {
+  formatBalance,
+  formatBalanceDollar,
+  getRealBalance,
+} from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
 import { withdraw } from "@/views/FarmView/utils/services";
@@ -29,6 +33,7 @@ const FarmComponent = () => {
   const { elrondToken: stakedToken, isLoading } = useGetElrondToken(
     selectedNetwork.tokensID.bskwegld
   );
+
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.bskwegld
   );
@@ -86,6 +91,22 @@ const FarmComponent = () => {
               {elrondToken && <LpTokenImage lpToken={elrondToken} />}
             </div>
           </div>
+
+          {farmInfo && (
+            <div className="mb-2">
+              <h4 className="flex gap-2">
+                TVL:
+                <span className="">
+                  $
+                  {formatBalanceDollar(
+                    { balance: farmInfo.stakedLp, decimals: 18 },
+                    price,
+                    true
+                  )}
+                </span>{" "}
+              </h4>
+            </div>
+          )}
 
           <p className="text-sm text-green-600 mb-1">Active</p>
           <p className="text-sm font-medium mb-4">APR 100%</p>
