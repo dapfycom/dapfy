@@ -18,7 +18,7 @@ const FarmOneDex = () => {
 
   return (
     <div className="mt-10 grid">
-      <div className="flex flex-col gap-8">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3   gap-8">
         {farms.map((f) => {
           return (
             <OneDexFarmContext.Provider

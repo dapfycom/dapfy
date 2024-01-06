@@ -91,7 +91,7 @@ const FarmItem = () => {
   };
 
   return (
-    <div className="px-4 pb-5 text-left">
+    <div className="text-left">
       <div className="max-w-[24rem] border rounded-lg p-6">
         <div>
           <div className="flex items-center gap-3">
