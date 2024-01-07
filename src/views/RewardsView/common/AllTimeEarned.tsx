@@ -12,7 +12,7 @@ const AllTimeEarned = () => {
     return null;
   }
   return (
-    <div className="mt-8 mb-8">
+    <div className="mt-8 mb-8 max-w-xl mx-auto">
       <h3 className="text-4xl text-orange-700 mb-2">All time Earned Rewards</h3>
       <p className="text-4xl font-bold mb-8">$25.7</p>
 

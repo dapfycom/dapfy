@@ -1,21 +1,18 @@
 "use client";
 import Container from "@/components/ui-system/Container";
-import DashboardHeading from "./common/DashboadHeading";
-import { ContentTable } from "./common/HoldingsTable";
-import RewardsCard from "./common/RewardsCard";
-import XPaymentCard from "./common/XPaymentCard";
-import { useBindXUserWithDapfyUser } from "./lib/hooks";
-import LoginButton from "./common/LogginButton";
-import Participants from "./common/Participants";
 import AllTimeEarned from "./common/AllTimeEarned";
 import CollectedEgld from "./common/CollectedEgld";
+import DashboardHeading from "./common/DashboadHeading";
 import EmailReports from "./common/EmailReports";
+import LoginButton from "./common/LogginButton";
+import Participants from "./common/Participants";
+import { useBindXUserWithDapfyUser } from "./lib/hooks";
 
 const Rewards = () => {
   useBindXUserWithDapfyUser();
 
   return (
-    <Container className="mt-10 flex flex-col gap-10 max-w-[800px] text-center">
+    <Container className="mt-10 flex flex-col gap-10 max-w-[800px] text-center justify-center">
       <DashboardHeading />
 
       <LoginButton />
