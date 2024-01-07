@@ -1,6 +1,6 @@
 import Loader1 from "@/components/ui-system/Loader/Loader1";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
@@ -29,8 +29,7 @@ const ConvertInfo = () => {
   ).toString();
   return (
     <Card>
-      <CardHeader></CardHeader>
-      <CardContent>
+      <CardContent className="mt-4 pb-4">
         {isLoading ? (
           <Loader1 />
         ) : (
