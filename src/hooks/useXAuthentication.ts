@@ -20,7 +20,7 @@ export const useXAuthentication = () => {
     logouteRoute,
     handleLogin,
     handleLogout,
-    isAuthenticated: true,
+    isAuthenticated,
     error,
     isLoading,
   };
