@@ -61,6 +61,10 @@ const SwapCard = () => {
     dispatch(onChageFromFieldValue(userAmount.toString()));
     dispatch(onChageFromFieldValueDecimals(accountToken.balance));
   };
+  const handleClear = () => {
+    dispatch(onChageFromFieldValue("0"));
+    dispatch(onChageFromFieldValueDecimals("0"));
+  };
 
   return (
     <Card className="text-left">
@@ -75,6 +79,7 @@ const SwapCard = () => {
           onChangeToken={handleChangeFromToken}
           isLoadingInput={loadingAggregatorData}
           onMax={handleMax}
+          clear={handleClear}
         />
         <div className="flex justify-center">
           <div className="w-10 h-10">

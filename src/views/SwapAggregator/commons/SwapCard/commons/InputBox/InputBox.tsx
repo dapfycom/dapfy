@@ -37,6 +37,7 @@ interface IProps {
   isLoadingInput?: boolean;
   disabeledTokenSelection?: boolean;
   onMax?: (t: IElrondAccountToken) => void;
+  clear?: () => void;
 }
 
 const InputBox = ({
@@ -47,6 +48,7 @@ const InputBox = ({
   isLoadingInput,
   disabeledTokenSelection,
   onMax,
+  clear,
 }: IProps) => {
   const { elrondToken, isLoading } = useGetElrondToken(selectedTokenI);
   const { accountToken } = useGetAccountToken(selectedTokenI);
@@ -168,18 +170,28 @@ const InputBox = ({
               )}
             </div>
 
-            <div className="flex gap-3 items-center">
+            <div className="flex flex-col gap-1 sm:gap-3 items-center">
               {!readOnly && (
-                <Button
-                  size={"xs"}
-                  className="text-xs"
-                  variant={"outline"}
-                  onClick={() =>
-                    onMax && onMax(accountToken as IElrondAccountToken)
-                  }
-                >
-                  MAX
-                </Button>
+                <div className="flex gap-1 ">
+                  <Button
+                    size={"xs"}
+                    className="text-xs text-red-500"
+                    variant={"outline"}
+                    onClick={clear}
+                  >
+                    CLEAR
+                  </Button>
+                  <Button
+                    size={"xs"}
+                    className="text-xs"
+                    variant={"outline"}
+                    onClick={() =>
+                      onMax && onMax(accountToken as IElrondAccountToken)
+                    }
+                  >
+                    MAX
+                  </Button>
+                </div>
               )}
               <p className="text-sm">Balance: {formatBalance(accountToken)}</p>
             </div>
