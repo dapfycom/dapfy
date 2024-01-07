@@ -65,12 +65,7 @@ const SwapInfo = () => {
               </div>
             </div>
           )}
-          <div className="flex justify-between">
-            <div className="flex flex-col">
-              <span className="text-sm text-gray-400">Market spot price</span>
-              <span className="text-lg">{formatNumber(data.marketSp)}</span>
-            </div>
-          </div>
+
           {data.priceImpact && (
             <div className="flex justify-between">
               <div className="flex flex-col">
