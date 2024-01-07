@@ -42,9 +42,14 @@ export const useBindXUserWithDapfyUser = () => {
         console.log(error);
       }
     };
-    if (status === "success" && user && callUpdateUser.current === 0) {
+    if (
+      address &&
+      status === "success" &&
+      user &&
+      callUpdateUser.current === 0
+    ) {
       bindUser(user, address);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, user?.id]);
+  }, [status, address, user?.id]);
 };

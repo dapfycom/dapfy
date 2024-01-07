@@ -1,4 +1,5 @@
 "use client";
+import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import LpTokenImage from "@/components/LpTokenImage/LpTokenImage";
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
@@ -150,31 +151,42 @@ const FarmComponent = () => {
             </DialogFooter>
           </form>
 
-          <Divider className="mt-4" />
-          <div className="my-3">
-            <div className="mb-2">My positions</div>
+          <Collapse isOpen={isOpen}>
+            <Divider className="mt-4" />
+            <div className="my-3">
+              <div className="mb-2">My positions</div>
 
-            <StakedDetails onModal />
-          </div>
-          <Divider className="my-4" />
-          <div className="grid gap-3">
-            <Button
-              className="text-sm w-full lg:w-auto bg-green-600 hover:text-green-500 text-white"
-              onClick={handleWithdraw}
-            >
-              Harvest
-            </Button>
-            <Button
-              className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
-              onClick={handleHarvest}
-            >
-              {" "}
-              withdraw
-            </Button>
+              <StakedDetails onModal />
+            </div>
+            <Divider className="my-4" />
+            <div className="grid gap-3">
+              <Button
+                className="text-sm w-full lg:w-auto bg-green-600 hover:text-green-500 text-white"
+                onClick={handleWithdraw}
+              >
+                Harvest
+              </Button>
+              <Button
+                className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
+                onClick={handleHarvest}
+              >
+                {" "}
+                withdraw
+              </Button>
 
-            {isOpenHarvest && (
-              <WithdrawModal isOpen={isOpenHarvest} onClose={onCloseHarvest} />
-            )}
+              {isOpenHarvest && (
+                <WithdrawModal
+                  isOpen={isOpenHarvest}
+                  onClose={onCloseHarvest}
+                />
+              )}
+            </div>
+          </Collapse>
+
+          <div className="flex justify-center mt-6">
+            <Button variant={"outline"} size={"xs"} onClick={onToggle}>
+              {isOpen ? "Less" : "More"} info
+            </Button>
           </div>
         </div>
       </div>
