@@ -1,7 +1,11 @@
+import { useXAuthentication } from "@/hooks/useXAuthentication";
 import Image from "next/image";
-import React from "react";
 
 const Participants = () => {
+  const { isAuthenticated } = useXAuthentication();
+  if (isAuthenticated) {
+    return null;
+  }
   return (
     <div className="flex flex-col items-center">
       <p className="mb-2 text-gray-400">Join 23+ income recipients</p>

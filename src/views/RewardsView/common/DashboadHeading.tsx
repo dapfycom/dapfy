@@ -1,9 +1,11 @@
-import useGetWalletWorth from "@/hooks/useGetWalletWorth";
-import { formatPrecision } from "@/utils/functions/formatBalance";
+import { useXAuthentication } from "@/hooks/useXAuthentication";
 import Image from "next/image";
 const DashboardHeading = () => {
-  const { netWorth } = useGetWalletWorth();
+  const { isAuthenticated } = useXAuthentication();
 
+  if (isAuthenticated) {
+    return null;
+  }
   return (
     <div className="flex flex-col items-center text-center">
       <div className="mb-10">
