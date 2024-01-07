@@ -23,7 +23,7 @@ const SelectTokens = () => {
           </div>
         ) : (
           <>
-            <div className="flex  gap-4">
+            <div className="flex  gap-4 flex-wrap">
               {finalTokens.map((token) => {
                 return (
                   <RowToken
