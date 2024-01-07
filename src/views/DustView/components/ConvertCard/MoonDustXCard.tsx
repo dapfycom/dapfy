@@ -60,7 +60,7 @@ const MoonDustXCard = () => {
       <CardContent className="space-y-2 px-3">
         <div className="flex flex-col  md:px-3">
           <SelectTokens />
-          <div className="flex w-full mt-4">
+          <div className="flex w-full my-4">
             <SelectAllTokens />
           </div>
 
