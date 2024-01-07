@@ -34,17 +34,17 @@ const ConvertInfo = () => {
           <Loader1 />
         ) : (
           <div className="flex flex-col gap-3">
-            <div className="flex justify-between mb-3">
-              <p>Minimum {formatTokenI(toTokenToConvert)} to receive</p>
+            <div className="flex flex-col mb-3">
+              <p>
+                You will receive{" "}
+                {formatBalance({
+                  balance: receiveAmount,
+                  decimals: token?.decimals,
+                })}{" "}
+                {formatTokenI(toTokenToConvert)}
+              </p>
               <div className="flex flex-col">
-                <p>
-                  {formatBalance({
-                    balance: receiveAmount,
-                    decimals: token?.decimals,
-                  })}{" "}
-                  {formatTokenI(toTokenToConvert)}
-                </p>
-                <p className="text-right text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm">
                   ≈ $
                   {formatBalanceDollar(
                     {
