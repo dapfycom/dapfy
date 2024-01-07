@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectConvertInfo } from "@/views/DustView/lib/dust-slice";
 import { useSelectableDustTokens } from "@/views/DustView/lib/hooks";
@@ -11,12 +11,7 @@ const SelectTokens = () => {
 
   return (
     <Card className="text-left">
-      <CardHeader>
-        <div className="flex justify-between  items-center flex-col md:flex-row">
-          <CardTitle className="text-md"> Your dust</CardTitle>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-2 px-4 md:px-6">
+      <CardContent className="space-y-2 pt-7 px-4 md:px-6">
         {isLoading ? (
           <div className="flex items-center justify-center w-full min-h-[400px]">
             <Loader2 className="animate-ping" />
