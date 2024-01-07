@@ -20,7 +20,7 @@ const AllTimeEarned = () => {
   return (
     <div className="mt-8 mb-8 max-w-xl mx-auto">
       <h3 className="text-4xl text-orange-700 mb-2">All time Earned Rewards</h3>
-      <p className="text-4xl font-bold mb-8">$25.7</p>
+      <p className="text-4xl font-bold mb-8">$0</p>
 
       <div className="flex items-center w-full mb-16 flex-col md:flex-row  gap-3">
         <div className="flex  justify-between items-center flex-1">
