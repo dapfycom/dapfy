@@ -19,7 +19,7 @@ const FarmOneDex = () => {
   return (
     <div className="mt-10 grid">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3   gap-8">
-        {farms.map((f) => {
+        {farms.slice(0, 1).map((f) => {
           return (
             <OneDexFarmContext.Provider
               key={f.farm_click_id}
