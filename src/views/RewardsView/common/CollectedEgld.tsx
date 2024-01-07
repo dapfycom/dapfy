@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import Image from "next/image";
-import React from "react";
 
 const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
@@ -22,7 +21,7 @@ const CollectedEgld = () => {
           </div>
         </div>
 
-        <Button className="h-14">COLLECT</Button>
+        <Button className="h-14 bg-green-500 text-xl">COLLECT</Button>
       </div>
     </div>
   );
