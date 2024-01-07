@@ -179,7 +179,7 @@ const InputBox = ({
                     variant={"outline"}
                     onClick={clear}
                   >
-                    CLEAR
+                    ABORT
                   </Button>
                   <Button
                     size={"xs"}
