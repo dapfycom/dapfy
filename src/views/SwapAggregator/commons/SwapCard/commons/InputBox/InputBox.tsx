@@ -174,7 +174,7 @@ const InputBox = ({
             <div className="flex flex-col gap-1 sm:gap-3 items-center">
               {!readOnly && (
                 <div className="flex gap-1 ">
-                  {!!value && (
+                  {value !== "" && value !== "0" && value !== null && (
                     <Button
                       size={"xs"}
                       className="text-xs text-red-500"
