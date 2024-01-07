@@ -63,9 +63,7 @@ const MoonDustXCard = () => {
           <div className="flex w-full mt-4">
             <SelectAllTokens />
           </div>
-          <p className="mt-8 text-sm md:text-md mb-7">
-            0% fees when converting into BSK 🥳️
-          </p>
+
           <ConvertInfo />
         </div>
       </CardContent>

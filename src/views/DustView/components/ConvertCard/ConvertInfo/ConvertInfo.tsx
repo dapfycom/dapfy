@@ -39,11 +39,11 @@ const ConvertInfo = () => {
               <p>Minimum {formatTokenI(toTokenToConvert)} to receive</p>
               <div className="flex flex-col">
                 <p>
-                  {formatTokenI(toTokenToConvert)}{" "}
                   {formatBalance({
                     balance: receiveAmount,
                     decimals: token?.decimals,
-                  })}
+                  })}{" "}
+                  {formatTokenI(toTokenToConvert)}
                 </p>
                 <p className="text-right text-muted-foreground text-sm">
                   ≈ $
@@ -62,7 +62,7 @@ const ConvertInfo = () => {
               <p>{formatTokenI(toTokenToConvert) === "BSK" ? "0%" : "3.5%"} </p>
             </div> */}
 
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <p>Slipage</p>
               <div className="flex gap-3">
                 <SlipageBox percent={1} selected={slipage === 1} />
@@ -70,86 +70,11 @@ const ConvertInfo = () => {
                 <SlipageBox percent={3} selected={slipage === 3} />
                 <SlipageBox percent={5} selected={slipage === 5} />
               </div>
-            </div>
+            </div> */}
           </div>
         )}
       </CardContent>
     </Card>
-
-    // <Card as={Flex} p={8} rounded="xl" w="full" flexDir={"column"} mt={8}>
-    //   {isLoading ? (
-    //     <Center minH={"60px"}>
-    //       <Spinner />
-    //     </Center>
-    //   ) : (
-    //     <Stack>
-    //       <Flex
-    //         justifyContent={"space-between"}
-    //         mb={4}
-    //         fontSize={{ xs: "14px", md: "md" }}
-    //         flexDir={{ xs: "column", md: "row" }}
-    //         textAlign={{ xs: "center", md: "initial" }}
-    //       >
-    //         <Text mb={5}>
-    //           Minimum {formatTokenI(toTokenToConvert)} to receive
-    //         </Text>
-    //         <Flex
-    //           flexDir={"column"}
-    //           alignItems={{ xs: "center", md: "flex-end" }}
-    //         >
-    //           <Text fontWeight="600">
-    //             {formatBalance({
-    //               balance: receiveAmount,
-    //               decimals: token?.decimals,
-    //             })}{" "}
-    //             {formatTokenI(toTokenToConvert)}
-    //           </Text>
-    //           <Text color={"GrayText"} fontWeight="600">
-    //             ≈ $
-    //             {formatBalanceDolar(
-    //               {
-    //                 balance: receiveAmount,
-    //                 decimals: token?.decimals,
-    //               },
-    //               token?.ticker === "USDC" ? 1 : token?.price
-    //             )}
-    //           </Text>
-    //         </Flex>
-    //       </Flex>
-    //       <Flex
-    //         justifyContent={"space-between"}
-    //         mb={4}
-    //         fontSize={{ xs: "14px", md: "md" }}
-    //         flexDir={{ xs: "column", md: "row" }}
-    //         textAlign={{ xs: "center", md: "initial" }}
-    //       >
-    //         <Text mb={5}>Basic protocol fee:</Text>
-    //         <Flex
-    //           flexDir={"column"}
-    //           alignItems={{ xs: "center", md: "flex-end" }}
-    //         >
-    //           <Text fontWeight="600">
-    //             {formatTokenI(toTokenToConvert) === "BSK" ? "0%" : "3.5%"}{" "}
-    //           </Text>
-    //         </Flex>
-    //       </Flex>
-
-    //       <Flex
-    //         justifyContent={"space-between"}
-    //         alignItems={"center"}
-    //         flexDir={{ xs: "column", md: "row" }}
-    //       >
-    //         <Text mb={{ xs: "2", md: 0 }}> Slipage</Text>
-    //         <Flex gap={"2"}>
-    //           <SlipageBox percent={1} selected={slipage === 1} />
-    //           <SlipageBox percent={2} selected={slipage === 2} />
-    //           <SlipageBox percent={3} selected={slipage === 3} />
-    //           <SlipageBox percent={5} selected={slipage === 5} />
-    //         </Flex>
-    //       </Flex>
-    //     </Stack>
-    //   )}
-    // </Card>
   );
 };
 
