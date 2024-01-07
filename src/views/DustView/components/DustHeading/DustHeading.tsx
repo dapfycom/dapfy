@@ -11,7 +11,7 @@ import {
 
 const DustHeading = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col text-center">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
