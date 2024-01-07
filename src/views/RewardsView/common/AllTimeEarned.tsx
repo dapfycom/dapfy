@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
@@ -6,7 +7,7 @@ import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
-  const { user, isAuthenticated } = useXAuthentication();
+  const { user, isAuthenticated, handleLogout } = useXAuthentication();
 
   if (!isAuthenticated) {
     return null;
@@ -16,8 +17,9 @@ const AllTimeEarned = () => {
       <h3 className="text-4xl text-orange-700 mb-2">All time Earned Rewards</h3>
       <p className="text-4xl font-bold mb-8">$25.7</p>
 
-      <div className="w-full mb-16">
-        <div className="flex justify-between items-center">
+      <div className="flex items-center w-full mb-16 flex-col md:flex-row  gap-3">
+        <Button onClick={handleLogout}>Log out</Button>
+        <div className="flex  justify-between items-center flex-1">
           <div className="flex gap-3 items-center">
             <Avatar className="w-14 h-14">
               <AvatarImage src={user?.profile_image_url} alt={user?.username} />
@@ -40,14 +42,28 @@ const AllTimeEarned = () => {
       </h4>
       <div className="w-full flex justify-center">
         <ul className="max-w-[600px] text-left flex flex-col gap-2">
-          <li className="flex gap-3">
-            <CheckCircle2 className="text-green-500 " /> Like retweet comment
-            one of our posts
-            <ArrowRight />
+          <li>
+            <a
+              href="http://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-3"
+            >
+              <CheckCircle2 className="text-green-500 " /> Like retweet comment
+              one of our posts
+              <ArrowRight />
+            </a>
           </li>
-          <li className="flex gap-3">
-            <CheckCircle2 className="text-green-500 " /> Write a tweet about
-            @dapfycom <ArrowRight />
+          <li>
+            <a
+              href="http://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-3"
+            >
+              <CheckCircle2 className="text-green-500 " /> Write a tweet about
+              @dapfycom <ArrowRight />
+            </a>
           </li>
           <li className="flex gap-3">
             <Circle className="text-green-500 " />
