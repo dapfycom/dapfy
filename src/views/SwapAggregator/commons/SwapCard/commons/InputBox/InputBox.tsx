@@ -22,6 +22,7 @@ import { IElrondAccountToken, IElrondToken } from "@/types/elrond.interface";
 import {
   formatBalance,
   formatBalanceDollar,
+  formatNumber,
   setElrondBalance,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
@@ -75,7 +76,7 @@ const InputBox = ({
             className="border-none focus-visible:border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-xl"
             placeholder="0.0"
             onChange={(e) => onChange(e.target.value, elrondToken)}
-            value={value}
+            value={readOnly ? (formatNumber(value || "0") as string) : value}
             readOnly={readOnly}
           />
           <Popover>

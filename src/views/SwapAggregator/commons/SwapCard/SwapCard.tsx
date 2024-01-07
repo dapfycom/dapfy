@@ -11,7 +11,7 @@ import { SwapIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { IElrondAccountToken, IElrondToken } from "@/types/elrond.interface";
-import { formatBalance, formatNumber } from "@/utils/functions/formatBalance";
+import { formatBalance } from "@/utils/functions/formatBalance";
 import {
   changeFromFieldToken,
   changeToFieldToken,
@@ -93,7 +93,7 @@ const SwapCard = () => {
 
         <InputBox
           selectedTokenI={toField.selectedToken}
-          value={formatNumber(toField.value || "0") as string}
+          value={toField.value}
           onChange={handleChangeToField}
           onChangeToken={handleChangeToToken}
           isLoadingInput={loadingAggregatorData}
