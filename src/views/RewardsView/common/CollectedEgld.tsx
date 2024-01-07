@@ -1,3 +1,4 @@
+import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import Image from "next/image";
@@ -21,7 +22,13 @@ const CollectedEgld = () => {
           </div>
         </div>
 
-        <Button className="h-14 bg-green-500 text-xl">COLLECT</Button>
+        <Button
+          key="1"
+          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-2 text-white shadow-md"
+        >
+          <ShoppingBagIcon className="mr-2 h-4 w-4" />
+          Collect
+        </Button>
       </div>
     </div>
   );

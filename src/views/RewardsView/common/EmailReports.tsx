@@ -1,3 +1,5 @@
+import { UserPlusIcon } from "@/components/ui-system/icons/ui-icons";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { useFormik } from "formik";
@@ -71,7 +73,7 @@ const EmailReports = () => {
                   </svg>
                 </div>
                 <input
-                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300  sm:rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Enter your email"
                   type="email"
                   id="user-email"
@@ -81,13 +83,11 @@ const EmailReports = () => {
                   required
                 />
               </div>
-              <div>
-                <button
-                  type="submit"
-                  className="py-3 px-5 w-full text-sm font-medium text-center rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Subscribe
-                </button>
+              <div className="ml-2">
+                <Button className="bg-[#4f46e5] hover:text-[#4f46e5] text-white px-4 py-2 rounded-md flex items-center space-x-2">
+                  <UserPlusIcon className="" />
+                  <span className="whitespace-nowrap">Add recipient</span>
+                </Button>
               </div>
             </div>
           </form>
