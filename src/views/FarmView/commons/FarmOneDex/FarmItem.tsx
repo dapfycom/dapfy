@@ -1,3 +1,4 @@
+import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import LpTokenImage from "@/components/LpTokenImage/LpTokenImage";
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
@@ -5,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
+import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -26,6 +28,8 @@ import { useGetApr } from "./utils/hooks";
 import { stake, withdraw } from "./utils/services";
 
 const FarmItem = () => {
+  const { isOpen, onToggle } = useDisclosure();
+
   const { farm } = useContext(OneDexFarmContext);
   const address = useAppSelector(selectUserAddress);
   const { accountToken: userStakedToken } = useGetAccountToken(
@@ -162,21 +166,28 @@ const FarmItem = () => {
         >
           No lock period, you can withdraw anytime.
         </p>
+        <Collapse isOpen={isOpen}>
+          <Divider className="mt-4" />
+          <div className="my-3">
+            <div className="mb-2">My positions</div>
 
-        <Divider className="mt-4" />
-        <div className="my-3">
-          <div className="mb-2">My positions</div>
+            <StakedDetails onModal />
+          </div>
+          <Divider className="my-4" />
+          <div className="grid gap-3">
+            <Button
+              className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
+              onClick={handleHarvest}
+            >
+              {" "}
+              withdraw
+            </Button>
+          </div>
+        </Collapse>
 
-          <StakedDetails onModal />
-        </div>
-        <Divider className="my-4" />
-        <div className="grid gap-3">
-          <Button
-            className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
-            onClick={handleHarvest}
-          >
-            {" "}
-            withdraw
+        <div className="flex justify-center mt-6">
+          <Button variant={"outline"} size={"xs"} onClick={onToggle}>
+            {isOpen ? "Less" : "More"} info
           </Button>
         </div>
       </div>

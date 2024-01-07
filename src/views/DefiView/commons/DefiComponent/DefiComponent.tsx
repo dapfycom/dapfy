@@ -1,10 +1,12 @@
 "use client";
+import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import {
@@ -41,6 +43,8 @@ interface FarmComponentProps {
   };
 }
 const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
+  const { isOpen, onToggle } = useDisclosure();
+
   const [sessionId, setSessionId] = useState<string | null>("");
   const { elrondToken } = useGetElrondToken(hatomFarm.moneyMarket.tokenI);
 
@@ -203,29 +207,36 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
           >
             No lock period, you can withdraw anytime.
           </p>
+          <Collapse isOpen={isOpen}>
+            <Divider className="mt-4" />
 
-          <Divider className="mt-4" />
+            <div className="my-3">
+              <div className="mb-2">My positions</div>
 
-          <div className="my-3">
-            <div className="mb-2">My positions</div>
+              <StakedDetails onModal={true} />
+            </div>
+            <Divider className="my-4" />
+            <div className="grid gap-3">
+              <Button
+                className="text-sm w-full bg-green-600 text-white hover:text-green-500"
+                onClick={handleClaimRewards}
+              >
+                Claim rewards
+              </Button>
 
-            <StakedDetails onModal={true} />
-          </div>
-          <Divider className="my-4" />
-          <div className="grid gap-3">
-            <Button
-              className="text-sm w-full bg-green-600 text-white hover:text-green-500"
-              onClick={handleClaimRewards}
-            >
-              Claim rewards
-            </Button>
+              <Button
+                className="w-full md:w-auto text-sm hover:text-red-700 bg-red-500 text-white"
+                onClick={handleWithdraw}
+              >
+                {" "}
+                withdraw
+              </Button>
+            </div>
+          </Collapse>
 
-            <Button
-              className="w-full md:w-auto text-sm hover:text-red-700 bg-red-500 text-white"
-              onClick={handleWithdraw}
-            >
-              {" "}
-              withdraw
+          <div className="flex justify-center mt-6">
+            <Button variant={"outline"} size={"xs"} onClick={onToggle}>
+              {isOpen ? "Less" : "More"} info
             </Button>
           </div>
         </div>
