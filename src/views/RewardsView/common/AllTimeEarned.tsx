@@ -2,16 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
-import {
-  ArrowRight,
-  CheckCheckIcon,
-  CheckCircle,
-  CheckCircle2,
-  CheckIcon,
-  Circle,
-} from "lucide-react";
-import Image from "next/image";
-import React from "react";
+import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
