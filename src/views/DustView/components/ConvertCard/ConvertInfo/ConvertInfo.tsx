@@ -34,7 +34,7 @@ const ConvertInfo = () => {
           <Loader1 />
         ) : (
           <div className="flex flex-col gap-3">
-            <div className="flex flex-col mb-3">
+            <div className="flex flex-col mb-3 text-center">
               <p>
                 You will receive{" "}
                 {formatBalance({
