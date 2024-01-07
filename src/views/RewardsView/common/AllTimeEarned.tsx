@@ -1,9 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
-import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Circle, LogOut } from "lucide-react";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
@@ -18,13 +23,25 @@ const AllTimeEarned = () => {
       <p className="text-4xl font-bold mb-8">$25.7</p>
 
       <div className="flex items-center w-full mb-16 flex-col md:flex-row  gap-3">
-        <Button onClick={handleLogout}>Log out</Button>
         <div className="flex  justify-between items-center flex-1">
           <div className="flex gap-3 items-center">
-            <Avatar className="w-14 h-14">
-              <AvatarImage src={user?.profile_image_url} alt={user?.username} />
-              <AvatarFallback>A</AvatarFallback>
-            </Avatar>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar className="w-14 h-14">
+                  <AvatarImage
+                    src={user?.profile_image_url}
+                    alt={user?.username}
+                  />
+                  <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="min-w-[200px]">
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Disconnect</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             <div className="text-left">
               <p>{user?.name}</p>
