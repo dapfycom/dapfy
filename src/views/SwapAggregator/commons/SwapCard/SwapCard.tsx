@@ -64,6 +64,8 @@ const SwapCard = () => {
   const handleClear = () => {
     dispatch(onChageFromFieldValue("0"));
     dispatch(onChageFromFieldValueDecimals("0"));
+    dispatch(onChangeToFieldValueDecimals("0"));
+    dispatch(onChangeToField("0"));
   };
 
   return (
