@@ -1,10 +1,14 @@
 "use client";
+import { routeNames } from "@/config/routes";
 import axiosDapfy from "@/services/rest/dapfy-api";
 import { ErrorMessage } from "@/utils/functions/error";
 import { useFormik } from "formik";
+import { usePathname } from "next/navigation";
 import toast from "react-hot-toast";
 
 const NewsletterForm = () => {
+  const path = usePathname();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,6 +33,10 @@ const NewsletterForm = () => {
       );
     },
   });
+
+  if (path.slice(3) === routeNames.rewards) {
+    return null;
+  }
 
   return (
     <section className="w-full">
