@@ -44,7 +44,7 @@ const AllTimeEarned = () => {
         <ul className="max-w-[600px] text-left flex flex-col gap-2">
           <li>
             <a
-              href="http://x.com"
+              href="https://twitter.com/DapfyCom"
               target="_blank"
               rel="noopener noreferrer"
               className="flex gap-3"
@@ -56,7 +56,7 @@ const AllTimeEarned = () => {
           </li>
           <li>
             <a
-              href="http://x.com"
+              href="https://x.com"
               target="_blank"
               rel="noopener noreferrer"
               className="flex gap-3"
