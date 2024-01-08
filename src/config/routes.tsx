@@ -9,7 +9,7 @@
 // import React from "react";
 // import { RouteObject } from "react-router-dom";
 
-import { SwapIcon } from "@/components/ui-system/icons/ui-icons";
+import { FarmIcon, SwapIcon } from "@/components/ui-system/icons/ui-icons";
 import { SendIcon, Table2, Twitter, Wrench } from "lucide-react";
 
 // const SwapView = React.lazy(() => import("views/SwapView"));
@@ -126,5 +126,10 @@ export const adminRoutes = [
     path: routeNames.admin + "/twitter",
     title: "Twitter",
     icon: <Twitter />,
+  },
+  {
+    path: routeNames.admin + "/farms",
+    title: "Farms",
+    icon: <FarmIcon />,
   },
 ];

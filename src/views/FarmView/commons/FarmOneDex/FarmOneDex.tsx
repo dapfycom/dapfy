@@ -16,6 +16,7 @@ export const OneDexFarmContext = createContext<IOneDexContext>({
 const FarmOneDex = () => {
   // new data
   const { farms } = useGetOneDexFarms();
+  console.log({ farms });
 
   return (
     <div className="mt-10 grid">
