@@ -49,6 +49,7 @@ const StakedDetails = ({ onModal }: IProps) => {
         value={earnedBsk}
         decimals={16}
         tokenI={selectedNetwork.tokensID.bsk}
+        withPrice
       />
     </div>
   );
