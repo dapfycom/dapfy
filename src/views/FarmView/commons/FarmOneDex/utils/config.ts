@@ -1,1 +1,1 @@
-export const allowedFarms = [1];
+export const allowedFarms = [1, 5];

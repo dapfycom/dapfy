@@ -265,4 +265,11 @@ export const pairs = [
     token1lp: "ONE-f9954f",
     token2lp: "WEGLD-bd4d79",
   },
+  {
+    lpname: "ONELEGLD",
+    lpidentifier: "ONELEGLD-f18564",
+    lpprice: "117.451",
+    token1lp: "ONE-f9954f",
+    token2lp: "LEGLD-d74da9",
+  },
 ];
