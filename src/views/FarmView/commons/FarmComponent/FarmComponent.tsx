@@ -8,6 +8,7 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
+import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
@@ -27,6 +28,7 @@ import WithdrawModal from "./common/Modals/WithdrawModal";
 import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
 
 const FarmComponent = () => {
+  const { handleConnect, isLoggedIn } = useAuthentication();
   const { isOpen, onToggle } = useDisclosure();
   const { elrondToken } = useGetElrondToken(selectedNetwork.tokensID.bskwegld);
   const { data: farmInfo } = useGetFarmsInfo();
@@ -140,14 +142,25 @@ const FarmComponent = () => {
             </div>
 
             <DialogFooter>
-              <Button
-                type="submit"
-                className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
-              >
-                <PointerIcon className="h-6 w-6" />
+              {isLoggedIn ? (
+                <Button
+                  type="submit"
+                  className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                >
+                  <PointerIcon className="h-6 w-6" />
 
-                <span>Deposit now with 1-Click®</span>
-              </Button>
+                  <span>Deposit now with 1-Click®</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleConnect}
+                  className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                >
+                  <PointerIcon className="h-6 w-6" />
+
+                  <span>Deposit now with 1-Click®</span>
+                </Button>
+              )}
             </DialogFooter>
           </form>
 

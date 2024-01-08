@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { selectedNetwork } from "@/config/network";
+import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
@@ -29,6 +30,7 @@ import { stake, withdraw } from "./utils/services";
 
 const FarmItem = () => {
   const { isOpen, onToggle } = useDisclosure();
+  const { handleConnect, isLoggedIn } = useAuthentication();
 
   const { farm } = useContext(OneDexFarmContext);
   const address = useAppSelector(selectUserAddress);
@@ -148,13 +150,23 @@ const FarmItem = () => {
           </div>
 
           <div>
-            <Button
-              key="1"
-              className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
-            >
-              <PointerIcon className="h-6 w-6" />
-              <span>Deposit now with 1-Click®</span>
-            </Button>
+            {isLoggedIn ? (
+              <Button
+                type="submit"
+                className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+              >
+                <PointerIcon className="h-6 w-6" />
+                <span>Deposit now with 1-Click®</span>
+              </Button>
+            ) : (
+              <Button
+                onClick={handleConnect}
+                className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+              >
+                <PointerIcon className="h-6 w-6" />
+                <span>Deposit now with 1-Click®</span>
+              </Button>
+            )}
           </div>
         </form>
 

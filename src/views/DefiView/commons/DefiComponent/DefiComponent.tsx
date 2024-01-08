@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import useAuthentication from "@/hooks/useAuthentication";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
@@ -44,6 +45,7 @@ interface FarmComponentProps {
 }
 const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
   const { isOpen, onToggle } = useDisclosure();
+  const { handleConnect, isLoggedIn } = useAuthentication();
 
   const [sessionId, setSessionId] = useState<string | null>("");
   const { elrondToken } = useGetElrondToken(hatomFarm.moneyMarket.tokenI);
@@ -188,14 +190,25 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
             </div>
 
             <DialogFooter>
-              <Button
-                key="1"
-                type="submit"
-                className="bg-[#ff9900] text-white hover:text-[#ff9900] px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
-              >
-                <PointerIcon className="h-6 w-6" />
-                <span>Deposit now with 1-Click®</span>
-              </Button>
+              {isLoggedIn ? (
+                <Button
+                  key="1"
+                  type="submit"
+                  className="bg-[#ff9900] text-white hover:text-[#ff9900] px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                >
+                  <PointerIcon className="h-6 w-6" />
+                  <span>Deposit now with 1-Click®</span>
+                </Button>
+              ) : (
+                <Button
+                  key="1"
+                  onClick={handleConnect}
+                  className="bg-[#ff9900] text-white hover:text-[#ff9900] px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                >
+                  <PointerIcon className="h-6 w-6" />
+                  <span>Deposit now with 1-Click®</span>
+                </Button>
+              )}
             </DialogFooter>
           </form>
 
