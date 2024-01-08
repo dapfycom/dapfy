@@ -272,4 +272,25 @@ export const pairs = [
     token1lp: "ONE-f9954f",
     token2lp: "LEGLD-d74da9",
   },
+  {
+    lpname: "RONEWEGLD",
+    lpidentifier: "RONEWEGLD-681d99",
+    lpprice: "117.451",
+    token1lp: "RONE-bb2e69",
+    token2lp: "WEGLD-bd4d79",
+  },
+  {
+    lpname: "XLHWEGLD",
+    lpidentifier: "XLHWEGLD-88cdb2",
+    lpprice: "117.451",
+    token1lp: "XLH-8daa50",
+    token2lp: "WEGLD-bd4d79",
+  },
+  {
+    lpname: "BFYWEGLD",
+    lpidentifier: "BFYWEGLD-529d73",
+    lpprice: "117.451",
+    token1lp: "BFY-8344ff",
+    token2lp: "WEGLD-bd4d79",
+  },
 ];

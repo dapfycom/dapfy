@@ -6,6 +6,7 @@ import FarmItem from "./FarmItem";
 
 const OnedexFarms = () => {
   const { farms, isLoading } = useGetOneDexFarms();
+  console.log({ farms });
 
   return (
     <div className="mt-10 grid">
