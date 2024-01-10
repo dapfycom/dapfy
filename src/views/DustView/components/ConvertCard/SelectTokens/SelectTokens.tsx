@@ -1,14 +1,31 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectConvertInfo } from "@/views/DustView/lib/dust-slice";
 import { useSelectableDustTokens } from "@/views/DustView/lib/hooks";
 import { Loader2 } from "lucide-react";
 import RowToken from "./RowToken";
 
+const elementsByRow = (width: number) => {
+  if (width > 1024) {
+    return 5;
+  }
+  if (width > 768) {
+    return 4;
+  }
+  if (width > 640) {
+    return 3;
+  }
+
+  return 2;
+};
+
 const SelectTokens = () => {
   const selectedTokens = useAppSelector(selectConvertInfo);
   const { finalTokens, isLoading } = useSelectableDustTokens();
+  const width = useBreakpoint();
 
+  const elements = elementsByRow(width);
   return (
     <Card className="text-left">
       <CardContent className="space-y-2 pt-7 px-4 md:px-6">
@@ -18,8 +35,9 @@ const SelectTokens = () => {
           </div>
         ) : (
           <>
-            <div className="flex  gap-4 flex-wrap">
-              {finalTokens.map((token) => {
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              {finalTokens.map((token, index) => {
+                const element = index + 1;
                 return (
                   <RowToken
                     key={token.identifier}
@@ -29,6 +47,26 @@ const SelectTokens = () => {
                         (selectedT) => selectedT.identifier === token.identifier
                       )
                     )}
+                    style={{
+                      borderTop:
+                        element < elements + 1
+                          ? "none"
+                          : "1px solid rgba(255,255,255,0.1)",
+                      borderBottom:
+                        finalTokens.length - element < elements
+                          ? "none"
+                          : "1px solid rgba(255,255,255,0.1)",
+
+                      borderLeft:
+                        element % elements === 1
+                          ? "none"
+                          : "1px solid rgba(255,255,255,0.1)",
+
+                      borderRight:
+                        element % elements === 0
+                          ? "none"
+                          : "1px solid rgba(255,255,255,0.1)",
+                    }}
                   />
                 );
               })}

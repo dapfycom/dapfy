@@ -9,12 +9,13 @@ import {
   selectOutputToken,
 } from "@/views/DustView/lib/dust-slice";
 import Image from "next/image";
+import { HTMLProps } from "react";
 
-interface IProps {
+interface IProps extends HTMLProps<HTMLDivElement> {
   token: IElrondAccountToken;
   checked: boolean;
 }
-const RowToken = ({ token, checked }: IProps) => {
+const RowToken = ({ token, checked, ...rest }: IProps) => {
   const dispatch = useAppDispatch();
   const selectedTokens = useAppSelector(selectConvertInfo);
 
@@ -33,7 +34,10 @@ const RowToken = ({ token, checked }: IProps) => {
     selectedTokens.length >= maxAllowedTokensCount &&
     !Boolean(selectedTokens.find((t) => t.identifier === token.identifier));
   return (
-    <div className="items-top flex flex-col space-x-2 items-center gap-2 cursor-pointer">
+    <div
+      className="items-top flex flex-col space-x-2 items-center gap-2 cursor-pointer border p-1"
+      {...rest}
+    >
       <Checkbox
         id={token.identifier}
         onCheckedChange={(e) => handleSelect(e as boolean)}
