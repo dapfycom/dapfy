@@ -1,3 +1,5 @@
+import { formatTokenI } from "@/utils/functions/tokens";
+import { hiddenPools } from "@/views/DefiView/utils/constants";
 import { useGetTvl } from "@/views/DefiView/utils/hooks";
 import FarmItem from "./FarmItem";
 
@@ -5,9 +7,13 @@ const FarmsList = () => {
   const hatomData = useGetTvl();
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3   gap-8 ">
-      {hatomData.tlvs.map((farm) => {
-        return <FarmItem key={farm.moneyMarket.htokenI} hatomFarm={farm} />;
-      })}
+      {hatomData.tlvs
+        .filter(
+          (f) => !hiddenPools.includes(formatTokenI(f.moneyMarket.tokenI))
+        )
+        .map((farm) => {
+          return <FarmItem key={farm.moneyMarket.htokenI} hatomFarm={farm} />;
+        })}
 
       {hatomData.isLoading && (
         // skeleton
