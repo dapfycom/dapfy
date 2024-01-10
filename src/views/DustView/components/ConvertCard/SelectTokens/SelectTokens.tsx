@@ -53,7 +53,10 @@ const SelectTokens = () => {
                           ? "none"
                           : "1px solid rgba(255,255,255,0.1)",
                       borderBottom:
-                        finalTokens.length - element < elements
+                        finalTokens.length - element <
+                        (finalTokens.length % elements === 0
+                          ? elements
+                          : finalTokens.length % elements)
                           ? "none"
                           : "1px solid rgba(255,255,255,0.1)",
 
