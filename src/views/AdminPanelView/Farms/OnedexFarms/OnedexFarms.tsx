@@ -1,9 +1,9 @@
 "use client";
 import { OneDexFarmContext } from "@/views/FarmView/commons/FarmOneDex/FarmOneDex";
 import { useGetOneDexFarms } from "@/views/FarmView/commons/FarmOneDex/utils/hooks";
+import BigNumber from "bignumber.js";
 import Image from "next/image";
 import FarmItem from "./FarmItem";
-
 const OnedexFarms = () => {
   const { farms, isLoading } = useGetOneDexFarms();
   console.log({ farms });
@@ -21,18 +21,22 @@ const OnedexFarms = () => {
         />
       </div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3   gap-8">
-        {farms.map((f) => {
-          return (
-            <OneDexFarmContext.Provider
-              key={f.farm_click_id}
-              value={{
-                farm: f,
-              }}
-            >
-              <FarmItem />
-            </OneDexFarmContext.Provider>
-          );
-        })}
+        {farms
+          .filter((f) =>
+            new BigNumber(f.total_deposited_amount).isGreaterThan(0)
+          )
+          .map((f) => {
+            return (
+              <OneDexFarmContext.Provider
+                key={f.farm_click_id}
+                value={{
+                  farm: f,
+                }}
+              >
+                <FarmItem />
+              </OneDexFarmContext.Provider>
+            );
+          })}
 
         {isLoading && (
           // skeleton
