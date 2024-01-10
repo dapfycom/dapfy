@@ -15,4 +15,4 @@ export const HatomConfigs = {
   },
 };
 
-export const hiddenPools = ["BUSD"];
+export const hiddenPools = ["BUSD", "USDT", "EGLD", "SEGLD"];
