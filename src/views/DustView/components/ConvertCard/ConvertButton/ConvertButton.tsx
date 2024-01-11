@@ -2,19 +2,26 @@ import Realistic from "@/components/Conffeti/Realistic";
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import useTxNotification from "@/hooks/useTxNotification";
 import {
   selectConvertInfo,
+  selectOutputToken,
   selectToTokenDust,
 } from "@/views/DustView/lib/dust-slice";
-import { useGetAmountOut } from "@/views/DustView/lib/hooks";
+import {
+  useGetAmountOut,
+  useSelectableDustTokens,
+} from "@/views/DustView/lib/hooks";
 import { convertTokens } from "@/views/DustView/lib/services";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import BigNumber from "bignumber.js";
 import { useState } from "react";
 
 const ConvertButton = () => {
+  const { finalTokens } = useSelectableDustTokens();
+  const dispatch = useAppDispatch();
+
   const selectedTokens = useAppSelector(selectConvertInfo);
   const toToken = useAppSelector(selectToTokenDust);
   const { data } = useGetAmountOut(selectedTokens);
@@ -25,6 +32,13 @@ const ConvertButton = () => {
 
   const onSuccess = () => {
     mutate();
+    dispatch(
+      selectOutputToken({
+        data: finalTokens,
+        isCheked: false,
+      })
+    );
+
     setConfetti(true);
 
     delayedToastTxNotification();

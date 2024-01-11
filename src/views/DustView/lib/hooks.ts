@@ -38,6 +38,8 @@ export const useGetAllowedOutputTokens = () => {
 export const useGetAmountOut = (
   tokensOut: { identifier: string; balance: string }[]
 ) => {
+  console.log({ tokensOut });
+
   const selectedToToken = useAppSelector(selectToTokenDust);
   const { data, isLoading, error } = useSwr(
     tokensOut.length > 0
@@ -47,7 +49,7 @@ export const useGetAmountOut = (
   );
 
   return {
-    data: data,
+    data: tokensOut.length > 0 ? data : undefined,
     isLoading,
     error,
   };
