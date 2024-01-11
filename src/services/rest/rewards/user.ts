@@ -1,4 +1,4 @@
-import { IUserPoints, IUserX } from "@/types/rewards.interface";
+import { IUserPoints, IUserTasks, IUserX } from "@/types/rewards.interface";
 import axiosRewards, { fakeData } from ".";
 
 export const fetchConnectedXUser = async (): Promise<IUserX> => {
@@ -34,6 +34,28 @@ export const fetchRewardsPoints = async (url: string): Promise<IUserPoints> => {
     return data;
   }
   const { data } = await axiosRewards.get<IUserPoints>(url, {
+    withCredentials: true,
+  });
+
+  // console.log(data);
+
+  return data;
+};
+export const fetchUserTask = async (url: string): Promise<IUserTasks> => {
+  if (fakeData) {
+    const data = Promise.resolve({
+      _id: "656c298f3c69a4d8389a91a7",
+      user_id: "1455420368986968067",
+      mention: false,
+      comment: false,
+      like: true,
+      rt: false,
+      defi: false,
+      __v: 0,
+    });
+    return data;
+  }
+  const { data } = await axiosRewards.get<IUserTasks>(url, {
     withCredentials: true,
   });
 

@@ -11,3 +11,13 @@ export interface IUserPoints {
   username: string;
   points: number;
 }
+
+export interface IUserTasks {
+  _id: string;
+  user_id: string;
+  mention: boolean;
+  comment: boolean;
+  like: boolean;
+  rt: boolean;
+  defi: boolean;
+}

@@ -9,10 +9,14 @@ import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { ArrowRight, CheckCircle2, Circle, LogOut } from "lucide-react";
+import { useGetUserTasks } from "../lib/hooks";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
   const { user, isAuthenticated, handleLogout } = useXAuthentication();
+  const { tasks } = useGetUserTasks();
+
+  console.log({ tasks });
 
   if (!isAuthenticated) {
     return null;
@@ -64,27 +68,28 @@ const AllTimeEarned = () => {
               href="https://twitter.com/DapfyCom"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex gap-3"
             >
-              <CheckCircle2 className="text-green-500 " /> Like retweet comment
-              one of our posts
-              <ArrowRight />
+              <UserTask
+                text="Like retweet comment one of our posts"
+                completed={
+                  !!tasks?.comment || !!tasks?.comment || !!tasks?.like
+                }
+              />
             </a>
           </li>
           <li>
-            <a
-              href="https://x.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex gap-3"
-            >
-              <CheckCircle2 className="text-green-500 " /> Write a tweet about
-              @dapfycom <ArrowRight />
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+              <UserTask
+                text="Write a tweet about @dapfycom"
+                completed={!!tasks?.mention}
+              />
             </a>
           </li>
-          <li className="flex gap-3">
-            <Circle className="text-green-500 " />
-            Interact with one of our useful DeFi tools <ArrowRight />
+          <li>
+            <UserTask
+              text=" Interact with one of our useful DeFi tools"
+              completed={false}
+            />
           </li>
         </ul>
       </div>
@@ -93,3 +98,22 @@ const AllTimeEarned = () => {
 };
 
 export default AllTimeEarned;
+
+const UserTask = ({
+  completed,
+  text,
+}: {
+  completed: boolean;
+  text: string;
+}) => {
+  return (
+    <span className="flex gap-3">
+      {completed ? (
+        <CheckCircle2 className="text-green-500 " />
+      ) : (
+        <Circle className="text-green-500 " />
+      )}
+      {text} <ArrowRight />
+    </span>
+  );
+};

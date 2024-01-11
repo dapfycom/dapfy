@@ -1,7 +1,10 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
-import { fetchRewardsPoints } from "@/services/rest/rewards/user";
+import {
+  fetchRewardsPoints,
+  fetchUserTask,
+} from "@/services/rest/rewards/user";
 import { IUserX } from "@/types/rewards.interface";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -17,6 +20,19 @@ export const useGetUserPoints = () => {
 
   return {
     rewards: data,
+    isLoading,
+    error,
+  };
+};
+export const useGetUserTasks = () => {
+  const { user } = useGetXUser();
+  const { data, error, isLoading } = useSWR(
+    user ? `/tasks/${user.id}` : null,
+    fetchUserTask
+  );
+
+  return {
+    tasks: data,
     isLoading,
     error,
   };
