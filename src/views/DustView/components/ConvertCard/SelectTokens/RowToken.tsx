@@ -35,7 +35,7 @@ const RowToken = ({ token, checked, ...rest }: IProps) => {
     !Boolean(selectedTokens.find((t) => t.identifier === token.identifier));
   return (
     <div
-      className="items-top flex flex-col space-x-2 items-center gap-2 cursor-pointer border p-1"
+      className="items-top flex flex-col space-x-2 items-center gap-2 cursor-pointer border p-3 justify-center"
       {...rest}
     >
       <Checkbox
