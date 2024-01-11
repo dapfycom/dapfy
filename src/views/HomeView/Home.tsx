@@ -13,8 +13,8 @@ const Home = () => {
   return (
     <Container className="min-h-[40vh]">
       <div className=" flex flex-col text-center mt-10 mb-5 md:mb-20">
-        <PageHeaderHeading className={cn("mb-10 md:text-7xl")}>
-          <span className={"gradienteTitle"}>CONNECT. INVEST. EARN.</span>
+        <PageHeaderHeading className={cn("mb-10 md:text-7xl gradienteTitle")}>
+          DAPFY: CONNECT. INVEST. EARN.
         </PageHeaderHeading>
         <div className="text-center">
           <PageHeaderDescription className="mb-20 text-center">
