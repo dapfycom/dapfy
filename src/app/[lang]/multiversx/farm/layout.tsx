@@ -26,7 +26,6 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
           </div>
 
           <div className="flex gap-3 items-center">
-            <div>Protocols : </div>
             <ProtolContainer
               onClick={() => setSelectedProtocol((p) => (p === 0 ? -1 : 0))}
               selected={selectedProtocol === 0}
