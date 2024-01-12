@@ -15,6 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { selectedNetwork } from "@/config/network";
+import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
@@ -53,6 +54,7 @@ const InputBox = ({
 }: IProps) => {
   const { elrondToken, isLoading } = useGetElrondToken(selectedTokenI);
   const { accountToken } = useGetAccountToken(selectedTokenI);
+  const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
 
   // select token
   const { ashTokens } = useGetSwapbleAggregatorTokens();
@@ -79,7 +81,10 @@ const InputBox = ({
             value={readOnly ? (formatNumber(value || "0") as string) : value}
             readOnly={readOnly}
           />
-          <Popover>
+          <Popover
+            open={isOpen}
+            onOpenChange={(open) => (open ? onOpen() : onClose())}
+          >
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
@@ -136,7 +141,10 @@ const InputBox = ({
                             <CommandItem key={t.identifier}>
                               <div
                                 className="w-full h-full gap-3 cursor-pointer flex  items-start px-4 py-2"
-                                onClick={() => onChangeToken(t)}
+                                onClick={() => {
+                                  onClose();
+                                  onChangeToken(t);
+                                }}
                               >
                                 <TokenImageSRC
                                   size={20}
