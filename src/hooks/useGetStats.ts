@@ -18,10 +18,10 @@ export const useGetTimeUntilNextEpoch = () => {
   let timeUntilNextEpoch = 0;
 
   if (stats) {
-    const roundesUntilNextEpoch = stats?.roundsPerEpoch - stats?.roundsPassed;
+    const roundsUntilNextEpoch = stats?.roundsPerEpoch - stats?.roundsPassed;
     const timePerRound = 6; // 6 seconds per round
 
-    timeUntilNextEpoch = roundesUntilNextEpoch * timePerRound;
+    timeUntilNextEpoch = roundsUntilNextEpoch * timePerRound;
   }
   return {
     timeUntilNextEpoch,

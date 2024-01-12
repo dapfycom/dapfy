@@ -18,7 +18,7 @@ const CollectedEgld = () => {
           </p>
           <div className="flex gap-3 items-center">
             <Image src="/images/egld.svg" alt="" width={22} height={22} />
-            <span className="font-bold">0.8</span>
+            <span className="font-bold">0</span>
           </div>
         </div>
 

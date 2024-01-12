@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { useFormik } from "formik";
-import { Trash2 } from "lucide-react";
 
 const EmailReports = () => {
   const { isAuthenticated } = useXAuthentication();
@@ -34,7 +33,7 @@ const EmailReports = () => {
 
           <div>
             <p className="mb-2">Daily report recipients</p>
-            <div className="flex w-full justify-between bg-zinc-200 dark:bg-zinc-800 px-2 mb-6 items-center rounded">
+            {/* <div className="flex w-full justify-between bg-zinc-200 dark:bg-zinc-800 px-2 mb-6 items-center rounded">
               <div className="flex  w-full gap-2 items-center py-2 ">
                 <svg
                   className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -50,7 +49,7 @@ const EmailReports = () => {
               </div>
 
               <Trash2 className="text-red-500" />
-            </div>
+            </div> */}
           </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
