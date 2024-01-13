@@ -56,7 +56,7 @@ const ConvertButton = () => {
       new BigNumber(slippage / 100).multipliedBy(bnAmountOut)
     );
     const res = await convertTokens(
-      data?.tokenIdentifier || "",
+      data?.tokenIdentifier || toToken,
       amountWithSlippage.toFixed(0),
       selectedTokens.map((token) => {
         return {
