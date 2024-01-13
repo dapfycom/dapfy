@@ -73,7 +73,7 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
         `The minimum amount is more than ${minAmountToStake} ${ticker}`
       )
       .max(
-        formatBalance(userStakedToken, true, 18) as number,
+        formatBalance(userStakedToken, true) as number,
         "Insufficient funds"
       ),
   });
