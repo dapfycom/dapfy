@@ -9,14 +9,13 @@ import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { ArrowRight, CheckCircle2, Circle, LogOut } from "lucide-react";
-import { useGetUserTasks } from "../lib/hooks";
+import { useGetIsUserInteractedDefiTool, useGetUserTasks } from "../lib/hooks";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
   const { user, isAuthenticated, handleLogout } = useXAuthentication();
   const { tasks } = useGetUserTasks();
-
-  console.log({ tasks });
+  const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
 
   if (!isAuthenticated) {
     return null;
@@ -88,7 +87,7 @@ const AllTimeEarned = () => {
           <li>
             <UserTask
               text=" Interact with one of our useful DeFi tools"
-              completed={false}
+              completed={isUserInteractedDefiTool}
             />
           </li>
         </ul>
@@ -103,7 +102,7 @@ const UserTask = ({
   completed,
   text,
 }: {
-  completed: boolean;
+  completed?: boolean;
   text: string;
 }) => {
   return (

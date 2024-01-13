@@ -24,7 +24,30 @@ export const useGetTimeUntilNextEpoch = () => {
     timeUntilNextEpoch = roundsUntilNextEpoch * timePerRound;
   }
   return {
-    timeUntilNextEpoch,
+    timeUntilNextEpoch: !!stats ? timeUntilNextEpoch : undefined,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetMvxEpoch = () => {
+  const {
+    timeUntilNextEpoch: timeInSecondsUntilNextEpoch,
+    isLoading,
+    error,
+  } = useGetTimeUntilNextEpoch();
+  const nextEpochDateTime = new Date(
+    Date.now() +
+      (timeInSecondsUntilNextEpoch ? timeInSecondsUntilNextEpoch * 1000 : 0)
+  );
+  const previousEpochDateTime = new Date(
+    nextEpochDateTime.getTime() - 86400000
+  );
+  return {
+    nextEpoch: !!timeInSecondsUntilNextEpoch ? nextEpochDateTime : undefined,
+    previousEpoch: !!timeInSecondsUntilNextEpoch
+      ? previousEpochDateTime
+      : undefined,
     isLoading,
     error,
   };
@@ -45,11 +68,13 @@ export const useGetTimeUntilNextEpochCountDown = () => {
 
     const intervalId = setInterval(() => {
       setTime((prevCountDown) => {
-        if (prevCountDown <= 0) {
-          mutate("/stats");
-          return 86400;
-        } else {
-          return prevCountDown - 1;
+        if (prevCountDown) {
+          if (prevCountDown <= 0) {
+            mutate("/stats");
+            return 86400;
+          } else {
+            return prevCountDown - 1;
+          }
         }
       });
     }, 1000);

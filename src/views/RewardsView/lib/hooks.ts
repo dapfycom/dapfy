@@ -1,6 +1,8 @@
+import { useGetMvxEpoch } from "@/hooks/useGetStats";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
 import {
   fetchRewardsPoints,
   fetchUserTask,
@@ -49,8 +51,6 @@ export const useBindXUserWithDapfyUser = () => {
     const bindUser = async (user: IUserX, address: string) => {
       try {
         await syncXUserWithDapfyUser(user, address);
-        console.log("success");
-
         callUpdateUser.current++;
         // window.location.href =
         //   process.env.NEXT_PUBLIC_BASE_URL + routeNames.rewards;
@@ -68,4 +68,28 @@ export const useBindXUserWithDapfyUser = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, address, user?.id]);
+};
+
+export const useGetIsUserInteractedDefiTool = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { nextEpoch, previousEpoch } = useGetMvxEpoch();
+
+  const { data, error, isLoading } = useSWR(
+    address && previousEpoch && nextEpoch
+      ? `/use-sc-tool/${address}/${previousEpoch.getMinutes()}/${nextEpoch.getMinutes()}`
+      : null,
+    async () => {
+      return fetchIsUserUsedDapfyTool({
+        address: address,
+        from: previousEpoch!.toISOString(),
+        to: nextEpoch!.toISOString(),
+      });
+    }
+  );
+
+  return {
+    isUserInteractedDefiTool: data?.data,
+    isLoading,
+    error,
+  };
 };

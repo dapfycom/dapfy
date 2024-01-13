@@ -143,6 +143,8 @@ const InputBox = ({
                                 className="w-full h-full gap-3 cursor-pointer flex  items-start px-4 py-2"
                                 onClick={() => {
                                   onClose();
+                                  console.log("close modal");
+
                                   onChangeToken(t);
                                 }}
                               >
