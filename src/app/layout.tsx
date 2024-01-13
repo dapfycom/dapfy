@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
   },
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   description: siteMetadata.description,
   openGraph: {
     title: siteMetadata.title,
