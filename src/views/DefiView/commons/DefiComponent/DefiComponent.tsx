@@ -71,11 +71,11 @@ const FarmComponent = ({ hatomFarm, userInfo }: FarmComponentProps) => {
       .min(
         minAmountToStake + 0.00001,
         `The minimum amount is more than ${minAmountToStake} ${ticker}`
-      )
-      .max(
-        formatBalance(userStakedToken, true, 18) as number,
-        "Insufficient funds"
       ),
+    // .max(
+    //   formatBalance(userStakedToken, true, 18) as number,
+    //   "Insufficient funds"
+    // ),
   });
 
   const formik = useFormik({
