@@ -1,4 +1,5 @@
 import { ENVIRONMENT } from "@/config/network";
+import { gql } from "graphql-request";
 import { IESDTInfo, TokenType } from "../type";
 import { TOKENS_BETA2 } from "./const-devnet";
 import { TOKENS_MAINNET } from "./const-mainnet";
@@ -50,4 +51,98 @@ const tokens = {
 export const WRAPPED_EGLD = tokens[ENVIRONMENT];
 
 export const FARMS =
-  (ENVIRONMENT == "devnet" ? farmsDevnet2 : farmsMainnet) || [];
+  (ENVIRONMENT === "devnet" ? farmsDevnet2 : farmsMainnet) || [];
+
+export type GraphOptions = {
+  withFC?: boolean;
+  withFB?: boolean;
+  withFD?: boolean;
+  withVE?: boolean;
+  withRW?: boolean;
+  withPools?: boolean;
+  withFarms?: boolean;
+  withBlockchain?: boolean;
+  withTokens?: boolean;
+  withSupply?: boolean;
+};
+export const queryOptions: { [key in keyof GraphOptions]: string } = {
+  withFC: gql`
+        farmController(address: $accAddress) {
+            address
+            timeTotal
+            totalWeight
+            nextTotalWeight
+            farms {
+                address
+                relativeWeight
+                nextRelativeWeight
+                farmType
+                votedPoint{
+                    bias
+                    slope
+                }
+                nextVotedPoint{
+                    bias
+                    slope
+                }
+            }
+            farmTypes {
+                farmType
+                name
+                weight
+                nextWeight
+            }
+            account{
+                voteUserPower
+                farms{
+                    address
+                    lastUserVote
+                    voteUserSlope{
+                        slope
+                        power
+                        end
+                    }
+                }
+            }
+        }
+    `,
+  withFB: gql`
+        farmBribe(address: $accAddress){
+            address
+            farms{
+                address
+                rewards{
+                    tokenId
+                    rewardPerVote
+                    activePeriod
+                    reserve
+                    claimed
+                    total
+                }
+            }
+            account{
+                farms{
+                    address
+                    rewards{
+                        tokenId
+                        lastUserClaim
+                        claimable
+                    }
+                }
+            }
+        }
+    `,
+  withSupply: gql`
+        ashSupply
+    `,
+  withRW: gql`
+        rewarder {
+            address
+            rewardPerSec
+        }
+    `,
+};
+
+export const FARMS_MAP = Object.fromEntries(
+  FARMS.map((f) => [f.farm_address, f])
+);

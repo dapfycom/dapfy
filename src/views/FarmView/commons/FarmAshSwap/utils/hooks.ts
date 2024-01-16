@@ -1,13 +1,15 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
-import request, { gql } from "graphql-request";
+import request, { Variables, gql } from "graphql-request";
+import { produce } from "immer";
 import { useContext } from "react";
 import useSwr, { SWRConfiguration } from "swr";
 import { AshFarmContext } from "../FarmAshSwap";
 import { ASHSWAP_CONFIG } from "../const/ashswapConfig";
-import { basicAshFarms } from "../const/mockedData";
+import { FARMS_MAP } from "../const/const";
 import { AshBaseState, PoolStatsRecord } from "../type";
 import {
+  POOLS_MAP_ADDRESS,
   fetchAshSwapDepositEntries,
   fetchAshSwapFarms,
   fetcher,
@@ -94,17 +96,185 @@ export const useGetAshFarmApr = () => {
   };
 };
 
+export const graphqlFetcher = ([query, variables]: [
+  query: string,
+  variables?: Variables
+]) =>
+  request<AshBaseState>(
+    `${ASHSWAP_CONFIG.ashGraphBaseUrl}`,
+    query,
+    variables
+  ).then((data) => {
+    return produce(data, (draft) => {
+      if (draft.farmController) {
+        draft.farmController.farms =
+          draft.farmController.farms?.filter((f) => !!FARMS_MAP[f.address]) ||
+          [];
+        if (draft.farmController.account) {
+          draft.farmController.account.farms =
+            draft.farmController.account.farms?.filter(
+              (f) => !!FARMS_MAP[f.address]
+            ) || [];
+        }
+      }
+      if (draft.farmBribe) {
+        draft.farmBribe.farms =
+          draft.farmBribe.farms?.filter((f) => !!FARMS_MAP[f.address]) || [];
+        if (draft.farmBribe.account) {
+          draft.farmBribe.account.farms =
+            draft.farmBribe.account.farms?.filter(
+              (f) => !!FARMS_MAP[f.address]
+            ) || [];
+        }
+      }
+      if (draft.farms) {
+        draft.farms =
+          draft.farms?.filter((f) => !!FARMS_MAP[f?.address || ""]) || [];
+      }
+      if (draft.pools) {
+        draft.pools =
+          draft.pools?.filter((p) => !!POOLS_MAP_ADDRESS[p?.address || ""]) ||
+          [];
+      }
+      if (draft.poolsV2) {
+        draft.poolsV2 =
+          draft.poolsV2?.filter((p) => !!POOLS_MAP_ADDRESS[p?.address || ""]) ||
+          [];
+      }
+    });
+  });
 export const useGetAshswapBaseState = (): {
   ashswapBaseState: AshBaseState;
   isLoading: boolean;
   error: any;
 } => {
-  const data: AshBaseState = basicAshFarms;
+  const address = useAppSelector(selectUserAddress);
+  const { data, isLoading, error } = useSwr<AshBaseState>(
+    [
+      gql`
+        query ashBaseStateQuery($accAddress: String = "") {
+          farms(address: $accAddress) {
+            address
+            farmToken {
+              ...allTokenProps
+            }
+            rewardToken {
+              ...allTokenProps
+            }
+            farmingToken {
+              ...allTokenProps
+            }
+            farmTokenSupply
+            rewardPerSec
+            rewardPerShare
+            state
+            lastRewardBlockTs
+            divisionSafetyConstant
+            farmingTokenBalance
+            produceRewardEnabled
+            account {
+              slopeBoosted
+            }
+            shard
+            additionalRewards {
+              rewardPerSec
+              rewardPerShare
+              periodRewardEnd
+              tokenId
+            }
+          }
+          pools {
+            address
+            lpToken {
+              ...allTokenProps
+            }
+            tokens {
+              ...allTokenProps
+            }
+            reserves
+            underlyingPrices
+            totalSupply
+            swapFeePercent
+            adminFeePercent
+            ampFactor
+            state
+          }
+          poolsV2 {
+            address
+            lpToken {
+              ...allTokenProps
+            }
+            totalSupply
+            reserves
+            priceScale
+            ampFactor
+            gamma
+            xp
+            futureAGammaTime
+            d
+            midFee
+            outFee
+            feeGamma
+            state
+          }
+          tokens {
+            ...allTokenProps
+          }
+          votingEscrows(address: $accAddress) {
+            address
+            lockedToken {
+              ...allTokenProps
+            }
+            totalLock
+            veSupply
+            account {
+              locked {
+                amount
+                end
+              }
+            }
+          }
+          feeDistributor(address: $accAddress) {
+            address
+            rewardToken {
+              ...allTokenProps
+            }
+            account {
+              reward
+            }
+          }
+          blockchain {
+            blockShards {
+              shard
+              nonce
+            }
+          }
+        }
+
+        fragment allTokenProps on Token {
+          id
+          price
+        }
+      `,
+      { accAddress: address },
+    ],
+    graphqlFetcher,
+    { refreshInterval: 15000 }
+  );
 
   return {
-    ashswapBaseState: data,
-    isLoading: false,
-    error: null,
+    ashswapBaseState: data || {
+      farms: [],
+      pools: [],
+      poolsV2: [],
+      tokens: [],
+      votingEscrows: [],
+      feeDistributor: null,
+      blockchain: {},
+      ashSupply: "0",
+    },
+    isLoading: isLoading,
+    error: error,
   };
 };
 

@@ -21,7 +21,6 @@ export const AshFarmContext = createContext<IAshFarmContext>({
 const FarmAshSwap = () => {
   // new data
   const { farms } = useGetAshSwapFarms();
-  console.log({ farms });
 
   const { farmRecords } = useGetAshFarmApr();
   console.log({ farmRecords });
