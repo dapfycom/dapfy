@@ -122,19 +122,22 @@ const FarmItem = () => {
         <p className="text-sm text-green-600 mb-1">Active</p>
         <p className="text-sm font-medium mb-4">
           {ashSwapInfo && (
-            <div className="h-8 px-2.5 space-x-1.5 border border-black bg-stake-gray-500/10 flex items-center text-sm font-bold text-ash-cyan-500">
-              <div>
-                <span className="underline">
-                  {formatNumber(ashSwapInfo?.totalAPRMin)}
-                </span>
-                <span className="text-2xs">%</span>
-              </div>
-              <ArrowRight className="w-3 h-auto" />
-              <div>
-                <span className="underline">
-                  {formatNumber(ashSwapInfo?.totalAPRMax)}
-                </span>
-                <span className="text-2xs">%</span>
+            <div className="flex  items-center">
+              <span>APR </span>
+              <div className="h-8 px-2.5 space-x-1.5 border border-black bg-stake-gray-500/10 flex items-center text-sm font-bold text-muted-foreground">
+                <div>
+                  <span className="underline">
+                    {formatNumber(ashSwapInfo?.totalAPRMin)}
+                  </span>
+                  <span className="text-2xs">%</span>
+                </div>
+                <ArrowRight className="w-3 h-auto" />
+                <div>
+                  <span className="underline">
+                    {formatNumber(ashSwapInfo?.totalAPRMax)}
+                  </span>
+                  <span className="text-2xs">%</span>
+                </div>
               </div>
             </div>
           )}
