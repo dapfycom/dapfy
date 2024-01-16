@@ -183,6 +183,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIROMENT: ENVIROMENTTYPE = "mainnet";
+export const ENVIRONMENT: ENVIROMENTTYPE = "devnet";
 
-export const selectedNetwork = networkConfig[ENVIROMENT];
+export const selectedNetwork = networkConfig[ENVIRONMENT];

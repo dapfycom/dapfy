@@ -32,9 +32,6 @@ const StakedDetails = ({ onModal }: IProps) => {
     );
 
   if (!depositEntries) return null;
-  console.log({
-    depositEntries,
-  });
 
   return (
     <div

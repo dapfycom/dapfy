@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { AshFarmContext } from "../../FarmAshSwap";
 
 const FarmInfo = () => {
-  const { farm } = useContext(AshFarmContext);
+  const { farm, ashSwapInfo } = useContext(AshFarmContext);
   const { data: userFarmInfo, isLoading } = useGetFarmUserInfo();
   const { elrondToken: firstToken } = useGetElrondToken(
     farm?.first_token_id || null
@@ -57,9 +57,9 @@ const FarmInfo = () => {
             decimals={lpToken?.decimals}
             tokenI={farm.lp_token_id}
           />
+          <div>apr</div>
         </>
       )}
-      {/* apr {calculateAPR(farm)}% */}
     </div>
   );
 };

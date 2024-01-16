@@ -1,4 +1,4 @@
-import { ENVIROMENT, selectedNetwork } from "@/config/network";
+import { ENVIRONMENT, selectedNetwork } from "@/config/network";
 import { fetchTokenById } from "@/services/rest/elrond/tokens";
 import BigNumber from "bignumber.js";
 import toHex from "to-hex";
@@ -38,7 +38,7 @@ export const getTokensByDollarAmount = async (
   tokenId: string,
   dollarAmount: number
 ): Promise<number> => {
-  if (ENVIROMENT !== "mainnet") {
+  if (ENVIRONMENT !== "mainnet") {
     return dollarAmount * 10000 * 0.96;
   }
   const mxToken = await fetchTokenById(tokenId);

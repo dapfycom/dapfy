@@ -1,6 +1,6 @@
 "use client";
 
-import { ENVIROMENT } from "@/config/network";
+import { ENVIRONMENT } from "@/config/network";
 import { routeNames } from "@/config/routes";
 import { AxiosInterceptorContext } from "@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext";
 import dynamic from "next/dynamic";
@@ -31,7 +31,7 @@ export default function SdkProvider({
         authenticatedDomanis={["https://tools.elrond.com"]}
       >
         <DappProvider
-          environment={ENVIROMENT}
+          environment={ENVIRONMENT}
           customNetworkConfig={{
             name: "customConfig",
             apiTimeout: 10000,

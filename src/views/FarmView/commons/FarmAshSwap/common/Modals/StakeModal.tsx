@@ -26,7 +26,6 @@ const StakeModal = ({ isOpen, onClose }: IProps) => {
   const { accountToken: userStakedToken } = useGetAccountToken(
     selectedNetwork.tokensID.egld
   );
-  console.log("farm", farm);
 
   const formik = useFormik({
     initialValues: {

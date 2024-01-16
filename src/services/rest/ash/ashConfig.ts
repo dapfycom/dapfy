@@ -1,4 +1,4 @@
-import { ENVIROMENT } from "@/config/network";
+import { ENVIRONMENT } from "@/config/network";
 
 export const ashSwapConfig = {
   mainnet: {
@@ -12,4 +12,4 @@ export const ashSwapConfig = {
   },
 };
 
-export const selectedSwapConfig = ashSwapConfig[ENVIROMENT];
+export const selectedSwapConfig = ashSwapConfig[ENVIRONMENT];

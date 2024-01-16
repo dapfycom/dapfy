@@ -8,11 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
-
+type FarmPages = "hatom" | "ashswap" | "farm";
 const FarmLayout = ({ children }: PropsWithChildren) => {
   const pathname = usePathname();
-  const [selectedProtocol, setSelectedProtocol] = useState<number>(
-    pathname.split("/").at(-1) === "farm" ? 0 : 1
+  const [selectedProtocol, setSelectedProtocol] = useState<FarmPages>(
+    pathname.split("/").at(-1) as FarmPages
   );
   return (
     <Container className="xl:max-w-[1200px]">
@@ -27,8 +27,8 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
 
           <div className="flex gap-3 items-center">
             <ProtolContainer
-              onClick={() => setSelectedProtocol((p) => (p === 0 ? -1 : 0))}
-              selected={selectedProtocol === 0}
+              onClick={() => setSelectedProtocol("farm")}
+              selected={selectedProtocol === "farm"}
               href={routeNames.farm}
             >
               <Image
@@ -43,8 +43,8 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
 
             {/* Hatom protocol */}
             <ProtolContainer
-              onClick={() => setSelectedProtocol((p) => (p === 1 ? -1 : 1))}
-              selected={selectedProtocol === 1}
+              onClick={() => setSelectedProtocol("hatom")}
+              selected={selectedProtocol === "hatom"}
               href={routeNames.farm + "/hatom"}
             >
               <Image
@@ -60,6 +60,20 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
                 width={80}
                 height={26}
                 className="block dark:hidden"
+              />
+            </ProtolContainer>
+
+            {/* Ashfarm protocol */}
+            <ProtolContainer
+              onClick={() => setSelectedProtocol("ashswap")}
+              selected={selectedProtocol === "ashswap"}
+              href={routeNames.farm + "/ashswap"}
+            >
+              <Image
+                src={"https://app.ashswap.io/logo.png"}
+                alt="ashswap"
+                width={70}
+                height={24}
               />
             </ProtolContainer>
           </div>

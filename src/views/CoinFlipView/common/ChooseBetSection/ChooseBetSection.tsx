@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ENVIROMENT, selectedNetwork } from "@/config/network";
+import { ENVIRONMENT, selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetMaiarPairs from "@/hooks/useGetMaiarPairs";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -69,7 +69,7 @@ const ChooseBetSection = () => {
         <div className="grid grid-cols-2 gap-4">
           {betOptionsInEgld.map((bet, i) => {
             const value = new BigNumber(bet)
-              .multipliedBy(ENVIROMENT === "mainnet" ? rate || 0 : 200000)
+              .multipliedBy(ENVIRONMENT === "mainnet" ? rate || 0 : 200000)
               .toFixed(2);
             return (
               <div
