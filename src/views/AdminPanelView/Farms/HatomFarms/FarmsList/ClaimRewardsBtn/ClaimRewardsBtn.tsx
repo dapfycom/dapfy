@@ -12,7 +12,7 @@ const ClaimRewardsBtn = () => {
 
   const handleClick = () => {
     getSmartContractInteraction("hatomParentWsp").scCall({
-      functionName: "claimUserRewards",
+      functionName: "claimRewards",
       arg: [
         new AddressValue(new Address(hatomFarm?.moneyMarket.childScAddress)),
       ],

@@ -2,6 +2,7 @@ import { useGetMvxEpoch } from "@/hooks/useGetStats";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import { getUserEmailsReport } from "@/services/rest/dapfy-api/rewards-report";
 import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
 import {
   fetchRewardsPoints,
@@ -89,6 +90,24 @@ export const useGetIsUserInteractedDefiTool = () => {
 
   return {
     isUserInteractedDefiTool: data?.data,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetUserEmailReport = () => {
+  const { user } = useGetXUser();
+  const { data, error, isLoading, mutate } = useSWR(
+    user ? `/email-report/${user.id}` : null,
+    () => {
+      return getUserEmailsReport(user?.id!);
+    }
+  );
+  console.log({ data });
+
+  return {
+    emailReport: data?.reports || [],
+    mutate,
     isLoading,
     error,
   };
