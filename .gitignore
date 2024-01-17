@@ -37,7 +37,6 @@ bun.lockb
 package-lock.json
 .env
 dumy.js
-prisma/migrations
 helpers.txt
 .env.production
 prisma/demo.csv
