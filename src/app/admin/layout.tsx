@@ -3,6 +3,7 @@ import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import Loader1 from "@/components/ui-system/Loader/Loader1";
 import { routeNames } from "@/config/routes";
 import useAuthentication from "@/hooks/useAuthentication";
+import { DrawerDialogDemo } from "@/views/AdminPanelView/common/Drawer";
 import { Sidebar } from "@/views/AdminPanelView/common/Sidebar";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect } from "react";
@@ -28,6 +29,7 @@ const AdminLayoute = ({ children }: PropsWithChildren) => {
       <PageHeaderHeading className="text-center my-6">
         Admin panel
       </PageHeaderHeading>
+      <DrawerDialogDemo />
       <div className="border-t">
         <div className="bg-background">
           <div className="grid lg:grid-cols-5">
