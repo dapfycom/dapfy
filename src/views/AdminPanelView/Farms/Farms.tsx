@@ -1,3 +1,4 @@
+import AshFarms from "./AshFarms/AshFarms";
 import HatomFarms from "./HatomFarms/HatomFarms";
 import OnedexFarms from "./OnedexFarms/OnedexFarms";
 
@@ -7,6 +8,8 @@ const FarmsAdmin = () => {
       <OnedexFarms />
 
       <HatomFarms />
+
+      <AshFarms />
     </div>
   );
 };

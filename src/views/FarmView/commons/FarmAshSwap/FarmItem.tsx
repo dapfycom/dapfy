@@ -68,44 +68,6 @@ const FarmItem = () => {
   };
 
   return (
-    // <Card className="w-full  px-4 pb-5">
-    //   <CardContent className="space-y-2 pt-6">
-    //     <div
-    //       className="flex justify-between items-center cursor-pointer flex-col sm:flex-row"
-    //       onClick={onToggle}
-    //     >
-    //       <div className="flex items-center gap-4">
-    //         <LpTokenImageV2 lpToken={elrondToken} size={40} />
-    //         {farm && (
-    //           <div className="flex flex-col ">
-    //             <p className="whitespace-nowrap mb-2">
-    //               {formatTokenI(farm.first_token_id)}-
-    //               {formatTokenI(farm.second_token_id)}
-    //             </p>
-    //             <p className="text-[12px] text-muted-foreground">
-    //               $
-    //               {formatBalanceDollar(
-    //                 { balance: farm.total_deposited_amount, decimals: 18 },
-    //                 price,
-    //                 true
-    //               )}
-    //             </p>
-    //           </div>
-    //         )}
-    //       </div>
-    //       <div className="flex items-center gap-7 flex-col sm:flex-row flex-1 justify-end">
-    //         <FarmInfo />
-    //         <FarmMainButtons isOpen={isOpen} />
-    //       </div>
-    //     </div>
-    //   </CardContent>
-    //   {isOpen && <Divider className="mb-4" />}
-
-    //   <Collapse isOpen={isOpen}>
-    //     <StakedInfo />
-    //   </Collapse>
-    // </Card>
-
     <div className="text-left">
       <div className="max-w-[24rem] border rounded-lg p-6">
         <div>

@@ -4,22 +4,39 @@ import { pairs } from "@/utils/constants/lpPairs";
 import Image from "next/image";
 
 interface IProps {
-  lpToken: IElrondToken;
+  lpToken?: IElrondToken;
+
+  token1lp?: string;
+  token2lp?: string;
 }
 
-const LpTokenImage = ({ lpToken }: IProps) => {
-  const lpData = pairs.find((pair) => pair.lpidentifier === lpToken.identifier);
+const LpTokenImage = ({ lpToken, token1lp, token2lp }: IProps) => {
+  const lpData = lpToken
+    ? pairs.find((pair) => pair.lpidentifier === lpToken.identifier)
+    : {
+        token1lp: token1lp!,
+        token2lp: token2lp!,
+      };
 
   const { tokens } = useGetMultipleElrondTokens(
     lpData ? [lpData.token1lp, lpData.token2lp] : []
   );
 
+  if (!lpToken) {
+    console.log({ tokens, lpData });
+  }
+
   if (!tokens || tokens.length === 0) return null;
 
   return (
     <div className="flex">
-      <Image src={tokens[0].assets.svgUrl} alt="" width={28} height={28} />
-      <Image src={tokens[1].assets.svgUrl} alt="" width={28} height={28} />
+      {tokens[0]?.assets?.svgUrl && (
+        <Image src={tokens[0].assets.svgUrl} alt="" width={28} height={28} />
+      )}
+
+      {tokens[1]?.assets?.svgUrl && (
+        <Image src={tokens[1].assets.svgUrl} alt="" width={28} height={28} />
+      )}
     </div>
   );
 };
