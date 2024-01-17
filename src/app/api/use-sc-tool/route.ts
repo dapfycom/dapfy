@@ -24,12 +24,8 @@ export const POST = async (req: Request) => {
   });
 
   const scAddressArr = Object.entries(selectedNetwork.scAddress);
-  console.log({
-    scAddressArr,
-  });
 
   let hasInteracted = false;
-  console.log({ results });
 
   for (let index = 0; index < scAddressArr.length && !hasInteracted; index++) {
     const addressElement = scAddressArr[index];

@@ -75,4 +75,15 @@ model XAcount {
     user              User     @relation(fields: [userId], references: [id]) // Relation to User model, refers to the user who made the attempt
     userId            String   @unique
     updatedAt         DateTime @updatedAt // Timestamp of the last update to this user record
+
+    // Define the email report for rewards user with x account
+    rewardsEmailReports RewardsEmailReport[]
+}
+
+// Define the email report for rewards user with x account
+model RewardsEmailReport {
+    id         String  @id @default(uuid()) // Unique identifier for each email report, generated as a UUID
+    xAccount   XAcount @relation(fields: [xAccountId], references: [id]) // Relation to User model, refers to the user who made the
+    xAccountId String
+    email      String  @unique
 }

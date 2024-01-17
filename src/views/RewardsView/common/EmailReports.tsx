@@ -2,21 +2,67 @@ import { UserPlusIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
+import {
+  deleteEmailReport,
+  saveEmailReport,
+} from "@/services/rest/dapfy-api/rewards-report";
+import { ErrorMessage } from "@/utils/functions/error";
 import { useFormik } from "formik";
+import { Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
+import { useGetUserEmailReport } from "../lib/hooks";
 
 const EmailReports = () => {
-  const { isAuthenticated } = useXAuthentication();
-
+  const { isAuthenticated, user } = useXAuthentication();
+  const { emailReport, mutate } = useGetUserEmailReport();
   const formik = useFormik({
     initialValues: {
       email: "",
     },
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      if (user?.id) {
+        toast.promise(
+          saveEmailReport(values.email, user.id),
+
+          {
+            loading: "Loading",
+            success: () => {
+              formik.resetForm();
+              mutate();
+              return "You now has a daily email with your rewards report";
+            },
+            error: (err) =>
+              ErrorMessage(err, "Error when subscribing to daily report"),
+          },
+          {
+            duration: 5000,
+          }
+        );
+      }
+    },
   });
 
   if (!isAuthenticated) {
     return null;
   }
+
+  const handleDelete = (id: string) => {
+    toast.promise(
+      deleteEmailReport(id),
+      {
+        loading: "Loading",
+        success: () => {
+          mutate();
+          return "You removed your daily email";
+        },
+        error: (err) => ErrorMessage(err, "Error when removing daily report"),
+      },
+      {
+        duration: 5000,
+      }
+    );
+  };
+
   return (
     <div className="w-full text-left max-w-xl mx-auto">
       <h4 className="text-2xl mb-2">Email reports</h4>
@@ -33,23 +79,38 @@ const EmailReports = () => {
 
           <div>
             <p className="mb-2">Daily report recipients</p>
-            {/* <div className="flex w-full justify-between bg-zinc-200 dark:bg-zinc-800 px-2 mb-6 items-center rounded">
-              <div className="flex  w-full gap-2 items-center py-2 ">
-                <svg
-                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                </svg>
+            {emailReport.length > 0 && (
+              <>
+                {emailReport.map((report) => {
+                  return (
+                    <div
+                      key={report.id}
+                      className="flex w-full justify-between bg-zinc-200 dark:bg-zinc-800 px-2 mb-6 items-center rounded"
+                    >
+                      <div className="flex  w-full gap-2 items-center py-2 ">
+                        <svg
+                          className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                        </svg>
 
-                <p>cesrmat@gmail.com</p>
-              </div>
-
-              <Trash2 className="text-red-500" />
-            </div> */}
+                        <p>{report.email}</p>
+                      </div>
+                      <Button
+                        variant={"ghost"}
+                        onClick={() => handleDelete(report.id)}
+                      >
+                        <Trash2 className="text-red-500 " />
+                      </Button>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">

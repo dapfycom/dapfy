@@ -26,7 +26,7 @@ export const POST = async (req: Request) => {
 
   try {
     if (user) {
-      prisma.xAcount.update({
+      await prisma.xAcount.update({
         where: {
           userId: user.id,
         },
@@ -38,17 +38,19 @@ export const POST = async (req: Request) => {
         },
       });
     } else {
-      prisma.xAcount.create({
+      const userCreated = await prisma.user.create({
+        data: {
+          address: userData.address,
+        },
+      });
+
+      await prisma.xAcount.create({
         data: {
           name: userData.name,
           username: userData.username,
           profile_image_url: userData.profile_image_url,
           xid: userData.id,
-          user: {
-            create: {
-              address: userData.address,
-            },
-          },
+          userId: userCreated.id,
         },
       });
     }
