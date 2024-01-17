@@ -40,3 +40,4 @@ dumy.js
 prisma/migrations
 helpers.txt
 .env.production
+prisma/demo.csv
