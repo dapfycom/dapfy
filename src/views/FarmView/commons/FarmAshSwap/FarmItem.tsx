@@ -77,7 +77,12 @@ const FarmItem = () => {
               {formatTokenI(farm.first_token_id)}-
               {formatTokenI(farm.second_token_id)}
             </h3>
-            {elrondToken && <LpTokenImage lpToken={elrondToken} />}
+            {elrondToken && (
+              <LpTokenImage
+                token1lp={farm.first_token_id}
+                token2lp={farm.second_token_id}
+              />
+            )}
           </div>
         </div>
 
