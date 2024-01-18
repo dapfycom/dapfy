@@ -20,6 +20,7 @@ import { formatTokenI } from "@/utils/functions/tokens";
 import { useFormik } from "formik";
 import { ArrowRight } from "lucide-react";
 import { useContext } from "react";
+import * as yup from "yup";
 import { AshFarmContext } from "./FarmAshSwap";
 import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
 import { stake, withdraw } from "./utils/services";
@@ -50,7 +51,12 @@ const FarmItem = () => {
         stake(amount, farm.farm_click_id);
       }
     },
-    // validationSchema: stakeSchema,
+    validationSchema: yup.object().shape({
+      amount: yup
+        .number()
+        .required("Amount is required")
+        .min(1, "Amount must be greater than 1 EGLD"),
+    }),
   });
   const handleMax = () => {
     const value = getRealBalance(
