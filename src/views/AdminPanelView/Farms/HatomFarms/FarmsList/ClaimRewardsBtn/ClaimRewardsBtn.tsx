@@ -16,7 +16,7 @@ const ClaimRewardsBtn = () => {
       arg: [
         new AddressValue(new Address(hatomFarm?.moneyMarket.childScAddress)),
       ],
-      gasL: 20_000_000,
+      gasL: 200_000_000,
     });
   };
   return (
