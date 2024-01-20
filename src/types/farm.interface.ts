@@ -58,6 +58,8 @@ export interface IAshFarmScResponse {
   total_deposited_farm_amount: BigNumber;
   total_weighted_block: BigNumber;
   total_farm_rewards: BigNumber;
+
+  is_pool_v2: boolean;
 }
 export interface IAshFarmEntriesScResponse {
   farm_click_id: BigNumber;
