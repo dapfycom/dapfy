@@ -23,6 +23,7 @@ const FarmAshSwap = () => {
   const { farms } = useGetAshSwapFarms();
 
   const { farmRecords } = useGetAshFarmApr();
+  console.log({ farms });
 
   return (
     <div className="mt-10">

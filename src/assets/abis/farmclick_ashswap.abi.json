@@ -1,11 +1,11 @@
 {
     "buildInfo": {
         "rustc": {
-            "version": "1.70.0-nightly",
-            "commitHash": "28a29282f6dde2e4aba6e1e4cfea5c9430a00217",
-            "commitDate": "2023-04-06",
+            "version": "1.76.0-nightly",
+            "commitHash": "d86d65bbc19b928387f68427fcc3a0da498d8a19",
+            "commitDate": "2023-12-10",
             "channel": "Nightly",
-            "short": "rustc 1.70.0-nightly (28a29282f 2023-04-06)"
+            "short": "rustc 1.76.0-nightly (d86d65bbc 2023-12-10)"
         },
         "contractCrate": {
             "name": "farmclick_ashswap",
@@ -13,7 +13,7 @@
         },
         "framework": {
             "name": "multiversx-sc",
-            "version": "0.39.5"
+            "version": "0.45.2"
         }
     },
     "docs": [
@@ -35,7 +35,11 @@
                 "type": "Address"
             },
             {
-                "name": "initial_fees_percentage",
+                "name": "initial_compund_fees_percentage",
+                "type": "u64"
+            },
+            {
+                "name": "initial_unstake_fees_percentage",
                 "type": "u64"
             },
             {
@@ -47,7 +51,50 @@
     },
     "endpoints": [
         {
-            "name": "setFeePercentage",
+            "name": "upgrade",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "wegld_token_id",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "wrap_egld_addr",
+                    "type": "Address"
+                },
+                {
+                    "name": "fees_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "initial_compund_fees_percentage",
+                    "type": "u64"
+                },
+                {
+                    "name": "initial_unstake_fees_percentage",
+                    "type": "u64"
+                },
+                {
+                    "name": "minimum_deposit_amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setFeePercentageCompound",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "fee_percentage",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setFeePercentageUnstake",
             "onlyOwner": true,
             "mutability": "mutable",
             "inputs": [
@@ -70,6 +117,10 @@
                 {
                     "name": "farm_addr",
                     "type": "Address"
+                },
+                {
+                    "name": "is_pool_v2",
+                    "type": "bool"
                 }
             ],
             "outputs": []
@@ -118,19 +169,11 @@
             "outputs": []
         },
         {
-            "name": "join",
+            "name": "exitFarm",
             "mutability": "mutable",
             "inputs": [
                 {
                     "name": "farm_click_id",
-                    "type": "u64"
-                },
-                {
-                    "name": "nonce1",
-                    "type": "u64"
-                },
-                {
-                    "name": "nonce2",
                     "type": "u64"
                 }
             ],
@@ -191,6 +234,26 @@
                 {
                     "type": "variadic<Address>",
                     "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getCompoundFeePercentage",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getUnstakeFeePercentage",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
                 }
             ]
         },
@@ -259,7 +322,7 @@
             ]
         }
     ],
-    "events": [],
+    "esdtAttributes": [],
     "hasCallback": false,
     "types": {
         "DepositEntry": {
@@ -338,6 +401,10 @@
                 {
                     "name": "farm_click_id",
                     "type": "u64"
+                },
+                {
+                    "name": "is_pool_v2",
+                    "type": "bool"
                 },
                 {
                     "name": "pool_address",
