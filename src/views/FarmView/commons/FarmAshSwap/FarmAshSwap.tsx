@@ -23,12 +23,11 @@ const FarmAshSwap = () => {
   const { farms } = useGetAshSwapFarms();
 
   const { farmRecords } = useGetAshFarmApr();
-  console.log({ farms });
 
   return (
     <div className="mt-10">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3   gap-8">
-        {farms.slice(0, 1).map((f) => {
+        {farms.slice(0, 2).map((f) => {
           const ashSwapInfo = farmRecords.find(
             (ashFarmData) =>
               ashFarmData.farm?.farm_address === f.farm_address &&
