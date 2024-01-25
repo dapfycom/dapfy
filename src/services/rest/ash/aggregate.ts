@@ -41,7 +41,7 @@ export const fetchAggregate = async ({
   from: string;
   to: string;
   amount: string;
-}): Promise<SorSwapResponse | undefined> => {
+}): Promise<(SorSwapResponse & { warning: string }) | undefined> => {
   if (!isValidNumber(amount)) {
     throw new Error("Invalid amount");
   }
@@ -53,7 +53,6 @@ export const fetchAggregate = async ({
   });
 
   const sorswap = await agService.getPaths(from, to, amount);
-  console.log("sorswap", sorswap);
 
-  return sorswap;
+  return sorswap as (SorSwapResponse & { warning: string }) | undefined;
 };

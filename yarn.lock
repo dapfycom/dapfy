@@ -25,10 +25,10 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@ashswap/ash-sdk-js@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@ashswap/ash-sdk-js/-/ash-sdk-js-2.0.3.tgz#fe12cb6449ca30384f7418809a81c8f06e02ab40"
-  integrity sha512-QL/gpGRXJaJso7ruR9Ho1UHqsUOqzFtCCzxDGX2QAjLNetNDVqSsa6VYFY+ZhAHGInhv5ia+zU/iQRfYJgDKnA==
+"@ashswap/ash-sdk-js@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@ashswap/ash-sdk-js/-/ash-sdk-js-2.0.7.tgz#9f15a48810764e89fd6bea4124668dd4f358b22c"
+  integrity sha512-QDqJijCimqVM0SdwUYO5VyRYk7uhA78Euca+DLi+IhlgwqadyKhB4lln8Rd0KHkmWS43kZuz0xZqZ1GhMt6wYg==
   dependencies:
     "@multiversx/sdk-core" "12.6.0"
     "@multiversx/sdk-network-providers" "1.5.0"
