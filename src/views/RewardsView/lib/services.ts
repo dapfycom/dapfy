@@ -7,3 +7,9 @@ export const syncXUserWithDapfyUser = async (data: IUserX, address: string) => {
     address,
   });
 };
+
+export const fetchUsersAvatars = async () => {
+  return await axiosDapfy.get<{
+    usersAvatars: { profile_image_url: string }[];
+  }>("/x-users-avatars");
+};

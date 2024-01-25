@@ -12,7 +12,7 @@ import { IUserX } from "@/types/rewards.interface";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import useSWR from "swr";
-import { syncXUserWithDapfyUser } from "./services";
+import { fetchUsersAvatars, syncXUserWithDapfyUser } from "./services";
 
 export const useGetUserPoints = () => {
   const { user } = useGetXUser();
@@ -103,10 +103,22 @@ export const useGetUserEmailReport = () => {
       return getUserEmailsReport(user?.id!);
     }
   );
-  console.log({ data });
 
   return {
     emailReport: data?.reports || [],
+    mutate,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetUsersAvatars = () => {
+  const { data, error, isLoading, mutate } = useSWR(
+    "/x-users-avatars",
+    fetchUsersAvatars
+  );
+  return {
+    avatars: data?.data?.usersAvatars || [],
     mutate,
     isLoading,
     error,
