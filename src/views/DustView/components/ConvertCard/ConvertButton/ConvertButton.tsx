@@ -77,6 +77,7 @@ const ConvertButton = () => {
       <Button
         className="w-full bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
         onClick={handleSubmit}
+        disabled={!data?.amountOut}
       >
         <PointerIcon className="h-6 w-6" />
         Convert dust now with 1-Click®
