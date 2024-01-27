@@ -49,6 +49,7 @@ export const routeNames = {
   security: "/security",
   terms: "/terms-of-use",
   openSource: "/open-source",
+  xfees: "/multiversx/x-fees",
 };
 
 export const externnalLinks = {
@@ -93,6 +94,10 @@ export const mainSiteRoutes = [
   {
     title: "The Forge",
     soon: true,
+  },
+  {
+    path: routeNames.xfees,
+    title: "X-Fees",
   },
   {
     title: "Admin",
