@@ -88,7 +88,7 @@ export const mainSiteRoutes = [
 
   {
     path: routeNames.dust,
-    title: "Convert Dust",
+    title: "Dust",
   },
 
   {
