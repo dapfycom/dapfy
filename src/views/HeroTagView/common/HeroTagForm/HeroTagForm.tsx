@@ -22,8 +22,6 @@ export default function HeroTagForm() {
       herotag: "",
     },
     onSubmit: async (values) => {
-      console.log("submitting");
-
       try {
         const res = await getSmartContractInteraction(
           "erd1qqqqqqqqqqqqqpgqz0ycyug2rqtpyrh5p33y9vqjv95s3xmaqpnq7uz3qq"
@@ -68,14 +66,16 @@ export default function HeroTagForm() {
                 onChange={formik.handleChange}
                 name="herotag"
               />
-
-              <p className="text-red-500 text-xs">{formik.errors.herotag}</p>
+              {formik.errors.herotag && (
+                <p className="text-red-500 text-xs">{formik.errors.herotag}</p>
+              )}
             </div>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button type="submit" disabled={!!formik.errors.herotag}>
-            Save
+            Generate
+            {/* {isLoading ? "Loading..." : "Generate"} */}
           </Button>
         </CardFooter>
       </form>
