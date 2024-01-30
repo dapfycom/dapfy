@@ -1,4 +1,4 @@
-import axiosDapfy from "@/services/rest/dapfy-api";
+import { fetchElrondData } from "@/services/rest/elrond";
 import { useDebounce } from "@multiversx/sdk-dapp/hooks";
 import useSWR from "swr";
 
@@ -7,15 +7,20 @@ export const useGetHeroTagAvailability = (herotag: string) => {
   const { data, error, isLoading } = useSWR(
     debouncedherotag ? `herotag-info/${debouncedherotag}` : null,
     async (url) => {
-      const data = await axiosDapfy.post<{
-        data?: string;
-        dnsAddress?: string;
-        error: boolean | string;
-      }>("/herotag-info", {
-        debouncedherotag,
-      });
+      const data = await fetchElrondData<{
+        address: string;
+        balance: string;
+        nonce: number;
+        timestamp: number;
+        shard: number;
+        rootHash: string;
+        username: string;
+        developerReward: string;
+        txCount: number;
+        scrCount: number;
+      }>(`usernames/${herotag}?withGuardianInfo=false`);
 
-      return data.data;
+      return data;
     }
   );
 

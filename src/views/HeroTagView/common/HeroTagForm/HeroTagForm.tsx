@@ -15,6 +15,7 @@ import { getSmartContractInteraction } from "@/services/sc";
 import { BytesValue } from "@multiversx/sdk-core/out";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useGetHeroTagAvailability } from "../../utils/hook";
 
 export default function HeroTagForm() {
   const formik = useFormik({
@@ -22,15 +23,16 @@ export default function HeroTagForm() {
       herotag: "",
     },
     onSubmit: async (values) => {
+      console.log("submitting");
+
       try {
-        const res = await getSmartContractInteraction(
+        getSmartContractInteraction(
           "erd1qqqqqqqqqqqqqpgqz0ycyug2rqtpyrh5p33y9vqjv95s3xmaqpnq7uz3qq"
         ).scCall({
           functionName: "register",
           gasL: 600000000,
           arg: [BytesValue.fromUTF8(values.herotag + ".elrond")],
         });
-        console.log({ res });
       } catch (error) {
         console.log({ error });
       }
@@ -45,6 +47,10 @@ export default function HeroTagForm() {
         ),
     }),
   });
+
+  const { isLoading, herotagInfo, error } = useGetHeroTagAvailability(
+    formik.values.herotag
+  );
 
   return (
     <Card className="w-[350px] text-left">
@@ -66,16 +72,21 @@ export default function HeroTagForm() {
                 onChange={formik.handleChange}
                 name="herotag"
               />
-              {formik.errors.herotag && (
-                <p className="text-red-500 text-xs">{formik.errors.herotag}</p>
-              )}
+              {formik.errors.herotag ||
+                (herotagInfo && (
+                  <p className="text-red-500 text-xs">
+                    {formik.errors.herotag || "This herotag is already taken"}
+                  </p>
+                ))}
             </div>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button type="submit" disabled={!!formik.errors.herotag}>
-            Generate
-            {/* {isLoading ? "Loading..." : "Generate"} */}
+          <Button
+            type="submit"
+            disabled={!!formik.errors.herotag || !!herotagInfo || isLoading}
+          >
+            {isLoading ? "Loading..." : "Generate"}
           </Button>
         </CardFooter>
       </form>
