@@ -68,7 +68,6 @@ const GameActions = () => {
         <CardContent>
           <div className="flex flex-col w-full gap-6">
             <div className="flex gap-2 w-full">
-              <p>2.</p>
               <div className="flex flex-col gap-2 flex-1">
                 <p>Select side of coin</p>
                 <div className="flex w-full gap-4">
@@ -90,7 +89,6 @@ const GameActions = () => {
               </div>
             </div>
             <div className="flex gap-2 w-full">
-              <p>3.</p>
               <div className="flex flex-col gap-2 flex-1">
                 <div className="flex w-full gap-4">
                   <Button
