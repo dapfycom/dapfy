@@ -18,7 +18,6 @@ import {
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useFormik } from "formik";
-import { ArrowRight } from "lucide-react";
 import { useContext } from "react";
 import * as yup from "yup";
 import { AshFarmContext } from "./FarmAshSwap";
@@ -101,13 +100,6 @@ const FarmItem = () => {
                 <div>
                   <span className="underline">
                     {formatNumber(ashSwapInfo?.totalAPRMin)}
-                  </span>
-                  <span className="text-2xs">%</span>
-                </div>
-                <ArrowRight className="w-3 h-auto" />
-                <div>
-                  <span className="underline">
-                    {formatNumber(ashSwapInfo?.totalAPRMax)}
                   </span>
                   <span className="text-2xs">%</span>
                 </div>

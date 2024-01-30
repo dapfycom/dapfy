@@ -123,7 +123,7 @@ export const getInterface = (workspace: WspTypes) => {
 };
 
 export const getSmartContractInteraction = (
-  key: WspTypes
+  key: WspTypes | string
 ): SmartContractInteraction => {
   const smartsContractsInteractions: {
     [key: string]: SmartContractInteraction;
