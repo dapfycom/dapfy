@@ -54,14 +54,26 @@ export const getTopVolume = (
   usersVolume: { address: string; amount: string }[],
   countToReturn: number = 10
 ): { address: string; amount: string }[] => {
-  // Ordenar los usuarios según el volumen en orden descendente
-  const sortedUsers = usersVolume.sort((a, b) => {
+  // Create a Set to keep track of unique addresses
+  const uniqueAddresses = new Set<string>();
+
+  // Filter out duplicates based on the address
+  const uniqueUsers = usersVolume.filter((user) => {
+    if (uniqueAddresses.has(user.address)) {
+      return false;
+    }
+    uniqueAddresses.add(user.address);
+    return true;
+  });
+
+  // Sort the unique users according to the volume in descending order
+  const sortedUsers = uniqueUsers.sort((a, b) => {
     const volumeA = new BigNumber(a.amount);
     const volumeB = new BigNumber(b.amount);
     return volumeB.minus(volumeA).toNumber();
   });
 
-  // Obtener el top de usuarios según countToReturn
+  // Get the top users according to countToReturn
   const topUsers = sortedUsers.slice(0, countToReturn);
 
   return topUsers;

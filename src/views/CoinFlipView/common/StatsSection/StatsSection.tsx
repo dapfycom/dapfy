@@ -27,6 +27,9 @@ const StatsSection = () => {
 
   const { playersCount } = useGetPlayersCount();
   const { playersVolume } = useGetAllPlayersVolume(playersCount);
+  console.log({ playersVolume });
+  console.log({ playersCount });
+
   const topPlayers = getTopVolume(playersVolume);
 
   return (
@@ -88,85 +91,6 @@ const StatsSection = () => {
         ))}
       </div>
     </div>
-    // <Flex flexDir={"column"} w="full" justifyContent="space-between" gap="20px">
-    //   <Card p="30px">
-    //     <Text color="primary" fontSize={"lg"} mb="10px">
-    //       Total BSK Bets
-    //     </Text>
-    //     <Text color="white">{formatNumber(allTimeBetsCount)}</Text>
-    //   </Card>
-    //   <Card p="30px">
-    //     <Text color="primary" fontSize={"lg"} mb="10px">
-    //       Total Players
-    //     </Text>
-    //     <Text color="white">{playersCount}</Text>
-    //   </Card>
-    //   <Card p="30px">
-    //     <Text color="primary" fontSize={"lg"} mb="10px">
-    //       All Time BSK Volume
-    //     </Text>
-    //     <Text color="white">
-    //       {" "}
-    //       {formatBalance({
-    //         balance: volume,
-    //         decimals: elrondToken?.decimals,
-    //       })}{" "}
-    //       {formatTokenI(tokenI)}
-    //     </Text>
-    //     <Text fontSize={"sm"} mt={1}>
-    //       {" "}
-    //       ${" "}
-    //       {formatBalanceDolar(
-    //         {
-    //           balance: volume,
-    //           decimals: elrondToken?.decimals,
-    //         },
-    //         elrondToken?.price
-    //       )}{" "}
-    //     </Text>
-    //   </Card>
-    //   <Card p="30px">
-    //     <Text color="primary" fontSize={"lg"} mb="10px">
-    //       ALL TIME BSK BURNED 🔥
-    //     </Text>
-    //     <Text color="white">
-    //       {" "}
-    //       {formatBalance({
-    //         balance: houseVolume,
-    //         decimals: elrondToken?.decimals,
-    //       })}{" "}
-    //       {formatTokenI(tokenI)}
-    //     </Text>
-    //     <Text fontSize={"sm"} mt={1}>
-    //       {" "}
-    //       ${" "}
-    //       {formatBalanceDolar(
-    //         {
-    //           balance: houseVolume,
-    //           decimals: elrondToken?.decimals,
-    //         },
-    //         elrondToken?.price
-    //       )}{" "}
-    //     </Text>
-    //   </Card>
-    //   <Card p="30px">
-    //     <Text color="primary" fontSize={"lg"} mb="10px">
-    //       Top 10 players
-    //     </Text>
-    //     {topPlayers.map((player) => {
-    //       return (
-    //         <Flex color={"white"} key={player.address}>
-    //           <Link
-    //             isExternal
-    //             href={`${selectedNetwork.network.explorerAddress}/accounts/${player.address}`}
-    //           >
-    //             <Text>{formatAddress(player.address)}</Text>
-    //           </Link>
-    //         </Flex>
-    //       );
-    //     })}
-    //   </Card>
-    // </Flex>
   );
 };
 
