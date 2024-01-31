@@ -107,12 +107,17 @@ const UserTask = ({
 }) => {
   return (
     <span className="flex gap-3">
-      {completed ? (
-        <CheckCircle2 className="text-green-500 " />
-      ) : (
-        <Circle className="text-green-500 " />
-      )}
-      {text} <ArrowRight />
+      <span className="w-[18px] sm:w-[23px]">
+        {completed ? (
+          <CheckCircle2 className="text-green-500 w-[18px] sm:w-[23px]" />
+        ) : (
+          <Circle className="text-green-500 w-[18px] sm:w-[23px]" />
+        )}
+      </span>
+
+      <div className="flex flex-auto">
+        {text} <ArrowRight />
+      </div>
     </span>
   );
 };
