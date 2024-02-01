@@ -1,6 +1,7 @@
 import aggregatorAbiUrl from "@/assets/abis/aggregator.abi.json";
 import ashSwapAggregatorAbiUrl from "@/assets/abis/ashswap-aggregator.abi.json";
 import bskFarmAbiUrl from "@/assets/abis/beskar-dao.abi.json";
+import rewardsAbiUrl from "@/assets/abis/contract.abi.json";
 import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
 import onDexFarmAbiUrl from "@/assets/abis/farm_onedex.abi.json";
 import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
@@ -27,7 +28,8 @@ export type WspTypes =
   | "ashSwapFarmWsp"
   | "oneDexFarmWsp"
   | "ashSwapAggregatorWsp"
-  | "originalOneDexWsp";
+  | "originalOneDexWsp"
+  | "rewardsWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -113,6 +115,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = originalOneDexAbiUrl;
       implementsInterfaces = "OneDex";
       break;
+    case "rewardsWsp":
+      simpleAddress = selectedNetwork.scAddress.rewards;
+      address = new Address(simpleAddress);
+      abiUrl = rewardsAbiUrl;
+      implementsInterfaces = "Contract";
+      break;
     default:
       simpleAddress = workspace;
       address = new Address(simpleAddress);
@@ -174,6 +182,10 @@ export const getSmartContractInteraction = (
     originalOneDexWsp: new SmartContractInteraction(
       getInterface("originalOneDexWsp").simpleAddress,
       AbiRegistry.create(getInterface("originalOneDexWsp").abiUrl)
+    ),
+    rewardsWsp: new SmartContractInteraction(
+      getInterface("rewardsWsp").simpleAddress,
+      AbiRegistry.create(getInterface("rewardsWsp").abiUrl)
     ),
   };
 
