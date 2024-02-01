@@ -70,9 +70,7 @@ const AllTimeEarned = () => {
             >
               <UserTask
                 text="Like retweet comment one of our posts"
-                completed={
-                  !!tasks?.comment || !!tasks?.comment || !!tasks?.like
-                }
+                completed={!!tasks?.comment && !!tasks?.rt && !!tasks?.like}
               />
             </a>
           </li>
