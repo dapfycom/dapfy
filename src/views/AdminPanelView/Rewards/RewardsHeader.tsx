@@ -4,7 +4,6 @@ import { TwitterIcon } from "lucide-react";
 
 const RewardsHeader = () => {
   const { handleLogin, isAuthenticated, user, error } = useXAuthentication();
-  console.log({ user, error, isAuthenticated });
 
   return (
     <div className="flex items-center justify-between text-center sm:text-left sm:flex-row flex-col-reverse">
@@ -22,6 +21,7 @@ const RewardsHeader = () => {
       ) : (
         <Button
           onClick={handleLogin}
+          disabled
           className="-translate-y-6 sm:translate-y-0"
         >
           <TwitterIcon className="mr-2 h-4 w-4" />
