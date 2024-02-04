@@ -1,4 +1,5 @@
 import axiosDapfy from "@/services/rest/dapfy-api";
+import { getSmartContractInteraction } from "@/services/sc";
 import { scQuery } from "@/services/sc/queries";
 import { IUserX } from "@/types/rewards.interface";
 import { Address } from "@multiversx/sdk-core/out";
@@ -30,4 +31,11 @@ export const fetchUnCollectedRewards = async (
   console.log({ value });
 
   return (res.firstValue?.valueOf().toString() as string) || "0";
+};
+
+// calls
+export const claimRewards = () => {
+  return getSmartContractInteraction("rewardsWsp").scCall({
+    functionName: "claim",
+  });
 };
