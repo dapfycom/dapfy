@@ -37,5 +37,6 @@ export const fetchUnCollectedRewards = async (
 export const claimRewards = () => {
   return getSmartContractInteraction("rewardsWsp").scCall({
     functionName: "claim",
+    gasL: 5_000_000,
   });
 };
