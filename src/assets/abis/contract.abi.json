@@ -61,6 +61,16 @@
             "outputs": []
         },
         {
+            "name": "hasClaimed",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
             "name": "getSupplyAmount",
             "mutability": "readonly",
             "inputs": [],

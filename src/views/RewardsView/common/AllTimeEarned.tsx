@@ -8,14 +8,19 @@ import {
 import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
-import { ArrowRight, CheckCircle2, Circle, LogOut } from "lucide-react";
-import { useGetIsUserInteractedDefiTool, useGetUserTasks } from "../lib/hooks";
+import { LogOut } from "lucide-react";
+import {
+  useGetHasClaimedRewards,
+  useGetIsUserInteractedDefiTool,
+  useGetUserTasks,
+} from "../lib/hooks";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
   const { user, isAuthenticated, handleLogout } = useXAuthentication();
   const { tasks } = useGetUserTasks();
   const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
+  const { hasClaimed } = useGetHasClaimedRewards();
 
   if (!isAuthenticated) {
     return null;
@@ -56,66 +61,8 @@ const AllTimeEarned = () => {
           <div className="text-gray-300">{formatAddress(address)}</div>
         </div>
       </div>
-
-      <h4 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">
-        Complete today’s tasks to earn rewards
-      </h4>
-      <div className="w-full flex justify-center">
-        <ul className="max-w-[600px] text-left flex flex-col gap-2">
-          <li>
-            <a
-              href="https://twitter.com/DapfyCom"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <UserTask
-                text="Like retweet comment one of our posts"
-                completed={!!tasks?.comment && !!tasks?.rt && !!tasks?.like}
-              />
-            </a>
-          </li>
-          <li>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer">
-              <UserTask
-                text="Write a tweet about @dapfycom"
-                completed={!!tasks?.mention}
-              />
-            </a>
-          </li>
-          <li>
-            <UserTask
-              text=" Interact with one of our useful DeFi tools"
-              completed={isUserInteractedDefiTool}
-            />
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };
 
 export default AllTimeEarned;
-
-const UserTask = ({
-  completed,
-  text,
-}: {
-  completed?: boolean;
-  text: string;
-}) => {
-  return (
-    <span className="flex gap-3">
-      <span className="w-[18px] sm:w-[23px]">
-        {completed ? (
-          <CheckCircle2 className="text-green-500 w-[18px] sm:w-[23px]" />
-        ) : (
-          <Circle className="text-green-500 w-[18px] sm:w-[23px]" />
-        )}
-      </span>
-
-      <div className="flex flex-auto">
-        {text} <ArrowRight />
-      </div>
-    </span>
-  );
-};

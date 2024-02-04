@@ -33,6 +33,13 @@ export const fetchUnCollectedRewards = async (
   return (res.firstValue?.valueOf().toString() as string) || "0";
 };
 
+export const fetchHasClaimedRewards = async (): Promise<boolean> => {
+  const res = await scQuery("rewardsWsp", "hasClaimed");
+  console.log({ hasClaimed: res.firstValue?.valueOf() });
+
+  return res.firstValue?.valueOf();
+};
+
 // calls
 export const claimRewards = () => {
   return getSmartContractInteraction("rewardsWsp").scCall({
