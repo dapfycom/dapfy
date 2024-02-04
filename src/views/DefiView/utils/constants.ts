@@ -1,10 +1,10 @@
 export const HatomConfigs = {
   apy: {
-    EGLD: 6.46,
-    USDC: 32.44,
-    USDT: 35.98,
+    EGLD: 8.146,
+    USDC: 29.989,
+    USDT: 34.053,
     BUSD: 0,
-    SEGLD: 4.14,
+    SEGLD: 3.576,
   },
   minDeposit: {
     EGLD: 1,
