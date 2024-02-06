@@ -1,14 +1,23 @@
 import { Button } from "@/components/ui/button";
+import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
+import { AlertCircle } from "lucide-react";
+import toast from "react-hot-toast";
 
 const LoginButton = () => {
-  const { isAuthenticated, handleLogin } = useXAuthentication();
-  // const handleLogin = () => {
-  //   toast("Coming soon", {
-  //     icon: <AlertCircle className="text-yellow-500" />,
-  //     position: "top-center",
-  //   });
-  // };
+  const { isLoggedIn, handleConnect } = useAuthentication();
+  const { isAuthenticated, handleLogin: loginWithX } = useXAuthentication();
+  const handleLogin = () => {
+    if (isLoggedIn) {
+      loginWithX();
+    } else {
+      toast("Connect your wallet to continue", {
+        icon: <AlertCircle className="text-yellow-500" />,
+        position: "top-center",
+      });
+      handleConnect();
+    }
+  };
 
   if (isAuthenticated) {
     return null;
