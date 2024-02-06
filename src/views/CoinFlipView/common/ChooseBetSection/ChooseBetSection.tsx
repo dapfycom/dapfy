@@ -1,30 +1,69 @@
 "use client";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ENVIRONMENT, selectedNetwork } from "@/config/network";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetMaiarPairs from "@/hooks/useGetMaiarPairs";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { formatBalance, formatNumber } from "@/utils/functions/formatBalance";
-import { formatTokenI } from "@/utils/functions/tokens";
 import {
   changeUserAmount,
   selectCoinFlipBetAmount,
   selectCoinFlipTokenStr,
 } from "@/views/CoinFlipView/lib/con-flip-slice";
 import BigNumber from "bignumber.js";
-import { useMemo } from "react";
+import { CheckIcon, ChevronsUpDown } from "lucide-react";
+import { useMemo, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import useGetTokenPrice from "@/hooks/useGetTokenPrice";
+import { cn } from "@/lib/utils";
+import {
+  formatBalanceDollar,
+  formatNumber,
+} from "@/utils/functions/formatBalance";
+import { formatTokenI } from "@/utils/functions/tokens";
+const frameworks = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
 //bet options
 const betOptionsInEgld = [
-  0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.7, 1, 2,
+  0.0002, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.7, 1, 2,
 ];
+// const betOptionsInEgld = [
+//   0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.7, 1, 2,
+// ];
 
 const ChooseBetSection = () => {
   const dispatch = useAppDispatch();
+  const betAmount = useAppSelector(selectCoinFlipBetAmount);
   const selctedTokenStr = useAppSelector(selectCoinFlipTokenStr);
-  const amount = useAppSelector(selectCoinFlipBetAmount);
   const { pairs } = useGetMaiarPairs();
   const { accountToken } = useGetAccountToken(selctedTokenStr);
+  const [tokenPrice] = useGetTokenPrice(selctedTokenStr);
   const rate = useMemo(() => {
     const pair = pairs.find(
       (p) =>
@@ -52,100 +91,143 @@ const ChooseBetSection = () => {
     dispatch(changeUserAmount(amount));
   };
 
+  const [open, setOpen] = useState(false);
+
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <div className="flex flex-col sm:flex-row justify-between pt-3 mb-2">
-          <p>1. Choose your bet</p>
-          <div className="flex w-full sm:w-fit ">
-            <p className="text-sm text-muted-foreground">
-              Balance : {formatBalance(accountToken)}{" "}
-              {formatTokenI(selctedTokenStr)}
-            </p>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-2 gap-4">
-          {betOptionsInEgld.map((bet, i) => {
-            const value = new BigNumber(bet)
-              .multipliedBy(ENVIRONMENT === "mainnet" ? rate || 0 : 200000)
-              .toFixed(2);
-            return (
-              <div
-                style={{
-                  gridColumn:
-                    i === betOptionsInEgld.length - 1
-                      ? "span 2 / span 2"
-                      : "span 1 / span 1",
-                }}
-                key={bet}
-                className="flex flex-col justify-center items-center"
-              >
-                <div
-                  className={`w-full justify-center text-center items-center 
-                  border py-3 rounded-md cursor-pointer hover:bg-secondary ${
-                    amount === value ? "bg-secondary" : "bg-transparent"
-                  }`}
-                  key={bet}
-                  onClick={() => handleChangeUserAmount(value)}
+    <Popover open={open} onOpenChange={setOpen}>
+      <div className="flex flex-col gap-2">
+        <Label>Choose amount</Label>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-[250px] justify-between"
+          >
+            {betAmount
+              ? `$
+            ${formatBalanceDollar(
+              {
+                balance: betAmount,
+                decimals: 0,
+              },
+              tokenPrice
+            )}`
+              : "Choose amount"}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+      </div>
+      <PopoverContent className="w-[250px] p-0">
+        <Command>
+          <CommandGroup>
+            {betOptionsInEgld.map((bet, i) => {
+              const value = new BigNumber(bet)
+                .multipliedBy(ENVIRONMENT === "mainnet" ? rate || 0 : 200000)
+                .toFixed(2);
+              return (
+                <CommandItem
+                  key={value}
+                  value={value}
+                  onSelect={(currentValue) => {
+                    handleChangeUserAmount(
+                      currentValue === betAmount ? "null" : currentValue
+                    );
+
+                    setOpen(false);
+                  }}
                 >
-                  {formatNumber(value)}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </CardContent>
-    </Card>
+                  <div className="flex justify-between w-full pr-3">
+                    <p>
+                      ${" "}
+                      {formatBalanceDollar(
+                        {
+                          balance: value,
+                          decimals: 0,
+                        },
+                        tokenPrice
+                      )}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatNumber(value)} {formatTokenI(selctedTokenStr)}
+                    </p>
+                  </div>
+                  <CheckIcon
+                    className={cn(
+                      "ml-auto h-4 w-4",
+                      betAmount === value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              );
+            })}
 
-    // <Card px="15px" py="30px" w="full" h={"full"}>
-    //   <Flex mb={3}>
-    //     <Text color="white">1. Choose your bet</Text>
-    //   </Flex>
-    //   <Card
-    //     flexDir={"row"}
-    //     justify="space-between"
-    //     px={"15px"}
-    //     py="12px"
-    //     borderRadius={"md"}
-    //     mb={4}
-    //   >
-    //     <Text>Balance:</Text>
-    //     <Text color="primary">
-    //       {formatBalance(accountToken)} {formatTokenI(selctedTokenStr)}
-    //     </Text>
-    //   </Card>
-
-    //   <Grid templateColumns={"repeat(2, 1fr)"} rowGap={"12px"} columnGap="15px">
-    //     {betOptionsInEgld.map((bet, i) => {
-    //       const value = new BigNumber(bet)
-    //         .multipliedBy(ENVIROMENT === "mainnet" ? rate : 200000)
-    //         .toFixed(2);
-    //       return (
-    //         <GridItem
-    //           key={bet}
-    //           colSpan={betOptionsInEgld.length - 1 === i ? 2 : 1}
-    //         >
-    //           <Card
+            {/* {frameworks.map((framework) => (
+              <CommandItem
+                key={framework.value}
+                value={framework.value}
+                onSelect={(currentValue) => {
+                  setValue(currentValue === value ? "" : currentValue);
+                  setOpen(false);
+                }}
+              >
+                {framework.label}
+                <CheckIcon
+                  className={cn(
+                    "ml-auto h-4 w-4",
+                    value === framework.value ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </CommandItem>
+            ))} */}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
+    // <Card className="h-full">
+    //   <CardHeader>
+    //     <div className="flex flex-col sm:flex-row justify-between pt-3 mb-2">
+    //       <p>1. Choose your bet</p>
+    //       <div className="flex w-full sm:w-fit ">
+    //         <p className="text-sm text-muted-foreground">
+    //           Balance : {formatBalance(accountToken)}{" "}
+    //           {formatTokenI(selctedTokenStr)}
+    //         </p>
+    //       </div>
+    //     </div>
+    //   </CardHeader>
+    //   <CardContent>
+    //     <div className="grid grid-cols-2 gap-4">
+    //       {betOptionsInEgld.map((bet, i) => {
+    //         const value = new BigNumber(bet)
+    //           .multipliedBy(ENVIRONMENT === "mainnet" ? rate || 0 : 200000)
+    //           .toFixed(2);
+    //         return (
+    //           <div
+    //             style={{
+    //               gridColumn:
+    //                 i === betOptionsInEgld.length - 1
+    //                   ? "span 2 / span 2"
+    //                   : "span 1 / span 1",
+    //             }}
     //             key={bet}
-    //             px={"15px"}
-    //             py="15px"
-    //             align="center"
-    //             color="white"
-    //             borderRadius={"md"}
-    //             as={Button}
-    //             h={"auto"}
-    //             w={"full"}
-    //             bg={amount === value ? "primary" : "transparent"}
-    //             onClick={() => handleChangeUserAmount(value)}
+    //             className="flex flex-col justify-center items-center"
     //           >
-    //             {formatNumber(value)}
-    //           </Card>
-    //         </GridItem>
-    //       );
-    //     })}
-    //   </Grid>
+    //             <div
+    //               className={`w-full justify-center text-center items-center
+    //               border py-3 rounded-md cursor-pointer hover:bg-secondary ${
+    //                 amount === value ? "bg-secondary" : "bg-transparent"
+    //               }`}
+    //               key={bet}
+    //               onClick={() => handleChangeUserAmount(value)}
+    //             >
+    //               {formatNumber(value)}
+    //             </div>
+    //           </div>
+    //         );
+    //       })}
+    //     </div>
+    //   </CardContent>
     // </Card>
   );
 };

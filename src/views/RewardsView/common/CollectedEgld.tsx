@@ -1,37 +1,123 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
+import { formatBalance } from "@/utils/functions/formatBalance";
+import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
+import {
+  useGetHasClaimedRewards,
+  useGetIsUserInteractedDefiTool,
+  useGetUnCollectedRewards,
+  useGetUserTasks,
+} from "../lib/hooks";
+import { claimRewards } from "../lib/services";
 
 const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
+  const { rewards } = useGetUnCollectedRewards();
+  const { tasks } = useGetUserTasks();
+  const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
+  const { hasClaimed } = useGetHasClaimedRewards();
 
   if (!isAuthenticated) {
     return null;
   }
+
   return (
-    <div className="w-full flex justify-center ">
-      <div className="flex flex-col w-full max-w-[500px] gap-4">
-        <div className="flex w-full justify-between mb">
-          <p className="text-blue-800 dark:text-blue-200  text-xl">
-            Your uncollected EGLD:{" "}
-          </p>
-          <div className="flex gap-3 items-center">
-            <Image src="/images/egld.svg" alt="" width={22} height={22} />
-            <span className="font-bold">0</span>
+    <>
+      <div className="mt-[-70px] flex gap-10 flex-col ">
+        <div>
+          <h4 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">
+            Complete today’s tasks to earn rewards
+          </h4>
+          <div className="w-full flex justify-center">
+            <ul className="max-w-[600px] text-left flex flex-col gap-2">
+              <li>
+                <a
+                  href="https://twitter.com/DapfyCom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Like retweet comment one of our posts"
+                    completed={!!tasks?.comment && !!tasks?.rt && !!tasks?.like}
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Write a tweet about @dapfycom"
+                    completed={!!tasks?.mention}
+                  />
+                </a>
+              </li>
+              <li>
+                <UserTask
+                  text=" Interact with one of our useful DeFi tools"
+                  completed={isUserInteractedDefiTool}
+                />
+              </li>
+            </ul>
           </div>
         </div>
+        <div className="w-full flex justify-center ">
+          <div className="flex flex-col w-full max-w-[500px] gap-4">
+            <div className="flex w-full justify-between mb">
+              <p className="text-blue-800 dark:text-blue-200  text-xl">
+                Your uncollected EGLD:{" "}
+              </p>
+              <div className="flex gap-3 items-center">
+                <Image src="/images/egld.svg" alt="" width={22} height={22} />
+                <span className="font-bold">
+                  {formatBalance({
+                    balance: rewards,
+                  })}
+                </span>
+              </div>
+            </div>
 
-        <Button
-          key="1"
-          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-2 text-white shadow-md"
-        >
-          <ShoppingBagIcon className="mr-2 h-4 w-4" />
-          Collect
-        </Button>
+            <Button
+              key="1"
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-2 text-white shadow-md"
+              onClick={claimRewards}
+            >
+              <ShoppingBagIcon className="mr-2 h-4 w-4" />
+              Collect
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default CollectedEgld;
+
+const UserTask = ({
+  completed,
+  text,
+}: {
+  completed?: boolean;
+  text: string;
+}) => {
+  return (
+    <span className="flex gap-3">
+      <span className="w-[18px] sm:w-[23px]">
+        {completed ? (
+          <CheckCircle2 className="text-green-500 w-[18px] sm:w-[23px]" />
+        ) : (
+          <Circle className="text-green-500 w-[18px] sm:w-[23px]" />
+        )}
+      </span>
+
+      <div className="flex flex-auto">
+        {text} <ArrowRight />
+      </div>
+    </span>
+  );
+};

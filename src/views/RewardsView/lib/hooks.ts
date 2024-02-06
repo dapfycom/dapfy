@@ -12,7 +12,12 @@ import { IUserX } from "@/types/rewards.interface";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import useSWR from "swr";
-import { fetchUsersAvatars, syncXUserWithDapfyUser } from "./services";
+import {
+  fetchHasClaimedRewards,
+  fetchUnCollectedRewards,
+  fetchUsersAvatars,
+  syncXUserWithDapfyUser,
+} from "./services";
 
 export const useGetUserPoints = () => {
   const { user } = useGetXUser();
@@ -119,6 +124,37 @@ export const useGetUsersAvatars = () => {
   );
   return {
     avatars: data?.data?.usersAvatars || [],
+    mutate,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetUnCollectedRewards = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { data, error, isLoading, mutate } = useSWR(
+    address ? "rewardsWsp:getUserClaimable" + address : null,
+    async () => {
+      return fetchUnCollectedRewards(address);
+    }
+  );
+  return {
+    rewards: data || "0",
+    mutate,
+    isLoading,
+    error,
+  };
+};
+export const useGetHasClaimedRewards = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { data, error, isLoading, mutate } = useSWR(
+    address ? "rewardsWsp:hasClaimed" + address : null,
+    async () => {
+      return fetchHasClaimedRewards();
+    }
+  );
+  return {
+    hasClaimed: data,
     mutate,
     isLoading,
     error,

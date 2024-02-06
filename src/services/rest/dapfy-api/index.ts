@@ -21,4 +21,9 @@ axiosDapfy.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+export const fetchAxiosDapfy = async <T>(req: string): Promise<T> => {
+  const res = await axiosDapfy.get<T>(req);
+  return res.data;
+};
+
 export default axiosDapfy;

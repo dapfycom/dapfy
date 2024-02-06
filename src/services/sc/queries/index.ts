@@ -32,6 +32,12 @@ export const scQuery = async (
 ) => {
   try {
     const { address, abiUrl } = getInterface(workspace);
+    if (workspace === "rewardsWsp") {
+      console.log({
+        address,
+        abiUrl,
+      });
+    }
     const abiRegistry = await AbiRegistry.create(abiUrl);
     const contract = new SmartContract({
       address: address as IAddress,

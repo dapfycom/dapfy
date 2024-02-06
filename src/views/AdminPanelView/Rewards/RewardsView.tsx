@@ -1,5 +1,6 @@
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { AdminRewards } from "./AdminRewards";
+import SupplyRewards from "./SupplyRewards/SupplyRewards";
 
 const RewardsView = () => {
   return (
@@ -16,6 +17,7 @@ const RewardsView = () => {
             </TabsTrigger>
           </TabsList> */}
         </div>
+        <SupplyRewards />
         <TabsContent value="music" className="border-none p-0 outline-none">
           <AdminRewards />
         </TabsContent>

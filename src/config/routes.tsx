@@ -36,6 +36,7 @@ export const routeNames = {
   dust: "/multiversx/dust",
   aggregator: "/multiversx/aggregator",
   defi: "/multiversx/defi",
+  herotag: "/multiversx/herotag",
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",
@@ -49,6 +50,7 @@ export const routeNames = {
   security: "/security",
   terms: "/terms-of-use",
   openSource: "/open-source",
+  xfees: "/multiversx/x-fees",
 };
 
 export const externnalLinks = {
@@ -87,12 +89,20 @@ export const mainSiteRoutes = [
 
   {
     path: routeNames.dust,
-    title: "Convert Dust",
+    title: "Dust",
   },
 
   {
+    title: "Herotag",
+    path: routeNames.herotag,
+  },
+  {
     title: "The Forge",
     soon: true,
+  },
+  {
+    path: routeNames.xfees,
+    title: "X-Fees",
   },
   {
     title: "Admin",

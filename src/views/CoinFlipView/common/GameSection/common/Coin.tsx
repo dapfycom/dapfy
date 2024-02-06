@@ -3,40 +3,18 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { selectLastHouseSelection } from "@/views/CoinFlipView/lib/con-flip-slice";
 import { selectChoise } from "@/views/CoinFlipView/lib/functions";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 // import css
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import styles from "./Coin.module.css";
 
 const Coin = () => {
-  const backRef = useRef<HTMLDivElement>(null);
-  const [backHeight, setBackHeight] = useState(0);
   const houseSelection = useAppSelector(selectLastHouseSelection);
-  useEffect(() => {
-    const handleResize = () => {
-      if (backRef.current) {
-        const backCoinWidth = backRef.current.offsetWidth;
-        setBackHeight(backCoinWidth);
-      }
-    };
-
-    // Establecer la altura inicial cuando se monta el componente
-    handleResize();
-
-    // Agregar el manejador de evento al evento de redimensionamiento
-    window.addEventListener("resize", handleResize);
-
-    // Remover el manejador de evento al desmontar el componente
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const isBack = houseSelection === null ? false : !houseSelection;
   return (
-    <Card className="pt-5">
-      <CardContent>
+    <Card className="border-none w-full p-0">
+      <CardContent className="p-0">
         <div
           className={cn(
             `w-full px-[35px] ${
@@ -61,7 +39,7 @@ const Coin = () => {
               )}
             >
               <Image
-                src={"/images/bsk-logo.svg"}
+                src={"/images/coin-heads.png"}
                 width={265}
                 height={265}
                 alt=""
@@ -73,16 +51,12 @@ const Coin = () => {
                 styles["flip-card-back"]
               )}
             >
-              <div
-                style={{
-                  height: `${backHeight}px`,
-                }}
-                className={`max-w-[265px] max-h-[265px] w-full  bg-[#3464F6] rounded-full`}
-                ref={backRef}
-              >
-                {" "}
-                <div></div>
-              </div>
+              <Image
+                src={"/images/coin-tails.png"}
+                width={265}
+                height={265}
+                alt=""
+              />
             </div>
           </div>
           {houseSelection !== null && (

@@ -22,28 +22,13 @@ const CoinFlipView = () => {
             50-50 odds, 100% on chain transparency
           </PageHeaderDescription>
         </div>
-        <div className="grid grid-cols-1 gap-x-[20px] gap-y-[40px] w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-10">
-            <div className="flex flex-col gap-10 w-full">
-              <Coin />
-
-              <div className="hidden md:block h-full">
-                <GameActions />
-              </div>
-
-              <div className="block md:hidden ">
-                <ChooseBetSection />
-              </div>
-            </div>
-
-            <div>
-              <div className="block md:hidden">
-                <GameActions />
-              </div>
-              <div className="hidden md:block h-full">
-                <ChooseBetSection />
-              </div>
-            </div>
+        <div className="flex flex-col items-center gap-x-[20px] gap-y-[40px] w-full ">
+          <Coin />
+          <div className="mt-[-30px]">
+            <ChooseBetSection />
+          </div>
+          <div className="max-w-[500px]">
+            <GameActions />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-0 md:gap-x-10">
