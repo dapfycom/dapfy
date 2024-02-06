@@ -67,4 +67,13 @@ export const POST = async (req: Request) => {
     });
     return NextResponse.json({ data: interactedList });
   }
+
+  return Response.json(
+    {
+      message: "Internal Error",
+    },
+    {
+      status: 500,
+    }
+  );
 };
