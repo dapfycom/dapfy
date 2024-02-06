@@ -81,7 +81,7 @@ const networkConfig = {
         "erd1qqqqqqqqqqqqqpgqwtqs3f42fmmwrm378df5n6ta9v06w45ey26s9e7lly",
       originalOneDex:
         "erd1qqqqqqqqqqqqqpgqqz6vp9y50ep867vnr296mqf3dduh6guvmvlsu3sujc",
-      rewards: "",
+      rewards: "erd1qqqqqqqqqqqqqpgq259tqqz6s8ym3r2x8tdawrt837mksny9q5yqc7hdff",
     },
   },
   devnet: {
