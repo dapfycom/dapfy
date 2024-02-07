@@ -61,7 +61,10 @@ export const verifyUser = async (
   return false;
 };
 
-export function verifyAdmins(token: string) {
+export function verifyAdmins(token?: string) {
+  if (!token) {
+    return false;
+  }
   if (process.env.ADMIN_TOKEN === token) {
     return true;
   }

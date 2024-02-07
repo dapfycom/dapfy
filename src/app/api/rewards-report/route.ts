@@ -1,5 +1,5 @@
 import prisma from "@/lib/db";
-import { verifyUser } from "@/lib/mx-utils";
+import { verifyAdmins, verifyUser } from "@/lib/mx-utils";
 import { z } from "zod";
 
 const dataSchema = z.object({
@@ -78,56 +78,84 @@ export const POST = async (req: Request) => {
 export const GET = async (req: Request) => {
   const { searchParams } = new URL(req.url);
   const xid = searchParams.get("xid");
-  if (!xid) {
-    return Response.json({ error: "No user X account id" }, { status: 400 });
+  const allusers = searchParams.get("allusers");
+  if (!xid && !allusers) {
+    return Response.json({ error: "No valid request" }, { status: 400 });
   }
 
   // authorization user to this route
+  let ok;
   const token = req.headers.get("Authorization")?.split(" ")[1];
-  const xAccount = await prisma.xAcount.findUnique({
-    where: {
-      xid: xid,
-    },
-    include: {
-      user: true,
-    },
-  });
-
-  const ok = await verifyUser(
-    {
-      address: xAccount?.user?.address,
-    },
-    token
-  );
-  if (!ok) {
-    return Response.json(
-      {
-        message: "invalid signature",
-        data: {
-          token,
-          isValid: ok,
-        },
+  if (xid) {
+    const xAccount = await prisma.xAcount.findUnique({
+      where: {
+        xid: xid,
       },
+      include: {
+        user: true,
+      },
+    });
+
+    ok = await verifyUser(
       {
-        status: 403,
-      }
+        address: xAccount?.user?.address,
+      },
+      token
     );
+    if (!ok) {
+      return Response.json(
+        {
+          message: "invalid signature",
+          data: {
+            token,
+            isValid: ok,
+          },
+        },
+        {
+          status: 403,
+        }
+      );
+    }
+    // fetch for requested user
+    try {
+      const reports = await prisma.rewardsEmailReport.findMany({
+        where: {
+          xAccount: {
+            xid: xid,
+          },
+        },
+      });
+      return Response.json({ reports }, { status: 200 });
+    } catch (error) {
+      return Response.json({ error: error }, { status: 400 });
+    }
+  } else {
+    ok = await verifyAdmins(token);
+
+    if (!ok) {
+      return Response.json(
+        {
+          message: "invalid signature",
+          data: {
+            token,
+            isValid: ok,
+          },
+        },
+        {
+          status: 403,
+        }
+      );
+    }
+
+    try {
+      const reports = await prisma.rewardsEmailReport.findMany();
+      return Response.json({ reports }, { status: 200 });
+    } catch (error) {
+      return Response.json({ error: error }, { status: 400 });
+    }
   }
 
   // end authorization
-
-  try {
-    const reports = await prisma.rewardsEmailReport.findMany({
-      where: {
-        xAccount: {
-          xid: xid,
-        },
-      },
-    });
-    return Response.json({ reports }, { status: 200 });
-  } catch (error) {
-    return Response.json({ error: error }, { status: 400 });
-  }
 };
 
 export const DELETE = async (req: Request) => {
