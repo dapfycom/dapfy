@@ -92,18 +92,18 @@ export const mainSiteRoutes = [
     title: "Dust",
   },
 
-  {
-    title: "Herotag",
-    path: routeNames.herotag,
-  },
+  // {
+  //   title: "Herotag",
+  //   path: routeNames.herotag,
+  // },
   {
     title: "The Forge",
     soon: true,
   },
-  {
-    path: routeNames.xfees,
-    title: "X-Fees",
-  },
+  // {
+  //   path: routeNames.xfees,
+  //   title: "X-Fees",
+  // },
   {
     title: "Admin",
     path: routeNames.admin,
