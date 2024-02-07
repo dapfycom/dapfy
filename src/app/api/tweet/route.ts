@@ -1,4 +1,5 @@
 import { writeTweet } from "@/lib/twitter";
+import axios from "axios";
 import { verifyAdmins } from "../../../lib/mx-utils";
 export const POST = async (req: Request) => {
   // authorization user to this route
@@ -36,6 +37,8 @@ export const POST = async (req: Request) => {
     const data = await writeTweet({
       text: text,
     });
+
+    await axios.post("https://report.dapfy.com/report-tweet");
     return Response.json(
       {
         message: data.detail,
