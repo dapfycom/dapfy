@@ -267,8 +267,6 @@ const LeaderboardTable = ({ data }: { data: IUserToReward[] }) => {
 const TableContainer = () => {
   const { leaderboard: data } = useGetRewardsLeaderboard();
 
-  console.log({ data });
-
   return <LeaderboardTable data={data} />;
 };
 
