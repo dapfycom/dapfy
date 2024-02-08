@@ -5,7 +5,7 @@ import { useGetUsersAvatars } from "../lib/hooks";
 const Participants = () => {
   const { isAuthenticated } = useXAuthentication();
   const { avatars } = useGetUsersAvatars();
-  console.log({ avatars });
+  console.log({});
 
   if (isAuthenticated) {
     return null;

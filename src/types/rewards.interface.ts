@@ -21,3 +21,16 @@ export interface IUserTasks {
   rt: boolean;
   defi: boolean;
 }
+
+export interface IUserToReward {
+  id: string;
+  xid: string;
+  username: string;
+  name: string;
+  profile_image_url: string;
+  userId: string;
+  updatedAt: string;
+  user: {
+    address: string;
+  };
+}

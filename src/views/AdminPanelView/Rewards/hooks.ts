@@ -1,12 +1,11 @@
-import { fetchLeaderboardPoints } from "@/services/rest/rewards/points";
+import { fetchUserTwitterTask } from "@/services/rest/dapfy-api/task";
 import { useSearchParams } from "next/navigation";
 import useSwr from "swr";
 export const useGetRewardsLeaderboard = () => {
   const params = useSearchParams();
   const date = params.get("date");
-  const { data, error, isLoading } = useSwr(
-    ["rewards/points/leaderboard" + date],
-    () => fetchLeaderboardPoints(date!)
+  const { data, error, isLoading } = useSwr(["tasks/all" + date], () =>
+    fetchUserTwitterTask()
   );
 
   return {
