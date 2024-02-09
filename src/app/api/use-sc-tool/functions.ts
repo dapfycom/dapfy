@@ -17,6 +17,11 @@ export const UserAddressHasInteracted = async (payload: {
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
   });
+  console.log({
+    before: timeStampToSeconds(payload.to.getTime()),
+    after: timeStampToSeconds(payload.from.getTime()),
+    sender: payload.address,
+  });
 
   const scAddressArr = Object.entries(selectedNetwork.scAddress);
 
@@ -32,7 +37,10 @@ export const UserAddressHasInteracted = async (payload: {
     for (let j = 0; j < results.length && !hasInteracted; j++) {
       const tx = results[j];
 
-      if (tx.receiver === addressElement[1]) {
+      if (
+        tx.receiver === addressElement[1] ||
+        tx.action?.arguments?.receiver === addressElement[1]
+      ) {
         hasInteracted = true;
       }
     }
