@@ -16,6 +16,7 @@ export const UserAddressHasInteracted = async (payload: {
     before: timeStampToSeconds(payload.to.getTime()),
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
+    size: 1000,
   });
   console.log({
     before: timeStampToSeconds(payload.to.getTime()),
