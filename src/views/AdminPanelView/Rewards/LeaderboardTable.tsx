@@ -104,7 +104,7 @@ const CheckInteraction = ({ dataInfo }: { dataInfo: IUserToReward }) => {
             },
             {
               success: {
-                duration: 70000,
+                duration: 7000,
               },
             }
           );
