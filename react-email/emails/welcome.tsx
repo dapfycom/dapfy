@@ -87,9 +87,6 @@ export const KoalaWelcomeEmail = ({
             ➜ Like, comment, retweet our posts
           </Text>
           <Text>➜ Use at least one of our DeFi tools</Text>
-          <Text style={{ marginTop: "5px" }}>
-            🎉 Congrats, you’re now eligible for rewards! 🎉
-          </Text>
         </Section>
         <Section style={btnContainer}>
           <Button pX={12} pY={12} style={button} href="https://dapfy.com">
