@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 import React from "react";
 
+import { DatePicker } from "@/components/ui-system/DatePicker/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -163,7 +164,7 @@ const LeaderboardTable = ({ data }: { data: IUserToReward[] }) => {
             }
             className="max-w-sm"
           />
-          {/* <div className="flex sm:ml-auto">
+          <div className="flex sm:ml-auto">
             <DatePicker
               presetDays={[
                 {
@@ -183,7 +184,7 @@ const LeaderboardTable = ({ data }: { data: IUserToReward[] }) => {
               defaultValue={new Date()}
               onChange={handleChangeDate}
             />
-          </div> */}
+          </div>
         </div>
         <div className="rounded-md border">
           <Table>

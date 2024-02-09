@@ -18,6 +18,7 @@ model User {
   purchaseAttempts PurchaseAttempt[] // Relation to PurchaseAttempt model, contains all purchase attempts by the user
   updatedAt        DateTime          @updatedAt // Timestamp of the last update to this user record
   xAccount         XAcount?
+  rewards          Reward[]
 }
 
 // Define the Product model
@@ -86,4 +87,13 @@ model RewardsEmailReport {
   xAccount   XAcount @relation(fields: [xAccountId], references: [id]) // Relation to User model, refers to the user who made the
   xAccountId String
   email      String  @unique
+}
+
+model Reward {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  rewardedAt DateTime @default(now())
+  amount     Float?
+  coin       String
 }
