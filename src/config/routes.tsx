@@ -92,10 +92,10 @@ export const mainSiteRoutes = [
     title: "Dust",
   },
 
-  // {
-  //   title: "Herotag",
-  //   path: routeNames.herotag,
-  // },
+  {
+    title: "Herotag",
+    path: routeNames.herotag,
+  },
   {
     title: "The Forge",
     soon: true,
