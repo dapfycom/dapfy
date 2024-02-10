@@ -33,7 +33,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useGetRewardsLeaderboard } from "./hooks";
 
-export const columns: ColumnDef<IUserToReward>[] = [
+export const columns: ColumnDef<IUserToReward | IUserToRewardExtended>[] = [
   {
     accessorKey: "username",
     header: "Username",
@@ -71,14 +71,21 @@ export const columns: ColumnDef<IUserToReward>[] = [
     accessorKey: "action",
     header: "Action",
     cell: ({ row }) => {
-      console.log({ row: row.original });
+      const hasInteracted = !!row.original.rewardedAt;
+      if (hasInteracted) {
+        return null;
+      }
 
       return <CheckInteraction dataInfo={row.original} />;
     },
   },
 ];
 
-const CheckInteraction = ({ dataInfo }: { dataInfo: IUserToReward }) => {
+const CheckInteraction = ({
+  dataInfo,
+}: {
+  dataInfo: IUserToReward | IUserToRewardExtended;
+}) => {
   const { nextEpoch, previousEpoch } = useGetMvxEpoch();
 
   return (

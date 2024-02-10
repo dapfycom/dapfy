@@ -4,4 +4,5 @@ export const excludeSmartContracts = [
   "wrapEgldShar1",
   "wrapEgldShar2",
   "maiarRouter",
+  "rewards",
 ];

@@ -1,12 +1,15 @@
 import { IUserToReward } from "@/types/rewards.interface";
+import { format } from "date-fns";
 import axiosDapfy from ".";
+
+const today = format(new Date(), "yyyy-MM-dd");
 
 export const fetchUserTwitterTask = async (date?: string) => {
   const { data } = await axiosDapfy.get<{ users: IUserToReward[] }>(
     "task/all",
     {
       params: {
-        date,
+        date: today === date ? undefined : date,
       },
     }
   );

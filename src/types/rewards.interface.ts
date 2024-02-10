@@ -34,3 +34,9 @@ export interface IUserToReward {
     address: string;
   };
 }
+
+export interface IUserToRewardExtended extends IUserToReward {
+  amount: number;
+  rewardedAt: string;
+  coin: string;
+}
