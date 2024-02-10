@@ -36,7 +36,8 @@ export const routeNames = {
   dust: "/multiversx/dust",
   aggregator: "/multiversx/aggregator",
   defi: "/multiversx/defi",
-  herotag: "/multiversx/herotag",
+  tools: "/multiversx/tools",
+  herotag: "/multiversx/tools/herotag",
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",
@@ -93,8 +94,8 @@ export const mainSiteRoutes = [
   },
 
   {
-    title: "Herotag",
-    path: routeNames.herotag,
+    title: "Free Tools",
+    path: routeNames.tools,
   },
   {
     title: "The Forge",
