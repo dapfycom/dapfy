@@ -8,27 +8,38 @@ import {
 import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
+import { formatBalanceDollar } from "@/utils/functions/formatBalance";
+import { useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
 import { LogOut } from "lucide-react";
-import {
-  useGetHasClaimedRewards,
-  useGetIsUserInteractedDefiTool,
-  useGetUserTasks,
-} from "../lib/hooks";
+import { useGetAllTimeEarned } from "../lib/hooks";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();
   const { user, isAuthenticated, handleLogout } = useXAuthentication();
-  const { tasks } = useGetUserTasks();
-  const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
-  const { hasClaimed } = useGetHasClaimedRewards();
-
+  const { allTimeEarned } = useGetAllTimeEarned();
+  const { price } = useGetEgldPrice();
   if (!isAuthenticated) {
     return null;
   }
   return (
     <div className="mt-8 mb-8 max-w-xl mx-auto">
-      <h3 className="text-4xl text-orange-700 mb-2">All time Earned Rewards</h3>
-      <p className="text-4xl font-bold mb-8">$0</p>
+      {price && (
+        <div>
+          <h3 className="text-4xl text-orange-700 mb-2">
+            All time Earned Rewards
+          </h3>
+          <p className="text-4xl font-bold mb-8">
+            $
+            {formatBalanceDollar(
+              {
+                balance: allTimeEarned,
+                decimals: 18,
+              },
+              price
+            )}
+          </p>
+        </div>
+      )}
 
       <div className="flex items-center w-full mb-16 flex-col md:flex-row  gap-3">
         <div className="flex  justify-between items-center flex-1">

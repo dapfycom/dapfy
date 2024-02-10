@@ -1,14 +1,17 @@
+import { selectedNetwork } from "@/config/network";
 import { useGetMvxEpoch } from "@/hooks/useGetStats";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { getUserEmailsReport } from "@/services/rest/dapfy-api/rewards-report";
 import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
+import { fetchTransactions } from "@/services/rest/elrond/transactions";
 import {
   fetchRewardsPoints,
   fetchUserTask,
 } from "@/services/rest/rewards/user";
 import { IUserX } from "@/types/rewards.interface";
+import BigNumber from "bignumber.js";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import useSWR from "swr";
@@ -18,7 +21,6 @@ import {
   fetchUsersAvatars,
   syncXUserWithDapfyUser,
 } from "./services";
-
 export const useGetUserPoints = () => {
   const { user } = useGetXUser();
   const { data, error, isLoading } = useSWR(
@@ -155,6 +157,56 @@ export const useGetHasClaimedRewards = () => {
   );
   return {
     hasClaimed: data,
+    mutate,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetAllTimeEarned = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { data, error, isLoading, mutate } = useSWR(
+    address ? `/all-time-earned/${address}` : null,
+    async () => {
+      return fetchTransactions({
+        sender: address,
+        receiver: selectedNetwork.scAddress.rewards,
+        function: "claim",
+        withScResults: true,
+      });
+    }
+  );
+  // const {
+  //   data: userEarned,
+  //   error: userEarnedError,
+  //   isLoading: userEarnedLoading,
+  // } = useSWR<BigNumber>(
+  //   address ? `rewardsWsp:getUserEarned:${address}` : null,
+  //   async () => {
+  //     return fetchScSimpleData("rewardsWsp:getUserEarned", [
+  //       new AddressValue(new Address(address)),
+  //     ]);
+  //   }
+  // );
+  // console.log({ userEarned: userEarned.toString() });
+
+  const txData = data || [];
+  const earned = txData
+    .reduce((acc, tx) => {
+      if (!tx?.results) return acc;
+
+      return new BigNumber(acc).plus(
+        tx.results.reduce((acc2, txResult) => {
+          console.log({ txResult });
+
+          return new BigNumber(acc2).plus(txResult.value);
+        }, new BigNumber(0))
+      );
+    }, new BigNumber(0))
+    .toString();
+
+  return {
+    allTimeEarned: earned,
     mutate,
     isLoading,
     error,

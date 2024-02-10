@@ -23,6 +23,12 @@
     },
     "endpoints": [
         {
+            "name": "upgrade",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
             "name": "supply",
             "mutability": "mutable",
             "payableInTokens": [
@@ -82,6 +88,21 @@
         },
         {
             "name": "getUserClaimable",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getUserEarned",
             "mutability": "readonly",
             "inputs": [
                 {
