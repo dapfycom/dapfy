@@ -10,7 +10,7 @@ import { ToolCard } from "./ToolCard";
 export const tools: Tool[] = [
   {
     name: "Make your herotag",
-    artist: "An easy way to put you username on the blockchain",
+    description: "An easy way to put your username on the blockchain",
     cover: "/images/hrotag-tool.jpg",
     link: routeNames.herotag,
   },
@@ -18,7 +18,7 @@ export const tools: Tool[] = [
 
 export interface Tool {
   name: string;
-  artist: string;
+  description: string;
   cover: string;
   link: string;
 }
