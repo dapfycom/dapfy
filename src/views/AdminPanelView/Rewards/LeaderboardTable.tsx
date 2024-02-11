@@ -26,14 +26,17 @@ import {
 import { selectedNetwork } from "@/config/network";
 import { useGetMvxEpoch } from "@/hooks/useGetStats";
 import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
-import { IUserToReward } from "@/types/rewards.interface";
+import {
+  IUserToReward,
+  IUserToRewardExtended,
+} from "@/types/rewards.interface";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useGetRewardsLeaderboard } from "./hooks";
 
-export const columns: ColumnDef<IUserToReward | IUserToRewardExtended>[] = [
+const columnsArr: ColumnDef<any>[] = [
   {
     accessorKey: "username",
     header: "Username",
@@ -59,6 +62,7 @@ export const columns: ColumnDef<IUserToReward | IUserToRewardExtended>[] = [
             }
             target="_blank"
             rel="noopener noreferrer"
+            className="text-blue-500"
           >
             {" "}
             {formatAddress(address)}
@@ -67,19 +71,32 @@ export const columns: ColumnDef<IUserToReward | IUserToRewardExtended>[] = [
       );
     },
   },
-  {
-    accessorKey: "action",
-    header: "Action",
-    cell: ({ row }) => {
-      const hasInteracted = !!row.original.rewardedAt;
-      if (hasInteracted) {
-        return null;
-      }
-
-      return <CheckInteraction dataInfo={row.original} />;
-    },
-  },
 ];
+
+export const columns = ({
+  hideInteractions,
+}: {
+  hideInteractions: boolean;
+}) => {
+  const columns = columnsArr;
+
+  if (!hideInteractions) {
+    columns.push({
+      accessorKey: "action",
+      header: "Action",
+      cell: ({ row }) => {
+        const hasInteracted = !!row.original.rewardedAt;
+        if (hasInteracted) {
+          return null;
+        }
+
+        return <CheckInteraction dataInfo={row.original} />;
+      },
+    });
+  }
+
+  return columns;
+};
 
 const CheckInteraction = ({
   dataInfo,
@@ -123,7 +140,13 @@ const CheckInteraction = ({
   );
 };
 
-const LeaderboardTable = ({ data }: { data: IUserToReward[] }) => {
+const LeaderboardTable = ({
+  data,
+  current,
+}: {
+  data: IUserToReward[];
+  current: boolean;
+}) => {
   const router = useRouter();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -135,7 +158,7 @@ const LeaderboardTable = ({ data }: { data: IUserToReward[] }) => {
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columns({ hideInteractions: !current }),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -273,9 +296,9 @@ const LeaderboardTable = ({ data }: { data: IUserToReward[] }) => {
 };
 
 const TableContainer = () => {
-  const { leaderboard: data } = useGetRewardsLeaderboard();
+  const { leaderboard: data, current } = useGetRewardsLeaderboard();
 
-  return <LeaderboardTable data={data} />;
+  return <LeaderboardTable data={data} current={!!current} />;
 };
 
 export default TableContainer;

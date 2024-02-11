@@ -9,7 +9,8 @@ export const useGetRewardsLeaderboard = () => {
   });
 
   return {
-    leaderboard: data || [],
+    leaderboard: data?.users || [],
+    current: data?.current,
     error,
     isLoading,
   };

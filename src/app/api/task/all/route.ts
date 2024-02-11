@@ -2,7 +2,7 @@ import prisma from "@/lib/db";
 import { verifyAdmins } from "@/lib/mx-utils";
 import axiosRewards from "@/services/rest/rewards";
 import { IUserTasks } from "@/types/rewards.interface";
-import { addDays } from "date-fns";
+import { addDays, format } from "date-fns";
 
 export async function GET(req: Request) {
   // authorization user to this route
@@ -23,11 +23,14 @@ export async function GET(req: Request) {
     );
   }
   // end authorization
-
+  let current = true;
   const { searchParams } = new URL(req.url);
-  const date = searchParams.get("date");
+  let date = searchParams.get("date");
+  const currentDate = new Date();
+
   let finalUsers;
-  if (!date) {
+  if (!date && currentDate.getUTCHours() < 16) {
+    current = true;
     const tasks = await axiosRewards.get<IUserTasks[]>("tasks/all");
     const usersThatCompleteTwitterTask = tasks.data.filter(
       (t) => t.comment && t.like && t.mention && t.rt
@@ -48,6 +51,11 @@ export async function GET(req: Request) {
       },
     });
   } else {
+    current = false;
+
+    if (!date) {
+      date = format(currentDate, "yyyy-MM-dd");
+    }
     const users = await prisma.reward.findMany({
       where: {
         rewardedAt: {
@@ -83,6 +91,7 @@ export async function GET(req: Request) {
   return Response.json(
     {
       users: finalUsers,
+      current: current,
     },
     {
       status: 200,
