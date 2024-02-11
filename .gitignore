@@ -40,3 +40,4 @@ dumy.js
 helpers.txt
 .env.production
 prisma/demo.csv
+dumy.ts
