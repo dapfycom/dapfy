@@ -37,8 +37,32 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Like retweet comment one of our posts"
-                    completed={!!tasks?.comment && !!tasks?.rt && !!tasks?.like}
+                    text="Comment one of our posts"
+                    completed={!!tasks?.comment}
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/DapfyCom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Like one of our posts"
+                    completed={!!tasks?.like}
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/DapfyCom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Retweet one of our posts"
+                    completed={!!tasks?.rt}
                   />
                 </a>
               </li>
