@@ -27,9 +27,7 @@ const ToolsView = () => {
     <Container>
       <div className="flex flex-col items-center text-center mt-5">
         <PageHeaderHeading className="mb-6">
-          <span className={"gradienteTitle"}>
-            Multiversx Mastery: Essential Free Tools
-          </span>
+          <span className={"gradienteTitle"}>Essential Free Tools</span>
         </PageHeaderHeading>
         <PageHeaderDescription className="mb-10">
           Elevate your experience with powerful, free Multiversx tools.
