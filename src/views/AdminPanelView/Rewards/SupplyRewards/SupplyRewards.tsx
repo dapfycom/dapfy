@@ -14,6 +14,7 @@ const SupplyRewards = () => {
       getSmartContractInteraction("rewardsWsp").EGLDPayment({
         functionName: "supply",
         value: values.amount,
+        gasL: 5_000_000,
       });
     },
 
