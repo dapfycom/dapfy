@@ -15,6 +15,7 @@ import { getSmartContractInteraction } from "@/services/sc";
 import { BytesValue } from "@multiversx/sdk-core/out";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { dnsScAddressForHerotag } from "../../utils/functions";
 import { useGetHeroTagAvailability } from "../../utils/hook";
 
 export default function HeroTagForm() {
@@ -24,14 +25,13 @@ export default function HeroTagForm() {
     },
     onSubmit: async (values) => {
       console.log("submitting");
+      const herotag = values.herotag.toLowerCase() + ".elrond";
 
       try {
-        getSmartContractInteraction(
-          "erd1qqqqqqqqqqqqqpgqz0ycyug2rqtpyrh5p33y9vqjv95s3xmaqpnq7uz3qq"
-        ).scCall({
+        getSmartContractInteraction(dnsScAddressForHerotag(herotag)).scCall({
           functionName: "register",
           gasL: 600000000,
-          arg: [BytesValue.fromUTF8(values.herotag.toLowerCase() + ".elrond")],
+          arg: [BytesValue.fromUTF8(herotag)],
         });
       } catch (error) {
         console.log({ error });
