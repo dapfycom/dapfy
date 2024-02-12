@@ -27,35 +27,11 @@ import {
   formatNumber,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+
 //bet options
 const betOptionsInEgld = [
-  0.0002, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.7, 1, 2,
+  0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.7, 1, 2,
 ];
-// const betOptionsInEgld = [
-//   0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.7, 1, 2,
-// ];
 
 const ChooseBetSection = () => {
   const dispatch = useAppDispatch();
