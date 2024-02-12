@@ -21,6 +21,14 @@ export const useGetHeroTagAvailability = (herotag: string) => {
       }>(`usernames/${herotag}?withGuardianInfo=false`);
 
       return data;
+    },
+    {
+      onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+        if (error.status === 404) return;
+        if (error.message === "Network Error") return;
+        if (retryCount >= 5) return;
+        setTimeout(() => revalidate({ retryCount }), 10000);
+      },
     }
   );
 
