@@ -31,7 +31,7 @@ export default function HeroTagForm() {
         ).scCall({
           functionName: "register",
           gasL: 600000000,
-          arg: [BytesValue.fromUTF8(values.herotag + ".elrond")],
+          arg: [BytesValue.fromUTF8(values.herotag.toLowerCase() + ".elrond")],
         });
       } catch (error) {
         console.log({ error });
