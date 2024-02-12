@@ -17,6 +17,7 @@ export const UserAddressHasInteracted = async (payload: {
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
     size: 1000,
+    status: "success",
   });
 
   const scAddressArr = Object.entries(selectedNetwork.scAddress);
