@@ -14,6 +14,12 @@ export const tools: Tool[] = [
     cover: "/images/hrotag-tool.jpg",
     link: routeNames.herotag,
   },
+  {
+    name: "Fees on Multiversx",
+    description: "Discover how much have you pay in multiversx",
+    cover: "/images/x-fees.jpg",
+    link: routeNames.xfees,
+  },
 ];
 
 export interface Tool {

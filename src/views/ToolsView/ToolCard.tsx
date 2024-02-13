@@ -37,7 +37,7 @@ export function ToolCard({
           />
         </div>
 
-        <div className="space-y-1 text-sm">
+        <div className="space-y-1 text-sm mt-2">
           <h3 className="font-medium leading-none">{tool.name}</h3>
           <p className="text-xs text-muted-foreground">{tool.description}</p>
         </div>

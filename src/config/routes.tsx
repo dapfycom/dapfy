@@ -106,10 +106,7 @@ export const mainSiteRoutes = [
     title: "The Forge",
     soon: true,
   },
-  // {
-  //   path: routeNames.xfees,
-  //   title: "X-Fees",
-  // },
+
   {
     title: "Admin",
     path: routeNames.admin,
