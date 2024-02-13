@@ -1,4 +1,5 @@
 "use client";
+import MyTooltip from "@/components/ui-system/Tooltip/Tooltip";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -45,9 +46,15 @@ const ContactForm = () => {
   return (
     <form onSubmit={formik.handleSubmit} className="space-y-8">
       <div>
-        <label htmlFor="email" className="block mb-2 text-sm font-medium  ">
-          Your email
-        </label>
+        <MyTooltip
+          content={
+            "We will never share your email with anyone else. We will only use it to send you a reply."
+          }
+        >
+          <label htmlFor="email" className="block mb-2 text-sm font-medium  ">
+            Your email / X account
+          </label>
+        </MyTooltip>
         <Input
           type="email"
           id="email"

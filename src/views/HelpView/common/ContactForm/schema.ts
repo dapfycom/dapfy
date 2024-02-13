@@ -9,6 +9,6 @@ export const contactFormSchema = yup.object({
       addressIsValid(value)
     ),
 
-  email: yup.string().email().required("Email is a required field"),
+  email: yup.string().required("Email or X account is a required field"),
   message: yup.string().required("Message is a required field"),
 });

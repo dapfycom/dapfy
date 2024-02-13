@@ -6,7 +6,7 @@ const payloadSchema = z.object({
   address: z.string().refine(addressIsValid, {
     message: "Address is not valid",
   }),
-  email: z.string().email(),
+  email: z.string(),
   message: z.string(),
 });
 export async function POST(req: Request) {
