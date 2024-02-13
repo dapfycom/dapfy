@@ -9,6 +9,6 @@ services:
       POSTGRES_USER: tu_usuario
       POSTGRES_PASSWORD: tu_contraseña
     ports:
-      - "5432:5432"
+      - ":5432"
 volumes:
   pgdata:

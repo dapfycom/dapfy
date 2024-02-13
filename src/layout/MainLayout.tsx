@@ -1,3 +1,4 @@
+import FloatingHelpButton from "@/components/FloatingHelpButton/FloatingHelpButton";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { StrikeModal } from "@/components/StrikeModal/StrikeModal";
@@ -14,6 +15,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       <StrikeModal />
       <ToasterShadcn />
       <Footer />
+      <FloatingHelpButton />
     </div>
   );
 };

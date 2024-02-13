@@ -56,13 +56,13 @@ const ContactForm = () => {
           </label>
         </MyTooltip>
         <Input
-          type="email"
           id="email"
           name="email"
           className="shadow-sm  border   text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5    "
           placeholder="name@gmail.com"
           required
           onChange={formik.handleChange}
+          value={formik.values.email}
         />
         {formik.errors.email && (
           <p className="text-red-500 text-sm mt-2">{formik.errors.email}</p>
@@ -99,6 +99,7 @@ const ContactForm = () => {
           className="block p-2.5 w-full text-sm   rounded-lg shadow-sm border  focus:ring-primary-500 focus:border-primary-500  dark:bg-transparent  "
           placeholder="Leave a comment..."
           onChange={formik.handleChange}
+          value={formik.values.message}
         ></textarea>
         {formik.errors.message && (
           <p className="text-red-500 text-sm mt-2">{formik.errors.message}</p>

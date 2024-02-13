@@ -41,6 +41,6 @@ export async function POST(req: Request) {
   } catch (error) {
     console.log("Ticket saving error", error);
 
-    return Response.json({ error });
+    return Response.json({ message: "Error creating ticket" }, { status: 500 });
   }
 }

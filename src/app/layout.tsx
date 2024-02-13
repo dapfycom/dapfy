@@ -71,13 +71,6 @@ export default function RootLayout({
         type="text/javascript"
       />
 
-      <Script
-        defer
-        src="https://widget.mava.app"
-        id="MavaWebChat"
-        data-token="ea3179c52788c5094e57dd45468439595d4c49392011c4cfdbb51186c5873298"
-      />
-
       <body>
         <RootProviders>
           <Layout>
