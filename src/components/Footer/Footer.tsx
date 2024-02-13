@@ -67,6 +67,10 @@ const productsRoutes: RouteProps[] = [
 
 const resourcesRoutes: RouteProps[] = [
   {
+    href: routeNames.help,
+    label: "Help",
+  },
+  {
     href: routeNames.blog,
     label: "Blog",
     isExternal: true,

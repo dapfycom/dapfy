@@ -41,6 +41,7 @@ export const routeNames = {
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",
+  help: "/help",
   // upgrade: "/multiversx/upgrade",
 
   assets: "/dapfy-assets.zip",
