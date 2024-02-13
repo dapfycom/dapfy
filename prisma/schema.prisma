@@ -100,13 +100,26 @@ model Reward {
 }
 
 model Ticket {
-  id            String   @id @default(uuid())
-  user          User     @relation(fields: [userId], references: [id])
+  id            String           @id @default(uuid())
+  user          User             @relation(fields: [userId], references: [id])
   userId        String
   responseEmail String
   message       String
-  viewed        Boolean  @default(false)
-  replied       Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  viewed        Boolean          @default(false)
+  replied       Boolean          @default(false)
+  status        String           @default("active")
+  labels        String[]
+  responses     TicketResponse[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+model TicketResponse {
+  id        String   @id @default(uuid())
+  ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId  String
+  message   String
+  status    String   @default("sent")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

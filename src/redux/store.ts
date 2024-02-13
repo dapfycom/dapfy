@@ -1,3 +1,4 @@
+import adminTicketReducer from "@/views/AdminPanelView/Tickets/adminTicketsSlice";
 import coinFlipReducer from "@/views/CoinFlipView/lib/con-flip-slice";
 import defiReducer from "@/views/DefiView/utils/defi-slice";
 import dustReducer from "@/views/DustView/lib/dust-slice";
@@ -17,6 +18,7 @@ export function makeStore() {
       dust: dustReducer,
       swapAggregator: swapAggregatorReducer,
       defi: defiReducer,
+      adminTicket: adminTicketReducer,
     },
   });
 }
