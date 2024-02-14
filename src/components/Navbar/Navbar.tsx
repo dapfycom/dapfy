@@ -6,13 +6,11 @@ import MainNav from "@/components/MainNav/MainNav";
 import NavbarActions from "@/components/NavActions/NavActions";
 import Container from "@/components/ui-system/Container";
 import { routeNames } from "@/config/routes";
-import useDisclosure from "@/hooks/useDisclosure";
 import useScrolled from "@/hooks/useScrolled";
 import Image from "next/image";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
-  const { isOpen } = useDisclosure();
 
   return (
     <>
@@ -52,7 +50,7 @@ const Navbar = () => {
                 />
               </p>
             </Link>
-            <MainNav className="mx-6 hidden md:flex" />
+            <MainNav className="mx-6 hidden xl:flex" />
             <NavbarActions />
           </div>
         </Container>

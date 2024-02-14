@@ -13,6 +13,7 @@ import { Menu, Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Fragment } from "react";
+import BuyEgldButton from "../BuyEgldButton/BuyEgldButton";
 import ConnectComponent from "../Login/ConnectComponent";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
@@ -32,7 +33,7 @@ const MobileNav = () => {
   return (
     <Sheet open={isOpen} onOpenChange={onToggle}>
       <SheetTrigger asChild>
-        <Button size={"icon"} className="md:hidden" variant={"outline"}>
+        <Button size={"icon"} className="xl:hidden" variant={"outline"}>
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
@@ -62,6 +63,8 @@ const MobileNav = () => {
             })}
           </div>
         </SheetHeader>
+
+        <BuyEgldButton />
         <SheetFooter className="flex-col">
           <div className="flex justify-center mb-4 gap-3">
             <Button
