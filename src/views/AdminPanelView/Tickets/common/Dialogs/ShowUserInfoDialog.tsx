@@ -51,10 +51,7 @@ const ShowUserInfoDialog = ({
               value={ticket.user.xAccount?.username}
             />
             <InfoItem label="X account xid" value={ticket.user.xAccount?.xid} />
-            <InfoItem
-              label="X account profile image url"
-              value={ticket.user.xAccount?.profile_image_url}
-            />
+
             <InfoItem
               label="Dapfy XAccount Id"
               value={ticket.user.xAccount?.id}
