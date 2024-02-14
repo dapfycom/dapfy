@@ -88,12 +88,6 @@ export const mainSiteRoutes = [
   },
 
   {
-    path: routeNames.play,
-    title: "Play",
-    soon: false,
-  },
-
-  {
     path: routeNames.dust,
     title: "Dust",
   },
