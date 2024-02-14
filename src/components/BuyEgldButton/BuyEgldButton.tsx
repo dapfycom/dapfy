@@ -7,10 +7,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { useAppSelector } from "@/hooks/useRedux";
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { WalletIcon } from "../ui-system/icons/ui-icons";
 import { Button } from "../ui/button";
 interface IPros {}
 const BuyEgldButton = () => {
+  const address = useAppSelector(selectUserAddress);
   return (
     <Dialog>
       <DialogTrigger>
@@ -30,7 +33,7 @@ const BuyEgldButton = () => {
           <DialogTitle></DialogTitle>
           <DialogDescription>
             <iframe
-              src="https://ramp.tradesilvania.com/?partnerId=65bcb0cbc9cb8dcfdd313284&assetTo=EGLD&networkTo=egld&language=en"
+              src={`https://ramp.tradesilvania.com/?partnerId=65bcb0cbc9cb8dcfdd313284&assetTo=EGLD&networkTo=egld&language=en&addressTo=${address}`}
               allowFullScreen
               width="100%"
               height="700"
