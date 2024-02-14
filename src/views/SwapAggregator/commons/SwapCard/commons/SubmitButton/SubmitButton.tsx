@@ -6,6 +6,10 @@ import { openLogin } from "@/redux/dapp/dapp-slice";
 import { submitSwap } from "@/views/SwapAggregator/lib/calls";
 import { useGetAggregate } from "@/views/SwapAggregator/lib/hooks";
 import {
+  onChageFromFieldValue,
+  onChageFromFieldValueDecimals,
+  onChangeToField,
+  onChangeToFieldValueDecimals,
   selectFromField,
   selectSlippage,
 } from "@/views/SwapAggregator/lib/swap-slice";
@@ -30,7 +34,10 @@ const SubmitButton = () => {
   const onSuccess = React.useCallback(() => {
     setTxSuccess(true);
     delayedToastTxNotification(2000);
-
+    dispatch(onChageFromFieldValue(""));
+    dispatch(onChageFromFieldValueDecimals(""));
+    dispatch(onChangeToField(""));
+    dispatch(onChangeToFieldValueDecimals(""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
