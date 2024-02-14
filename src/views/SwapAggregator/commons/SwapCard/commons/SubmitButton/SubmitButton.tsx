@@ -1,5 +1,6 @@
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
+import useGetAccountToken from "@/hooks/useGetAccountToken";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import useTxNotification from "@/hooks/useTxNotification";
 import { openLogin } from "@/redux/dapp/dapp-slice";
@@ -16,8 +17,8 @@ import {
 
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks/account/useGetLoginInfo";
+import BigNumber from "bignumber.js";
 import React, { useState } from "react";
-
 const Realistic = React.lazy(() => import("@/components/Conffeti/Realistic"));
 
 const SubmitButton = () => {
@@ -28,6 +29,7 @@ const SubmitButton = () => {
   const { data: aggregatorData } = useGetAggregate();
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const [txSuccess, setTxSuccess] = useState(false);
+  const { accountToken } = useGetAccountToken(fromField.selectedToken);
   const { delayedToastTxNotification, toastTxNotification } =
     useTxNotification();
 
@@ -64,13 +66,19 @@ const SubmitButton = () => {
       }
     }
   };
-
+  const InsufficientBalance = new BigNumber(
+    fromField.valueDecimals
+  ).isLessThanOrEqualTo(accountToken.balance);
   let buttonText = isLoggedIn ? (
     fromField.value !== "" ? (
-      <>
-        {" "}
-        <PointerIcon className="h-6 w-6" /> Swap now with 1-Click®
-      </>
+      InsufficientBalance ? (
+        <>
+          {" "}
+          <PointerIcon className="h-6 w-6" /> Swap now with 1-Click®
+        </>
+      ) : (
+        "Insufficient  balance"
+      )
     ) : (
       "Enter an amount"
     )
@@ -84,7 +92,7 @@ const SubmitButton = () => {
       <Button
         onClick={handleSwap}
         className="w-full  bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
-        disabled={!aggregatorData && isLoggedIn}
+        disabled={(!aggregatorData || !InsufficientBalance) && isLoggedIn}
       >
         {buttonText}
       </Button>
