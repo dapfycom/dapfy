@@ -43,3 +43,8 @@ export const fetchTickets = async (params: {
   );
   return res.data.tickets;
 };
+
+export const replyTicket = async (id: string, email: string, msg: string) => {
+  const res = await axiosDapfy.post(`/help/reply`, { message: msg, id, email });
+  return res.data;
+};

@@ -34,10 +34,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { updateTicket } from "@/services/rest/dapfy-api/tickets";
+import { replyTicket, updateTicket } from "@/services/rest/dapfy-api/tickets";
 import { ITicket, TicketStatus } from "@/types/tickets.interface";
 import { formatAddress } from "@/utils/functions/formatAddress";
-import { useEffect } from "react";
+import { isValidEmail } from "@/utils/functions/validations";
+import { useEffect, useState } from "react";
 import { mutate } from "swr";
 
 interface MailDisplayProps {
@@ -58,6 +59,13 @@ export function MailDisplay({ mail }: MailDisplayProps) {
       updateView(mail.id);
     }
   }, [mail?.id, mail?.viewed]);
+  const [reply, setReply] = useState<string>("");
+  const onReply = () => {
+    if (mail) {
+      replyTicket(mail.id, mail.responseEmail, reply);
+      setReply("");
+    }
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -245,13 +253,15 @@ export function MailDisplay({ mail }: MailDisplayProps) {
                   placeholder={`Reply ${
                     mail.user.xAccount?.name || mail.responseEmail
                   }...`}
+                  onChange={(e) => setReply(e.target.value)}
+                  value={reply}
                 />
                 <div className="flex items-center">
                   <Button
-                    onClick={(e) => e.preventDefault()}
+                    onClick={onReply}
                     size="sm"
                     className="ml-auto"
-                    disabled
+                    disabled={!isValidEmail(mail?.responseEmail)}
                   >
                     Send
                   </Button>
