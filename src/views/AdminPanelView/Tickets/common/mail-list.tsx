@@ -20,7 +20,7 @@ export const mail = {
 export function MailList({ items }: MailListProps) {
   const dispatch = useDispatch();
   return (
-    <ScrollArea className="h-screen">
+    <ScrollArea className="min-h-screen">
       <div className="flex flex-col gap-2 p-4 pt-0">
         {items.map((item) => (
           <button

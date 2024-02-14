@@ -19,21 +19,15 @@ export const sendWelcomeEmail = async (email: string) => {
 };
 
 export const sendTicketReplayEmail = async (email: string, message: string) => {
-  try {
-    const res = await resend.emails.send({
-      from: `dapfy.com <${process.env.EMAIL_HOST}>`,
-      to: [email],
-      subject: "Response about your open ticket on Dapfy",
-      react: TicketReplyEmail({
-        externnalLinks: externnalLinks,
-        email: email,
-        message: message,
-      }),
-      text: message,
-    });
-    console.log({ emailRes: res });
-    return res;
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await resend.emails.send({
+    from: `dapfy.com <${process.env.EMAIL_HOST}>`,
+    to: [email],
+    subject: "Response about your open ticket on Dapfy",
+    react: TicketReplyEmail({
+      externnalLinks: externnalLinks,
+      email: email,
+      message: message,
+    }),
+    text: message,
+  });
 };

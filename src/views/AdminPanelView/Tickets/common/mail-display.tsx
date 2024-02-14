@@ -39,6 +39,7 @@ import { ITicket, TicketStatus } from "@/types/tickets.interface";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { isValidEmail } from "@/utils/functions/validations";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { mutate } from "swr";
 
 interface MailDisplayProps {
@@ -62,8 +63,14 @@ export function MailDisplay({ mail }: MailDisplayProps) {
   const [reply, setReply] = useState<string>("");
   const onReply = () => {
     if (mail) {
-      replyTicket(mail.id, mail.responseEmail, reply);
-      setReply("");
+      toast.promise(replyTicket(mail.id, mail.responseEmail, reply), {
+        loading: "Loading...",
+        success: () => {
+          setReply("");
+          return "Reply email sent";
+        },
+        error: "Error, the email might not be delivered",
+      });
     }
   };
 
@@ -246,7 +253,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </div>
           <Separator className="mt-auto" />
           <div className="p-4">
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
               <div className="grid gap-4">
                 <Textarea
                   className="p-4"
