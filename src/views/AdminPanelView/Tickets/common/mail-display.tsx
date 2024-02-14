@@ -7,7 +7,6 @@ import {
   ArchiveX,
   Clock,
   Forward,
-  MoreVertical,
   Reply,
   ReplyAll,
   Trash2,
@@ -16,12 +15,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
@@ -41,6 +34,7 @@ import { isValidEmail } from "@/utils/functions/validations";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { mutate } from "swr";
+import MailDisplayOptions from "./mail-display-options";
 
 interface MailDisplayProps {
   mail: ITicket | null;
@@ -196,20 +190,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </Tooltip>
         </div>
         <Separator orientation="vertical" className="mx-2 h-6" />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" disabled={!mail}>
-              <MoreVertical className="h-4 w-4" />
-              <span className="sr-only">More</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Mark as unread</DropdownMenuItem>
-            <DropdownMenuItem>Star thread</DropdownMenuItem>
-            <DropdownMenuItem>Add label</DropdownMenuItem>
-            <DropdownMenuItem>Mute thread</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <MailDisplayOptions ticket={mail} />
       </div>
       <Separator />
       {mail ? (
