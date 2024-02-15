@@ -8,9 +8,11 @@ import Container from "@/components/ui-system/Container";
 import { routeNames } from "@/config/routes";
 import useScrolled from "@/hooks/useScrolled";
 import Image from "next/image";
+import useBuyFromTradesilvania from "@/hooks/useBuyFromTradesilvania";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
+  useBuyFromTradesilvania();
 
   return (
     <>

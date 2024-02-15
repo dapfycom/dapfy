@@ -64,8 +64,10 @@ const MobileNav = () => {
           </div>
         </SheetHeader>
 
-        <BuyEgldButton />
-        <SheetFooter className="flex-col">
+        <div c className="mx-auto">
+          <BuyEgldButton />
+        </div>
+        <SheetFooter className="!flex-col">
           <div className="flex justify-center mb-4 gap-3">
             <Button
               size={"icon"}

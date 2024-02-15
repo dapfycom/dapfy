@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -9,11 +10,26 @@ import {
 
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import queryString from "query-string";
 import { WalletIcon } from "../ui-system/icons/ui-icons";
 import { Button } from "../ui/button";
+
 interface IPros {}
 const BuyEgldButton = () => {
   const address = useAppSelector(selectUserAddress);
+
+  const tradesilvaniaUrl = queryString.stringifyUrl({
+    url: "https://ramp.tradesilvania.com/",
+    query: {
+      partnerId: "65bcb0cbc9cb8dcfdd313284",
+      assetTo: "EGLD",
+      networkTo: "egld",
+      language: "en",
+      addressTo: address,
+      redirectTo: "https://www.dapfy.com/",
+    },
+  });
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -33,7 +49,7 @@ const BuyEgldButton = () => {
           <DialogTitle></DialogTitle>
           <DialogDescription>
             <iframe
-              src={`https://ramp.tradesilvania.com/?partnerId=65bcb0cbc9cb8dcfdd313284&assetTo=EGLD&networkTo=egld&language=en&addressTo=${address}`}
+              src={tradesilvaniaUrl}
               allowFullScreen
               width="100%"
               height="700"

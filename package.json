@@ -77,6 +77,7 @@
     "next-transpile-modules": "^10.0.1",
     "oauth-1.0a": "^2.2.6",
     "postcss": "8.4.29",
+    "query-string": "^8.2.0",
     "react": "18.2.0",
     "react-canvas-confetti": "^1.4.0",
     "react-collapsed": "^4.0.4",

@@ -80,7 +80,7 @@ const CollectedEgld = () => {
               </li>
               <li>
                 <UserTask
-                  text=" Interact with one of our useful DeFi tools"
+                  text="Buy some EGLD Powered by Tradesilvania"
                   completed={isUserInteractedDefiTool}
                 />
               </li>
