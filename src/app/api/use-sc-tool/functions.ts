@@ -56,13 +56,13 @@ export const UserAddressHasInteracted = async (payload: {
       user: {
         address: payload.address,
       },
+      status: "settled",
       createdAt: {
         gte: payload.from,
         lte: payload.to,
       },
     },
   });
-  console.log({ purchases });
 
   const hasInteracted = purchases.length > 0;
 
