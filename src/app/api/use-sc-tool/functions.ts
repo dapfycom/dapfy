@@ -51,7 +51,7 @@ export const UserAddressHasInteracted = async (payload: {
     return false;
   }
 
-  const purchases = await prisma.tradesilvaniaPurchase.findMany({
+  const purchases = await prisma.tradesilvaniaTransaction.findMany({
     where: {
       user: {
         address: payload.address,
