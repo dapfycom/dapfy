@@ -53,6 +53,6 @@ tQIDAQAB
     });
     return Response.json({ message: "success" });
   } catch (error) {
-    return Response.json({ message: "Error creating ticket" }, { status: 500 });
+    return Response.json({ message: error }, { status: 500 });
   }
 }
