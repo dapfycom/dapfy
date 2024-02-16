@@ -1,22 +1,39 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/hooks/useRedux";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
+import queryString from "query-string";
 import {
   useGetIsUserInteractedDefiTool,
   useGetUnCollectedRewards,
   useGetUserTasks,
 } from "../lib/hooks";
 import { claimRewards } from "../lib/services";
+
 const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUnCollectedRewards();
   const { tasks } = useGetUserTasks();
-  const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
 
+  const address = useAppSelector(selectUserAddress);
+
+  const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
+  const tradesilvaniaUrl = queryString.stringifyUrl({
+    url: "https://ramp.tradesilvania.com/",
+    query: {
+      partnerId: "65bcb0cbc9cb8dcfdd313284",
+      assetTo: "EGLD",
+      networkTo: "egld",
+      language: "en",
+      addressTo: address,
+      redirectTo: "/",
+    },
+  });
   if (!isAuthenticated) {
     return null;
   }
@@ -79,10 +96,16 @@ const CollectedEgld = () => {
                 </a>
               </li>
               <li>
-                <UserTask
-                  text="Buy some EGLD Powered by Tradesilvania"
-                  completed={isUserInteractedDefiTool}
-                />
+                <a
+                  href={tradesilvaniaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Buy some EGLD Powered by Tradesilvania"
+                    completed={isUserInteractedDefiTool}
+                  />
+                </a>
               </li>
             </ul>
           </div>
