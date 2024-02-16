@@ -2,7 +2,20 @@ import prisma from "@/lib/db";
 import crypto from "crypto";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const body: {
+    id: string;
+    status: string;
+    orderType: string;
+    assetFrom: string;
+    amountFrom: 20;
+    assetTo: string;
+    amountTo: string | null;
+    addressTo: string;
+    networkTo: string;
+    additionalTo: string | null;
+    paymentType: string;
+    payoutBlockchainId: string | null;
+  } = await req.json();
 
   // Extract the Tradesilvania signature from the request headers
   const signature = req.headers.get("tradesilvania-signature") as string;
@@ -32,16 +45,15 @@ tQIDAQAB
     await prisma.tradesilvaniaTransaction.create({
       data: {
         amountFrom: body.amountFrom,
-        amountTo: body.amountTo,
+        amountTo: Number(body.amountTo),
         assetFrom: body.assetFrom,
         assetTo: body.assetTo,
         networkTo: body.networkTo,
         orderType: body.orderType,
-        rampOrderId: body.rampOrderId,
+        rampOrderId: body.id,
         status: body.status,
         additionalTo: body.additionalTo,
-        externalCustomerId: body.externalCustomerId,
-        externalTransactionId: body.externalTransactionId,
+
         paymentType: body.paymentType,
         payoutBlockchainId: body.payoutBlockchainId,
         user: {
@@ -53,6 +65,8 @@ tQIDAQAB
     });
     return Response.json({ message: "success" });
   } catch (error) {
+    console.error({ error });
+
     return Response.json({ message: error }, { status: 500 });
   }
 }

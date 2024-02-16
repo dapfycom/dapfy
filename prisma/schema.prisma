@@ -134,21 +134,19 @@ model TradesilvaniaPurchase {
 }
 
 model TradesilvaniaTransaction {
-  id                    String   @id @default(uuid())
-  rampOrderId           String
-  status                String
-  orderType             String
-  assetFrom             String
-  amountFrom            Float
-  assetTo               String
-  amountTo              Float
-  user                  User     @relation(fields: [userId], references: [id])
-  userId                String
-  networkTo             String
-  additionalTo          String?
-  payoutBlockchainId    String?
-  paymentType           String?
-  externalTransactionId String?
-  externalCustomerId    String?
-  createdAt             DateTime @default(now())
+  id                 String   @id @default(uuid())
+  rampOrderId        String
+  status             String
+  orderType          String
+  assetFrom          String
+  amountFrom         Float
+  assetTo            String?
+  amountTo           Float?
+  user               User     @relation(fields: [userId], references: [id])
+  userId             String
+  networkTo          String
+  additionalTo       String?
+  payoutBlockchainId String?
+  paymentType        String?
+  createdAt          DateTime @default(now())
 }
