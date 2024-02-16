@@ -40,7 +40,7 @@ export function Mail({
   defaultCollapsed = false,
   navCollapsedSize,
 }: MailProps) {
-  const { tickets } = useGetTickets({}, mails);
+  const { tickets } = useGetTickets({ replied: false }, mails);
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const ticketSelected = useAppSelector(selectSelectedTicketId);
 

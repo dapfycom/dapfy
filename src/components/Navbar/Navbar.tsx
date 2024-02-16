@@ -5,15 +5,14 @@ import EpochCountDown from "@/components/EpochCountDown/EpochCountDown";
 import MainNav from "@/components/MainNav/MainNav";
 import NavbarActions from "@/components/NavActions/NavActions";
 import Container from "@/components/ui-system/Container";
-import { routeNames } from "@/config/routes";
-import useDisclosure from "@/hooks/useDisclosure";
+import { adminRoutes, routeNames } from "@/config/routes";
 import useScrolled from "@/hooks/useScrolled";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const hasScrolled = useScrolled();
-  const { isOpen } = useDisclosure();
-
+  const pathname = usePathname();
   return (
     <>
       <header
@@ -58,9 +57,11 @@ const Navbar = () => {
         </Container>
       </header>
 
-      <div className={"pt-6"}>
-        <EpochCountDown />
-      </div>
+      {!adminRoutes.map((route) => route.path).includes(pathname) && (
+        <div className={"pt-6"}>
+          <EpochCountDown />
+        </div>
+      )}
     </>
   );
 };

@@ -28,12 +28,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { replyTicket, updateTicket } from "@/services/rest/dapfy-api/tickets";
-import { ITicket, TicketStatus } from "@/types/tickets.interface";
+import { ITicket } from "@/types/tickets.interface";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { isValidEmail } from "@/utils/functions/validations";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { mutate } from "swr";
+import { refreshTickets } from "../utils/functions";
 import MailDisplayOptions from "./mail-display-options";
 
 interface MailDisplayProps {
@@ -48,7 +48,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
         viewed: true,
       });
 
-      mutate(["tickets", TicketStatus.ACTIVE, undefined, undefined]);
+      refreshTickets();
     };
     if (!mail?.viewed && mail?.id) {
       updateView(mail.id);
@@ -61,6 +61,8 @@ export function MailDisplay({ mail }: MailDisplayProps) {
         loading: "Loading...",
         success: () => {
           setReply("");
+          refreshTickets();
+
           return "Reply email sent";
         },
         error: "Error, the email might not be delivered",

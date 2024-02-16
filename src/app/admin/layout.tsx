@@ -1,5 +1,4 @@
 "use client";
-import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import Loader1 from "@/components/ui-system/Loader/Loader1";
 import { routeNames } from "@/config/routes";
 import useAuthentication from "@/hooks/useAuthentication";
@@ -25,10 +24,7 @@ const AdminLayoute = ({ children }: PropsWithChildren) => {
     );
   }
   return (
-    <div>
-      <PageHeaderHeading className="text-center my-6">
-        Admin panel
-      </PageHeaderHeading>
+    <div className="mt-24">
       <DrawerDialogDemo />
       <div className="border-t">
         <div className="bg-background">

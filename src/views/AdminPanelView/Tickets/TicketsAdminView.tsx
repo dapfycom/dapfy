@@ -7,6 +7,7 @@ async function TicketsAdminView() {
   const initialTickets = await prisma.ticket.findMany({
     where: {
       status: "active",
+      replied: false,
     },
     include: {
       user: {

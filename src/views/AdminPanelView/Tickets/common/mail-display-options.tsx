@@ -6,9 +6,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useDisclosure from "@/hooks/useDisclosure";
+import { updateTicket } from "@/services/rest/dapfy-api/tickets";
 import { ITicket } from "@/types/tickets.interface";
 import { MoreVertical } from "lucide-react";
 import dynamic from "next/dynamic";
+import { refreshTickets } from "../utils/functions";
 const ShowUserInfoDialog = dynamic(
   () => import("./Dialogs/ShowUserInfoDialog")
 );
@@ -21,7 +23,13 @@ const MailDisplayOptions = ({ ticket }: { ticket: ITicket | null }) => {
   const onShowUserInfo = () => {
     onOpenUserInfo();
   };
-  const onMarkAsUnread = () => {};
+  const onMarkAsUnread = async () => {
+    updateTicket(ticket?.id || "", { viewed: false });
+  };
+  const onMarkAsReplied = async () => {
+    await updateTicket(ticket?.id || "", { replied: true });
+    refreshTickets();
+  };
   const onAddLabel = () => {};
   return (
     <>
@@ -36,10 +44,16 @@ const MailDisplayOptions = ({ ticket }: { ticket: ITicket | null }) => {
           <DropdownMenuItem onClick={onShowUserInfo} className="cursor-pointer">
             Show User Info
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem onClick={onMarkAsUnread} className="cursor-pointer">
             Mark as unread
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem
+            onClick={onMarkAsReplied}
+            className="cursor-pointer"
+          >
+            Mark as replied
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-not-allowed">
             Add label
           </DropdownMenuItem>
         </DropdownMenuContent>

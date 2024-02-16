@@ -26,6 +26,7 @@ export async function PUT(
   // end authorization
 
   let payload = (await req.json()) as Partial<IBaseTicket>;
+  console.log({ payload });
 
   try {
     const updated = await prisma.ticket.update({
