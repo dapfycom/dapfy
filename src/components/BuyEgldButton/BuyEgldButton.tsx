@@ -26,7 +26,7 @@ const BuyEgldButton = () => {
       networkTo: "egld",
       language: "en",
       addressTo: address,
-      redirectTo: "https://www.dapfy.com/",
+      redirectTo: "/",
     },
   });
 
