@@ -9,10 +9,9 @@ export async function POST(req: Request) {
     assetFrom: string;
     amountFrom: 20;
     assetTo: string;
-    amountTo: string | null;
+    amountTo: number | null;
     addressTo: string;
     networkTo: string;
-    additionalTo: string | null;
     paymentType: string;
     payoutBlockchainId: string | null;
   } = await req.json();
@@ -45,15 +44,13 @@ tQIDAQAB
     await prisma.tradesilvaniaTransaction.create({
       data: {
         amountFrom: body.amountFrom,
-        amountTo: Number(body.amountTo),
+        amountTo: body.amountTo,
         assetFrom: body.assetFrom,
         assetTo: body.assetTo,
         networkTo: body.networkTo,
         orderType: body.orderType,
         rampOrderId: body.id,
         status: body.status,
-        additionalTo: body.additionalTo,
-
         paymentType: body.paymentType,
         payoutBlockchainId: body.payoutBlockchainId,
         user: {
