@@ -11,15 +11,17 @@ datasource db {
 
 // Define the User model
 model User {
-  id               String            @id @default(uuid()) // Unique identifier for each user, generated as a UUID
-  address          String            @unique // Address of the user
-  purchases        Purchase[] // Relation to Purchase model, contains all purchases made by the user
-  createdAt        DateTime          @default(now()) // Timestamp of when the user was created
-  purchaseAttempts PurchaseAttempt[] // Relation to PurchaseAttempt model, contains all purchase attempts by the user
-  updatedAt        DateTime          @updatedAt // Timestamp of the last update to this user record
-  xAccount         XAcount?
-  rewards          Reward[]
-  tickets          Ticket[]
+  id                       String                     @id @default(uuid()) // Unique identifier for each user, generated as a UUID
+  address                  String                     @unique // Address of the user
+  purchases                Purchase[] // Relation to Purchase model, contains all purchases made by the user
+  createdAt                DateTime                   @default(now()) // Timestamp of when the user was created
+  purchaseAttempts         PurchaseAttempt[] // Relation to PurchaseAttempt model, contains all purchase attempts by the user
+  updatedAt                DateTime                   @updatedAt // Timestamp of the last update to this user record
+  xAccount                 XAcount?
+  rewards                  Reward[]
+  tickets                  Ticket[]
+  tradesilvania            TradesilvaniaPurchase[]
+  tradesilvaniaTransaction TradesilvaniaTransaction[]
 }
 
 // Define the Product model
@@ -122,4 +124,29 @@ model TicketResponse {
   status    String   @default("sent")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model TradesilvaniaPurchase {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model TradesilvaniaTransaction {
+  id                 String   @id @default(uuid())
+  rampOrderId        String
+  status             String
+  orderType          String
+  assetFrom          String
+  amountFrom         Float
+  assetTo            String?
+  amountTo           Float?
+  user               User     @relation(fields: [userId], references: [id])
+  userId             String
+  networkTo          String
+  additionalTo       String?
+  payoutBlockchainId String?
+  paymentType        String?
+  createdAt          DateTime @default(now())
 }
