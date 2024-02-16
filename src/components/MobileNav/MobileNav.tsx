@@ -64,7 +64,7 @@ const MobileNav = () => {
           </div>
         </SheetHeader>
 
-        <div c className="mx-auto">
+        <div className="mx-auto">
           <BuyEgldButton />
         </div>
         <SheetFooter className="!flex-col">
