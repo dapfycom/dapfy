@@ -30,7 +30,7 @@ export default function HeroTagForm() {
       try {
         getSmartContractInteraction(dnsScAddressForHerotag(herotag)).scCall({
           functionName: "register",
-          gasL: 60000000,
+          gasL: 600_000_000,
           arg: [BytesValue.fromUTF8(herotag)],
         });
       } catch (error) {
