@@ -71,6 +71,18 @@ const columnsArr: ColumnDef<any>[] = [
       );
     },
   },
+  {
+    accessorKey: "action",
+    header: "Action",
+    cell: ({ row }) => {
+      const hasInteracted = !!row.original.rewardedAt;
+      if (hasInteracted) {
+        return null;
+      }
+
+      return <CheckInteraction dataInfo={row.original} />;
+    },
+  },
 ];
 
 export const columns = ({
@@ -79,21 +91,6 @@ export const columns = ({
   hideInteractions: boolean;
 }) => {
   const columns = columnsArr;
-
-  if (!hideInteractions) {
-    columns.push({
-      accessorKey: "action",
-      header: "Action",
-      cell: ({ row }) => {
-        const hasInteracted = !!row.original.rewardedAt;
-        if (hasInteracted) {
-          return null;
-        }
-
-        return <CheckInteraction dataInfo={row.original} />;
-      },
-    });
-  }
 
   return columns;
 };
@@ -134,7 +131,7 @@ const CheckInteraction = ({
           );
         }}
       >
-        Check Defi
+        Defi
       </Button>
     </div>
   );
