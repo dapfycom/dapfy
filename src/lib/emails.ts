@@ -1,5 +1,6 @@
 import { externnalLinks, routeNames } from "@/config/routes";
 import { Resend } from "resend";
+import BuyEgldRampEmail from "../../react-email/emails/buy-egld-ramp";
 import TicketReplyEmail from "../../react-email/emails/ticket-replay";
 import KoalaWelcomeEmail from "../../react-email/emails/welcome";
 
@@ -30,4 +31,20 @@ export const sendTicketReplayEmail = async (email: string, message: string) => {
     }),
     text: message,
   });
+};
+
+export const sendBuyEgldEmail = async (emails: string[]) => {
+  const res = await resend.batch.send(
+    emails.map((email: string) => {
+      return {
+        from: `dapfy.com <${process.env.EMAIL_HOST}>`,
+        to: [email],
+        subject: "Buy EGLD Faster & Cheaper",
+        react: BuyEgldRampEmail({
+          externnalLinks: externnalLinks,
+          email: email,
+        }),
+      };
+    })
+  );
 };
