@@ -12,7 +12,7 @@ export const fetchStakingProvidersTransactions = async (
 
   const providersBatches: string[][] = providers.reduce(
     (acc, provider, index) => {
-      const batchIndex = Math.floor(index / 20);
+      const batchIndex = Math.floor(index / 10);
       if (!acc[batchIndex]) {
         // @ts-ignore
         acc[batchIndex] = [];
