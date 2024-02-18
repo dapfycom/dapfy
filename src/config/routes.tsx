@@ -42,6 +42,8 @@ export const routeNames = {
   defi: "/multiversx/defi",
   tools: "/multiversx/tools",
   herotag: "/multiversx/tools/herotag",
+  xfees: "/multiversx/tools/x-fees",
+  xstkRewards: "/multiversx/tools/staking-providers-rewards",
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",
@@ -56,7 +58,6 @@ export const routeNames = {
   security: "/security",
   terms: "/terms-of-use",
   openSource: "/open-source",
-  xfees: "/multiversx/x-fees",
 };
 
 export const externnalLinks = {

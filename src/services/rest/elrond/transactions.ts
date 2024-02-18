@@ -43,3 +43,12 @@ export const fetchTransactionByHash = async (
   const res = await axiosElrond.get<ITransacation>(`/transactions/${txHash}`);
   return res.data;
 };
+
+export const fetchTransfers = async (
+  params?: IFetchTransactionParams
+): Promise<ITransacation[]> => {
+  const res = await axiosElrond.get<ITransacation[]>(`/transfers`, {
+    params: params,
+  });
+  return res.data;
+};

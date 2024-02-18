@@ -20,6 +20,12 @@ export const tools: Tool[] = [
     cover: "/images/x-fees.jpg",
     link: routeNames.xfees,
   },
+  {
+    name: "Staking Rewards Overview",
+    description: "View your staking rewards",
+    cover: "/images/xstkRewards.jpg",
+    link: routeNames.xstkRewards,
+  },
 ];
 
 export interface Tool {
