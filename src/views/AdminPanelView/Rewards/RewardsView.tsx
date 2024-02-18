@@ -1,5 +1,6 @@
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { AdminRewards } from "./AdminRewards";
+import CheckLastRewarded from "./CheckLastRewarded/CheckLastRewarded";
 import SupplyRewards from "./SupplyRewards/SupplyRewards";
 
 const RewardsView = () => {
@@ -17,7 +18,10 @@ const RewardsView = () => {
             </TabsTrigger>
           </TabsList> */}
         </div>
-        <SupplyRewards />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <SupplyRewards />
+          <CheckLastRewarded />
+        </div>
         <TabsContent value="music" className="border-none p-0 outline-none">
           <AdminRewards />
         </TabsContent>
