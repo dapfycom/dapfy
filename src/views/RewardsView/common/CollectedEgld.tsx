@@ -1,13 +1,5 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
@@ -103,28 +95,10 @@ const CollectedEgld = () => {
                 </a>
               </li>
               <li>
-                <Dialog>
-                  <DialogTrigger>
-                    <UserTask
-                      text="Buy some EGLD Powered by Tradesilvania"
-                      completed={isUserInteractedDefiTool}
-                    />
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle></DialogTitle>
-                      <DialogDescription>
-                        <iframe
-                          src={tradesilvaniaUrl}
-                          allowFullScreen
-                          width="100%"
-                          height="700"
-                          allow="camera"
-                        ></iframe>
-                      </DialogDescription>
-                    </DialogHeader>
-                  </DialogContent>
-                </Dialog>
+                <UserTask
+                  text=" Interact with one of our useful DeFi tools"
+                  completed={isUserInteractedDefiTool}
+                />
               </li>
             </ul>
           </div>
