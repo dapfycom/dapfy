@@ -115,7 +115,7 @@ const RewardsCard = () => {
           <CardFooter>
             <div className="flex flex-col gap-2">
               <p className="text-muted-foreground text-sm">
-                Your are allowed to change the fee wallet without connecting it
+                Your are allowed to change the fee wallet without connecting
               </p>
               <form onSubmit={formik.handleSubmit}>
                 <div className="flex flex-col space-y-2">
