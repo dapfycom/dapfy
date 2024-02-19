@@ -80,7 +80,7 @@ const RewardsCard = () => {
           ) : (
             <>
               <p>
-                Fees:{" "}
+                Rewards:{" "}
                 <span className="text-green-500">
                   {" "}
                   {formatBalance({

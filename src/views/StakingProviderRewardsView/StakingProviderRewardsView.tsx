@@ -4,9 +4,13 @@ import {
   PageHeaderHeading,
 } from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
+import useAuthentication from "@/hooks/useAuthentication";
+import ConnectButton from "./common/ConnectButton/ConnectButton";
 import RewardsCard from "./common/RewardsCard/RewardsCard";
 
 const StakingProviderRewardsView = () => {
+  const { isLoggedIn } = useAuthentication();
+
   return (
     <Container>
       <div className="flex flex-col items-center text-center mt-5">
@@ -19,8 +23,9 @@ const StakingProviderRewardsView = () => {
           Track total staking rewards received from providers on MultiversX
           blockchain.
         </PageHeaderDescription>
-
-        <RewardsCard />
+        <div className="min-h-[20vh] w-full">
+          {isLoggedIn ? <RewardsCard /> : <ConnectButton />}
+        </div>
       </div>
     </Container>
   );

@@ -8,21 +8,26 @@ export const useGetXStakingRewards = (address: string) => {
     data: providers,
     isLoading: isLoadingProviders,
     error: errorProviders,
-  } = useSWR("/providers?withLatestInfo=false&fields=provider", () => {
-    return fetchElrondData<{ provider: string }[]>(
-      "/providers?withLatestInfo=false&fields=provider"
-    );
-  });
+  } = useSWR(
+    address ? "/providers?withLatestInfo=false&fields=provider" : null,
+    () => {
+      return fetchElrondData<{ provider: string }[]>(
+        "/providers?withLatestInfo=false&fields=provider"
+      );
+    }
+  );
 
   const {
     data: transactionsData,
     isLoading: isLoadingTransactions,
     error: errorTransactions,
   } = useSWR(
-    "/providers/transactions?sender=" +
-      address +
-      "&receiver=" +
-      providers?.join(","),
+    address
+      ? "/providers/transactions?sender=" +
+          address +
+          "&receiver=" +
+          providers?.join(",")
+      : null,
     () => {
       return fetchStakingProvidersTransactions(
         providers?.map((p) => p.provider) || [],

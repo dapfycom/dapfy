@@ -6,7 +6,7 @@ const ConnectButton = () => {
   return (
     <div className="text-center">
       <Button className="mx-auto" onClick={handleConnect}>
-        Find my fees
+        Find my providers rewards
       </Button>
     </div>
   );
