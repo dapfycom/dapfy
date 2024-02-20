@@ -118,7 +118,12 @@ const FarmComponent = () => {
             <div className="flex flex-col gap-2 mb-4">
               {/* <Label htmlFor="amount-bskegld">BSK-EGLD Amount</Label> */}
               <div className="flex justify-between">
-                <Label htmlFor="amount-bskegld">Deposit LP</Label>
+                <Label
+                  htmlFor="amount-bskegld"
+                  className="hidden sm:block text-right"
+                >
+                  Deposit LP
+                </Label>
                 <div className="flex justify-between text-xs">
                   <p className="cursor-pointer" onClick={handleMax}>
                     Balance: {formatBalance(userStakedToken)}{" "}
@@ -145,18 +150,18 @@ const FarmComponent = () => {
               {isLoggedIn ? (
                 <Button
                   type="submit"
-                  className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                  className="bg-[#ff9900] hover:text-[#ff9900] text-xs sm:text-md text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
                 >
-                  <PointerIcon className="h-6 w-6" />
+                  <PointerIcon className="h-6 w-6 hidden sm:inline-block" />
 
                   <span>Deposit now with 1-Click®</span>
                 </Button>
               ) : (
                 <Button
                   onClick={handleConnect}
-                  className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                  className="bg-[#ff9900] hover:text-[#ff9900] text-xs sm:text-md text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
                 >
-                  <PointerIcon className="h-6 w-6" />
+                  <PointerIcon className="h-6 w-6 hidden sm:inline-block" />
 
                   <span>Deposit now with 1-Click®</span>
                 </Button>
