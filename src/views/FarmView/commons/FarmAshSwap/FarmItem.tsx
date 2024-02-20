@@ -142,7 +142,7 @@ const FarmItem = () => {
             {isLoggedIn ? (
               <Button
                 type="submit"
-                className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                className="bg-[#ff9900] hover:text-[#ff9900] text-xs sm:text-md text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
               >
                 <PointerIcon className="h-6 w-6 hidden sm:inline-block" />
                 <span>Deposit now with 1-Click®</span>
@@ -150,7 +150,7 @@ const FarmItem = () => {
             ) : (
               <Button
                 onClick={handleConnect}
-                className="bg-[#ff9900] hover:text-[#ff9900] text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
+                className="bg-[#ff9900] hover:text-[#ff9900] text-xs sm:text-md text-white px-4 py-2 rounded-md flex items-center justify-center space-x-2 w-full"
               >
                 <PointerIcon className="h-6 w-6 hidden sm:inline-block" />
                 <span>Deposit now with 1-Click®</span>
