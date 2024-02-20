@@ -85,7 +85,7 @@ const FarmComponent = () => {
   };
   return (
     <>
-      <div className="w-full my-10 flex justify-center text-left">
+      <div className="w-full my-10 flex  text-left">
         <div className="max-w-[24rem] w-full rounded-lg border p-6">
           <div className="mb-4">
             <div className="flex items-center gap-3">

@@ -2,13 +2,12 @@
 import Container from "@/components/ui-system/Container";
 import { Button } from "@/components/ui/button";
 import { routeNames } from "@/config/routes";
-import FarmComponent from "@/views/FarmView/commons/FarmComponent/FarmComponent";
 import FarmHeading from "@/views/FarmView/commons/FarmHeading/FarmHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
-type FarmPages = "hatom" | "ashswap" | "farm";
+type FarmPages = "hatom" | "ashswap" | "farm" | "one-dex";
 const FarmLayout = ({ children }: PropsWithChildren) => {
   const pathname = usePathname();
   const [selectedProtocol, setSelectedProtocol] = useState<FarmPages>(
@@ -18,18 +17,29 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
     <Container className="xl:max-w-[1200px]">
       <div className="flex flex-col items-center text-center mt-5">
         <FarmHeading />
-        <div className="flex flex-col gap-3 w-full">
-          <FarmComponent />
-
-          <div className="text-4xl font-bold mt-8 mb-4">
-            Auto-Compounded DeFi Farming
-          </div>
-
-          <div className="flex gap-3 items-center">
+        <div className="flex flex-col gap-3 w-full ">
+          <div className="flex gap-3 items-center mt-10">
+            {/* Bsk protocol */}
             <ProtolContainer
               onClick={() => setSelectedProtocol("farm")}
               selected={selectedProtocol === "farm"}
               href={routeNames.farm}
+            >
+              <div className="flex gap-2 items-center">
+                <Image
+                  src={"/images/bsk-logo.svg"}
+                  alt="hatom"
+                  width={26}
+                  height={26}
+                />
+                <p>BSK</p>
+              </div>
+            </ProtolContainer>
+
+            <ProtolContainer
+              onClick={() => setSelectedProtocol("one-dex")}
+              selected={selectedProtocol === "one-dex"}
+              href={routeNames.farm + "/one-dex"}
             >
               <Image
                 src={
