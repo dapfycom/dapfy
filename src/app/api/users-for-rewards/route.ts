@@ -2,6 +2,7 @@ import prisma from "@/lib/db";
 import { verifyAdmins } from "@/lib/mx-utils";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+const blackList = ["1700024719263875072"];
 const dataSchema = z.object({
   users: z.array(
     z.object({
@@ -40,6 +41,7 @@ export const POST = async (req: Request) => {
     where: {
       xid: {
         in: payload.users.map((u) => u.user_id),
+        notIn: blackList,
       },
     },
     include: {
