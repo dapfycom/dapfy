@@ -44,6 +44,7 @@ export const routeNames = {
   herotag: "/multiversx/tools/herotag",
   xfees: "/multiversx/tools/x-fees",
   xstkRewards: "/multiversx/tools/staking-providers-rewards",
+  xpayments: "/multiversx/tools/x-payments",
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",

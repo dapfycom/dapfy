@@ -26,6 +26,12 @@ export const tools: Tool[] = [
     cover: "/images/xstkRewards.jpg",
     link: routeNames.xstkRewards,
   },
+  {
+    name: "Track your payments",
+    description: "An easy way to track your payments",
+    cover: "/images/xstkRewards.jpg",
+    link: routeNames.xpayments,
+  },
 ];
 
 export interface Tool {
