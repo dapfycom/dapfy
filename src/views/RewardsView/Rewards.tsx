@@ -3,7 +3,6 @@ import Container from "@/components/ui-system/Container";
 import AllTimeEarned from "./common/AllTimeEarned";
 import CollectedEgld from "./common/CollectedEgld";
 import DashboardHeading from "./common/DashboadHeading";
-import EmailReports from "./common/EmailReports";
 import LoginButton from "./common/LogginButton";
 import Participants from "./common/Participants";
 import { useBindXUserWithDapfyUser } from "./lib/hooks";
@@ -23,7 +22,7 @@ const Rewards = () => {
 
       <CollectedEgld />
 
-      <EmailReports />
+      {/* <EmailReports /> */}
     </Container>
   );
 };
