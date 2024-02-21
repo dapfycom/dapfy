@@ -30,12 +30,11 @@ const SubmitButton = () => {
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const [txSuccess, setTxSuccess] = useState(false);
   const { accountToken } = useGetAccountToken(fromField.selectedToken);
-  const { delayedToastTxNotification, toastTxNotification } =
-    useTxNotification();
+  const { toastTxNotification } = useTxNotification();
 
   const onSuccess = React.useCallback(() => {
     setTxSuccess(true);
-    delayedToastTxNotification(2000);
+    toastTxNotification();
     dispatch(onChageFromFieldValue(""));
     dispatch(onChageFromFieldValueDecimals(""));
     dispatch(onChangeToField(""));
