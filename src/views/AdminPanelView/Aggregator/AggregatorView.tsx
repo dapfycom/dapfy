@@ -7,10 +7,14 @@ import { formatBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { integrator } from "@/views/SwapAggregator/lib/constants";
 import { Address, AddressValue, U64Value } from "@multiversx/sdk-core/out";
+import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import BigNumber from "bignumber.js";
+import React from "react";
 import useSWR from "swr";
+
 const AggregatorView = () => {
-  const { data } = useSWR("Claimable Aggregator Fee", () => {
+  const [sessionId, setSessionId] = React.useState<string | null>("");
+  const { data, mutate } = useSWR("Claimable Aggregator Fee", () => {
     return fetchScSimpleData<{ amount: BigNumber; token: string }[]>(
       "ashSwapAggregatorWsp:getClaimabeProtocolFee",
       [
@@ -20,17 +24,27 @@ const AggregatorView = () => {
       ]
     );
   });
+  useTrackTransactionStatus({
+    transactionId: sessionId,
+    onSuccess: () => {
+      mutate();
+    },
+  });
 
   const { tokens } = useGetMultipleElrondTokens(
     data?.map((item) => item.token) || []
   );
 
-  const handleClaimFee = () => {
-    getSmartContractInteraction("ashSwapAggregatorWsp").scCall({
+  const handleClaimFee = async () => {
+    const res = await getSmartContractInteraction(
+      "ashSwapAggregatorWsp"
+    ).scCall({
       functionName: "claimProtocolFee",
 
       arg: [new AddressValue(new Address(integrator))],
     });
+
+    setSessionId(res?.sessionId);
   };
 
   const rewards = tokens.map((token) => {
