@@ -106,7 +106,7 @@ const CollectedEgld = () => {
         <div className="w-full flex justify-center ">
           <div className="flex flex-col w-full max-w-[500px] gap-4">
             <div className="flex w-full justify-between mb">
-              <p className="text-blue-800 dark:text-blue-200  text-xl">
+              <p className="text-blue-800 dark:text-blue-200  text-sm sm:text-xl">
                 Your uncollected EGLD:{" "}
               </p>
               <div className="flex gap-3 items-center">
