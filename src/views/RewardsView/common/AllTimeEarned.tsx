@@ -1,3 +1,4 @@
+import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -25,9 +26,9 @@ const AllTimeEarned = () => {
     <div className="mt-8 mb-8 max-w-xl mx-auto">
       {price && (
         <div>
-          <h3 className="text-4xl text-orange-700 mb-2">
-            All time Earned Rewards
-          </h3>
+          <PageHeaderHeading className="mb-6">
+            <span className={"gradienteTitle"}>Earned Rewards</span>
+          </PageHeaderHeading>
           <p className="text-4xl font-bold mb-8">
             $
             {formatBalanceDollar(
