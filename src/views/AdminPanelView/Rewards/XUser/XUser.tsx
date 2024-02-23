@@ -58,9 +58,8 @@ const XUser = () => {
   };
   return (
     <Dialog>
-      <DialogTrigger>
-        {" "}
-        <Button>Show X User Info</Button>
+      <DialogTrigger asChild>
+        <Button className="w-fit">Show X User Info</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
