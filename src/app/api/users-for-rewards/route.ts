@@ -3,7 +3,7 @@ import { verifyAdmins } from "@/lib/mx-utils";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 const blackListIds = ["1700024719263875072", "1338230901503905795"];
-const blackListUsernames = ["bernardi066"];
+const blackListUsernames = ["bernardi066", "Premisever99362"];
 const dataSchema = z.object({
   users: z.array(
     z.object({
