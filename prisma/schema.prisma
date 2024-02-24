@@ -150,3 +150,9 @@ model TradesilvaniaTransaction {
   paymentType        String?
   createdAt          DateTime @default(now())
 }
+
+model BlackListRewards {
+  id         String   @id @default(uuid())
+  identifier String   @unique
+  createdAt  DateTime @default(now())
+}

@@ -12,7 +12,6 @@ import {
 } from "@tanstack/react-table";
 import React from "react";
 
-import { DatePicker } from "@/components/ui-system/DatePicker/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -23,126 +22,63 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { selectedNetwork } from "@/config/network";
-import { useGetMvxEpoch } from "@/hooks/useGetStats";
-import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
-import {
-  IUserToReward,
-  IUserToRewardExtended,
-} from "@/types/rewards.interface";
-import { formatAddress } from "@/utils/functions/formatAddress";
-import { format } from "date-fns";
+import axiosDapfy from "@/services/rest/dapfy-api";
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { useGetRewardsLeaderboard } from "./hooks";
+import { mutate } from "swr";
+import { useGetBlackListUsers } from "../hooks";
+import AddBlackListUser from "./AddBlackListUser";
 
 const columnsArr: ColumnDef<any>[] = [
   {
     accessorKey: "username",
     header: "Username",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("username")}</div>
-    ),
+    cell: ({ row }) => <div>{row.getValue("username")}</div>,
   },
   {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
-  },
-  {
-    accessorKey: "user",
-    header: "Address",
-    cell: ({ row }) => {
-      const address = (row.getValue("user") as any).address;
-      return (
-        <div className="capitalize">
-          <a
-            href={
-              selectedNetwork.network.explorerAddress + "/accounts/" + address
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500"
-          >
-            {" "}
-            {formatAddress(address)}
-          </a>
-        </div>
-      );
-    },
+    accessorKey: "xid",
+    header: "X ID",
+    cell: ({ row }) => <div>{row.getValue("xid")}</div>,
   },
   {
     accessorKey: "action",
     header: "Action",
     cell: ({ row }) => {
-      const hasInteracted = !!row.original.rewardedAt;
-      if (hasInteracted) {
-        return null;
-      }
+      const id = row.original.id;
 
-      return <CheckInteraction dataInfo={row.original} />;
+      return (
+        <div>
+          <Button
+            size="sm"
+            variant={"destructive"}
+            onClick={() => {
+              toast.promise(axiosDapfy.delete(`/xuser/blacklist/${id}`), {
+                loading: "Deleting user from blacklist...",
+                success: () => {
+                  mutate("/xuser/blacklist");
+                  return "User deleted from blacklist";
+                },
+                error: "Failed to delete user from blacklist",
+              });
+            }}
+          >
+            <Trash2 />
+          </Button>
+        </div>
+      );
     },
   },
 ];
 
-export const columns = ({
-  hideInteractions,
-}: {
-  hideInteractions: boolean;
-}) => {
-  const columns = columnsArr;
-
-  return columns;
-};
-
-const CheckInteraction = ({
-  dataInfo,
-}: {
-  dataInfo: IUserToReward | IUserToRewardExtended;
-}) => {
-  const { nextEpoch, previousEpoch } = useGetMvxEpoch();
-
-  return (
-    <div className="capitalize">
-      <Button
-        size={"xs"}
-        onClick={async () => {
-          const interacted = fetchIsUserUsedDapfyTool({
-            address: dataInfo.user.address,
-            from: previousEpoch!.toISOString(),
-            to: nextEpoch!.toISOString(),
-          });
-
-          toast.promise(
-            interacted,
-            {
-              loading: "Loading",
-              success: (data) =>
-                data.data
-                  ? `🔥 User ${dataInfo.username} has already interacted with Dapfy`
-                  : ` 😔 User ${dataInfo.username} has not interacted with Dapfy yet`,
-              error: (err) => `This just happened: ${err.toString()}`,
-            },
-            {
-              success: {
-                duration: 7000,
-              },
-            }
-          );
-        }}
-      >
-        Defi
-      </Button>
-    </div>
-  );
-};
-
-const LeaderboardTable = ({
+const BlackListTable = ({
   data,
-  current,
 }: {
-  data: IUserToReward[];
-  current: boolean;
+  data: {
+    username: string;
+    xid: string;
+    id: string;
+  }[];
 }) => {
   const router = useRouter();
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -155,7 +91,7 @@ const LeaderboardTable = ({
 
   const table = useReactTable({
     data,
-    columns: columns({ hideInteractions: !current }),
+    columns: columnsArr,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -172,11 +108,6 @@ const LeaderboardTable = ({
     },
   });
 
-  const handleChangeDate = (date: Date) => {
-    const formatedDate = format(date, "yyyy-LL-dd");
-    router.push("?date=" + formatedDate);
-  };
-
   return (
     <div className="flex space-x-4 pb-4 px-3 max-w-[750px] mx-auto">
       <div className="w-full">
@@ -191,27 +122,7 @@ const LeaderboardTable = ({
             }
             className="max-w-sm"
           />
-          <div className="flex sm:ml-auto">
-            <DatePicker
-              presetDays={[
-                {
-                  label: "Today",
-                  value: 0,
-                },
-                {
-                  label: "Yesterday",
-                  value: -1,
-                },
-
-                {
-                  label: "A week ago",
-                  value: -7,
-                },
-              ]}
-              defaultValue={new Date()}
-              onChange={handleChangeDate}
-            />
-          </div>
+          <AddBlackListUser />
         </div>
         <div className="rounded-md border">
           <Table>
@@ -253,7 +164,7 @@ const LeaderboardTable = ({
               ) : (
                 <TableRow>
                   <TableCell
-                    colSpan={columns.length}
+                    colSpan={columnsArr.length}
                     className="h-24 text-center"
                   >
                     No results.
@@ -292,10 +203,11 @@ const LeaderboardTable = ({
   );
 };
 
-const TableContainer = () => {
-  const { leaderboard: data, current } = useGetRewardsLeaderboard();
+const BlackListContainer = () => {
+  const { users: data } = useGetBlackListUsers();
+  console.log({ data });
 
-  return <LeaderboardTable data={data} current={!!current} />;
+  return <BlackListTable data={data} />;
 };
 
-export default TableContainer;
+export default BlackListContainer;

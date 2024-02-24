@@ -5,11 +5,11 @@ import { Separator } from "@/components/ui/separator";
 import LeaderboardTable from "./LeaderboardTable";
 import RewardsHeader from "./RewardsHeader";
 
-export function AdminRewards() {
+export function LeaderboardContainer() {
   return (
     <>
-      <RewardsHeader />
       <Separator className="my-4" />
+      <RewardsHeader />
       <div className="relative">
         <ScrollArea>
           <LeaderboardTable />

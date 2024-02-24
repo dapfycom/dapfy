@@ -1,5 +1,6 @@
 import prisma from "@/lib/db";
 import { verifyAdmins } from "@/lib/mx-utils";
+import { isUsername } from "@/utils/functions/validations";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 const blackListIds = ["1700024719263875072", "1338230901503905795"];
@@ -37,6 +38,14 @@ export const POST = async (req: Request) => {
   } catch (error) {
     return Response.json({ error: error }, { status: 400 });
   }
+
+  const blackList = await prisma.blackListRewards.findMany();
+  const blackListIds = blackList
+    .map((b) => b.identifier)
+    .filter((identifer) => !isUsername(identifer));
+  const blackListUsernames = blackList
+    .map((b) => b.identifier)
+    .filter((identifer) => isUsername(identifer));
 
   const xAccountRes = await prisma.xAcount.findMany({
     where: {

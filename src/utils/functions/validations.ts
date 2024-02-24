@@ -11,3 +11,11 @@ export function isValidEmail(email: string) {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+// return true if string start with @
+export const isUsername = (str: string): boolean => {
+  if (str.startsWith("@")) {
+    return true;
+  }
+  return false;
+};
