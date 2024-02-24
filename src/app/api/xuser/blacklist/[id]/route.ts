@@ -32,11 +32,10 @@ export const DELETE = async (
         id: id,
       },
     });
+    return Response.json({ message: "success" }, { status: 200 });
   } catch (error) {
     console.log("Prisma on error", error);
 
     return Response.json({ error: "Unknow error" }, { status: 500 });
   }
-
-  return Response.json({ message: "success" }, { status: 200 });
 };
