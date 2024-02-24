@@ -17,7 +17,8 @@ const Participants = () => {
       </p>
       <div className="flex -space-x-4 rtl:space-x-reverse">
         {avatars
-          .filter((a, i) => i < 9 && i !== 1)
+          // .filter((a, i) => i < 9 && i !== 1)
+          .slice(0, 9)
           .map((avatar) => {
             return (
               <Image

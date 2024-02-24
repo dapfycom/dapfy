@@ -6,6 +6,7 @@ const nextConfig = {
       "placehold.co",
       "images.unsplash.com",
       "pbs.twimg.com",
+      "abs.twimg.com",
       "app.ashswap.io",
     ],
   },
