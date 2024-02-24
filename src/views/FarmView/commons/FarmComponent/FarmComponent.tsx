@@ -112,7 +112,6 @@ const FarmComponent = () => {
           )}
 
           <p className="text-sm text-green-600 mb-1">Active</p>
-          <p className="text-sm font-medium mb-4">APR 100%</p>
 
           <form onSubmit={formik.handleSubmit}>
             <div className="flex flex-col gap-2 mb-4">
