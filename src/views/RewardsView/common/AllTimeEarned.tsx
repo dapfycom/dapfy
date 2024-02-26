@@ -23,7 +23,7 @@ const AllTimeEarned = () => {
     return null;
   }
   return (
-    <div className="mt-8 mb-8 max-w-xl mx-auto">
+    <div className="mt-8  max-w-xl mx-auto">
       {price && (
         <div>
           <PageHeaderHeading className="mb-6">
@@ -42,7 +42,7 @@ const AllTimeEarned = () => {
         </div>
       )}
 
-      <div className="flex items-center w-full mb-16 flex-col md:flex-row  gap-3">
+      <div className="flex items-center w-full flex-col md:flex-row  gap-3">
         <div className="flex  justify-between items-center flex-1">
           <div className="flex gap-3 items-center">
             <DropdownMenu>

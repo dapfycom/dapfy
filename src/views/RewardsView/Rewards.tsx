@@ -5,6 +5,7 @@ import CollectedEgld from "./common/CollectedEgld";
 import DashboardHeading from "./common/DashboadHeading";
 import LoginButton from "./common/LogginButton";
 import Participants from "./common/Participants";
+import StreakDays from "./common/StreakeDays";
 import { useBindXUserWithDapfyUser } from "./lib/hooks";
 
 const Rewards = () => {
@@ -19,6 +20,8 @@ const Rewards = () => {
       <Participants />
 
       <AllTimeEarned />
+
+      <StreakDays />
 
       <CollectedEgld />
 

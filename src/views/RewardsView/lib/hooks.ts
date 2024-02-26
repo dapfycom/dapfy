@@ -10,7 +10,9 @@ import {
   fetchRewardsPoints,
   fetchUserTask,
 } from "@/services/rest/rewards/user";
+import { fetchScSimpleData } from "@/services/sc/queries";
 import { IUserX } from "@/types/rewards.interface";
+import { Address, AddressValue } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -157,6 +159,24 @@ export const useGetHasClaimedRewards = () => {
   );
   return {
     hasClaimed: data,
+    mutate,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetStreak = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { data, error, isLoading, mutate } = useSWR(
+    address ? "rewardsWsp:getUserStrike" + address : null,
+    async () => {
+      return fetchScSimpleData("rewardsWsp:getUserStrike", [
+        new AddressValue(new Address(address)),
+      ]);
+    }
+  );
+  return {
+    userStreak: data ? new BigNumber(data as BigNumber).toNumber() : 0,
     mutate,
     isLoading,
     error,

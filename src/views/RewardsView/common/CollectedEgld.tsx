@@ -39,7 +39,7 @@ const CollectedEgld = () => {
 
   return (
     <>
-      <div className="mt-[-70px] flex gap-10 flex-col ">
+      <div className="flex gap-10 flex-col ">
         <div>
           <h4 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">
             Complete today’s tasks to earn rewards
