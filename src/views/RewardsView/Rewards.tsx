@@ -6,11 +6,11 @@ import DashboardHeading from "./common/DashboadHeading";
 import LoginButton from "./common/LogginButton";
 import Participants from "./common/Participants";
 import StreakDays from "./common/StreakeDays";
-import { useBindXUserWithDapfyUser } from "./lib/hooks";
+import { useBindXUserWithDapfyUser, useStreakDialog } from "./lib/hooks";
 
 const Rewards = () => {
   useBindXUserWithDapfyUser();
-
+  useStreakDialog();
   return (
     <Container className="mt-10 flex flex-col gap-10 max-w-[800px] text-center justify-center">
       <DashboardHeading />

@@ -1,8 +1,8 @@
 import { selectedNetwork } from "@/config/network";
 import { useGetMvxEpoch } from "@/hooks/useGetStats";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
-import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import { selectUserAddress, setIsStreakModal } from "@/redux/dapp/dapp-slice";
 import { getUserEmailsReport } from "@/services/rest/dapfy-api/rewards-report";
 import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
@@ -12,8 +12,10 @@ import {
 } from "@/services/rest/rewards/user";
 import { fetchScSimpleData } from "@/services/sc/queries";
 import { IUserX } from "@/types/rewards.interface";
+import { generateHash } from "@/utils/functions/crypto";
 import { Address, AddressValue } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
+import { getCookie, setCookie } from "cookies-next";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import useSWR from "swr";
@@ -23,6 +25,7 @@ import {
   fetchUsersAvatars,
   syncXUserWithDapfyUser,
 } from "./services";
+
 export const useGetUserPoints = () => {
   const { user } = useGetXUser();
   const { data, error, isLoading } = useSWR(
@@ -231,4 +234,32 @@ export const useGetAllTimeEarned = () => {
     isLoading,
     error,
   };
+};
+
+export const useStreakDialog = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { userStreak, error, isLoading } = useGetStreak();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (
+      address &&
+      (userStreak === 1 ||
+        userStreak === 7 ||
+        userStreak === 14 ||
+        userStreak === 30)
+    ) {
+      const hash = generateHash(address + userStreak);
+
+      // get cookie value of hash
+      const cookieHash = getCookie("streak-hash");
+
+      if (cookieHash !== hash) {
+        setCookie("streak-hash", hash, {
+          maxAge: 60 * 60 * 24 * 365, // 1 year
+        });
+
+        dispatch(setIsStreakModal(true));
+      }
+    }
+  }, [userStreak, address, dispatch]);
 };
