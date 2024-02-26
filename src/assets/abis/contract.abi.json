@@ -54,6 +54,10 @@
             "mutability": "mutable",
             "inputs": [
                 {
+                    "name": "reward_epoch",
+                    "type": "u64"
+                },
+                {
                     "name": "new_board_members",
                     "type": "List<Address>"
                 }
@@ -64,6 +68,21 @@
             "name": "claim",
             "mutability": "mutable",
             "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "config_stike",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "days",
+                    "type": "List<u64>"
+                },
+                {
+                    "name": "percent",
+                    "type": "List<u64>"
+                }
+            ],
             "outputs": []
         },
         {
@@ -113,6 +132,76 @@
             "outputs": [
                 {
                     "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getUserLastRewardEpoch",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getUserCurrentEpochReward",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getUserStrike",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "user",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getStikeDays",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "position",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getStikePercent",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "position",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
                 }
             ]
         }
