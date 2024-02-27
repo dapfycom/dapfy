@@ -16,13 +16,13 @@ export const tools: Tool[] = [
   },
   {
     name: "Fees on Multiversx",
-    description: "Discover how much have you pay in multiversx",
+    description: "Discover the amount of fees you paid on MultiversX",
     cover: "/images/x-fees.jpg",
     link: routeNames.xfees,
   },
   {
     name: "Staking Rewards Overview",
-    description: "View your staking rewards",
+    description: "Check your staking rewards",
     cover: "/images/xstkRewards.jpg",
     link: routeNames.xstkRewards,
   },
