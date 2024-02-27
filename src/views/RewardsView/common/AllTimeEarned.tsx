@@ -1,3 +1,4 @@
+import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -22,12 +23,12 @@ const AllTimeEarned = () => {
     return null;
   }
   return (
-    <div className="mt-8 mb-8 max-w-xl mx-auto">
+    <div className="mt-8  max-w-xl mx-auto">
       {price && (
         <div>
-          <h3 className="text-4xl text-orange-700 mb-2">
-            All time Earned Rewards
-          </h3>
+          <PageHeaderHeading className="mb-6">
+            <span className={"gradienteTitle"}>Earned Rewards</span>
+          </PageHeaderHeading>
           <p className="text-4xl font-bold mb-8">
             $
             {formatBalanceDollar(
@@ -41,7 +42,7 @@ const AllTimeEarned = () => {
         </div>
       )}
 
-      <div className="flex items-center w-full mb-16 flex-col md:flex-row  gap-3">
+      <div className="flex items-center w-full flex-col md:flex-row  gap-3">
         <div className="flex  justify-between items-center flex-1">
           <div className="flex gap-3 items-center">
             <DropdownMenu>

@@ -3,6 +3,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { cn } from "@/lib/utils";
 import { selectIsStreakModal, setIsStreakModal } from "@/redux/dapp/dapp-slice";
+import { useGetStreak } from "@/views/RewardsView/lib/hooks";
 import { CheckCircle2, Flame, Gem } from "lucide-react";
 import Image from "next/image";
 import Realistic from "../Conffeti/Realistic";
@@ -10,6 +11,7 @@ import Realistic from "../Conffeti/Realistic";
 export function StrikeModal({}: {}) {
   const dispatch = useAppDispatch();
   const isStreakActive = useAppSelector(selectIsStreakModal);
+  const { userStreak, error, isLoading } = useGetStreak();
 
   return (
     <>
@@ -49,48 +51,51 @@ export function StrikeModal({}: {}) {
               <div className="flex w-full justify-between relative my-10">
                 <div className="h-[3px] bg-gray-500 w-full absolute top-[50%] -translate-y-1/2 -z-10"></div>
                 <StreakItem
-                  active
+                  active={userStreak >= 1}
                   bottomComponent={
                     <span className="flex">
                       <CheckCircle2
                         className="mr-1 text-green-500"
                         size={"13px"}
                       />{" "}
-                      20XPs
+                      activated
                     </span>
                   }
                   topText="Day 1"
                 />
                 <StreakItem
+                  active={userStreak >= 7}
                   topText="Day 7"
                   bottomComponent={
                     <span className="flex">
-                      <Gem className="mr-1 text-purple-500" size={"13px"} /> 1
-                      Gems
+                      <Gem className="mr-1 text-purple-500" size={"13px"} />
+                      5%
                     </span>
                   }
                 />
                 <StreakItem
+                  active={userStreak >= 14}
                   topText="Day 14"
                   bottomComponent={
                     <span className="flex">
-                      <Gem className="mr-1 text-purple-500" size={"13px"} /> 3
-                      Gems
+                      <Gem className="mr-1 text-purple-500" size={"13px"} />
+                      10%
                     </span>
                   }
                 />
                 <StreakItem
+                  active={userStreak >= 30}
                   topText="Day 30"
                   bottomComponent={
                     <span className="flex">
-                      <Gem className="mr-1 text-purple-500" size={"13px"} /> 5
-                      Gems
+                      <Gem className="mr-1 text-purple-500" size={"13px"} />
+                      20%
                     </span>
                   }
                 />
               </div>
               <div className="text-sm text-gray-300">
-                🤩 Congrats, you have earned 20XPs
+                🤩 Congrats, you have activated Streaks
               </div>
             </DialogContent>
           </Dialog>

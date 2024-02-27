@@ -1,7 +1,9 @@
 import prisma from "@/lib/db";
 import { verifyAdmins } from "@/lib/mx-utils";
+import { isUsername } from "@/utils/functions/validations";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+
 const dataSchema = z.object({
   users: z.array(
     z.object({
@@ -36,10 +38,22 @@ export const POST = async (req: Request) => {
     return Response.json({ error: error }, { status: 400 });
   }
 
+  const blackList = await prisma.blackListRewards.findMany();
+  const blackListIds = blackList
+    .map((b) => b.identifier)
+    .filter((identifer) => !isUsername(identifer));
+  const blackListUsernames = blackList
+    .map((b) => b.identifier)
+    .filter((identifer) => isUsername(identifer));
+
   const xAccountRes = await prisma.xAcount.findMany({
     where: {
       xid: {
         in: payload.users.map((u) => u.user_id),
+        notIn: blackListIds,
+      },
+      username: {
+        notIn: blackListUsernames,
       },
     },
     include: {

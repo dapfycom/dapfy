@@ -39,7 +39,7 @@ const CollectedEgld = () => {
 
   return (
     <>
-      <div className="mt-[-70px] flex gap-10 flex-col ">
+      <div className="flex gap-10 flex-col ">
         <div>
           <h4 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">
             Complete today’s tasks to earn rewards
@@ -96,7 +96,7 @@ const CollectedEgld = () => {
               </li>
               <li>
                 <UserTask
-                  text=" Interact with one of our useful DeFi tools"
+                  text=" Interact with one of our DeFi tools"
                   completed={isUserInteractedDefiTool}
                 />
               </li>
@@ -106,7 +106,7 @@ const CollectedEgld = () => {
         <div className="w-full flex justify-center ">
           <div className="flex flex-col w-full max-w-[500px] gap-4">
             <div className="flex w-full justify-between mb">
-              <p className="text-blue-800 dark:text-blue-200  text-xl">
+              <p className="text-blue-800 dark:text-blue-200  text-sm sm:text-xl">
                 Your uncollected EGLD:{" "}
               </p>
               <div className="flex gap-3 items-center">

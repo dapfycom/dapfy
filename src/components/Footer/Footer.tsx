@@ -43,20 +43,24 @@ const companyRoutes: RouteProps[] = [
 
 const productsRoutes: RouteProps[] = [
   {
+    href: routeNames.rewards,
+    label: "Earn",
+  },
+  {
     href: routeNames.aggregator,
-    label: "Swap Aggregator",
+    label: "Swap",
   },
   {
     href: routeNames.farm,
     label: "Farm",
   },
   {
-    href: routeNames.play,
-    label: "Play",
-  },
-  {
     href: routeNames.dust,
     label: "Dust",
+  },
+  {
+    href: routeNames.tools,
+    label: "Free tools",
   },
 
   // {
@@ -70,16 +74,7 @@ const resourcesRoutes: RouteProps[] = [
     href: routeNames.help,
     label: "Help",
   },
-  {
-    href: routeNames.blog,
-    label: "Blog",
-    isExternal: true,
-  },
-  {
-    href: routeNames.docs,
-    label: "Docs",
-    isExternal: true,
-  },
+
   {
     href: externnalLinks.github,
     label: "Github",

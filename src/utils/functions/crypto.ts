@@ -43,3 +43,7 @@ export function generateEncryptionPassword(secret: string): string {
   const derivedKey = pbkdf2Sync(secret, salt, iterations, keyLength, "sha512");
   return derivedKey.toString("hex");
 }
+
+export function generateHash(string: string): string {
+  return createHash("sha256").update(string).digest("hex");
+}

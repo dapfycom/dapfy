@@ -32,14 +32,11 @@ const BuyEgldButton = () => {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button
           key="1"
           className="bg-gradient-to-r from-[#434190] to-[#9059ff] text-white font-semibold py-2 h-auto  px-8 rounded-full flex items-center justify-center space-x-2"
         >
-          <span className="bg-green-500 text-white  py-[2px] px-2 rounded-full text-xs">
-            NEW
-          </span>
           <WalletIcon className="text-white h-5 w-5" />
           <span>Buy EGLD</span>
         </Button>

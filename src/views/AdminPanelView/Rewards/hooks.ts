@@ -1,3 +1,4 @@
+import { fetchAxiosDapfy } from "@/services/rest/dapfy-api";
 import { fetchUserTwitterTask } from "@/services/rest/dapfy-api/task";
 import { useSearchParams } from "next/navigation";
 import useSwr from "swr";
@@ -11,6 +12,22 @@ export const useGetRewardsLeaderboard = () => {
   return {
     leaderboard: data?.users || [],
     current: data?.current,
+    error,
+    isLoading,
+  };
+};
+
+export const useGetBlackListUsers = () => {
+  const { data, error, isLoading } = useSwr<{
+    users: {
+      username: string;
+      xid: string;
+      id: string;
+    }[];
+  }>("/xuser/blacklist", fetchAxiosDapfy);
+
+  return {
+    users: data?.users || [],
     error,
     isLoading,
   };

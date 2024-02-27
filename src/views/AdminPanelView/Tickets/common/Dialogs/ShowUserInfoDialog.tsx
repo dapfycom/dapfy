@@ -65,7 +65,13 @@ const ShowUserInfoDialog = ({
 
 export default ShowUserInfoDialog;
 
-const InfoItem = ({ value, label }: { value?: string; label: string }) => {
+export const InfoItem = ({
+  value,
+  label,
+}: {
+  value?: string;
+  label: string;
+}) => {
   const handleCopy = () => {
     copyTextToClipboard(value || "");
     toast("Copied to clipboard");

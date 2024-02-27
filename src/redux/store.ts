@@ -2,6 +2,7 @@ import adminTicketReducer from "@/views/AdminPanelView/Tickets/adminTicketsSlice
 import coinFlipReducer from "@/views/CoinFlipView/lib/con-flip-slice";
 import defiReducer from "@/views/DefiView/utils/defi-slice";
 import dustReducer from "@/views/DustView/lib/dust-slice";
+import rewardsReducer from "@/views/RewardsView/lib/rewards-slice";
 import swapAggregatorReducer from "@/views/SwapAggregator/lib/swap-slice";
 import swapReducer from "@/views/SwapView/lib/swap-slice";
 import swapLpReducer from "@/views/SwapView/lib/swapLp-slice";
@@ -19,6 +20,7 @@ export function makeStore() {
       swapAggregator: swapAggregatorReducer,
       defi: defiReducer,
       adminTicket: adminTicketReducer,
+      rewards: rewardsReducer,
     },
   });
 }
