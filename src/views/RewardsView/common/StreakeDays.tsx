@@ -10,7 +10,7 @@ export default function StreakDays() {
     <div className="flex items-center justify-center w-full  rounded-lg  my-[-10px]">
       <div className="grid grid-cols-1 items-center gap-4 text-center">
         <div className="flex items-center justify-center">
-          <span className="text-8xl font-extrabold leading-none tracking-tighter text-[#FF6347] dark:text-[#FF6347]">
+          <span className="text-8xl font-extrabold leading-none tracking-tighter gradienteTitle">
             {userStreak}
           </span>
         </div>
