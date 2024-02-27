@@ -178,6 +178,7 @@ export const useGetStreak = () => {
       ]);
     }
   );
+
   return {
     userStreak: data ? new BigNumber(data as BigNumber).toNumber() : 0,
     mutate,
