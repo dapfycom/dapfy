@@ -29,7 +29,7 @@ export const tools: Tool[] = [
   {
     name: "Track your payments",
     description: "An easy way to track your payments",
-    cover: "/images/xstkRewards.jpg",
+    cover: "/images/x-payments-tool.jpg",
     link: routeNames.xpayments,
   },
 ];
@@ -55,7 +55,7 @@ const ToolsView = () => {
           <Separator className="my-4" />
           <div className="relative">
             <ScrollArea>
-              <div className="flex flex-col sm:flex-row gap-4 pb-4">
+              <div className="flex justify-center flex-wrap gap-4 pb-4">
                 {tools.map((tool) => (
                   <ToolCard
                     link={tool.link}

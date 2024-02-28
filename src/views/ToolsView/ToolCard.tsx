@@ -30,6 +30,7 @@ export function ToolCard({
             alt={tool.name}
             width={width}
             height={height}
+            unoptimized={true}
             className={cn(
               "h-auto w-auto object-cover transition-all hover:scale-105",
               aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
