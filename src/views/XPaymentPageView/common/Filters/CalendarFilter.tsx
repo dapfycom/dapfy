@@ -40,7 +40,7 @@ export function CalendarFilter({
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col sm:flex-row gap-4">
       <div className="flex flex-col w-full gap-[6px] pt-[2.6px]">
         <Label>From Date</Label>
         <Popover>

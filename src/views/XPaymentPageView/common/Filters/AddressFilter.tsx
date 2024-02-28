@@ -22,7 +22,7 @@ const AddressFilter = () => {
     }
   }, [address, setFieldValue, values.receiver]);
   return (
-    <div className="flex  gap-4 w-full mt-[-3px]">
+    <div className="flex flex-col sm:flex-row  gap-4 w-full mt-[-3px]">
       <div className="w-full">
         <Label>Receiver</Label>
         <Input
