@@ -35,7 +35,7 @@ const useGetMultipleElrondTokens = (tokensIdentifiers: string[]) => {
 
   let finalData: IElrondToken[] = data?.data ? [...data?.data] : [];
   if (isEgldonTokens) {
-    if (egldData && finalData.length > 0) {
+    if (egldData) {
       if (finalData.findIndex((item) => item.identifier === "EGLD") === -1) {
         finalData.unshift({
           type: "FungibleESDT",

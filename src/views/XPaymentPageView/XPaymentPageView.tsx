@@ -1,9 +1,10 @@
+"use client";
 import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/PageHeader/PageHeader";
 import Container from "@/components/ui-system/Container";
-import PaymentsTable from "./common/PaymentsTable";
+import FormikContainer from "./common/FormikContainer/FormikContainer";
 
 function XPaymentPageView() {
   return (
@@ -17,8 +18,8 @@ function XPaymentPageView() {
         <PageHeaderDescription className="mb-10">
           Track your payments on multiversx
         </PageHeaderDescription>
-        <PaymentsTable />
       </div>
+      <FormikContainer />
     </Container>
   );
 }
