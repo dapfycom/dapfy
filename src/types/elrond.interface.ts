@@ -321,6 +321,7 @@ export interface ITransacation {
         token: string;
         decimals: number;
         value: string;
+        identifier: string;
       }[];
       receiver: string;
       functionName: string;
