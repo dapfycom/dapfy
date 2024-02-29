@@ -42,6 +42,7 @@ const AggregatorView = () => {
       functionName: "claimProtocolFee",
 
       arg: [new AddressValue(new Address(integrator))],
+      gasL: 100_000_000,
     });
 
     setSessionId(res?.sessionId);
