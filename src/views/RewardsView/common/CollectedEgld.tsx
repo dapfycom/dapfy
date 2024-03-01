@@ -96,7 +96,7 @@ const CollectedEgld = () => {
               </li>
               <li>
                 <UserTask
-                  text=" Interact with one of our DeFi tools"
+                  text="Swap & Burn Bsk on Burnify to double your earnings 🔥"
                   completed={isUserInteractedDefiTool}
                 />
               </li>
