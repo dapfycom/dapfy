@@ -95,10 +95,16 @@ const CollectedEgld = () => {
                 </a>
               </li>
               <li>
-                <UserTask
-                  text="Swap & Burn Bsk on Burnify to double your earnings 🔥"
-                  completed={isUserInteractedDefiTool}
-                />
+                <a
+                  href="https://burnify.app/swap-burn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Swap & Burn Bsk on Burnify to double your earnings 🔥"
+                    completed={isUserInteractedDefiTool}
+                  />
+                </a>
               </li>
             </ul>
           </div>

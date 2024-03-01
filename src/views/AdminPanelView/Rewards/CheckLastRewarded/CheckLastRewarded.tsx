@@ -31,7 +31,6 @@ const CheckLastRewarded = () => {
   const hexData = decodeBase64ToString(data[0].data || "");
   const addressInHex = hexData.split("@")[2];
   const addressList = decodeHexToListOfAddress(addressInHex);
-  console.log({ addressList });
 
   return (
     <div>
