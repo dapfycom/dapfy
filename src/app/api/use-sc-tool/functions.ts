@@ -1,8 +1,51 @@
 import { selectedNetwork } from "@/config/network";
+import { decodeBase64ToString } from "@/lib/coder";
 import { timeStampToSeconds } from "@/lib/date";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
-import { excludeSmartContracts } from "./excluded-sc";
+import { BytesValue } from "@multiversx/sdk-core/out";
 
+// export const UserAddressHasInteracted = async (payload: {
+//   to: Date;
+//   from: Date;
+//   address?: string;
+// }) => {
+//   if (!payload.address) {
+//     return false;
+//   }
+
+//   const results = await fetchTransactions({
+//     before: timeStampToSeconds(payload.to.getTime()),
+//     after: timeStampToSeconds(payload.from.getTime()),
+//     sender: payload.address,
+//     size: 1000,
+//     status: "success",
+//   });
+
+//   const scAddressArr = Object.entries(selectedNetwork.scAddress);
+
+//   let hasInteracted = false;
+
+//   for (let index = 0; index < scAddressArr.length && !hasInteracted; index++) {
+//     const addressElement = scAddressArr[index];
+
+//     if (excludeSmartContracts.includes(addressElement[0])) {
+//       continue;
+//     }
+
+//     for (let j = 0; j < results.length && !hasInteracted; j++) {
+//       const tx = results[j];
+
+//       if (
+//         tx.receiver === addressElement[1] ||
+//         tx.action?.arguments?.receiver === addressElement[1]
+//       ) {
+//         hasInteracted = true;
+//       }
+//     }
+//   }
+
+//   return hasInteracted;
+// };
 export const UserAddressHasInteracted = async (payload: {
   to: Date;
   from: Date;
@@ -16,32 +59,25 @@ export const UserAddressHasInteracted = async (payload: {
     before: timeStampToSeconds(payload.to.getTime()),
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
-    size: 1000,
     status: "success",
+    receiver: "erd1qqqqqqqqqqqqqpgqxetccmv9rjefu2fwtw7a6kkx0tsqtqxpp4ssj8shz4",
+    function: "deposit",
   });
-
-  const scAddressArr = Object.entries(selectedNetwork.scAddress);
 
   let hasInteracted = false;
 
-  for (let index = 0; index < scAddressArr.length && !hasInteracted; index++) {
-    const addressElement = scAddressArr[index];
+  results.forEach((transaction) => {
+    const hexData = decodeBase64ToString(transaction.data || "");
 
-    if (excludeSmartContracts.includes(addressElement[0])) {
-      continue;
+    const expectedToken = hexData.split("@")[6];
+
+    if (
+      BytesValue.fromHex(expectedToken).toString() ===
+      selectedNetwork.tokensID.bsk
+    ) {
+      hasInteracted = true;
     }
-
-    for (let j = 0; j < results.length && !hasInteracted; j++) {
-      const tx = results[j];
-
-      if (
-        tx.receiver === addressElement[1] ||
-        tx.action?.arguments?.receiver === addressElement[1]
-      ) {
-        hasInteracted = true;
-      }
-    }
-  }
+  });
 
   return hasInteracted;
 };
