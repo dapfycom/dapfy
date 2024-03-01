@@ -127,7 +127,7 @@ const CollectedEgld = () => {
 
             <Button
               key="1"
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-2 text-white shadow-md"
+              className="inline-flex items-center justify-center rounded-full  px-6 py-2 text-white shadow-md"
               onClick={claimRewards}
               disabled={new BigNumber(rewards).isZero()}
             >

@@ -40,7 +40,7 @@ const FarmMainButtons = ({ isOpen }: IProps) => {
             Harvest
           </Button>
           <Button
-            className="text-sm w-full lg:w-auto bg-[#ff9900] hover:text-[#ff9900] text-white"
+            className="text-sm w-full lg:w-auto  text-white"
             onClick={handleStakeLp}
           >
             Stake LP

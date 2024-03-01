@@ -92,7 +92,7 @@ const GameActions = () => {
               <div className="flex flex-col gap-2 flex-1">
                 <div className="flex w-full gap-4">
                   <Button
-                    className="w-full  bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
+                    className="w-full   text-white gap-3"
                     variant={"secondary"}
                     onClick={isLoggedIn ? handleFlip : handleConnect}
                   >

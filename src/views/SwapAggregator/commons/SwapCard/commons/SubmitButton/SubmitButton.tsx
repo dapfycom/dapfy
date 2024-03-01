@@ -90,7 +90,7 @@ const SubmitButton = () => {
       {txSuccess && <Realistic />}
       <Button
         onClick={handleSwap}
-        className="w-full  bg-[#ff9900] hover:text-[#ff9900] text-white gap-3"
+        className="w-full   text-white gap-3"
         disabled={(!aggregatorData || !InsufficientBalance) && isLoggedIn}
       >
         {buttonText}
