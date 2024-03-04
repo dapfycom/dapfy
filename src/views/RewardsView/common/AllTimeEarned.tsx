@@ -43,7 +43,7 @@ const AllTimeEarned = () => {
       )}
 
       <div className="flex items-center w-full flex-col md:flex-row  gap-3">
-        <div className="flex  justify-between items-center flex-1">
+        <div className="flex  justify-center items-center flex-1">
           <div className="flex gap-3 items-center">
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -65,12 +65,10 @@ const AllTimeEarned = () => {
 
             <div className="text-left">
               <p>{user?.name}</p>
-              <p className="text-muted-foreground">
-                @{user?.username} <span className="text-gray-500">You</span>
-              </p>
+              <p className="text-muted-foreground">@{user?.username}</p>
+              <div className="text-gray-300">{formatAddress(address)}</div>
             </div>
           </div>
-          <div className="text-gray-300">{formatAddress(address)}</div>
         </div>
       </div>
     </div>
