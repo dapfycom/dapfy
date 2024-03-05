@@ -1,5 +1,5 @@
+import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
-import Image from "next/image";
 const DashboardHeading = () => {
   const { isAuthenticated } = useXAuthentication();
 
@@ -8,26 +8,12 @@ const DashboardHeading = () => {
   }
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="mb-10">
-        <Image
-          className="block dark:hidden"
-          src={"/images/logo-v2-black.png"}
-          alt="Dapfy"
-          width={200}
-          height={80}
-        />
-
-        <Image
-          className="hidden dark:block"
-          src={"/images/logo-v2-white.png"}
-          alt="Dapfy"
-          width={200}
-          height={80}
-        />
-      </div>
-      <h1 className="text-4xl sm:text-6xl gradienteTitle mb-5">
-        Get Rewarded For Your Interactions
-      </h1>
+      <PageHeaderHeading className="mb-6">
+        <span className={"gradienteTitle"}>
+          {" "}
+          Get Rewarded For Your Interactions
+        </span>
+      </PageHeaderHeading>
       <div className="items-center justify-center text-center  sm:text-2xl flex flex-col sm:flex-row">
         <div>Built for 𝕏, powered by</div>
         <span className=" mx-auto sm:m-0 w-fit">
