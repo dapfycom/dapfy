@@ -44,6 +44,8 @@ export class SmartContractInteraction {
       realValue?: BigNumber.Value;
     }
   ): Transaction {
+    console.log({ interaction, options });
+
     const sender = store.getState().dapp.userAddress;
     const senderAddress = new Address(sender);
 

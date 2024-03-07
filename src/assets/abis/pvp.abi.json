@@ -1,0 +1,325 @@
+{
+  "buildInfo": {
+    "rustc": {
+      "version": "1.72.0-nightly",
+      "commitHash": "8c74a5d27c644a0f7a22bb2fa8dd3ff8257bc220",
+      "commitDate": "2023-06-14",
+      "channel": "Nightly",
+      "short": "rustc 1.72.0-nightly (8c74a5d27 2023-06-14)"
+    },
+    "contractCrate": {
+      "name": "contract",
+      "version": "0.0.0"
+    },
+    "framework": {
+      "name": "multiversx-sc",
+      "version": "0.45.1"
+    }
+  },
+  "name": "PvPGame",
+  "constructor": {
+    "inputs": [
+      {
+        "name": "token_identifier",
+        "type": "EgldOrEsdtTokenIdentifier"
+      },
+      {
+        "name": "percent_fee",
+        "type": "u32"
+      },
+      {
+        "name": "randon_sc_address",
+        "type": "Address"
+      }
+    ],
+    "outputs": []
+  },
+  "endpoints": [
+    {
+      "name": "upgrade",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "create_game",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [
+        {
+          "name": "username",
+          "type": "Option<bytes>"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "join_game",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [
+        {
+          "name": "game_id",
+          "type": "u32"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "Address"
+        }
+      ]
+    },
+    {
+      "name": "cancel_game",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "game_id",
+          "type": "u32"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "update_fee",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "fee",
+          "type": "u32"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "claim_fee_rewards",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "getActiveGames",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "List<GameWithCreator>"
+        }
+      ]
+    },
+    {
+      "name": "getActiveOrFinishedGames",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "List<Game>"
+        }
+      ]
+    },
+    {
+      "name": "getGames",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<u32>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getGameById",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "game_id",
+          "type": "u32"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "Game"
+        }
+      ]
+    },
+    {
+      "name": "getUserInfo",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "UserInfo"
+        }
+      ]
+    },
+    {
+      "name": "getUserEarnings",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getAllowedTokens",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<EgldOrEsdtTokenIdentifier>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getFeePercentage",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "getFeeRewards",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<GamePayment>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "random_sc_address",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "Address"
+        }
+      ]
+    }
+  ],
+  "esdtAttributes": [],
+  "hasCallback": true,
+  "types": {
+    "Game": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "id",
+          "type": "u32"
+        },
+        {
+          "name": "amount",
+          "type": "BigUint"
+        },
+        {
+          "name": "token_identifier",
+          "type": "EgldOrEsdtTokenIdentifier"
+        },
+        {
+          "name": "user_creator",
+          "type": "Address"
+        },
+        {
+          "name": "user_challenger",
+          "type": "Address"
+        },
+        {
+          "name": "status",
+          "type": "GameStatus"
+        },
+        {
+          "name": "winner",
+          "type": "Address"
+        },
+        {
+          "name": "date",
+          "type": "u64"
+        }
+      ]
+    },
+    "GamePayment": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "token_identifier",
+          "type": "EgldOrEsdtTokenIdentifier"
+        },
+        {
+          "name": "amount",
+          "type": "BigUint"
+        }
+      ]
+    },
+    "GameStatus": {
+      "type": "enum",
+      "variants": [
+        {
+          "name": "Created",
+          "discriminant": 0
+        },
+        {
+          "name": "Finished",
+          "discriminant": 1
+        },
+        {
+          "name": "Canceled",
+          "discriminant": 2
+        }
+      ]
+    },
+    "GameWithCreator": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "game",
+          "type": "Game"
+        },
+        {
+          "name": "user_info",
+          "type": "UserInfo"
+        }
+      ]
+    },
+    "UserInfo": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "games_created",
+          "type": "u32"
+        },
+        {
+          "name": "games_challenged",
+          "type": "u32"
+        },
+        {
+          "name": "games_won",
+          "type": "u32"
+        },
+        {
+          "name": "username",
+          "type": "bytes"
+        }
+      ]
+    }
+  }
+}
