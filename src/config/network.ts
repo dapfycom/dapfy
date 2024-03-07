@@ -190,7 +190,4 @@ const networkConfig = {
 };
 export const ENVIRONMENT: ENVIROMENTTYPE = "devnet";
 
-export const selectedNetwork =
-  networkConfig[
-    process.env.NODE_ENV === "production" ? "mainnet" : ENVIRONMENT
-  ];
+export const selectedNetwork = networkConfig[ENVIRONMENT];
