@@ -1,5 +1,6 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
+import { routeNames } from "@/config/routes";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
@@ -7,6 +8,7 @@ import { formatBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import queryString from "query-string";
 import {
   useGetIsUserInteractedDefiTool,
@@ -95,8 +97,8 @@ const CollectedEgld = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="https://burnify.app/swap-burn"
+                <Link
+                  href={routeNames.dust}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -104,7 +106,7 @@ const CollectedEgld = () => {
                     text="Use the Dust Converter"
                     completed={isUserInteractedDefiTool}
                   />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
