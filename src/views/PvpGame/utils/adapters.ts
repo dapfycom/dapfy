@@ -5,7 +5,7 @@ export const adaptGame = (game?: IScGameInfo) => {
   }
   return {
     id: game.id.toNumber(),
-    amount: game.amount.toNumber(),
+    amount: game.amount.toString(),
     token_identifier: game.token_identifier,
     user_creator: game.user_creator.bech32(),
     user_challenger: game.user_challenger.bech32(),

@@ -11,9 +11,9 @@ import { adaptGame, adaptGamesWithUserInfo, adaptUserInfo } from "./adapters";
 // sc calls
 export const createGame = (
   amount: number,
+  username?: string,
   tokenIdentifier: string = "EGLD",
-  decimals: number = 18,
-  username?: string
+  decimals: number = 18
 ) => {
   const args = [];
 
@@ -29,6 +29,38 @@ export const createGame = (
     arg: args,
     value: amount,
     gasL: 80_000_000,
+  });
+};
+
+export const joinGame = (
+  gameId: number,
+  amount: string,
+  username?: string,
+  tokenIdentifier: string = "EGLD",
+  decimals: number = 18
+) => {
+  const args: any[] = [new U32Value(gameId)];
+
+  if (username) {
+    args.push(BytesValue.fromUTF8(username));
+  }
+  getSmartContractInteraction("pvpWsp").ESDTorEGLDTransfer({
+    functionName: "join_game",
+    token: {
+      collection: tokenIdentifier,
+      decimals: decimals,
+    },
+    arg: args,
+    realValue: amount,
+    gasL: 80_000_000,
+  });
+};
+
+export const cancelGame = (gameId: number) => {
+  getSmartContractInteraction("pvpWsp").scCall({
+    functionName: "cancel_game",
+    arg: [new U32Value(gameId)],
+    gasL: 20_000_000,
   });
 };
 
