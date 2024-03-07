@@ -1,9 +1,15 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { formatAddress } from "@/utils/functions/formatAddress";
+import { useGetActiveGames } from "@/views/PvpGame/utils/hooks";
 import { createGame } from "@/views/PvpGame/utils/services";
 
 export default function PvPPage() {
+  const { games } = useGetActiveGames();
+
+  console.log({ games });
+
   return (
     <div className="h-screen  p-8 flex flex-col items-center">
       <div className="p-4 rounded-lg mb-4 text-center">
@@ -26,86 +32,59 @@ export default function PvPPage() {
         <div>
           <h2 className="text-2xl font-semibold mb-4">Active Game Sessions</h2>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    alt="User Avatar"
-                    src="/placeholder-avatar.jpg"
-                  />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm text-[#888eb0]">Game ID: 3982</p>
-                  <p className="text-lg font-semibold">Username123</p>
+            {games.map((game, index) => {
+              return (
+                <div
+                  key={game.game?.id || index}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
+                  <div className="flex items-center space-x-4">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage
+                        alt="User Avatar"
+                        src="/placeholder-avatar.jpg"
+                      />
+                      <AvatarFallback>U</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm text-[#888eb0]">
+                        Game ID: {game.game?.id}
+                      </p>
+                      <p className="text-lg font-semibold">
+                        {game.user_creator?.username ||
+                          formatAddress(game.game?.user_creator || "")}
+                      </p>
+                    </div>
+                  </div>
+                  <Button className=" ">Join</Button>
                 </div>
-              </div>
-              <Button className=" ">Join</Button>
-            </div>
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    alt="User Avatar"
-                    src="/placeholder-avatar.jpg"
-                  />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm text-[#888eb0]">Game ID: 3982</p>
-                  <p className="text-lg font-semibold">erdK092....2kj1</p>
-                </div>
-              </div>
-              <Button className=" ">Join</Button>
-            </div>
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    alt="User Avatar"
-                    src="/placeholder-avatar.jpg"
-                  />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm text-[#888eb0]">Game ID: 3982</p>
-                  <p className="text-lg font-semibold">Username456</p>
-                </div>
-              </div>
-              <Button className=" ">Join</Button>
-            </div>
+              );
+            })}
           </div>
         </div>
         <div>
           <h2 className="text-2xl font-semibold mb-4">My Games</h2>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <div>
-                  <p className="text-lg font-semibold">Game Title 1</p>
-                  <p className="text-sm text-[#888eb0]">Game ID: 1234</p>
+            {games.map((game, index) => {
+              return (
+                <div
+                  key={game.game?.id || index}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div>
+                      <p className="text-lg font-semibold">
+                        {game.user_creator?.username || game.game?.user_creator}
+                      </p>
+                      <p className="text-sm text-[#888eb0]">
+                        Game ID: {game.game?.id}
+                      </p>
+                    </div>
+                    <Button variant={"secondary"}>Cancel</Button>
+                  </div>
                 </div>
-                <Button variant={"secondary"}>Cancel</Button>
-              </div>
-            </div>
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <div>
-                  <p className="text-lg font-semibold">Game Title 2</p>
-                  <p className="text-sm text-[#888eb0]">Game ID: 5678</p>
-                </div>
-                <Button variant={"secondary"}>Cancel</Button>
-              </div>
-            </div>
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex items-center space-x-4">
-                <div>
-                  <p className="text-lg font-semibold">Game Title 3</p>
-                  <p className="text-sm text-[#888eb0]">Game ID: 9012</p>
-                </div>
-                <Button variant={"secondary"}>Cancel</Button>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
