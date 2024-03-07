@@ -1,8 +1,6 @@
 import { selectedNetwork } from "@/config/network";
-import { decodeBase64ToString } from "@/lib/coder";
 import { timeStampToSeconds } from "@/lib/date";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
-import { BytesValue } from "@multiversx/sdk-core/out";
 
 // export const UserAddressHasInteracted = async (payload: {
 //   to: Date;
@@ -60,24 +58,11 @@ export const UserAddressHasInteracted = async (payload: {
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
     status: "success",
-    receiver: "erd1qqqqqqqqqqqqqpgqxetccmv9rjefu2fwtw7a6kkx0tsqtqxpp4ssj8shz4",
-    function: "deposit",
+    receiver: selectedNetwork.scAddress.dust,
+    function: "swipe",
   });
 
-  let hasInteracted = false;
-
-  results.forEach((transaction) => {
-    const hexData = decodeBase64ToString(transaction.data || "");
-
-    const expectedToken = hexData.split("@")[6];
-
-    if (
-      BytesValue.fromHex(expectedToken).toString() ===
-      selectedNetwork.tokensID.bsk
-    ) {
-      hasInteracted = true;
-    }
-  });
+  let hasInteracted = results.length > 0;
 
   return hasInteracted;
 };

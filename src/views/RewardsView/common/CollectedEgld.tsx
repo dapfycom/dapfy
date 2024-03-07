@@ -101,7 +101,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Swap & Burn Bsk on Burnify to double your earnings 🔥"
+                    text="Use the Dust Converter"
                     completed={isUserInteractedDefiTool}
                   />
                 </a>
