@@ -66,8 +66,6 @@ export const UserAddressHasInteracted = async (payload: {
 
   let hasInteracted = false;
 
-  console.log(results);
-
   results.forEach((tx) => {
     const hexData = decodeBase64ToString(tx.data || "");
     const dataArr = hexData.split("@");
