@@ -6,29 +6,37 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  useGetActiveGames,
-  useGetUserActiveGames,
-} from "@/views/PvpGame/utils/hooks";
+import useDisclosure from "@/hooks/useDisclosure";
+import useGetXMinimalInfo from "@/hooks/useGetXMinimalInfo";
 import { createGame } from "@/views/PvpGame/utils/services";
+import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
+import React from "react";
+import { mutate } from "swr";
 import * as yup from "yup";
 
 const CreateGame = () => {
-  const { games } = useGetActiveGames();
-  const { games: userGames } = useGetUserActiveGames();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { user } = useGetXMinimalInfo();
+  const [sessionId, setSessionId] = React.useState<string | null>("");
 
-  console.log({ games });
   const formik = useFormik({
     initialValues: {
       amount: "",
     },
-    onSubmit: (values) => {
-      createGame(Number(values.amount), "firulaus", "EGLD", 18);
+    onSubmit: async (values) => {
+      const res = await createGame(
+        Number(values.amount),
+        user?.username,
+        user?.profile_image_url
+      );
+
+      setSessionId(res?.sessionId);
+
+      onClose();
     },
 
     validationSchema: yup.object().shape({
@@ -36,39 +44,60 @@ const CreateGame = () => {
     }),
   });
 
+  const onSuccess = React.useCallback(() => {
+    mutate("pvpWsp:getActiveGames");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useTrackTransactionStatus({
+    transactionId: sessionId,
+    onSuccess,
+
+    onFail: (transactionId: string | null, errorMessage?: string) => {
+      console.error("transactionId", transactionId);
+      console.error("errorMessage", errorMessage);
+    },
+  });
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="mb-6 ">Create a new game</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={formik.handleSubmit}>
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
-            </DialogDescription>
-          </DialogHeader>
+    <>
+      <Button className="mb-6" onClick={onOpen}>
+        Create a new game
+      </Button>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(open) => {
+          open ? onOpen() : onClose();
+        }}
+      >
+        <DialogContent className="sm:max-w-[425px]">
+          <form onSubmit={formik.handleSubmit}>
+            <DialogHeader>
+              <DialogTitle>Create Game</DialogTitle>
+              <DialogDescription>
+                Play with others users and earn EGLD
+              </DialogDescription>
+            </DialogHeader>
 
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="amount" className="text-right">
-                Amount
-              </Label>
-              <Input
-                id="amount"
-                className="col-span-3"
-                name="amount"
-                onChange={formik.handleChange}
-              />
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="amount" className="text-right">
+                  Amount
+                </Label>
+                <Input
+                  id="amount"
+                  className="col-span-3"
+                  name="amount"
+                  onChange={formik.handleChange}
+                />
+              </div>
             </div>
-          </div>
 
-          <Button type="submit">Send</Button>
-        </form>
-      </DialogContent>
-    </Dialog>
+            <Button type="submit">Send</Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

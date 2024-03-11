@@ -7,6 +7,7 @@ export interface IScUserInfo {
   games_won: BigNumber;
   games_lost: BigNumber;
   username: Buffer;
+  profile_url: Buffer;
 }
 
 export interface IScGameInfo {
@@ -21,4 +22,30 @@ export interface IScGameInfo {
   };
   winner: Address;
   date: BigNumber;
+}
+
+export interface IGameInfo {
+  id: number;
+  amount: string;
+  token_identifier: string;
+  user_creator: string;
+  user_challenger: string;
+  status: "Created" | "Finished" | "Canceled";
+  winner: string;
+  date: number;
+}
+
+export interface IUserInfo {
+  games_created: number;
+  games_challenged: number;
+  games_won: number;
+  games_lost: number;
+  username: string;
+  profile_url: string;
+}
+
+export interface IGameWithUserInfo {
+  game: IGameInfo | undefined;
+  user_creator: IUserInfo | undefined;
+  user_challenger: IUserInfo | undefined;
 }

@@ -8,9 +8,17 @@ export const useGetActiveGames = () => {
     "pvpWsp:getActiveGames",
     fetchActiveGames
   );
+  const games = data || [];
+  const displayGames = games.sort((a, b) => {
+    if (a.game?.date && b.game?.date) {
+      return b.game.date - a.game.date;
+    } else {
+      return 0;
+    }
+  });
 
   return {
-    games: data || [],
+    games: displayGames,
     error,
     isLoading,
   };

@@ -1,5 +1,11 @@
-import { IScGameInfo, IScUserInfo } from "./interface";
-export const adaptGame = (game?: IScGameInfo) => {
+import {
+  IGameInfo,
+  IGameWithUserInfo,
+  IScGameInfo,
+  IScUserInfo,
+  IUserInfo,
+} from "./interface";
+export const adaptGame = (game?: IScGameInfo): IGameInfo | undefined => {
   if (!game) {
     return;
   }
@@ -21,13 +27,12 @@ export const adaptGamesWithUserInfo = (
     user_creator: IScUserInfo;
     user_challenger: IScUserInfo;
   }[]
-) => {
+): IGameWithUserInfo[] | undefined => {
   if (!gamesWithInfo) {
     return;
   }
   return gamesWithInfo.map((gameI) => {
     return {
-      ...gameI,
       game: adaptGame(gameI.game),
       user_creator: adaptUserInfo(gameI.user_creator),
       user_challenger: adaptUserInfo(gameI.user_challenger),
@@ -35,7 +40,9 @@ export const adaptGamesWithUserInfo = (
   });
 };
 
-export const adaptUserInfo = (userInfo?: IScUserInfo) => {
+export const adaptUserInfo = (
+  userInfo?: IScUserInfo
+): IUserInfo | undefined => {
   if (!userInfo) {
     return;
   }
@@ -45,5 +52,6 @@ export const adaptUserInfo = (userInfo?: IScUserInfo) => {
     games_challenged: userInfo.games_challenged.toNumber(),
     games_won: userInfo.games_won.toNumber(),
     games_lost: userInfo.games_lost.toNumber(),
+    profile_url: userInfo.profile_url.toString("utf8"),
   };
 };

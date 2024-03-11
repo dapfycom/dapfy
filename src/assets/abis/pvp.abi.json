@@ -1,11 +1,11 @@
 {
   "buildInfo": {
     "rustc": {
-      "version": "1.72.0-nightly",
-      "commitHash": "8c74a5d27c644a0f7a22bb2fa8dd3ff8257bc220",
-      "commitDate": "2023-06-14",
+      "version": "1.76.0-nightly",
+      "commitHash": "d86d65bbc19b928387f68427fcc3a0da498d8a19",
+      "commitDate": "2023-12-10",
       "channel": "Nightly",
-      "short": "rustc 1.72.0-nightly (8c74a5d27 2023-06-14)"
+      "short": "rustc 1.76.0-nightly (d86d65bbc 2023-12-10)"
     },
     "contractCrate": {
       "name": "contract",
@@ -50,9 +50,15 @@
           "name": "username",
           "type": "optional<bytes>",
           "multi_arg": true
+        },
+        {
+          "name": "profile_url",
+          "type": "optional<bytes>",
+          "multi_arg": true
         }
       ],
-      "outputs": []
+      "outputs": [],
+      "allow_multiple_var_args": true
     },
     {
       "name": "join_game",
@@ -67,13 +73,19 @@
           "name": "username",
           "type": "optional<bytes>",
           "multi_arg": true
+        },
+        {
+          "name": "profile_url",
+          "type": "optional<bytes>",
+          "multi_arg": true
         }
       ],
       "outputs": [
         {
           "type": "Address"
         }
-      ]
+      ],
+      "allow_multiple_var_args": true
     },
     {
       "name": "cancel_game",
@@ -332,6 +344,10 @@
         },
         {
           "name": "username",
+          "type": "bytes"
+        },
+        {
+          "name": "profile_url",
           "type": "bytes"
         }
       ]

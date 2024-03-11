@@ -1,5 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { formatAddress } from "@/utils/functions/formatAddress";
+import { copyTextToClipboard } from "@/utils/functions/general";
 import { useGetUserActiveGames } from "@/views/PvpGame/utils/hooks";
 import { cancelGame } from "@/views/PvpGame/utils/services";
 const MyGames = () => {
@@ -18,8 +20,18 @@ const MyGames = () => {
             >
               <div className="flex items-center space-x-4">
                 <div>
-                  <p className="text-lg font-semibold">
-                    {game.user_creator?.username || game.game?.user_creator}
+                  <p
+                    className="text-lg font-semibold cursor-pointer"
+                    onClick={() =>
+                      copyTextToClipboard(
+                        game.user_creator?.username ||
+                          game.game?.user_creator ||
+                          " "
+                      )
+                    }
+                  >
+                    {game.user_creator?.username ||
+                      formatAddress(game.game?.user_creator)}
                   </p>
                   <p className="text-sm text-[#888eb0]">
                     Game ID: {game.game?.id}

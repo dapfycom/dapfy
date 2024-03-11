@@ -6,21 +6,26 @@ import {
   BytesValue,
   U32Value,
 } from "@multiversx/sdk-core/out";
+import { getCookie } from "cookies-next";
 import { adaptGame, adaptGamesWithUserInfo, adaptUserInfo } from "./adapters";
 
 // sc calls
 export const createGame = (
   amount: number,
   username?: string,
+  profileUrl?: string,
   tokenIdentifier: string = "EGLD",
   decimals: number = 18
 ) => {
   const args = [];
 
-  if (username) {
+  const incognitoPreference = getCookie("incognito-mode");
+  if (username && profileUrl && incognitoPreference !== "true") {
     args.push(BytesValue.fromUTF8(username));
+    args.push(BytesValue.fromUTF8(profileUrl));
   }
-  getSmartContractInteraction("pvpWsp").ESDTorEGLDTransfer({
+
+  return getSmartContractInteraction("pvpWsp").ESDTorEGLDTransfer({
     functionName: "create_game",
     token: {
       collection: tokenIdentifier,
