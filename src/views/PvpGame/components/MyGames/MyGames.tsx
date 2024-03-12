@@ -9,7 +9,7 @@ const MyGames = () => {
   const { games: userGames, isLoading } = useGetUserActiveGames();
 
   return (
-    <div className="mt-12">
+    <div className="">
       {isLoading ? (
         <div className="gap-8 flex flex-col">
           <Skeleton className="min-h-[94px]" />

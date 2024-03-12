@@ -1,21 +1,22 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ActiveGames from "../ActiveGames/ActiveGames";
-import MyGames from "../MyGames/MyGames";
+import GameHistory from "../GamesHistory/GameHistory";
 
 const GamesTabs = () => {
   return (
     <Tabs defaultValue="account" className="w-full">
-      <TabsList>
-        <TabsTrigger value="account">Active Games</TabsTrigger>
-        <TabsTrigger value="password">My Games</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <ActiveGames />
-      </TabsContent>
-      <TabsContent value="password">
-        {" "}
-        <MyGames />
-      </TabsContent>
+      <div className="w-full flex items-center flex-col">
+        <TabsList>
+          <TabsTrigger value="account">Active Games</TabsTrigger>
+          <TabsTrigger value="password">Last 50 Games</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account" className="w-full">
+          <ActiveGames />
+        </TabsContent>
+        <TabsContent value="password" className="w-full mt-[52px]">
+          <GameHistory />
+        </TabsContent>
+      </div>
     </Tabs>
   );
 };

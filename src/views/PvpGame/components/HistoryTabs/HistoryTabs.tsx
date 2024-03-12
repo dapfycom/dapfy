@@ -1,18 +1,18 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import GameHistory from "../GamesHistory/GameHistory";
+import MyGames from "../MyGames/MyGames";
 import UserGamesHistory from "../UserGamesHistory/UserGamesHistory";
 
 const HistoryTabs = () => {
   return (
-    <Tabs defaultValue="history" className="w-full">
-      <TabsList className="mb-10">
-        <TabsTrigger value="history">Last 50 Games</TabsTrigger>
+    <Tabs defaultValue="history" className="w-full flex items-center flex-col">
+      <TabsList className="mb-11">
+        <TabsTrigger value="history">My Games</TabsTrigger>
         <TabsTrigger value="user_history">My Last 50 Games</TabsTrigger>
       </TabsList>
-      <TabsContent value="history">
-        <GameHistory />
+      <TabsContent value="history" className="w-full">
+        <MyGames />
       </TabsContent>
-      <TabsContent value="user_history">
+      <TabsContent value="user_history" className="w-full">
         {" "}
         <UserGamesHistory />
       </TabsContent>
