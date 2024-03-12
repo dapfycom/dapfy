@@ -129,6 +129,7 @@ export const fetchScStats = async () => {
         token: vol.token,
       };
     }),
+    total_users: data.total_users.toNumber(),
   };
 };
 

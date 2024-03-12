@@ -338,6 +338,10 @@
         {
           "name": "volume",
           "type": "List<GameVolume>"
+        },
+        {
+          "name": "total_users",
+          "type": "u32"
         }
       ]
     },

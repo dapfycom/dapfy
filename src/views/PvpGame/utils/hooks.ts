@@ -28,12 +28,15 @@ export const useStatsGAmes = () => {
   const { data, error, isLoading } = useSWR<{
     gamesPlayed: number;
     volume: { token: string; amount: number }[];
+    total_users: number;
   }>("pvpWsp:getStats", fetchScStats);
+  console.log({ data });
 
   return {
     stats: data || {
       gamesPlayed: 0,
       volume: [],
+      total_users: 0,
     },
     error,
     isLoading,

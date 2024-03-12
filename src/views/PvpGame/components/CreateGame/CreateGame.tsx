@@ -10,7 +10,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useDisclosure from "@/hooks/useDisclosure";
+import useGetAccountToken from "@/hooks/useGetAccountToken";
 import useGetXMinimalInfo from "@/hooks/useGetXMinimalInfo";
+import { formatBalance } from "@/utils/functions/formatBalance";
 import { createGame } from "@/views/PvpGame/utils/services";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
@@ -22,7 +24,7 @@ const CreateGame = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { user } = useGetXMinimalInfo();
   const [sessionId, setSessionId] = React.useState<string | null>("");
-
+  const { accountToken } = useGetAccountToken("EGLD");
   const formik = useFormik({
     initialValues: {
       amount: "",
@@ -80,10 +82,11 @@ const CreateGame = () => {
             </DialogHeader>
 
             <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="amount" className="text-right">
-                  Amount
-                </Label>
+              <div className="flex flex-col  gap-2">
+                <div className="flex w-full justify-between">
+                  <Label htmlFor="amount">Amount</Label>
+                  <div>{formatBalance(accountToken)} EGLD</div>
+                </div>
                 <Input
                   id="amount"
                   className="col-span-3"
@@ -93,7 +96,9 @@ const CreateGame = () => {
               </div>
             </div>
 
-            <Button type="submit">Send</Button>
+            <Button type="submit" className="w-full">
+              Start Battle
+            </Button>
           </form>
         </DialogContent>
       </Dialog>

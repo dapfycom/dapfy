@@ -56,7 +56,6 @@ const ActiveGames = () => {
   };
 
   const txSuccess = Boolean(txData);
-  console.log({ txData });
 
   return (
     <div>
