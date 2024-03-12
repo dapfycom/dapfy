@@ -49,3 +49,18 @@ export interface IGameWithUserInfo {
   user_creator: IUserInfo | undefined;
   user_challenger: IUserInfo | undefined;
 }
+
+export interface IUserInHistory {
+  address: string;
+  username: string;
+  profile_url: string;
+}
+
+export interface IHistoryData {
+  gameId: number;
+  creator: IUserInHistory;
+  challenger: IUserInHistory;
+  winner: IUserInHistory;
+  txHash: string;
+  date: number;
+}

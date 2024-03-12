@@ -78,6 +78,21 @@
           "name": "profile_url",
           "type": "optional<bytes>",
           "multi_arg": true
+        },
+        {
+          "name": "_creator_address",
+          "type": "optional<Address>",
+          "multi_arg": true
+        },
+        {
+          "name": "_creator_username",
+          "type": "optional<bytes>",
+          "multi_arg": true
+        },
+        {
+          "name": "_creator_profile_url",
+          "type": "optional<bytes>",
+          "multi_arg": true
         }
       ],
       "outputs": [
@@ -134,6 +149,26 @@
       "outputs": [
         {
           "type": "List<GameWithCreator>"
+        }
+      ]
+    },
+    {
+      "name": "getFinishedGames",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "List<GameWithCreator>"
+        }
+      ]
+    },
+    {
+      "name": "getStats",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "GameStats"
         }
       ]
     },
@@ -273,6 +308,10 @@
         {
           "name": "date",
           "type": "u64"
+        },
+        {
+          "name": "incognito",
+          "type": "bool"
         }
       ]
     },
@@ -286,6 +325,19 @@
         {
           "name": "amount",
           "type": "BigUint"
+        }
+      ]
+    },
+    "GameStats": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "total_games",
+          "type": "u32"
+        },
+        {
+          "name": "volume",
+          "type": "List<GameVolume>"
         }
       ]
     },
@@ -303,6 +355,19 @@
         {
           "name": "Canceled",
           "discriminant": 2
+        }
+      ]
+    },
+    "GameVolume": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "token",
+          "type": "EgldOrEsdtTokenIdentifier"
+        },
+        {
+          "name": "amount",
+          "type": "BigUint"
         }
       ]
     },

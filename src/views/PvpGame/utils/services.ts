@@ -1,5 +1,8 @@
+import { selectedNetwork } from "@/config/network";
+import { fetchTransactions } from "@/services/rest/elrond/transactions";
 import { getSmartContractInteraction } from "@/services/sc";
 import { scQuery } from "@/services/sc/queries";
+import { Base64toString } from "@/utils/functions/sc";
 import {
   Address,
   AddressValue,
@@ -8,6 +11,7 @@ import {
 } from "@multiversx/sdk-core/out";
 import { getCookie } from "cookies-next";
 import { adaptGame, adaptGamesWithUserInfo, adaptUserInfo } from "./adapters";
+import { IHistoryData, IUserInHistory } from "./interface";
 
 // sc calls
 export const createGame = (
@@ -40,16 +44,29 @@ export const createGame = (
 export const joinGame = (
   gameId: number,
   amount: string,
-  username?: string,
+  username: string = "",
+  profileUrl: string = "",
+  creatorAddress: string,
+  creatorUsername: string = "",
+  creatorProfileUrl: string = "",
   tokenIdentifier: string = "EGLD",
   decimals: number = 18
 ) => {
   const args: any[] = [new U32Value(gameId)];
 
-  if (username) {
+  const incognitoPreference = getCookie("incognito-mode");
+  if (incognitoPreference === "true") {
+    args.push(BytesValue.fromUTF8(""));
+    args.push(BytesValue.fromUTF8(""));
+  } else {
     args.push(BytesValue.fromUTF8(username));
+    args.push(BytesValue.fromUTF8(profileUrl));
   }
-  getSmartContractInteraction("pvpWsp").ESDTorEGLDTransfer({
+  args.push(new AddressValue(Address.fromBech32(creatorAddress)));
+  args.push(BytesValue.fromUTF8(creatorUsername));
+  args.push(BytesValue.fromUTF8(creatorProfileUrl));
+
+  return getSmartContractInteraction("pvpWsp").ESDTorEGLDTransfer({
     functionName: "join_game",
     token: {
       collection: tokenIdentifier,
@@ -57,7 +74,7 @@ export const joinGame = (
     },
     arg: args,
     realValue: amount,
-    gasL: 80_000_000,
+    gasL: 20_000_000,
   });
 };
 
@@ -97,4 +114,96 @@ export const fetchUserEarnings = async (address: string) => {
   ]);
 
   return res?.firstValue?.valueOf().toString();
+};
+
+export const fetchScStats = async () => {
+  const res = await scQuery("pvpWsp", "getStats");
+
+  const data = res?.firstValue?.valueOf();
+
+  return {
+    gamesPlayed: data.total_games.toNumber(),
+    volume: data.volume.map((vol: any) => {
+      return {
+        amount: vol.amount.toString(),
+        token: vol.token,
+      };
+    }),
+  };
+};
+
+export const fetchGamesHistory = async (): Promise<IHistoryData[]> => {
+  const transactions = await fetchTransactions({
+    receiver: selectedNetwork.scAddress.pvp,
+    function: "join_game",
+    size: 50,
+    status: "success",
+    withScResults: true,
+  });
+  console.log({ transactions });
+
+  const history: IHistoryData[] = transactions.map((tx) => {
+    const dataHex = Base64toString(tx.data || "");
+
+    const parts = dataHex.split("@");
+    let challenger: IUserInHistory;
+    let creator: IUserInHistory;
+    let gameId = 0;
+    let winner: IUserInHistory = {
+      address: Address.Zero().bech32(),
+      profile_url: "",
+      username: "",
+    };
+
+    if (parts.length !== 7) {
+      challenger = {
+        address: tx.sender,
+        profile_url: "",
+        username: "",
+      };
+
+      creator = {
+        address: Address.Zero().bech32(),
+        profile_url: "",
+        username: "",
+      };
+    } else {
+      challenger = {
+        address: tx.sender,
+        username: Buffer.from(parts[2], "hex").toString(),
+        profile_url: Buffer.from(parts[3], "hex").toString(),
+      };
+
+      creator = {
+        address: Address.fromHex(parts[4]).bech32(),
+        username: Buffer.from(parts[5], "hex").toString(),
+        profile_url: Buffer.from(parts[6], "hex").toString(),
+      };
+
+      gameId = parseInt(parts[1]);
+      const results = tx.results || [];
+      if (results.length > 0) {
+        const winnerAddress = results[results.length - 1].receiver;
+
+        if (winnerAddress === challenger.address) {
+          winner = challenger;
+        } else {
+          winner = creator;
+        }
+      }
+    }
+
+    const data: IHistoryData = {
+      challenger: challenger,
+      creator: creator,
+      winner: winner,
+      txHash: tx.txHash,
+      date: tx.timestamp,
+      gameId: gameId,
+    };
+
+    return data;
+  });
+
+  return history;
 };
