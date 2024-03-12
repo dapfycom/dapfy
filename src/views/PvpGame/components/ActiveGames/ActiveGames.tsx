@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import { useGetAccount } from "@multiversx/sdk-dapp/hooks";
 import { useGetActiveGames } from "../../utils/hooks";
@@ -19,19 +20,32 @@ const ActiveGames = () => {
         </div>
       </div>
 
-      {games.length > 0 && !isLoading ? (
-        <div className="space-y-4">
-          {games.map((game, index) => {
-            if (!game.game) {
-              return null;
-            }
-            return <Game key={game.game?.id || index} game={game} />;
-          })}
+      {isLoading ? (
+        <div className="gap-8 flex flex-col">
+          <Skeleton className="min-h-[94px]" />
+          <Skeleton className="min-h-[94px]" />
+
+          <Skeleton className="min-h-[94px]" />
+          <Skeleton className="min-h-[94px]" />
+          <Skeleton className="min-h-[94px]" />
         </div>
       ) : (
-        <div className="w-full border rounded min-h-[300px] flex justify-center items-center">
-          <p>No games found</p>
-        </div>
+        <>
+          {games.length > 0 && !isLoading ? (
+            <div className="space-y-4">
+              {games.map((game, index) => {
+                if (!game.game) {
+                  return null;
+                }
+                return <Game key={game.game?.id || index} game={game} />;
+              })}
+            </div>
+          ) : (
+            <div className="w-full border rounded min-h-[300px] flex justify-center items-center">
+              <p>No games found</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
