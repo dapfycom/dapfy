@@ -39,6 +39,7 @@ const Game = ({ game }: IProps) => {
   const onSuccess = useCallback(() => {
     mutate("pvpWsp:getActiveGames");
     mutate("pvpWsp:getStats");
+    mutate("pvpWsp:getGamesHistory");
   }, []);
 
   useTrackTransactionStatus({
