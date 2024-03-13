@@ -1,5 +1,7 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import BigNumber from "bignumber.js";
+import { useState } from "react";
 import useSWR from "swr";
 import {
   fetchActiveGames,
@@ -7,7 +9,6 @@ import {
   fetchMinAmounts,
   fetchScStats,
 } from "./services";
-
 export const useGetActiveGames = () => {
   const { data, error, isLoading } = useSWR(
     "pvpWsp:getActiveGames",
@@ -15,8 +16,8 @@ export const useGetActiveGames = () => {
   );
   const games = data || [];
   const displayGames = games.sort((a, b) => {
-    if (a.game?.date && b.game?.date) {
-      return b.game.date - a.game.date;
+    if (a.game?.amount && b.game?.amount) {
+      return new BigNumber(b.game.amount).minus(a.game.amount).toNumber();
     } else {
       return 0;
     }
@@ -109,5 +110,66 @@ export const useGetMinimalAmount = (tokenIdentifier: string) => {
     minAmount: gamePayments.find((p) => p.token_identifier === tokenIdentifier),
     error,
     isLoading,
+  };
+};
+
+export const useFilterGames = () => {
+  const [filterOptions, setFilterOptions] = useState<{
+    name: "bigger" | "smaller" | "equal";
+    value: string;
+    token?: string;
+  }>();
+  const { games, isLoading, error } = useGetActiveGames();
+
+  const filterGames = games.filter((game) => {
+    if (!filterOptions) return true;
+    const amount = new BigNumber(game.game?.amount || 0);
+    if (filterOptions.token) {
+      if (filterOptions.name === "bigger") {
+        return (
+          amount.isGreaterThanOrEqualTo(filterOptions.value) &&
+          game.game?.token_identifier === filterOptions.token
+        );
+      } else if (filterOptions.name === "smaller") {
+        return (
+          amount.isLessThanOrEqualTo(filterOptions.value) &&
+          game.game?.token_identifier === filterOptions.token
+        );
+      } else {
+        return (
+          amount.isEqualTo(filterOptions.value) &&
+          game.game?.token_identifier === filterOptions.token
+        );
+      }
+    } else {
+      if (filterOptions.name === "bigger") {
+        return amount.isGreaterThanOrEqualTo(filterOptions.value);
+      } else if (filterOptions.name === "smaller") {
+        return amount.isLessThanOrEqualTo(filterOptions.value);
+      } else {
+        return amount.isEqualTo(filterOptions.value);
+      }
+    }
+  });
+
+  const handleFilter = (
+    name: "bigger" | "smaller" | "equal",
+    value: string,
+    token?: string
+  ) => {
+    setFilterOptions({ name, value, token });
+  };
+
+  const clearFilter = () => {
+    setFilterOptions(undefined);
+  };
+
+  return {
+    games: filterGames,
+    handleFilter,
+    filterOptions,
+    clearFilter,
+    isLoading,
+    error,
   };
 };

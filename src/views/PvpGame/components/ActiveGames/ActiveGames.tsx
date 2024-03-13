@@ -1,9 +1,13 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { formatBalance } from "@/utils/functions/formatBalance";
+import {
+  formatBalance,
+  setElrondBalance,
+} from "@/utils/functions/formatBalance";
 import { useGetAccount } from "@multiversx/sdk-dapp/hooks";
-import { useGetActiveGames } from "../../utils/hooks";
+import { useFilterGames } from "../../utils/hooks";
 import Game from "./components/Game";
 
+import { Button } from "@/components/ui/button";
 import useGetXMinimalInfo from "@/hooks/useGetXMinimalInfo";
 import { IGameWithUserInfo } from "@/views/PvpGame/utils/interface";
 import { joinGame } from "@/views/PvpGame/utils/services";
@@ -15,7 +19,8 @@ import { mutate } from "swr";
 const ResultModal = dynamic(() => import("./components/ResultModal"));
 
 const ActiveGames = () => {
-  const { games, isLoading } = useGetActiveGames();
+  const { games, handleFilter, filterOptions, isLoading, clearFilter } =
+    useFilterGames();
   const { balance } = useGetAccount();
 
   const [sessionId, setSessionId] = useState<string | null>("");
@@ -85,6 +90,34 @@ const ActiveGames = () => {
         </div>
       ) : (
         <>
+          <div className="flex w-full justify-between">
+            <div className="mb-3 flex gap-4">
+              <Button
+                variant={
+                  filterOptions?.name === "bigger" ? "secondary" : "outline"
+                }
+                onClick={() =>
+                  handleFilter("bigger", setElrondBalance(1), "EGLD")
+                }
+              >
+                {"> 1 EGLD"}
+              </Button>
+              <Button
+                variant={
+                  filterOptions?.name === "smaller" ? "secondary" : "outline"
+                }
+                onClick={() =>
+                  handleFilter("smaller", setElrondBalance(1), "EGLD")
+                }
+              >
+                {"< 1 EGLD"}
+              </Button>
+            </div>
+
+            <Button variant={"destructive"} onClick={clearFilter}>
+              Clear
+            </Button>
+          </div>
           {games.length > 0 && !isLoading ? (
             <div className="space-y-4">
               {games.map((game, index) => {
