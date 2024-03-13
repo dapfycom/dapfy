@@ -1,7 +1,12 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import useSWR from "swr";
-import { fetchActiveGames, fetchGamesHistory, fetchScStats } from "./services";
+import {
+  fetchActiveGames,
+  fetchGamesHistory,
+  fetchMinAmounts,
+  fetchScStats,
+} from "./services";
 
 export const useGetActiveGames = () => {
   const { data, error, isLoading } = useSWR(
@@ -30,7 +35,6 @@ export const useStatsGAmes = () => {
     volume: { token: string; amount: number }[];
     total_users: number;
   }>("pvpWsp:getStats", fetchScStats);
-  console.log({ data });
 
   return {
     stats: data || {
@@ -89,6 +93,20 @@ export const useGetUserGamesHistory = () => {
 
   return {
     history: userGames,
+    error,
+    isLoading,
+  };
+};
+
+export const useGetMinimalAmount = (tokenIdentifier: string) => {
+  const { data, error, isLoading } = useSWR(
+    "pvpWsp:getMinAmounts",
+    fetchMinAmounts
+  );
+  const gamePayments = data || [];
+
+  return {
+    minAmount: gamePayments.find((p) => p.token_identifier === tokenIdentifier),
     error,
     isLoading,
   };

@@ -8,7 +8,7 @@ import Stats from "./components/Stats/Stats";
 
 const PvpView = () => {
   return (
-    <Container>
+    <Container className=" xl:max-w-[1000px]">
       <div className="min-h-screen  p-8 flex flex-col items-center">
         <Heading />
         <Stats />

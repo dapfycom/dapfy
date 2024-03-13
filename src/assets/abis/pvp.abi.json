@@ -28,8 +28,12 @@
         "type": "u32"
       },
       {
-        "name": "randon_sc_address",
+        "name": "random_sc_address",
         "type": "Address"
+      },
+      {
+        "name": "min_amount_info",
+        "type": "List<GamePayment>"
       }
     ],
     "outputs": []
@@ -130,6 +134,18 @@
       "onlyOwner": true,
       "mutability": "mutable",
       "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "update_minimal_amount_info",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "min_amount_info",
+          "type": "List<GamePayment>"
+        }
+      ],
       "outputs": []
     },
     {
@@ -267,6 +283,17 @@
       "outputs": [
         {
           "type": "Address"
+        }
+      ]
+    },
+    {
+      "name": "getMinAmounts",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<GamePayment>",
+          "multi_result": true
         }
       ]
     }

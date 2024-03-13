@@ -64,3 +64,13 @@ export interface IHistoryData {
   txHash: string;
   date: number;
 }
+
+export interface IScGamePayment {
+  amount: BigNumber;
+  token_identifier: string;
+}
+
+export interface IGamePayment {
+  amount: string;
+  token_identifier: string;
+}

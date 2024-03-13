@@ -10,8 +10,13 @@ import {
   U32Value,
 } from "@multiversx/sdk-core/out";
 import { getCookie } from "cookies-next";
-import { adaptGame, adaptGamesWithUserInfo, adaptUserInfo } from "./adapters";
-import { IHistoryData, IUserInHistory } from "./interface";
+import {
+  adaptGame,
+  adaptGamePayment,
+  adaptGamesWithUserInfo,
+  adaptUserInfo,
+} from "./adapters";
+import { IGamePayment, IHistoryData, IUserInHistory } from "./interface";
 
 // sc calls
 export const createGame = (
@@ -116,6 +121,14 @@ export const fetchUserEarnings = async (address: string) => {
   return res?.firstValue?.valueOf().toString();
 };
 
+export const fetchMinAmounts = async (): Promise<IGamePayment[]> => {
+  const res = await scQuery("pvpWsp", "getMinAmounts");
+
+  return (res?.firstValue?.valueOf() || []).map((p: any) =>
+    adaptGamePayment(p)
+  );
+};
+
 export const fetchScStats = async () => {
   const res = await scQuery("pvpWsp", "getStats");
 
@@ -141,7 +154,6 @@ export const fetchGamesHistory = async (): Promise<IHistoryData[]> => {
     status: "success",
     withScResults: true,
   });
-  console.log({ transactions });
 
   const history: IHistoryData[] = transactions.map((tx) => {
     const dataHex = Base64toString(tx.data || "");

@@ -1,10 +1,13 @@
 import {
   IGameInfo,
+  IGamePayment,
   IGameWithUserInfo,
   IScGameInfo,
+  IScGamePayment,
   IScUserInfo,
   IUserInfo,
 } from "./interface";
+
 export const adaptGame = (game?: IScGameInfo): IGameInfo | undefined => {
   if (!game) {
     return;
@@ -53,5 +56,12 @@ export const adaptUserInfo = (
     games_won: userInfo.games_won.toNumber(),
     games_lost: userInfo.games_lost.toNumber(),
     profile_url: userInfo.profile_url.toString("utf8"),
+  };
+};
+
+export const adaptGamePayment = (payment: IScGamePayment): IGamePayment => {
+  return {
+    amount: payment.amount.toString(),
+    token_identifier: payment.token_identifier,
   };
 };

@@ -11,20 +11,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useDisclosure from "@/hooks/useDisclosure";
 import useGetAccountToken from "@/hooks/useGetAccountToken";
+import useGetElrondToken from "@/hooks/useGetElrondToken";
 import useGetXMinimalInfo from "@/hooks/useGetXMinimalInfo";
-import { formatBalance } from "@/utils/functions/formatBalance";
+import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { createGame } from "@/views/PvpGame/utils/services";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
 import React from "react";
 import { mutate } from "swr";
 import * as yup from "yup";
+import { useGetMinimalAmount } from "../../utils/hooks";
 
 const CreateGame = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { user } = useGetXMinimalInfo();
   const [sessionId, setSessionId] = React.useState<string | null>("");
   const { accountToken } = useGetAccountToken("EGLD");
+  const { minAmount } = useGetMinimalAmount("EGLD");
+  const { elrondToken } = useGetElrondToken(
+    minAmount?.token_identifier || null
+  );
   const formik = useFormik({
     initialValues: {
       amount: "",
@@ -42,7 +48,21 @@ const CreateGame = () => {
     },
 
     validationSchema: yup.object().shape({
-      amount: yup.number().required("Required"),
+      amount: yup
+        .number()
+        .required("Required")
+        .min(
+          getRealBalance(
+            minAmount?.amount || 0,
+            elrondToken?.decimals || 0,
+            true
+          ) as number,
+          `Amount must be greater than or equal to "${getRealBalance(
+            minAmount?.amount || 0,
+            elrondToken?.decimals || 0,
+            true
+          )} ${minAmount?.token_identifier}"`
+        ),
     }),
   });
 
@@ -81,7 +101,7 @@ const CreateGame = () => {
               </DialogDescription>
             </DialogHeader>
 
-            <div className="grid gap-4 py-4">
+            <div className="grid gap-4 mt-4">
               <div className="flex flex-col  gap-2">
                 <div className="flex w-full justify-between">
                   <Label htmlFor="amount">Amount</Label>
@@ -96,7 +116,9 @@ const CreateGame = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full">
+            <p className="text-red-500 text-sm mt-2">{formik.errors.amount}</p>
+
+            <Button type="submit" className="w-full mt-4">
               Start Battle
             </Button>
           </form>
