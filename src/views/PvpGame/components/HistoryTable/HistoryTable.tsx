@@ -8,6 +8,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { selectedNetwork } from "@/config/network";
+import { useAppSelector } from "@/hooks/useRedux";
+import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { Address } from "@multiversx/sdk-core/out";
 import { IHistoryData } from "../../utils/interface";
@@ -17,8 +19,7 @@ interface IProps {
   isLoading: boolean;
 }
 const HistoryTable = ({ data, isLoading }: IProps) => {
-  console.log({ data });
-
+  const address = useAppSelector(selectUserAddress);
   return (
     <div className="overflow-auto">
       {isLoading ? (
@@ -63,6 +64,10 @@ const HistoryTable = ({ data, isLoading }: IProps) => {
                             (rowData.winner.address !== Address.Zero().bech32()
                               ? formatAddress(rowData.winner.address)
                               : "Unknown")}
+
+                          {address === rowData.winner.address && (
+                            <span className="ml-4">👑</span>
+                          )}
                         </TableCell>
                         <TableCell>
                           <a
