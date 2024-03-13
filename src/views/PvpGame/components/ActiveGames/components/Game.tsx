@@ -48,7 +48,7 @@ const Game = ({ game, handleJoinGame }: IProps) => {
           onClick={handleJoinGame}
           disabled={address === game.game?.user_creator}
         >
-          ⚔️ {getRealBalance(game.game?.amount).toString()}{" "}
+          ⚔️ Battle for {getRealBalance(game.game?.amount).toString()}{" "}
           {game.game?.token_identifier}
         </Button>
       </div>
