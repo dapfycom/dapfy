@@ -1,11 +1,12 @@
 import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
+import useAuthentication from "@/hooks/useAuthentication";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import { useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
 import { useGetUserEarnings } from "../../utils/hooks";
 const Heading = () => {
   const { earnings } = useGetUserEarnings();
   const { price } = useGetEgldPrice();
-
+  const { isLoggedIn } = useAuthentication();
   console.log({ earnings });
 
   return (
@@ -25,7 +26,7 @@ const Heading = () => {
         </div>
       </div>
 
-      {price && (
+      {price && isLoggedIn && (
         <p className="text-4xl font-bold mt-5">
           Total Won:{" "}
           {formatBalanceDollar(
