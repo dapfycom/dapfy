@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 
 interface IProps {
   isOpen: boolean;
@@ -9,31 +9,27 @@ interface IProps {
 const PendingModal = ({ isOpen, onClose }: IProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
-        <div
-          key="1"
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-        >
-          <div className="bg-black text-white rounded-lg max-w-md w-full mx-4 p-6">
-            <div className="flex flex-col items-center mb-6">
-              <div className="mb-4 p-2 rounded-full border-2 border-yellow-500 animate-spin-slow">
-                <HourglassIcon className="h-12 w-12 text-yellow-500" />
-              </div>
-              <h1 className="text-xl font-semibold mb-2">
-                No action required!
-              </h1>
-              <p className="text-lg">Your transaction is now processing...</p>
+      <div
+        key="1"
+        className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      >
+        <div className="bg-black text-white rounded-lg max-w-md w-full mx-4 p-6">
+          <div className="flex flex-col items-center mb-6">
+            <div className="mb-4 p-2 rounded-full border-2 border-yellow-500 animate-spin-slow">
+              <HourglassIcon className="h-12 w-12 text-yellow-500" />
             </div>
-            <p className="text-center text-sm mb-6">
-              This usually takes a few moments, but can vary depending on
-              network activity. Please wait patiently.
-            </p>
-            <Button className="w-full " onClick={onClose}>
-              Done
-            </Button>
+            <h1 className="text-xl font-semibold mb-2">No action required!</h1>
+            <p className="text-lg">Your transaction is now processing...</p>
           </div>
+          <p className="text-center text-sm mb-6">
+            This usually takes a few moments, but can vary depending on network
+            activity. Please wait patiently.
+          </p>
+          <Button className="w-full " onClick={onClose}>
+            Done
+          </Button>
         </div>
-      </DialogContent>
+      </div>
     </Dialog>
   );
 };
