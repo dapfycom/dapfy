@@ -17,7 +17,7 @@ import { formatBalance, getRealBalance } from "@/utils/functions/formatBalance";
 import { createGame } from "@/views/PvpGame/utils/services";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import { useFormik } from "formik";
-import React from "react";
+import React, { MouseEvent } from "react";
 import { mutate } from "swr";
 import * as yup from "yup";
 import { useGetMinimalAmount } from "../../utils/hooks";
@@ -80,7 +80,13 @@ const CreateGame = () => {
       console.error("errorMessage", errorMessage);
     },
   });
-
+  const handleSetAmount = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    value: string
+  ) => {
+    e.preventDefault();
+    formik.setFieldValue("amount", value);
+  };
   return (
     <>
       <Button className="mb-6" onClick={onOpen}>
@@ -112,11 +118,43 @@ const CreateGame = () => {
                   className="col-span-3"
                   name="amount"
                   onChange={formik.handleChange}
+                  value={formik.values.amount}
                 />
               </div>
             </div>
 
             <p className="text-red-500 text-sm mt-2">{formik.errors.amount}</p>
+            <div className="flex gap-3 justify-center mt-4">
+              <Button
+                variant={"secondary"}
+                className="w-[60px]"
+                onClick={(e) => handleSetAmount(e, "0.01")}
+              >
+                0.01
+              </Button>
+              <Button
+                variant={"secondary"}
+                className="w-[60px]"
+                onClick={(e) => handleSetAmount(e, "0.1")}
+              >
+                0.1
+              </Button>
+
+              <Button
+                variant={"secondary"}
+                className="w-[60px]"
+                onClick={(e) => handleSetAmount(e, "0.5")}
+              >
+                0.5
+              </Button>
+              <Button
+                variant={"secondary"}
+                className="w-[60px]"
+                onClick={(e) => handleSetAmount(e, "1")}
+              >
+                1
+              </Button>
+            </div>
 
             <Button type="submit" className="w-full mt-4">
               Start Battle

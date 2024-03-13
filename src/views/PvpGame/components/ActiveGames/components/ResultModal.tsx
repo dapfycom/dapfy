@@ -60,6 +60,9 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
   };
 
   const userWin = winnerInfo.winner === userAddress;
+
+  console.log("isReady", isReady);
+
   return (
     <>
       {transaction && isReady && userWin && <Realistic />}

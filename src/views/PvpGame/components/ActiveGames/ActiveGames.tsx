@@ -8,14 +8,16 @@ import { useFilterGames } from "../../utils/hooks";
 import Game from "./components/Game";
 
 import { Button } from "@/components/ui/button";
+import useDisclosure from "@/hooks/useDisclosure";
 import useGetXMinimalInfo from "@/hooks/useGetXMinimalInfo";
 import { IGameWithUserInfo } from "@/views/PvpGame/utils/interface";
 import { joinGame } from "@/views/PvpGame/utils/services";
 import { Address } from "@multiversx/sdk-core/out";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mutate } from "swr";
+import PendingModal from "./components/PendingModal";
 const ResultModal = dynamic(() => import("./components/ResultModal"));
 
 const ActiveGames = () => {
@@ -26,6 +28,7 @@ const ActiveGames = () => {
   const [sessionId, setSessionId] = useState<string | null>("");
   const { user } = useGetXMinimalInfo();
   const [txData, setTxData] = useState("");
+  const { isOpen, onOpen, onClose, setOpen } = useDisclosure();
 
   const handleJoinGame = async (game: IGameWithUserInfo) => {
     const res = await joinGame(
@@ -39,6 +42,7 @@ const ActiveGames = () => {
     );
 
     setSessionId(res?.sessionId);
+    onOpen();
   };
 
   const onSuccess = () => {
@@ -51,21 +55,31 @@ const ActiveGames = () => {
     mutate("pvpWsp:getGamesHistory");
   };
 
-  const { transactions } = useTrackTransactionStatus({
+  const { transactions, isPending } = useTrackTransactionStatus({
     transactionId: sessionId,
     onSuccess,
   });
 
+  useEffect(() => {
+    setOpen(Boolean(isPending));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPending]);
   const handleClose = () => {
     setTxData("");
+    onClose();
   };
 
   const txSuccess = Boolean(txData);
 
+  const isOpenPendingModal = isPending && isOpen;
   return (
     <div>
       {txSuccess && (
         <ResultModal isOpen={txSuccess} onClose={handleClose} txHash={txData} />
+      )}
+
+      {isOpenPendingModal && (
+        <PendingModal isOpen={isOpenPendingModal} onClose={onClose} />
       )}
       <div className="flex justify-center items-end w-full mb-4">
         <div>
