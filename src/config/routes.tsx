@@ -37,6 +37,7 @@ export const routeNames = {
   farm: "/multiversx/farm",
   stake: "/multiversx/stake",
   play: "/multiversx/play",
+  pvp: "/multiversx/pvp",
   dust: "/multiversx/dust",
   aggregator: "/multiversx/aggregator",
   defi: "/multiversx/defi",
@@ -99,8 +100,8 @@ export const mainSiteRoutes = [
     path: routeNames.tools,
   },
   {
-    title: "The Forge",
-    soon: true,
+    title: "PvP Game",
+    path: routeNames.pvp,
   },
 
   {

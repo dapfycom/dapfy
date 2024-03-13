@@ -113,69 +113,6 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
           )}
         </DialogContent>
       </Dialog>
-      {/* <MyModal isOpen={isOpen} onClose={handleClose} py={0}>
-        <ModalCloseButton _focus={{ border: "none" }} right={5} top={6} />
-        <ModalBody pt={2} minH={"300px"}>
-          {isLoading ? (
-            <Center h="300px" w="full">
-              <Spinner size={"lg"} />
-            </Center>
-          ) : (
-            transaction &&
-            isReady && (
-              <Center width={"full"} flexDirection="column" mt={4}>
-                <Box>Your Choice</Box>
-                <Text
-                  color="primary"
-                  fontSize="xl"
-                  fontWeight="semibold"
-                  mb={8}
-                >
-                  {selectChoise(userSelection)}{" "}
-                </Text>
-                <Divider />
-                <Box mt={8}>Coin Result</Box>
-                <Text
-                  color="primary"
-                  fontSize="xl"
-                  fontWeight="semibold"
-                  mb={8}
-                >
-                  {selectChoise(coinSelection)}
-                </Text>
-                <Divider />
-
-                {userWin ? (
-                  <Text
-                    color="green.500"
-                    fontSize="2xl"
-                    fontWeight="bold"
-                    my={8}
-                  >
-                    You Win!
-                  </Text>
-                ) : (
-                  <Text color="red.500" fontSize="2xl" fontWeight="bold" my={8}>
-                    You Loose!
-                  </Text>
-                )}
-              </Center>
-            )
-          )}
-        </ModalBody>
-        <ModalFooter mb={3} flexDirection="column">
-          <Button
-            mr={3}
-            onClick={onClose}
-            width="full"
-            borderRadius="8px"
-            height="50px"
-            textTransform="uppercase"
-          >
-            Close
-          </Button>
-        </ModalFooter>
-      </MyModal> */}
     </>
   );
 };
