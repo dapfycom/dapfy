@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatAddress } from "@/utils/functions/formatAddress";
+import { formatBalance } from "@/utils/functions/formatBalance";
 import { copyTextToClipboard } from "@/utils/functions/general";
 import { useGetUserActiveGames } from "@/views/PvpGame/utils/hooks";
 import { cancelGame } from "@/views/PvpGame/utils/services";
@@ -47,6 +48,14 @@ const MyGames = () => {
                         </p>
                         <p className="text-sm text-[#888eb0]">
                           Game ID: {game.game?.id}
+                        </p>
+
+                        <p>
+                          {formatBalance({
+                            balance: game.game.amount,
+                            decimals: 18,
+                          })}{" "}
+                          {game.game.token_identifier}
                         </p>
                       </div>
                       <Button

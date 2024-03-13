@@ -105,7 +105,7 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
                         href={queryString.stringifyUrl({
                           url: "https://twitter.com/intent/post",
                           query: {
-                            text: `I just ${formatBalance({
+                            text: `I just won ${formatBalance({
                               balance: winnerInfo.amount,
                               decimals: elrondToken.decimals,
                             })} 💸 🎉  Play the PvP game on dapfy.com and you can win too!`,

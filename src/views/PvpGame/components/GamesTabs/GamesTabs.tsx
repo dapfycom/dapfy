@@ -6,19 +6,25 @@ import UserGamesHistory from "../UserGamesHistory/UserGamesHistory";
 
 const GamesTabs = () => {
   return (
-    <Tabs defaultValue="account" className="w-full">
+    <Tabs defaultValue="account" className="w-full overflow-auto">
       <div className="w-full flex items-center flex-col">
-        <TabsList>
-          <TabsTrigger value="account">Active Games</TabsTrigger>
-          <TabsTrigger value="password">Last 50 Games</TabsTrigger>
-          <TabsTrigger value="history">My Games</TabsTrigger>
-          <TabsTrigger value="user_history">My Last 50 Games</TabsTrigger>
-        </TabsList>
+        <div className="w-full flex items-center justify-center flex-col sm:flex-row gap-4">
+          <TabsList>
+            <TabsTrigger value="account">Active Games</TabsTrigger>
+            <TabsTrigger value="password">Last 50 Games</TabsTrigger>
+          </TabsList>
+          <TabsList>
+            <TabsTrigger value="history">My Games</TabsTrigger>
+            <TabsTrigger value="user_history">My Last 50 Games</TabsTrigger>
+          </TabsList>
+        </div>
         <TabsContent value="account" className="w-full">
           <ActiveGames />
         </TabsContent>
         <TabsContent value="password" className="w-full mt-[52px]">
-          <GameHistory />
+          <div className="overflow-auto w-full">
+            <GameHistory />
+          </div>
         </TabsContent>
 
         <TabsContent value="history" className="w-full  mt-[52px]">
