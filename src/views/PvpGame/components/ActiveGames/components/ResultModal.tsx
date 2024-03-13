@@ -1,4 +1,5 @@
 import Realistic from "@/components/Conffeti/Realistic";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +11,7 @@ import useGetTransactionByHash from "@/hooks/useGetTransactionByHash";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { formatBalance } from "@/utils/functions/formatBalance";
+import queryString from "query-string";
 import { memo, useEffect, useState } from "react";
 
 interface IProps {
@@ -61,8 +63,6 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
 
   const userWin = winnerInfo.winner === userAddress;
 
-  console.log("isReady", isReady);
-
   return (
     <>
       {transaction && isReady && userWin && <Realistic />}
@@ -99,6 +99,26 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
                       })}{" "}
                       {winnerInfo.tokenIdentifier}
                     </div>
+
+                    <Button className="mt-8">
+                      <a
+                        href={queryString.stringifyUrl({
+                          url: "https://twitter.com/intent/post",
+                          query: {
+                            text: `I just ${formatBalance({
+                              balance: winnerInfo.amount,
+                              decimals: elrondToken.decimals,
+                            })} 💸 🎉  Play the PvP game on dapfy.com and you can win too!`,
+                            original_referer: "https://www.dapfy.com/",
+                            related: "dapfy",
+                          },
+                        })}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Share on X
+                      </a>
+                    </Button>
                   </div>
                 ) : (
                   <div className="my-8">
