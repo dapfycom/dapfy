@@ -98,7 +98,7 @@ const CreateGame = () => {
           open ? onOpen() : onClose();
         }}
       >
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] top-[30%] sm:top-[50%]">
           <form onSubmit={formik.handleSubmit}>
             <DialogHeader>
               <DialogTitle>Create Game</DialogTitle>
