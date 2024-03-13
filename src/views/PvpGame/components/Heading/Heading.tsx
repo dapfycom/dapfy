@@ -1,5 +1,13 @@
 import { PageHeaderHeading } from "@/components/PageHeader/PageHeader";
+import { formatBalanceDollar } from "@/utils/functions/formatBalance";
+import { useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
+import { useGetUserEarnings } from "../../utils/hooks";
 const Heading = () => {
+  const { earnings } = useGetUserEarnings();
+  const { price } = useGetEgldPrice();
+
+  console.log({ earnings });
+
   return (
     <div className="flex flex-col items-center text-center mt-5 w-full">
       <PageHeaderHeading className="mb-6">
@@ -16,6 +24,20 @@ const Heading = () => {
           </button>
         </div>
       </div>
+
+      {price && (
+        <p className="text-4xl font-bold mt-5">
+          Total Won:{" "}
+          {formatBalanceDollar(
+            {
+              balance: earnings,
+              decimals: 18,
+            },
+            price
+          )}{" "}
+          $
+        </p>
+      )}
     </div>
   );
 };

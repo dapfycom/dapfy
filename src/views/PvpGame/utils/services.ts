@@ -114,6 +114,8 @@ export const fetchUserInfo = async (address: string) => {
 };
 
 export const fetchUserEarnings = async (address: string) => {
+  console.log({ address });
+
   const res = await scQuery("pvpWsp", "getUserEarnings", [
     new AddressValue(new Address(address)),
   ]);

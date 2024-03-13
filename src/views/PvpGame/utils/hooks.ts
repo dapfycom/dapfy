@@ -8,6 +8,7 @@ import {
   fetchGamesHistory,
   fetchMinAmounts,
   fetchScStats,
+  fetchUserEarnings,
 } from "./services";
 export const useGetActiveGames = () => {
   const { data, error, isLoading } = useSWR(
@@ -171,5 +172,18 @@ export const useFilterGames = () => {
     clearFilter,
     isLoading,
     error,
+  };
+};
+
+export const useGetUserEarnings = () => {
+  const address = useAppSelector(selectUserAddress);
+  const { data, error, isLoading } = useSWR<string>(
+    address ? "pvpWsp:getUserEarnings" : null,
+    () => fetchUserEarnings(address)
+  );
+  return {
+    earnings: data || "0",
+    error,
+    isLoading,
   };
 };
