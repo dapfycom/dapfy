@@ -9,6 +9,7 @@ import {
   BytesValue,
   U32Value,
 } from "@multiversx/sdk-core/out";
+import BigNumber from "bignumber.js";
 import { getCookie } from "cookies-next";
 import {
   adaptGame,
@@ -17,7 +18,6 @@ import {
   adaptUserInfo,
 } from "./adapters";
 import { IGamePayment, IHistoryData, IUserInHistory } from "./interface";
-
 // sc calls
 export const createGame = (
   amount: number,
@@ -157,6 +157,8 @@ export const fetchGamesHistory = async (): Promise<IHistoryData[]> => {
     withScResults: true,
   });
 
+  console.log({ transactions });
+
   const history: IHistoryData[] = transactions.map((tx) => {
     const dataHex = Base64toString(tx.data || "");
 
@@ -198,7 +200,10 @@ export const fetchGamesHistory = async (): Promise<IHistoryData[]> => {
       gameId = parseInt(parts[1]);
       const results = tx.results || [];
       if (results.length > 0) {
-        const winnerAddress = results[results.length - 1].receiver;
+        const sortedResults = results.sort((a, b) =>
+          new BigNumber(b.value).minus(a.value).toNumber()
+        );
+        const winnerAddress = sortedResults[0].receiver;
 
         if (winnerAddress === challenger.address) {
           winner = challenger;

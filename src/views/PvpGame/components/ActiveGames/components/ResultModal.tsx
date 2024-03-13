@@ -11,6 +11,7 @@ import useGetTransactionByHash from "@/hooks/useGetTransactionByHash";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { formatBalance } from "@/utils/functions/formatBalance";
+import BigNumber from "bignumber.js";
 import queryString from "query-string";
 import { memo, useEffect, useState } from "react";
 
@@ -42,8 +43,13 @@ const ResultModal = ({ isOpen, onClose, txHash }: IProps) => {
   useEffect(() => {
     if (transaction?.status !== "pending") {
       const results = transaction?.results || [];
+
       if (results.length > 0) {
-        const winnerAddress = results[results.length - 1].receiver;
+        const sortedResults = results.sort((a, b) =>
+          new BigNumber(b.value).minus(a.value).toNumber()
+        );
+        const winnerAddress = sortedResults[0].receiver;
+
         setWinnerInfo({
           winner: winnerAddress,
           amount: results[results.length - 1].value,
