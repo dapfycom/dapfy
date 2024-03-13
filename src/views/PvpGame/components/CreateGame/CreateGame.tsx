@@ -98,7 +98,7 @@ const CreateGame = () => {
           open ? onOpen() : onClose();
         }}
       >
-        <DialogContent className="sm:max-w-[425px] top-[30%] sm:top-[50%]">
+        <DialogContent className="sm:max-w-[465px] top-[30%] sm:top-[50%]">
           <form onSubmit={formik.handleSubmit}>
             <DialogHeader>
               <DialogTitle>Create Game</DialogTitle>
@@ -124,7 +124,7 @@ const CreateGame = () => {
             </div>
 
             <p className="text-red-500 text-sm mt-2">{formik.errors.amount}</p>
-            <div className="flex gap-3 justify-center mt-4">
+            <div className="flex flex-wrap gap-3 justify-center mt-4">
               <Button
                 variant={"secondary"}
                 className="w-[60px]"
@@ -153,6 +153,22 @@ const CreateGame = () => {
                 onClick={(e) => handleSetAmount(e, "1")}
               >
                 1
+              </Button>
+
+              <Button
+                variant={"secondary"}
+                className="w-[60px]"
+                onClick={(e) => handleSetAmount(e, "2")}
+              >
+                2
+              </Button>
+
+              <Button
+                variant={"secondary"}
+                className="w-[60px]"
+                onClick={(e) => handleSetAmount(e, "5")}
+              >
+                5
               </Button>
             </div>
 
