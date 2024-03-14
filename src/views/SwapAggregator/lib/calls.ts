@@ -92,7 +92,8 @@ export const submitSwap = async (
 
   const interaction = await agService.aggregateFromPaths(
     sorswap,
-    slippage * 100
+    slippage * 100,
+    () => Promise.resolve(true)
   );
 
   const tx1 = interaction
