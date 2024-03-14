@@ -67,65 +67,6 @@ const BetsTable = ({ data }: IProps) => {
         </TableBody>
       </Table>
     </div>
-    // <div>
-    //   {" "}
-    //   <Divider borderColor="dark.300" />
-    //   <TableContainer overflowY="auto" overflowX={"auto"}>
-    //     <Table variant="simple" overflowX={"auto"}>
-    //       <Thead>
-    //         <Tr>
-    //           <Th px={"10px"} py={"12px"}>
-    //             Players
-    //           </Th>
-    //           <Th px={"10px"} py={"12px"}>
-    //             Txn
-    //           </Th>
-    //           <Th px={"10px"} py={"12px"}>
-    //             Amount
-    //           </Th>
-    //           <Th px={"10px"} py={"12px"}>
-    //             Choice
-    //           </Th>
-    //           <Th px={"10px"} py={"12px"}>
-    //             Result
-    //           </Th>
-    //           {/* <Th px={"10px"} py={"12px"}>
-    //             Payoff
-    //           </Th> */}
-    //         </Tr>
-    //       </Thead>
-    //       <Tbody>
-    //         {data.map((rowData, index) => {
-    //           return (
-    //             <Tr key={index}>
-    //               <Td px={"10px"} color="primary">
-    //                 {formatAddress(rowData.address)}
-    //               </Td>
-    //               <Td px={"10px"}>
-    //                 <Link
-    //                   href={`${selectedNetwork.network.explorerAddress}/transactions/${rowData.txHash}`}
-    //                   isExternal
-    //                 >
-    //                   {rowData.txHash.substring(0, 10) + "..."}
-    //                 </Link>{" "}
-    //               </Td>
-    //               <Td px={"10px"}>
-    //                 {formatBalance({
-    //                   balance: rowData.betAmount,
-    //                   decimals: elrondToken?.decimals,
-    //                 })}{" "}
-    //                 {formatTokenI(flipCoinTokenStr)}
-    //               </Td>
-    //               <Td px={"10px"}>{selectChoise(rowData.isHeadBet)}</Td>
-    //               <Td px={"10px"}>{selectChoise(rowData.result)}</Td>
-    //               {/* <Td px={"10px"}>364.32 CRO</Td> */}
-    //             </Tr>
-    //           );
-    //         })}
-    //       </Tbody>
-    //     </Table>
-    //   </TableContainer>
-    // </div>
   );
 };
 

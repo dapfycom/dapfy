@@ -98,12 +98,12 @@ const CollectedEgld = () => {
               </li>
               <li>
                 <Link
-                  href={routeNames.dust}
+                  href={routeNames.aggregator}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Use the Dust Converter"
+                    text="Use the swap aggregator"
                     completed={isUserInteractedDefiTool}
                   />
                 </Link>

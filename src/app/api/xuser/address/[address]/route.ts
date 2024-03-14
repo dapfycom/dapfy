@@ -1,10 +1,19 @@
 import prisma from "@/lib/db";
-import { verifyAdmins } from "@/lib/mx-utils";
+import { verifyUser } from "@/lib/mx-utils";
 
-export async function GET(req: Request) {
+export async function GET(
+  req: Request,
+  { params }: { params: { address: string } }
+) {
   // authorization user to this route
   const token = req.headers.get("Authorization")?.split(" ")[1];
-  const ok = verifyAdmins(token || "");
+
+  const ok = await verifyUser(
+    {
+      address: params.address,
+    },
+    token
+  );
   if (!ok) {
     return Response.json(
       {
@@ -19,21 +28,19 @@ export async function GET(req: Request) {
       }
     );
   }
-  // end authorization
-  const { searchParams } = new URL(req.url);
-  const identifier = searchParams.get("identifier");
 
-  if (!identifier) {
-    return Response.json({ message: "missing identifier" }, { status: 400 });
-  }
+  // end authorization
 
   try {
-    const user = await prisma.xAcount.findUnique({
+    const user = await prisma.xAcount.findFirst({
       where: {
-        username: identifier,
+        user: {
+          address: params.address,
+        },
       },
-      include: {
-        user: true,
+      select: {
+        username: true,
+        profile_image_url: true,
       },
     });
 
