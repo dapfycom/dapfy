@@ -91,7 +91,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Write a tweet about @dapfycom"
+                    text="Pomote ticker $BSK on X and tag @dapfycom"
                     completed={!!tasks?.mention}
                   />
                 </a>
@@ -103,7 +103,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Use the swap aggregator"
+                    text="Buy BSK using the swap aggregator"
                     completed={isUserInteractedDefiTool}
                   />
                 </Link>
