@@ -1,6 +1,5 @@
 import { selectedNetwork } from "@/config/network";
 import { decodeBase64ToString } from "@/lib/coder";
-import { timeStampToSeconds } from "@/lib/date";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
 import { Address } from "@multiversx/sdk-core/out";
 
@@ -56,19 +55,21 @@ export const UserAddressHasInteracted = async (payload: {
   }
 
   const results = await fetchTransactions({
-    before: timeStampToSeconds(payload.to.getTime()),
-    after: timeStampToSeconds(payload.from.getTime()),
+    // before: timeStampToSeconds(payload.to.getTime()),
+    // after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
     status: "success",
     receiver: selectedNetwork.scAddress.ashSwapAggregator,
     size: 1000,
   });
+  console.log("results", results);
 
   let hasInteracted = false;
 
   results.forEach((tx) => {
     const hexData = decodeBase64ToString(tx.data || "");
     const dataArr = hexData.split("@");
+
     let lobbyAddress = "";
     try {
       lobbyAddress = Address.fromHex(dataArr[dataArr.length - 1]).bech32();
@@ -80,7 +81,13 @@ export const UserAddressHasInteracted = async (payload: {
       lobbyAddress ===
       "erd1085h6wdckzfkvfftq837mwt2a780dv0p8wcjjpauku7at0dlqswszewvjn"
     ) {
-      hasInteracted = true;
+      if (
+        Buffer.from(dataArr[1], "hex")
+          .toString("utf-8")
+          .includes(selectedNetwork.tokensID.bsk)
+      ) {
+        hasInteracted = true;
+      }
     }
   });
 
