@@ -89,19 +89,13 @@ export const mainSiteRoutes = [
     path: routeNames.farm,
     title: "Farm",
   },
-
+  {
+    title: "Play",
+    path: routeNames.pvp,
+  },
   {
     path: routeNames.dust,
     title: "Dust",
-  },
-
-  {
-    title: "Free Tools",
-    path: routeNames.tools,
-  },
-  {
-    title: "PvP Game",
-    path: routeNames.pvp,
   },
 
   {
