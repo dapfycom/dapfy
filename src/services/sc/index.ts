@@ -7,6 +7,7 @@ import onDexFarmAbiUrl from "@/assets/abis/farm_onedex.abi.json";
 import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import originalOneDexAbiUrl from "@/assets/abis/original_OneDex.abi.json";
+import pvpAbiUrl from "@/assets/abis/pvp.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
 import stakeBskAbiUrl from "@/assets/abis/staking-sc.abi.json";
 import { selectedNetwork } from "@/config/network";
@@ -31,7 +32,8 @@ export type WspTypes =
   | "ashSwapAggregatorWsp"
   | "originalOneDexWsp"
   | "rewardsWsp"
-  | "stakeBskWsp";
+  | "stakeBskWsp"
+  | "pvpWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -129,6 +131,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = stakeBskAbiUrl;
       implementsInterfaces = "Staking";
       break;
+    case "pvpWsp":
+      simpleAddress = selectedNetwork.scAddress.pvp;
+      address = new Address(simpleAddress);
+      abiUrl = pvpAbiUrl;
+      implementsInterfaces = "PvPGame";
+      break;
     default:
       simpleAddress = workspace;
       address = new Address(simpleAddress);
@@ -198,6 +206,10 @@ export const getSmartContractInteraction = (
     stakeBskWsp: new SmartContractInteraction(
       getInterface("stakeBskWsp").simpleAddress,
       AbiRegistry.create(getInterface("stakeBskWsp").abiUrl)
+    ),
+    pvpWsp: new SmartContractInteraction(
+      getInterface("pvpWsp").simpleAddress,
+      AbiRegistry.create(getInterface("pvpWsp").abiUrl)
     ),
   };
 

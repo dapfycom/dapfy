@@ -18,7 +18,7 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
       <div className="flex flex-col items-center text-center mt-5">
         <FarmHeading />
         <div className="flex flex-col gap-3 w-full ">
-          <div className="flex flex-wrap gap-3 items-center mt-10">
+          <div className="flex flex-wrap gap-3 items-center mt-10 justify-center">
             {/* Bsk protocol */}
             <ProtolContainer
               onClick={() => setSelectedProtocol("farm")}
@@ -111,7 +111,7 @@ const ProtolContainer = ({
     <Button
       asChild
       variant={selected ? "secondary" : "outline"}
-      className="cursor-pointer"
+      className="cursor-pointer w-[130px]"
       onClick={onClick}
     >
       <Link href={href}>

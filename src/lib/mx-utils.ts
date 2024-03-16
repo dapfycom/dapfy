@@ -2,6 +2,7 @@ import { admins } from "@/views/AdminPanelView/data";
 import { Address, SignableMessage } from "@multiversx/sdk-core/out";
 import { UserVerifier } from "@multiversx/sdk-wallet";
 import prisma from "./db";
+
 export function verifyAuthTokenSignature(
   address: string,
   authToken: string,
@@ -10,7 +11,7 @@ export function verifyAuthTokenSignature(
   const verifier = UserVerifier.fromAddress(new Address(address));
 
   const message = new SignableMessage({
-    message: Buffer.from(`${address}${authToken}{}`),
+    message: Buffer.from(`${address}${authToken}`),
   });
 
   const serializedMessage = message.serializeForSigning();

@@ -10,8 +10,10 @@ import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatAddress } from "@/utils/functions/formatAddress";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
+import { copyTextToClipboard } from "@/utils/functions/general";
 import { useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
-import { LogOut } from "lucide-react";
+import { Check, Copy, LogOut } from "lucide-react";
+import { useState } from "react";
 import { useGetAllTimeEarned } from "../lib/hooks";
 
 const AllTimeEarned = () => {
@@ -19,6 +21,7 @@ const AllTimeEarned = () => {
   const { user, isAuthenticated, handleLogout } = useXAuthentication();
   const { allTimeEarned } = useGetAllTimeEarned();
   const { price } = useGetEgldPrice();
+  const [copyClicked, setCopyClicked] = useState(false);
   if (!isAuthenticated) {
     return null;
   }
@@ -43,7 +46,7 @@ const AllTimeEarned = () => {
       )}
 
       <div className="flex items-center w-full flex-col md:flex-row  gap-3">
-        <div className="flex  justify-between items-center flex-1">
+        <div className="flex  justify-center items-center flex-1">
           <div className="flex gap-3 items-center">
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -65,12 +68,26 @@ const AllTimeEarned = () => {
 
             <div className="text-left">
               <p>{user?.name}</p>
-              <p className="text-muted-foreground">
-                @{user?.username} <span className="text-gray-500">You</span>
-              </p>
+              <p className="text-muted-foreground">@{user?.username}</p>
+              <div className="flex items-center gap-3 group cursor-pointer">
+                <div
+                  className="text-gray-300 "
+                  onClick={() => {
+                    copyTextToClipboard(address);
+                    setCopyClicked(true);
+                    setTimeout(() => setCopyClicked(false), 2000);
+                  }}
+                >
+                  {formatAddress(address)}
+                </div>
+                {copyClicked ? (
+                  <Check size={"12px"} className="hidden group-hover:block" />
+                ) : (
+                  <Copy size={"12px"} className="hidden group-hover:block" />
+                )}
+              </div>
             </div>
           </div>
-          <div className="text-gray-300">{formatAddress(address)}</div>
         </div>
       </div>
     </div>

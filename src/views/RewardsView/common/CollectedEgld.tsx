@@ -1,5 +1,6 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
+import { routeNames } from "@/config/routes";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
@@ -7,6 +8,7 @@ import { formatBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import queryString from "query-string";
 import {
   useGetIsUserInteractedDefiTool,
@@ -89,22 +91,22 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Write a tweet about @dapfycom"
+                    text="Pomote ticker $BSK on X and tag @dapfycom"
                     completed={!!tasks?.mention}
                   />
                 </a>
               </li>
               <li>
-                <a
-                  href="https://burnify.app/swap-burn"
+                <Link
+                  href={routeNames.aggregator}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Swap & Burn Bsk on Burnify to double your earnings 🔥"
+                    text="Buy BSK using the swap aggregator"
                     completed={isUserInteractedDefiTool}
                   />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -24,7 +24,6 @@ const MainNav: React.FC<MainNavProps> = ({
     href: route.path,
     label: route.title,
     active: getBasePath(pathname) === route.path,
-    soon: route.soon,
     ...route,
     // isExternal: route.isExternal,
   }));

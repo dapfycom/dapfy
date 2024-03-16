@@ -1,6 +1,7 @@
 import { selectedNetwork } from "@/config/network";
 import { AppState } from "@/redux/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 export const reducerName = "dust";
 
@@ -11,12 +12,14 @@ interface IdustState {
     balance: string;
   }[];
   slipage: number;
+  maxTokenSelection: number;
 }
 
 const initialState: IdustState = {
   toToken: selectedNetwork.tokensID.wegld, // token that user wants to receive
   convertInfo: [],
   slipage: 2,
+  maxTokenSelection: 30,
 };
 
 export const dust = createSlice({
@@ -46,6 +49,12 @@ export const dust = createSlice({
     ) => {
       if (!Array.isArray(action.payload.data)) {
         if (action.payload.isCheked) {
+          if (state.convertInfo.length >= state.maxTokenSelection) {
+            toast.error(
+              `You can select up to ${state.maxTokenSelection} tokens`
+            );
+            return;
+          }
           state.convertInfo = [
             ...state.convertInfo,
             {
@@ -66,7 +75,16 @@ export const dust = createSlice({
         }
       } else {
         if (action.payload.isCheked) {
-          state.convertInfo = action.payload.data;
+          state.convertInfo = action.payload.data.slice(
+            0,
+            state.maxTokenSelection
+          );
+
+          if (action.payload.data.length >= state.maxTokenSelection) {
+            toast.error(
+              `You can select up to ${state.maxTokenSelection} tokens`
+            );
+          }
         } else {
           state.convertInfo = state.convertInfo.filter(
             (tokenI) =>

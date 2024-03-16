@@ -2,7 +2,7 @@ import { selectedNetwork } from "@/config/network";
 import { decodeBase64ToString } from "@/lib/coder";
 import { timeStampToSeconds } from "@/lib/date";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
-import { BytesValue } from "@multiversx/sdk-core/out";
+import { Address } from "@multiversx/sdk-core/out";
 
 // export const UserAddressHasInteracted = async (payload: {
 //   to: Date;
@@ -60,27 +60,41 @@ export const UserAddressHasInteracted = async (payload: {
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
     status: "success",
-    receiver: "erd1qqqqqqqqqqqqqpgqxetccmv9rjefu2fwtw7a6kkx0tsqtqxpp4ssj8shz4",
-    function: "deposit",
+    receiver: selectedNetwork.scAddress.ashSwapAggregator,
+    size: 1000,
   });
+  console.log("results", results);
 
   let hasInteracted = false;
 
-  results.forEach((transaction) => {
-    const hexData = decodeBase64ToString(transaction.data || "");
+  results.forEach((tx) => {
+    const hexData = decodeBase64ToString(tx.data || "");
+    const dataArr = hexData.split("@");
 
-    const expectedToken = hexData.split("@")[6];
+    let lobbyAddress = "";
+    try {
+      lobbyAddress = Address.fromHex(dataArr[dataArr.length - 1]).bech32();
+    } catch (error) {
+      console.error(error);
+    }
 
     if (
-      BytesValue.fromHex(expectedToken).toString() ===
-      selectedNetwork.tokensID.bsk
+      lobbyAddress ===
+      "erd1085h6wdckzfkvfftq837mwt2a780dv0p8wcjjpauku7at0dlqswszewvjn"
     ) {
-      hasInteracted = true;
+      if (
+        Buffer.from(dataArr[1], "hex")
+          .toString("utf-8")
+          .includes(selectedNetwork.tokensID.bsk)
+      ) {
+        hasInteracted = true;
+      }
     }
   });
 
   return hasInteracted;
 };
+
 // export const UserAddressHasInteracted = async (payload: {
 //   to: Date;
 //   from: Date;

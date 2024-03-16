@@ -30,7 +30,7 @@ const MoonDustXCard = () => {
     <Card className="text-left">
       <CardHeader>
         <div className="flex justify-between  items-center flex-col md:flex-row">
-          <CardTitle className="mb-3">Convert into</CardTitle>
+          <CardTitle className="mb-3">Convert dust into:</CardTitle>
           <div className="flex justify-center md:justify-end flex-wrap gap-4">
             {toTokensToConvert.map((tokenI) => {
               const elrondToken = tokens?.find((t) => t.identifier === tokenI);

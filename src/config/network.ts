@@ -84,6 +84,7 @@ const networkConfig = {
       rewards: "erd1qqqqqqqqqqqqqpgq259tqqz6s8ym3r2x8tdawrt837mksny9q5yqc7hdff",
       stakeBsk:
         "erd1qqqqqqqqqqqqqpgqpygeps34dw9vx4ezzzevhdez7zs74p5dtt6qsv68k0",
+      pvp: "erd1qqqqqqqqqqqqqpgqtuyjw08nvj4v4akk5yfkaqxw7p9s8vndq5yqd805px",
     },
   },
   devnet: {
@@ -138,6 +139,7 @@ const networkConfig = {
       originalOneDex:
         "erd1qqqqqqqqqqqqqpgqhnmuen6gx7unfmqsjwx0ul7ezjyg2ndfvcqsa4nqax",
       rewards: "erd1qqqqqqqqqqqqqpgq07h4ydezhnr4w85krgnhqgvh8j9fr82aq5yqw9vzpw",
+      pvp: "erd1qqqqqqqqqqqqqpgq6k9t4klkekxvceqhcru2fl2lu3tyyczxq5yq4rw985",
     },
   },
   testnet: {
@@ -190,7 +192,4 @@ const networkConfig = {
 };
 export const ENVIRONMENT: ENVIROMENTTYPE = "mainnet";
 
-export const selectedNetwork =
-  networkConfig[
-    process.env.NODE_ENV === "production" ? "mainnet" : ENVIRONMENT
-  ];
+export const selectedNetwork = networkConfig[ENVIRONMENT];
