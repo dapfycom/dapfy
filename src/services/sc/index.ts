@@ -8,6 +8,7 @@ import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import originalOneDexAbiUrl from "@/assets/abis/original_OneDex.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
+import stakeBskAbiUrl from "@/assets/abis/staking-sc.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
 import { SmartContractInteraction } from "./calls/transaction";
@@ -29,7 +30,8 @@ export type WspTypes =
   | "oneDexFarmWsp"
   | "ashSwapAggregatorWsp"
   | "originalOneDexWsp"
-  | "rewardsWsp";
+  | "rewardsWsp"
+  | "stakeBskWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -121,6 +123,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = rewardsAbiUrl;
       implementsInterfaces = "Contract";
       break;
+    case "stakeBskWsp":
+      simpleAddress = selectedNetwork.scAddress.stakeBsk;
+      address = new Address(simpleAddress);
+      abiUrl = stakeBskAbiUrl;
+      implementsInterfaces = "Staking";
+      break;
     default:
       simpleAddress = workspace;
       address = new Address(simpleAddress);
@@ -186,6 +194,10 @@ export const getSmartContractInteraction = (
     rewardsWsp: new SmartContractInteraction(
       getInterface("rewardsWsp").simpleAddress,
       AbiRegistry.create(getInterface("rewardsWsp").abiUrl)
+    ),
+    stakeBskWsp: new SmartContractInteraction(
+      getInterface("stakeBskWsp").simpleAddress,
+      AbiRegistry.create(getInterface("stakeBskWsp").abiUrl)
     ),
   };
 

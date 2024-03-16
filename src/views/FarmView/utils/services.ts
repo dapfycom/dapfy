@@ -62,6 +62,29 @@ export const withdraw = () => {
   // scCall("bskFarmWsp", "withdraw", [], 50000000);
 };
 
+export const stakeBSK = (amount: number | string, token: IElrondToken) => {
+  getSmartContractInteraction("stakeBskWsp").ESDTTransfer({
+    functionName: "stake",
+    token: { ...token, collection: token.identifier },
+    gasL: 10_000_000,
+    value: Number(amount),
+  });
+};
+
+export const unstakeBsk = (amount: BigNumber.Value) => {
+  getSmartContractInteraction("bskFarmWsp").scCall({
+    functionName: "unstake",
+    gasL: 50000000,
+    arg: [new BigUIntValue(amount)],
+  });
+};
+export const restakeBsk = () => {
+  getSmartContractInteraction("bskFarmWsp").scCall({
+    functionName: "restake",
+    gasL: 50000000,
+  });
+};
+
 //queries
 export const fetchUserFarmInfo = async ([key, address]: [string, string]) => {
   const dataFields = [
