@@ -61,9 +61,9 @@ export const UserAddressHasInteracted = async (payload: {
     sender: payload.address,
     status: "success",
     receiver: selectedNetwork.scAddress.ashSwapAggregator,
-    size: 1000,
+    size: 50,
+    withScResults: true,
   });
-  console.log("results", results);
 
   let hasInteracted = false;
 
@@ -82,12 +82,21 @@ export const UserAddressHasInteracted = async (payload: {
       lobbyAddress ===
       "erd1085h6wdckzfkvfftq837mwt2a780dv0p8wcjjpauku7at0dlqswszewvjn"
     ) {
-      if (
-        Buffer.from(dataArr[1], "hex")
-          .toString("utf-8")
-          .includes(selectedNetwork.tokensID.bsk)
-      ) {
-        hasInteracted = true;
+      const results = tx?.results || [];
+      for (let index = 0; index < results.length; index++) {
+        const result = results[index];
+
+        const resultData = decodeBase64ToString(result.data);
+
+        const resultDataArr = resultData.split("@");
+
+        if (
+          resultDataArr.includes(
+            Buffer.from(selectedNetwork.tokensID.bsk, "utf-8").toString("hex")
+          )
+        ) {
+          hasInteracted = true;
+        }
       }
     }
   });
