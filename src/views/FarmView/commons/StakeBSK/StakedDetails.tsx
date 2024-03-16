@@ -29,18 +29,18 @@ const StakedDetails = ({ onModal }: IProps) => {
       )}
     >
       <StakedDetail
-        title={`Deposited ${formatTokenI(token.identifier)}`}
+        title={`Deposited ${formatTokenI(token?.identifier)}`}
         value={data?.staked}
         decimals={token?.decimals}
-        tokenI={token.identifier}
+        tokenI={token?.identifier}
         withPrice
       />
 
       <StakedDetail
-        title={`Earned ${formatTokenI(token.identifier)}`}
+        title={`Earned ${formatTokenI(token?.identifier)}`}
         value={data.rewards}
         decimals={token?.decimals}
-        tokenI={token.identifier}
+        tokenI={token?.identifier}
       />
     </div>
   );
