@@ -1,7 +1,7 @@
 "use client";
 import Collapse from "@/components/Collapse/Collapse";
 import Divider from "@/components/Divider/Divider";
-import LpTokenImage from "@/components/LpTokenImage/LpTokenImage";
+import TokenImage from "@/components/TokenImage/TokenImage";
 import { PointerIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
@@ -19,26 +19,26 @@ import {
   getRealBalance,
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
-import { useGetFarmsInfo } from "@/views/FarmView/utils/hooks";
-import { withdraw } from "@/views/FarmView/utils/services";
+import { useStakeBskInfo } from "@/views/FarmView/utils/hooks";
+import {
+  claimBskRewards,
+  restakeBsk,
+  stakeBSK,
+} from "@/views/FarmView/utils/services";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { stakeLP } from "../../utils/services";
-import WithdrawModal from "./common/Modals/WithdrawModal";
-import StakedDetails from "./common/StakedInfo/StakedDetails/StakedDetails";
+import StakedDetails from "./StakedDetails";
+import WithdrawModal from "./WithdrawModal";
 
-const FarmComponent = () => {
+const StakeBSK = () => {
+  const { data } = useStakeBskInfo();
   const { handleConnect, isLoggedIn } = useAuthentication();
   const { isOpen, onToggle } = useDisclosure();
-  const { elrondToken } = useGetElrondToken(selectedNetwork.tokensID.bskwegld);
-  const { data: farmInfo } = useGetFarmsInfo();
-  const [price] = useGetTokenPrice(selectedNetwork.tokensID.bskwegld);
-  const { elrondToken: stakedToken, isLoading } = useGetElrondToken(
-    selectedNetwork.tokensID.bskwegld
-  );
+  const { elrondToken } = useGetElrondToken(selectedNetwork.tokensID.bsk);
+  const [price] = useGetTokenPrice(selectedNetwork.tokensID.bsk);
 
   const { accountToken: userStakedToken } = useGetAccountToken(
-    selectedNetwork.tokensID.bskwegld
+    selectedNetwork.tokensID.bsk
   );
   const {
     isOpen: isOpenHarvest,
@@ -49,9 +49,26 @@ const FarmComponent = () => {
     amount: yup
       .number()
       .required("This field is required")
-      .min(0, "Negative number")
+      .min(
+        // @ts-ignore
+        getRealBalance(
+          data.minimumStaking,
+          userStakedToken.decimals,
+          true
+        ).toString() as number,
+        "Minimum stake is " +
+          formatBalance({
+            balance: data.minimumStaking,
+            decimals: userStakedToken.decimals,
+          })
+      )
       .max(
-        formatBalance(userStakedToken, true, 18) as number,
+        // @ts-ignore
+        getRealBalance(
+          userStakedToken.balance,
+          userStakedToken.decimals,
+          true
+        ).toString() as number,
         "Insufficient funds"
       ),
   });
@@ -62,7 +79,7 @@ const FarmComponent = () => {
     },
     onSubmit: (values) => {
       let amount = values.amount;
-      stakeLP(amount, stakedToken);
+      stakeBSK(amount, elrondToken);
     },
     validationSchema: stakeSchema,
   });
@@ -75,13 +92,17 @@ const FarmComponent = () => {
     formik.setFieldValue("amount", value.toString());
   };
 
-  const handleHarvest = () => {
+  const handleWithdraw = () => {
     onCloseHarvest();
     onOpenHarvest();
   };
 
-  const handleWithdraw = () => {
-    withdraw();
+  const handleReStake = () => {
+    restakeBsk();
+  };
+
+  const handleClaim = () => {
+    claimBskRewards();
   };
   return (
     <>
@@ -90,26 +111,32 @@ const FarmComponent = () => {
           <div className="mb-4">
             <div className="flex items-center gap-3">
               {" "}
-              <h3 className="text-lg font-semibold">BSK-EGLD FARM</h3>
-              {elrondToken && <LpTokenImage lpToken={elrondToken} />}
+              <h3 className="text-lg font-semibold">STAKE BSK</h3>
+              {elrondToken && (
+                <TokenImage src={elrondToken.assets.svgUrl} size={32} />
+              )}
             </div>
           </div>
 
-          {farmInfo && (
+          {data && elrondToken && (
             <div className="mb-2">
               <h4 className="flex gap-2">
                 TVL:
                 <span className="">
                   $
                   {formatBalanceDollar(
-                    { balance: farmInfo.stakedLp, decimals: 18 },
+                    { balance: data.staked, decimals: elrondToken.decimals },
                     price,
                     true
                   )}
                 </span>{" "}
               </h4>
+              <h4 className="flex gap-2">
+                Users:
+                <span className="">{data.totalUsers}</span>{" "}
+              </h4>
 
-              <h4 className="flex gap- 2 text-yellow-600">42% APY</h4>
+              <h4 className="flex gap- 2 text-yellow-600">10% APY</h4>
             </div>
           )}
 
@@ -123,7 +150,7 @@ const FarmComponent = () => {
                   htmlFor="amount-bskegld"
                   className="hidden sm:block text-right"
                 >
-                  Deposit LP
+                  Deposit BSK
                 </Label>
                 <div className="flex justify-between text-xs">
                   <p className="cursor-pointer" onClick={handleMax}>
@@ -144,7 +171,10 @@ const FarmComponent = () => {
                   Boolean(formik.errors.amount)
                 }
               />
-              <p className="text-red-700 text-xs">{formik.errors.amount}</p>
+              {Boolean(formik.touched.amount) &&
+                Boolean(formik.errors.amount) && (
+                  <p className="text-red-700 text-xs">{formik.errors.amount}</p>
+                )}
             </div>
 
             <DialogFooter>
@@ -176,21 +206,30 @@ const FarmComponent = () => {
               <div className="mb-2">My positions</div>
 
               <StakedDetails onModal />
+              <Button
+                variant={"secondary"}
+                className="text-sm w-full  bg-blue-600 hover:text-blue-500 text-white"
+                onClick={handleClaim}
+              >
+                Claim
+              </Button>
             </div>
             <Divider className="my-4" />
             <div className="grid gap-3">
               <Button
+                variant={"secondary"}
                 className="text-sm w-full lg:w-auto bg-green-600 hover:text-green-500 text-white"
-                onClick={handleWithdraw}
+                onClick={handleReStake}
               >
-                Harvest
+                Restake
               </Button>
               <Button
+                variant={"secondary"}
                 className="w-full md:w-auto text-sm bg-red-500 text-white hover:text-red-700"
-                onClick={handleHarvest}
+                onClick={handleWithdraw}
               >
                 {" "}
-                withdraw
+                Unstake
               </Button>
 
               {isOpenHarvest && (
@@ -213,4 +252,4 @@ const FarmComponent = () => {
   );
 };
 
-export default FarmComponent;
+export default StakeBSK;

@@ -1,10 +1,11 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
+import { fetchScSimpleData } from "@/services/sc/queries";
+import { Address, AddressValue } from "@multiversx/sdk-core/out";
 import BigNumber from "bignumber.js";
 import useSwr from "swr";
 import { calculateFarmReward } from "./functions";
 import { fetchFarmInfo, fetchUserFarmInfo } from "./services";
-import { fetchScSimpleData } from "@/services/sc/queries";
 export const useGetFarmUserInfo = () => {
   const address = useAppSelector(selectUserAddress);
   const { data, isLoading, error } = useSwr(
@@ -93,5 +94,74 @@ export const useNFTsStoped = () => {
 
   return {
     isNFTsStoped: isNFTsStoped,
+  };
+};
+
+export const useStakeBskInfo = () => {
+  const {
+    data: staked,
+    isLoading: isLoading1,
+    error: error1,
+  } = useSwr<BigNumber>("stakeBskWsp:tvl", fetchScSimpleData);
+  const {
+    data: issued,
+    isLoading: isLoading2,
+    error: error2,
+  } = useSwr<BigNumber>("stakeBskWsp:issued", fetchScSimpleData);
+  const {
+    data: totalUsers,
+    isLoading: isLoading3,
+    error: error3,
+  } = useSwr<BigNumber>("stakeBskWsp:total_addresses", fetchScSimpleData);
+  const {
+    data: minimumStaking,
+    isLoading: isLoading4,
+    error: error4,
+  } = useSwr<BigNumber>("stakeBskWsp:minimum_staking", fetchScSimpleData);
+
+  const info = {
+    staked: staked?.toString() || "0",
+    issued: issued?.toString() || "0",
+    totalUsers: totalUsers?.toNumber() || 0,
+    minimumStaking: minimumStaking?.toString() || "0",
+  };
+
+  return {
+    data: info,
+    isLoading: isLoading1 || isLoading2 || isLoading3 || isLoading4,
+    error: error1 || error2 || error3 || error4,
+  };
+};
+
+export const useGetStakeBskUserInfo = () => {
+  const address = useAppSelector(selectUserAddress);
+  const {
+    data: staked,
+    isLoading: isLoadingStaked,
+    error: errorStaked,
+  } = useSwr(["stakeBskWsp:staked", address], () =>
+    fetchScSimpleData("stakeBskWsp:staked", [
+      new AddressValue(Address.fromBech32(address)),
+    ])
+  );
+  const {
+    data: rewards,
+    isLoading: isLoadingRewards,
+    error: errorRewards,
+  } = useSwr(["stakeBskWsp:rewards", address], () =>
+    fetchScSimpleData("stakeBskWsp:rewards", [
+      new AddressValue(Address.fromBech32(address)),
+    ])
+  );
+
+  const info = {
+    staked: staked?.toString() || "0",
+    rewards: rewards?.toString() || "0",
+  };
+
+  return {
+    data: info,
+    isLoading: isLoadingStaked || isLoadingRewards,
+    error: errorStaked || errorRewards,
   };
 };
