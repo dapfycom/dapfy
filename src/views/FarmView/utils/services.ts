@@ -85,7 +85,7 @@ export const restakeBsk = () => {
   });
 };
 export const claimBskRewards = () => {
-  getSmartContractInteraction("bskFarmWsp").scCall({
+  getSmartContractInteraction("stakeBskWsp").scCall({
     functionName: "claim",
     gasL: 50000000,
   });
