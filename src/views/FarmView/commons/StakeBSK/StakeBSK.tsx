@@ -20,7 +20,11 @@ import {
 } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import { useStakeBskInfo } from "@/views/FarmView/utils/hooks";
-import { restakeBsk, stakeBSK } from "@/views/FarmView/utils/services";
+import {
+  claimBskRewards,
+  restakeBsk,
+  stakeBSK,
+} from "@/views/FarmView/utils/services";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import StakedDetails from "./StakedDetails";
@@ -96,6 +100,10 @@ const StakeBSK = () => {
   const handleReStake = () => {
     restakeBsk();
   };
+
+  const handleClaim = () => {
+    claimBskRewards();
+  };
   return (
     <>
       <div className="w-full my-10 flex  text-left">
@@ -103,7 +111,7 @@ const StakeBSK = () => {
           <div className="mb-4">
             <div className="flex items-center gap-3">
               {" "}
-              <h3 className="text-lg font-semibold">BSK</h3>
+              <h3 className="text-lg font-semibold">STAKE BSK</h3>
               {elrondToken && (
                 <TokenImage src={elrondToken.assets.svgUrl} size={32} />
               )}
@@ -123,22 +131,12 @@ const StakeBSK = () => {
                   )}
                 </span>{" "}
               </h4>
-
-              <h4 className="flex gap-2">
-                Issued:
-                <span className="">
-                  {formatBalance({
-                    balance: data.issued,
-                    decimals: elrondToken.decimals,
-                  })}{" "}
-                  {formatTokenI(elrondToken.identifier)}
-                </span>{" "}
-              </h4>
-
               <h4 className="flex gap-2">
                 Users:
                 <span className="">{data.totalUsers}</span>{" "}
               </h4>
+
+              <h4 className="flex gap- 2 text-yellow-600">10% APY</h4>
             </div>
           )}
 
@@ -208,6 +206,13 @@ const StakeBSK = () => {
               <div className="mb-2">My positions</div>
 
               <StakedDetails onModal />
+              <Button
+                variant={"secondary"}
+                className="text-sm w-full  bg-blue-600 hover:text-blue-500 text-white"
+                onClick={handleClaim}
+              >
+                Claim
+              </Button>
             </div>
             <Divider className="my-4" />
             <div className="grid gap-3">

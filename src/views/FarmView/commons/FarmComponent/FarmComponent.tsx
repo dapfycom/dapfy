@@ -90,7 +90,7 @@ const FarmComponent = () => {
           <div className="mb-4">
             <div className="flex items-center gap-3">
               {" "}
-              <h3 className="text-lg font-semibold">BSK-EGLD</h3>
+              <h3 className="text-lg font-semibold">BSK-EGLD FARM</h3>
               {elrondToken && <LpTokenImage lpToken={elrondToken} />}
             </div>
           </div>
@@ -108,6 +108,8 @@ const FarmComponent = () => {
                   )}
                 </span>{" "}
               </h4>
+
+              <h4 className="flex gap- 2 text-yellow-600">42% APY</h4>
             </div>
           )}
 

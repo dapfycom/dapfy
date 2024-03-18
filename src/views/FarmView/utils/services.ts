@@ -84,6 +84,12 @@ export const restakeBsk = () => {
     gasL: 50000000,
   });
 };
+export const claimBskRewards = () => {
+  getSmartContractInteraction("bskFarmWsp").scCall({
+    functionName: "claim",
+    gasL: 50000000,
+  });
+};
 
 //queries
 export const fetchUserFarmInfo = async ([key, address]: [string, string]) => {
