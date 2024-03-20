@@ -25,6 +25,8 @@ export const POST = async (req: Request) => {
     return Response.json({ error: error }, { status: 400 });
   }
 
+  console.log("Use SC Tool", payload);
+
   if (payload.address !== undefined) {
     const hasInteracted = await UserAddressHasInteracted(payload);
     return NextResponse.json({ data: hasInteracted });
