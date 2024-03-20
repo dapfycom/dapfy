@@ -55,7 +55,7 @@ export const POST = async (req: Request) => {
         try {
           return await UserAddressHasInteracted({ ...payload, address });
         } catch (error) {
-          console.log(error);
+          console.log("UserAddressHasInteracted ERROR: ", error);
 
           // if fails put the user inside the list
           return true;
