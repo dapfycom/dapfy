@@ -68,6 +68,7 @@ export function DataTable<TData, TValue>({
       rowSelection,
     },
   });
+  console.log("data", data);
 
   return (
     <div className="w-full">

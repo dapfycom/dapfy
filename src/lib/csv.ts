@@ -2,10 +2,12 @@ export const arrayToCsv = ({
   data = null,
   columnDelimiter = ",",
   lineDelimiter = "\n",
+  fileName = "demo.csv",
 }: {
   data: any[] | null;
   columnDelimiter?: string;
   lineDelimiter?: string;
+  fileName?: string;
 }) => {
   let result: any, ctr: any, keys: any;
 
@@ -42,7 +44,7 @@ export const arrayToCsv = ({
   var url = window.URL.createObjectURL(blob);
   var anchor = document.createElement("a");
   anchor.href = url;
-  anchor.download = "demo.csv";
+  anchor.download = fileName;
 
   // (D) "FORCE DOWNLOAD"
   // NOTE: MAY NOT ALWAYS WORK DUE TO BROWSER SECURITY
