@@ -46,6 +46,8 @@ export const routeNames = {
   xfees: "/multiversx/tools/x-fees",
   xstkRewards: "/multiversx/tools/staking-providers-rewards",
   xpayments: "/multiversx/tools/x-payments",
+  raffle: "/multiversx/tools/raffle",
+
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",

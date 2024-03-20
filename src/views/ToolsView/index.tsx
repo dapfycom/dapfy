@@ -32,6 +32,12 @@ export const tools: Tool[] = [
     cover: "/images/x-payments-tool.jpg",
     link: routeNames.xpayments,
   },
+  {
+    name: "Raffle Draw",
+    description: "Randomly select winners from a list of wallets",
+    cover: "/images/raffle.jpeg",
+    link: routeNames.raffle,
+  },
 ];
 
 export interface Tool {
