@@ -67,6 +67,10 @@ export const swapAggregator = createSlice({
 
       state.toField.selectedToken = from.selectedToken;
     },
+
+    onChangeSlippage: (state, action: PayloadAction<number>) => {
+      state.slipage = action.payload;
+    },
   },
 });
 
@@ -95,5 +99,6 @@ export const {
   setRate,
   onChangeToFieldValueDecimals,
   onSwapFields,
+  onChangeSlippage,
 } = swapAggregator.actions;
 export default swapAggregator.reducer;
