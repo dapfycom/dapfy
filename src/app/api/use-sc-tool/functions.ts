@@ -110,7 +110,7 @@ export const UserAddressHasInteracted = async (payload: {
 
               // console.log("decodedResult", decodedResult);
 
-              if (decodedResult === selectedNetwork.tokensID.bsk) {
+              if (decodedResult === selectedNetwork.tokensID.bober) {
                 hasInteracted = true;
               }
             } catch (error) {

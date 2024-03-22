@@ -20,6 +20,7 @@ const networkConfig = {
       egld: "EGLD",
       wegld: "WEGLD-bd4d79",
       bsk: "BSK-baa025",
+      bober: "BOBER-9eb764",
       ride: "RIDE-7d18e9",
       hodl: "HODL-d7f4b5",
       usdc: "USDC-c76f1f",
