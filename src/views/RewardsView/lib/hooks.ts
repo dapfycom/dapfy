@@ -1,10 +1,10 @@
+import { UserAddressHasInteracted } from "@/app/api/use-sc-tool/functions";
 import { selectedNetwork } from "@/config/network";
 import { useGetMvxEpoch } from "@/hooks/useGetStats";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
 import { selectUserAddress, setIsStreakModal } from "@/redux/dapp/dapp-slice";
 import { getUserEmailsReport } from "@/services/rest/dapfy-api/rewards-report";
-import { fetchIsUserUsedDapfyTool } from "@/services/rest/dapfy-api/use-sc-tool";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
 import {
   fetchRewardsPoints,
@@ -92,16 +92,15 @@ export const useGetIsUserInteractedDefiTool = () => {
       ? `/use-sc-tool/${address}/${previousEpoch.getMinutes()}/${nextEpoch.getMinutes()}`
       : null,
     async () => {
-      return fetchIsUserUsedDapfyTool({
+      return UserAddressHasInteracted({
         address: address,
-        from: previousEpoch!.toISOString(),
-        to: nextEpoch!.toISOString(),
+        from: previousEpoch!,
+        to: nextEpoch!,
       });
     }
   );
-
   return {
-    isUserInteractedDefiTool: data?.data,
+    isUserInteractedDefiTool: data,
     isLoading,
     error,
   };

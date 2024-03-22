@@ -12,6 +12,11 @@ export const addressIsValid = (address: string): boolean => {
 
     return true;
   } catch (error) {
-    return false;
+    try {
+      Address.fromHex(address);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 };
