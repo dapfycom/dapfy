@@ -46,7 +46,7 @@ export const fetchUserTask = async (url: string): Promise<IUserTasks> => {
     const data = Promise.resolve({
       _id: "656c298f3c69a4d8389a91a7",
       user_id: "1455420368986968067",
-      mention: false,
+      mention: true,
       comment: false,
       like: true,
       rt: false,

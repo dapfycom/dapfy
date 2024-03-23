@@ -1,15 +1,15 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { routeNames } from "@/config/routes";
-import { useAppSelector } from "@/hooks/useRedux";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
-import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
+import { getCookie, setCookie } from "cookies-next";
+import { addMinutes } from "date-fns";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import queryString from "query-string";
+import { useEffect, useState } from "react";
 import {
   useGetIsUserInteractedDefiTool,
   useGetUnCollectedRewards,
@@ -20,21 +20,33 @@ const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUnCollectedRewards();
   const { tasks } = useGetUserTasks();
-
-  const address = useAppSelector(selectUserAddress);
+  const [mentionBoberPost, setMentionBoberPost] = useState(false);
 
   const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
-  const tradesilvaniaUrl = queryString.stringifyUrl({
-    url: "https://ramp.tradesilvania.com/",
-    query: {
-      partnerId: "65bcb0cbc9cb8dcfdd313284",
-      assetTo: "EGLD",
-      networkTo: "egld",
-      language: "en",
-      addressTo: address,
-      redirectTo: "/",
-    },
-  });
+
+  useEffect(() => {
+    if (tasks?.mention) {
+      const key = Buffer.from("x-mention", "utf-8").toString("hex");
+      const boberPostCookie = getCookie(key);
+
+      if (boberPostCookie) {
+        const date = new Date(Number(boberPostCookie));
+
+        if (new Date() > addMinutes(date, 15)) {
+          setMentionBoberPost(true);
+        }
+      } else {
+        setMentionBoberPost(false);
+
+        setCookie(key, new Date().getTime(), {
+          maxAge: 60 * 60 * 18,
+        });
+      }
+    } else {
+      setMentionBoberPost(false);
+    }
+  }, [tasks?.mention]);
+
   if (!isAuthenticated) {
     return null;
   }
@@ -84,6 +96,7 @@ const CollectedEgld = () => {
                   />
                 </a>
               </li>
+
               <li>
                 <a
                   href="https://x.com"
@@ -93,6 +106,18 @@ const CollectedEgld = () => {
                   <UserTask
                     text="Pomote ticker $BOBER on X and tag @dapfycom"
                     completed={!!tasks?.mention}
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <UserTask
+                    text="Write a funny post/meme about $BOBER"
+                    completed={mentionBoberPost}
                   />
                 </a>
               </li>
