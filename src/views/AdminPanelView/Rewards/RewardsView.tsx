@@ -3,6 +3,7 @@ import Blacklist from "./Blacklist/Blacklist";
 import CheckLastRewarded from "./CheckLastRewarded/CheckLastRewarded";
 import { LeaderboardContainer } from "./Leaderboard/LeaderboardContainer";
 import SupplyRewards from "./SupplyRewards/SupplyRewards";
+import UserTasks from "./UserTasks/UserTasks";
 import XUser from "./XUser/XUser";
 
 const RewardsView = () => {
@@ -20,7 +21,7 @@ const RewardsView = () => {
               Users
             </TabsTrigger>
             <TabsTrigger value="blacklist">Blacklist</TabsTrigger>
-            <TabsTrigger value="whitelist">Whitelist</TabsTrigger>
+            <TabsTrigger value="whitelist">User Tasks</TabsTrigger>
           </TabsList>
         </div>
 
@@ -31,7 +32,7 @@ const RewardsView = () => {
           <Blacklist />
         </TabsContent>
         <TabsContent value="whitelist" className="border-none p-0 outline-none">
-          <LeaderboardContainer />
+          <UserTasks />
         </TabsContent>
       </Tabs>
     </div>

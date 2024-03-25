@@ -1,3 +1,4 @@
+import useGetRewardsDapfyPubicTasks from "@/hooks/useGetRewardsDapfyPubicTasks";
 import { fetchAxiosDapfy } from "@/services/rest/dapfy-api";
 import { fetchUserTwitterTask } from "@/services/rest/dapfy-api/task";
 import { useSearchParams } from "next/navigation";
@@ -28,6 +29,19 @@ export const useGetBlackListUsers = () => {
 
   return {
     users: data?.users || [],
+    error,
+    isLoading,
+  };
+};
+
+export const useGetPublicUserTasks = (id: string) => {
+  const { tasks, error, isLoading } = useGetRewardsDapfyPubicTasks();
+  console.log("tasks", tasks);
+
+  const userTasks = tasks?.find((t) => t.user_id === id);
+
+  return {
+    userTasks,
     error,
     isLoading,
   };

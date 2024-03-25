@@ -156,3 +156,13 @@ model BlackListRewards {
   identifier String   @unique
   createdAt  DateTime @default(now())
 }
+
+model UsersTasks {
+  id        String   @id @default(uuid())
+  xuserId   String   @unique
+  mention   String   @default("auto")
+  comment   String   @default("auto")
+  like      String   @default("auto")
+  rt        String   @default("auto")
+  updatedAt DateTime @updatedAt
+}

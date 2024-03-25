@@ -1,6 +1,6 @@
 import prisma from "@/lib/db";
 import { verifyAdmins } from "@/lib/mx-utils";
-import axiosRewards from "@/services/rest/rewards";
+import { serverAxiosDapfy } from "@/services/rest/dapfy-api";
 import { IUserTasks } from "@/types/rewards.interface";
 import { addDays, format } from "date-fns";
 
@@ -31,7 +31,7 @@ export async function GET(req: Request) {
   let finalUsers;
   if (!date && currentDate.getUTCHours() < 16) {
     current = true;
-    const tasks = await axiosRewards.get<IUserTasks[]>("tasks/all");
+    const tasks = await serverAxiosDapfy.get<IUserTasks[]>("/task");
     const usersThatCompleteTwitterTask = tasks.data.filter(
       (t) => t.comment && t.like && t.mention && t.rt
     );

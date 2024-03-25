@@ -22,6 +22,14 @@ export interface IUserTasks {
   defi: boolean;
 }
 
+export interface IDapfyUserTasks {
+  user_id: string;
+  mention: string;
+  comment: string;
+  like: string;
+  rt: string;
+}
+
 export interface IUserToReward {
   id: string;
   xid: string;
