@@ -36,7 +36,6 @@ export const useGetBlackListUsers = () => {
 
 export const useGetPublicUserTasks = (id: string) => {
   const { tasks, error, isLoading } = useGetRewardsDapfyPubicTasks();
-  console.log("tasks", tasks);
 
   const userTasks = tasks?.find((t) => t.user_id === id);
 

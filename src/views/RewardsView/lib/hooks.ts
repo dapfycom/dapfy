@@ -1,15 +1,13 @@
 import { UserAddressHasInteracted } from "@/app/api/use-sc-tool/functions";
 import { selectedNetwork } from "@/config/network";
+import useGetRewardsDapfyPubicTasks from "@/hooks/useGetRewardsDapfyPubicTasks";
 import { useGetMvxEpoch } from "@/hooks/useGetStats";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGetXUser } from "@/hooks/useXAuthentication";
 import { selectUserAddress, setIsStreakModal } from "@/redux/dapp/dapp-slice";
 import { getUserEmailsReport } from "@/services/rest/dapfy-api/rewards-report";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
-import {
-  fetchRewardsPoints,
-  fetchUserTask,
-} from "@/services/rest/rewards/user";
+import { fetchRewardsPoints } from "@/services/rest/rewards/user";
 import { fetchScSimpleData } from "@/services/sc/queries";
 import { IUserX } from "@/types/rewards.interface";
 import { generateHash } from "@/utils/functions/crypto";
@@ -41,10 +39,10 @@ export const useGetUserPoints = () => {
 };
 export const useGetUserTasks = () => {
   const { user } = useGetXUser();
-  const { data, error, isLoading } = useSWR(
-    user ? `/tasks/${user.id}` : null,
-    fetchUserTask
-  );
+
+  const { tasks, error, isLoading } = useGetRewardsDapfyPubicTasks();
+
+  const data = tasks?.find((t) => t.user_id === user?.id);
 
   return {
     tasks: data,
