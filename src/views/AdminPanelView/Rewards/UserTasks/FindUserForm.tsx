@@ -5,10 +5,10 @@ import FormTask from "./FormTask";
 
 const FindUserForm = () => {
   const [xId, setXId] = useState("");
-  const { userTasks } = useGetPublicUserTasks(xId);
   const handleXIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setXId(e.target.value);
   };
+  const { userTasks } = useGetPublicUserTasks(xId);
 
   return (
     <div>
@@ -17,7 +17,7 @@ const FindUserForm = () => {
         value={xId}
         onChange={handleXIdChange}
       />
-      <FormTask xId={xId} />
+      {xId !== "" && userTasks && <FormTask xId={xId} userTasks={userTasks} />}
     </div>
   );
 };

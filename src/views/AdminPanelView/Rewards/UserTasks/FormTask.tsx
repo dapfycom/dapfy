@@ -2,18 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import axiosDapfy from "@/services/rest/dapfy-api";
-import { IDapfyUserTasks } from "@/types/rewards.interface";
+import { IDapfyUserTasks, IUserTasks } from "@/types/rewards.interface";
 import { useFormik } from "formik";
 import { useEffect } from "react";
-import { useGetPublicUserTasks } from "../hooks";
 
 interface FormTaskProps {
   xId: string;
+  userTasks: IUserTasks;
 }
 
-const FormTask = ({ xId }: FormTaskProps) => {
-  const { userTasks } = useGetPublicUserTasks(xId);
-
+const FormTask = ({ xId, userTasks }: FormTaskProps) => {
   const formik = useFormik({
     initialValues: {
       mention: userTasks?.mention,
@@ -38,6 +36,7 @@ const FormTask = ({ xId }: FormTaskProps) => {
     formik.setFieldValue("comment", userTasks?.comment);
     formik.setFieldValue("like", userTasks?.like);
     formik.setFieldValue("rt", userTasks?.rt);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userTasks?.user_id]);
 
   return (

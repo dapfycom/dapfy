@@ -49,8 +49,6 @@ const XUser = () => {
       ).data
   );
 
-  console.log({ data });
-
   const handleSubmit = async () => {
     if (userInput) {
       setUser(userInput);
