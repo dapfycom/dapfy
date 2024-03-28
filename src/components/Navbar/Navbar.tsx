@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 
+import boberImg from "@/assets/images/coins/bober.jpg";
 import EpochCountDown from "@/components/EpochCountDown/EpochCountDown";
 import MainNav from "@/components/MainNav/MainNav";
 import NavbarActions from "@/components/NavActions/NavActions";
@@ -10,7 +11,6 @@ import useBuyFromTradesilvania from "@/hooks/useBuyFromTradesilvania";
 import useScrolled from "@/hooks/useScrolled";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
 const Navbar = () => {
   const hasScrolled = useScrolled();
   const pathname = usePathname();
@@ -38,18 +38,11 @@ const Navbar = () => {
             <Link href={routeNames.home} className="ml-[-10px] flex gap-x-2">
               <p className="font-bold text-4xl">
                 <Image
-                  src={"/images/logo-white.png"}
+                  src={boberImg}
                   alt="logo"
                   width={40}
                   height={40}
-                  className="hidden dark:block"
-                />
-                <Image
-                  src={"/images/logo-black.png"}
-                  alt="logo"
-                  width={40}
-                  height={40}
-                  className="block dark:hidden"
+                  className="rounded-full"
                 />
               </p>
             </Link>
