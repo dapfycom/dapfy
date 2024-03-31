@@ -1,5 +1,7 @@
 "use client";
+import Divider from "@/components/Divider/Divider";
 import Pagination from "@/components/ui-system/Pagination/Pagination";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -100,7 +102,7 @@ interface AlbumArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: number;
   height?: number;
 }
-const AlbumArtwork = ({
+export const AlbumArtwork = ({
   nft,
   aspectRatio = "portrait",
   width,
@@ -108,6 +110,7 @@ const AlbumArtwork = ({
   className,
   ...props
 }: AlbumArtworkProps) => {
+  const [count, setcount] = React.useState<number>(1);
   return (
     <div className={cn("space-y-3", className)} {...props}>
       <div className="overflow-hidden rounded-md">
@@ -130,8 +133,43 @@ const AlbumArtwork = ({
       </div>
 
       <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{nft.name}</h3>
-        <p className="text-xs text-muted-foreground">{nft.collection}</p>
+        <div className="flex w-full justify-between mb-3">
+          <h3 className="font-medium leading-none">{nft.name}</h3>
+          {Number(nft.balance) > 1 && (
+            <h3 className="font-medium leading-none text-blue-500">
+              {nft.balance}
+            </h3>
+          )}
+        </div>
+        <Divider />
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 items-center">
+            <div>{count}</div>
+            <div className="flex gap-3">
+              <Button
+                variant={"outline"}
+                size={"sm"}
+                onClick={() =>
+                  setcount((old) =>
+                    old === Number(nft.balance) ? Number(nft.balance) : old + 1
+                  )
+                }
+              >
+                +
+              </Button>
+              <Button
+                variant={"outline"}
+                size={"sm"}
+                onClick={() => setcount((old) => (old === 1 ? 1 : old - 1))}
+              >
+                -
+              </Button>
+            </div>
+          </div>
+          <Button variant={"outline"} size={"xs"} className="w-full">
+            Stake
+          </Button>
+        </div>
       </div>
     </div>
   );

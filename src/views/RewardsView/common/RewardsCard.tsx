@@ -9,7 +9,7 @@ import {
 import useAuthentication from "@/hooks/useAuthentication";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { cn } from "@/lib/utils";
-import { useGetUserPoints } from "../lib/hooks";
+import { useGetUserPoints } from "../lib/tasks-hooks";
 
 const RewardsCard = () => {
   const { isLoggedIn } = useAuthentication();

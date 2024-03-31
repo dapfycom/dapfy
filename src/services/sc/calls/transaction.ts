@@ -169,6 +169,25 @@ export class SmartContractInteraction {
     });
   }
 
+  public ESDTSFTTransfer({
+    functionName,
+    token,
+    quantity,
+    arg = [],
+    gasL,
+  }: IESDTNFTTransferProps & { quantity: number }) {
+    let interaction = this.createInteraction(functionName, arg);
+
+    interaction.withSingleESDTNFTTransfer(
+      TokenTransfer.semiFungible(token.collection, token.nonce, quantity)
+    );
+
+    return SmartContractInteraction.sendTransaction({
+      interaction,
+      options: { gasL },
+    });
+  }
+
   /**
    * EGLDPayment
    */

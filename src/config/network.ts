@@ -86,6 +86,7 @@ const networkConfig = {
       stakeBsk:
         "erd1qqqqqqqqqqqqqpgqpygeps34dw9vx4ezzzevhdez7zs74p5dtt6qsv68k0",
       pvp: "erd1qqqqqqqqqqqqqpgqtuyjw08nvj4v4akk5yfkaqxw7p9s8vndq5yqd805px",
+      mintingStakingNft: "",
     },
   },
   devnet: {
@@ -113,6 +114,7 @@ const networkConfig = {
       rare: "RIDE-6e4c49",
       utk: "UTK-14d57d",
       bskwegld: "",
+      bober: "",
       busd: "",
       usdt: "",
     },
@@ -141,6 +143,9 @@ const networkConfig = {
         "erd1qqqqqqqqqqqqqpgqhnmuen6gx7unfmqsjwx0ul7ezjyg2ndfvcqsa4nqax",
       rewards: "erd1qqqqqqqqqqqqqpgq07h4ydezhnr4w85krgnhqgvh8j9fr82aq5yqw9vzpw",
       pvp: "erd1qqqqqqqqqqqqqpgq6k9t4klkekxvceqhcru2fl2lu3tyyczxq5yq4rw985",
+      stakeBsk: "",
+      mintingStakingNft:
+        "erd1qqqqqqqqqqqqqpgq28d5c6hgglaqzlandvedvxjgnax3jk2wq5yq73j4ek",
     },
   },
   testnet: {
@@ -191,6 +196,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIRONMENT: ENVIROMENTTYPE = "mainnet";
+export const ENVIRONMENT: ENVIROMENTTYPE = "devnet";
 
 export const selectedNetwork = networkConfig[ENVIRONMENT];

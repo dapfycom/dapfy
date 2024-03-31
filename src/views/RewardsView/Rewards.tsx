@@ -4,9 +4,10 @@ import AllTimeEarned from "./common/AllTimeEarned";
 import CollectedEgld from "./common/CollectedEgld";
 import DashboardHeading from "./common/DashboadHeading";
 import LoginButton from "./common/LogginButton";
+import NFTsStaking from "./common/NFTsStaking/NFTsStaking";
 import Participants from "./common/Participants";
 import StreakDays from "./common/StreakeDays";
-import { useBindXUserWithDapfyUser, useStreakDialog } from "./lib/hooks";
+import { useBindXUserWithDapfyUser, useStreakDialog } from "./lib/tasks-hooks";
 
 const Rewards = () => {
   useBindXUserWithDapfyUser();
@@ -24,6 +25,8 @@ const Rewards = () => {
       <StreakDays />
 
       <CollectedEgld />
+
+      <NFTsStaking />
 
       {/* <EmailReports /> */}
     </Container>

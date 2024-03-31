@@ -59,7 +59,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[#FF7613] text-[#FFFFFF] hover:[#eb7520] shadow-[inset_0px_4px_0px_#FF8B38,inset_0px_-4px_0px_#DE640C,_0px_0px_5px_#C96218] border-[1px] border-[#DE630A] ",
+          "bg-[#FF7613] hover:bg-[#dc620a]  text-[#FFFFFF] hover:[#eb7520] shadow-[inset_0px_4px_0px_#FF8B38,inset_0px_-4px_0px_#DE640C,_0px_0px_5px_#C96218] border-[1px] border-[#DE630A] ",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

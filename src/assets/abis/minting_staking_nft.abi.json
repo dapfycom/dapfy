@@ -1,0 +1,426 @@
+{
+  "buildInfo": {
+    "rustc": {
+      "version": "1.76.0-nightly",
+      "commitHash": "d86d65bbc19b928387f68427fcc3a0da498d8a19",
+      "commitDate": "2023-12-10",
+      "channel": "Nightly",
+      "short": "rustc 1.76.0-nightly (d86d65bbc 2023-12-10)"
+    },
+    "contractCrate": {
+      "name": "minting_staking_nft",
+      "version": "0.0.0"
+    },
+    "framework": {
+      "name": "multiversx-sc",
+      "version": "0.45.1"
+    }
+  },
+  "name": "MintingStakingNft",
+  "constructor": {
+    "inputs": [
+      {
+        "name": "royalties",
+        "type": "BigUint"
+      },
+      {
+        "name": "max_supply",
+        "type": "u64"
+      },
+      {
+        "name": "allowed_to_mint",
+        "type": "Address"
+      }
+    ],
+    "outputs": []
+  },
+  "endpoints": [
+    {
+      "name": "upgrade",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "issueNft",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "payableInTokens": ["EGLD"],
+      "inputs": [
+        {
+          "name": "token_name",
+          "type": "bytes"
+        },
+        {
+          "name": "token_ticker",
+          "type": "bytes"
+        },
+        {
+          "name": "nfts_base_name",
+          "type": "bytes"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setLocalRoles",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "token_roles",
+          "type": "optional<variadic<NFTRoles>>",
+          "multi_arg": true
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "mintNft",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "uri",
+          "type": "bytes"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "updateRoyalties",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "royalties",
+          "type": "BigUint"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "updateNftTokenName",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "nft_token_name",
+          "type": "bytes"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "addAllowedToMint",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "updateAllowedToMint",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "users",
+          "type": "List<Address>"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "addRewards",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "addAllowedTokens",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "tokens",
+          "type": "List<EgldOrEsdtTokenIdentifier>"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "unStake",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "index",
+          "type": "optional<u32>",
+          "multi_arg": true
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "claimRewards",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "stake",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "autoStake",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "Address"
+        },
+        {
+          "name": "nonce",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "getUserNftsStaked",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "List<Nft>"
+        }
+      ]
+    },
+    {
+      "name": "getStakingInfo",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "StakingInfo"
+        }
+      ]
+    },
+    {
+      "name": "getUserStakingInfo",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "UserStakingInfo"
+        }
+      ]
+    },
+    {
+      "name": "getNftsStaked",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<Nft>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getUserRewards",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        },
+        {
+          "name": "token_identifier",
+          "type": "EgldOrEsdtTokenIdentifier"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "EgldOrEsdtTokenPayment"
+        }
+      ]
+    },
+    {
+      "name": "getAllowedRewardsTokens",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<EgldOrEsdtTokenIdentifier>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getUserEarned",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "variadic<EgldOrEsdtTokenPayment>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getNftTokenId",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "TokenIdentifier"
+        }
+      ]
+    },
+    {
+      "name": "getNftTokenName",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "bytes"
+        }
+      ]
+    }
+  ],
+  "esdtAttributes": [],
+  "hasCallback": true,
+  "types": {
+    "EgldOrEsdtTokenPayment": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "token_identifier",
+          "type": "EgldOrEsdtTokenIdentifier"
+        },
+        {
+          "name": "token_nonce",
+          "type": "u64"
+        },
+        {
+          "name": "amount",
+          "type": "BigUint"
+        }
+      ]
+    },
+    "NFTRoles": {
+      "type": "enum",
+      "variants": [
+        {
+          "name": "ESDTRoleNFTCreate",
+          "discriminant": 0
+        },
+        {
+          "name": "ESDTRoleNFTBurn",
+          "discriminant": 1
+        },
+        {
+          "name": "ESDTRoleNFTUpdateAttributes",
+          "discriminant": 2
+        },
+        {
+          "name": "ESDTRoleNFTAddURI",
+          "discriminant": 3
+        },
+        {
+          "name": "ESDTTransferRole",
+          "discriminant": 4
+        }
+      ]
+    },
+    "Nft": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "nonce",
+          "type": "u64"
+        },
+        {
+          "name": "nft_collection",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "owner",
+          "type": "Address"
+        }
+      ]
+    },
+    "Payment": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "token_identifier",
+          "type": "EgldOrEsdtTokenIdentifier"
+        },
+        {
+          "name": "amount",
+          "type": "BigUint"
+        }
+      ]
+    },
+    "StakingInfo": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "nfts_staked",
+          "type": "u32"
+        },
+        {
+          "name": "rewards_tokens",
+          "type": "List<EgldOrEsdtTokenIdentifier>"
+        },
+        {
+          "name": "total_users",
+          "type": "u32"
+        }
+      ]
+    },
+    "UserStakingInfo": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "user_nfts",
+          "type": "List<Nft>"
+        },
+        {
+          "name": "rewards_tokens",
+          "type": "List<Payment>"
+        }
+      ]
+    }
+  }
+}

@@ -14,7 +14,7 @@ import { copyTextToClipboard } from "@/utils/functions/general";
 import { useGetEgldPrice } from "@multiversx/sdk-dapp/hooks";
 import { Check, Copy, LogOut } from "lucide-react";
 import { useState } from "react";
-import { useGetAllTimeEarned } from "../lib/hooks";
+import { useGetAllTimeEarned } from "../lib/tasks-hooks";
 
 const AllTimeEarned = () => {
   const { address } = useAuthentication();

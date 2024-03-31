@@ -1,4 +1,4 @@
-import { useGetStreak } from "../lib/hooks";
+import { useGetStreak } from "../lib/tasks-hooks";
 
 export default function StreakDays() {
   const { userStreak, error } = useGetStreak();

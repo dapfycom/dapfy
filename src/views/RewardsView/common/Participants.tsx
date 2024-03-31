@@ -1,6 +1,6 @@
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import Image from "next/image";
-import { useGetUsersAvatars } from "../lib/hooks";
+import { useGetUsersAvatars } from "../lib/tasks-hooks";
 
 const Participants = () => {
   const { isAuthenticated } = useXAuthentication();

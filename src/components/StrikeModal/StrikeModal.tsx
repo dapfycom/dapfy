@@ -3,7 +3,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { cn } from "@/lib/utils";
 import { selectIsStreakModal, setIsStreakModal } from "@/redux/dapp/dapp-slice";
-import { useGetStreak } from "@/views/RewardsView/lib/hooks";
+import { useGetStreak } from "@/views/RewardsView/lib/tasks-hooks";
 import { CheckCircle2, Flame, Gem } from "lucide-react";
 import Image from "next/image";
 import Realistic from "../Conffeti/Realistic";

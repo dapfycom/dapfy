@@ -6,6 +6,8 @@ import dustAbiUrl from "@/assets/abis/dust_sc.abi.json";
 import onDexFarmAbiUrl from "@/assets/abis/farm_onedex.abi.json";
 import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
+import mintingStakingNftAbiUrl from "@/assets/abis/minting_staking_nft.abi.json";
+
 import originalOneDexAbiUrl from "@/assets/abis/original_OneDex.abi.json";
 import pvpAbiUrl from "@/assets/abis/pvp.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
@@ -33,7 +35,8 @@ export type WspTypes =
   | "originalOneDexWsp"
   | "rewardsWsp"
   | "stakeBskWsp"
-  | "pvpWsp";
+  | "pvpWsp"
+  | "mintingStakingNftWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -137,6 +140,12 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = pvpAbiUrl;
       implementsInterfaces = "PvPGame";
       break;
+    case "mintingStakingNftWsp":
+      simpleAddress = selectedNetwork.scAddress.mintingStakingNft;
+      address = new Address(simpleAddress);
+      abiUrl = mintingStakingNftAbiUrl;
+      implementsInterfaces = "MintingStakingNft";
+      break;
     default:
       simpleAddress = workspace;
       address = new Address(simpleAddress);
@@ -210,6 +219,11 @@ export const getSmartContractInteraction = (
     pvpWsp: new SmartContractInteraction(
       getInterface("pvpWsp").simpleAddress,
       AbiRegistry.create(getInterface("pvpWsp").abiUrl)
+    ),
+
+    mintingStakingNftWsp: new SmartContractInteraction(
+      getInterface("mintingStakingNftWsp").simpleAddress,
+      AbiRegistry.create(getInterface("mintingStakingNftWsp").abiUrl)
     ),
   };
 

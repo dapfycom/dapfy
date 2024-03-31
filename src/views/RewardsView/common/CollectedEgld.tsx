@@ -10,12 +10,12 @@ import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { claimRewards } from "../lib/services";
 import {
   useGetIsUserInteractedDefiTool,
   useGetUnCollectedRewards,
   useGetUserTasks,
-} from "../lib/hooks";
-import { claimRewards } from "../lib/services";
+} from "../lib/tasks-hooks";
 const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUnCollectedRewards();

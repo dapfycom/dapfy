@@ -3,6 +3,7 @@ const nextConfig = {
   images: {
     domains: [
       "media.elrond.com",
+      "devnet-media.elrond.com",
       "placehold.co",
       "images.unsplash.com",
       "pbs.twimg.com",

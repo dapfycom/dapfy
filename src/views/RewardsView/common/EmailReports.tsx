@@ -10,7 +10,7 @@ import { ErrorMessage } from "@/utils/functions/error";
 import { useFormik } from "formik";
 import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
-import { useGetUserEmailReport } from "../lib/hooks";
+import { useGetUserEmailReport } from "../lib/tasks-hooks";
 
 const EmailReports = () => {
   const { isAuthenticated, user } = useXAuthentication();

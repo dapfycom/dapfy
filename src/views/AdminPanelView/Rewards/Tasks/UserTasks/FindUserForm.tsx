@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
-import { useGetPublicUserTasks } from "../hooks";
+import { useGetPublicUserTasks } from "../../hooks";
 import FormTask from "./FormTask";
 
 const FindUserForm = () => {

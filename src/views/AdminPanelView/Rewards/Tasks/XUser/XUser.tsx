@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import axiosDapfy from "@/services/rest/dapfy-api";
 import { useState } from "react";
 import useSWR from "swr";
-import { InfoItem } from "../../Tickets/common/Dialogs/ShowUserInfoDialog";
+import { InfoItem } from "../../../Tickets/common/Dialogs/ShowUserInfoDialog";
 
 const XUser = () => {
   const [userInput, setUserInput] = useState("");

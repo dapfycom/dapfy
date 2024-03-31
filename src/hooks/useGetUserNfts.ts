@@ -3,10 +3,10 @@ import { fetchUserNfts } from "@/services/rest/elrond/accounts";
 import useSWR from "swr";
 import { useAppSelector } from "./useRedux";
 
-const useGetUserNfts = (collections?: string) => {
+const useGetUserNfts = (collections?: string | null) => {
   const address = useAppSelector(selectUserAddress);
   const { data, error } = useSWR(
-    address
+    address && collections !== null
       ? {
           address: address,
           parameters: { collections: collections },
