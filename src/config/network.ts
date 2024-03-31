@@ -141,7 +141,7 @@ const networkConfig = {
         "erd1qqqqqqqqqqqqqpgq7p7dnazynjakfe044n3fj8a8mt6hztyavr2swekvkd",
       originalOneDex:
         "erd1qqqqqqqqqqqqqpgqhnmuen6gx7unfmqsjwx0ul7ezjyg2ndfvcqsa4nqax",
-      rewards: "erd1qqqqqqqqqqqqqpgq07h4ydezhnr4w85krgnhqgvh8j9fr82aq5yqw9vzpw",
+      rewards: "erd1qqqqqqqqqqqqqpgqpf0c433d649wuq77rcmzyztxaegp4hfnq5yqtuzt58",
       pvp: "erd1qqqqqqqqqqqqqpgq6k9t4klkekxvceqhcru2fl2lu3tyyczxq5yq4rw985",
       stakeBsk: "",
       mintingStakingNft:
