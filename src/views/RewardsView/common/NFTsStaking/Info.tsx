@@ -1,6 +1,14 @@
 import Divider from "@/components/Divider/Divider";
 import TokenImage from "@/components/TokenImage/TokenImage";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
 import { getSmartContractInteraction } from "@/services/sc";
 import { formatBalance } from "@/utils/functions/formatBalance";
@@ -24,9 +32,27 @@ export default function Info() {
       <div>
         <h2 className="text-2xl font-bold mb-4">NFTs</h2>
         <p className="text-sm mb-8">
-          <a className="text-blue-500 hover:underline" href="#">
-            How it works?
-          </a>
+          <Dialog>
+            <DialogTrigger className="text-blue-500 hover:underline">
+              How it works?
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>How Our Streak Reward System Works</DialogTitle>
+                <DialogDescription>
+                  When you achieve the maximum streak of 30 consecutive days, an
+                  NFT is automatically staked in your name, rewarding you for
+                  your consistency. These rewards come from the NFTs you have in
+                  staking, and you are free to withdraw your NFTs at any time to
+                  sell or list them on other marketplaces. For each new 30-day
+                  streak you achieve, a new NFT is created, increasing the
+                  rewards you receive. The more NFTs you accumulate, the greater
+                  your rewards become. This unique system is designed to
+                  recognize and reward your dedication and engagement.
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         </p>
         <div className="mb-6">
           <p className="mb-2">
