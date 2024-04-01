@@ -145,7 +145,7 @@ const networkConfig = {
       pvp: "erd1qqqqqqqqqqqqqpgq6k9t4klkekxvceqhcru2fl2lu3tyyczxq5yq4rw985",
       stakeBsk: "",
       mintingStakingNft:
-        "erd1qqqqqqqqqqqqqpgq28d5c6hgglaqzlandvedvxjgnax3jk2wq5yq73j4ek",
+        "erd1qqqqqqqqqqqqqpgqjsjkl4qeafpgs8v6px83qwal8n66wmsgq5yqp3ljer",
     },
   },
   testnet: {
