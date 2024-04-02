@@ -93,7 +93,6 @@
     },
     {
       "name": "updateRoyalties",
-      "onlyOwner": true,
       "mutability": "mutable",
       "inputs": [
         {
@@ -105,7 +104,6 @@
     },
     {
       "name": "updateNftTokenName",
-      "onlyOwner": true,
       "mutability": "mutable",
       "inputs": [
         {
@@ -117,7 +115,6 @@
     },
     {
       "name": "addAllowedToMint",
-      "onlyOwner": true,
       "mutability": "mutable",
       "inputs": [
         {
@@ -129,7 +126,6 @@
     },
     {
       "name": "updateAllowedToMint",
-      "onlyOwner": true,
       "mutability": "mutable",
       "inputs": [
         {
@@ -141,7 +137,6 @@
     },
     {
       "name": "addRewards",
-      "onlyOwner": true,
       "mutability": "mutable",
       "payableInTokens": ["*"],
       "inputs": [],
@@ -149,7 +144,6 @@
     },
     {
       "name": "addAllowedTokens",
-      "onlyOwner": true,
       "mutability": "mutable",
       "inputs": [
         {
@@ -195,6 +189,17 @@
         {
           "name": "nonce",
           "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "updateAllowedToAutoStake",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "users",
+          "type": "List<Address>"
         }
       ],
       "outputs": []
@@ -307,6 +312,16 @@
       ]
     },
     {
+      "name": "getNextIndexToMint",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u32"
+        }
+      ]
+    },
+    {
       "name": "getNftTokenName",
       "mutability": "readonly",
       "inputs": [],
@@ -315,6 +330,38 @@
           "type": "bytes"
         }
       ]
+    },
+    {
+      "name": "getNftRoyalties",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getMaxSupply",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "addAdmin",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "admin",
+          "type": "Address"
+        }
+      ],
+      "outputs": []
     }
   ],
   "esdtAttributes": [],
