@@ -31,12 +31,12 @@ const Available = () => {
   };
 
   return (
-    <div className="bg-[#3a393954] p-6 rounded-lg">
+    <div className="bg-[#3a393954] p-6 rounded-lg ">
       <h3 className="text-2xl font-bold mb-4">Available NFTs</h3>
       {nfts.length === 0 ? (
         <p className="text-sm mb-4">No available NFTs in your wallet</p>
       ) : (
-        <p>
+        <p className="text-sm mb-4">
           Available:{" "}
           <span className="font-semibold">
             {nfts.reduce((acc, nft) => {
@@ -45,10 +45,6 @@ const Available = () => {
           </span>
         </p>
       )}
-
-      <p className="text-sm mb-6">
-        Selected: <span className="font-semibold">0</span>
-      </p>
 
       <Dialog>
         <DialogTrigger asChild>
