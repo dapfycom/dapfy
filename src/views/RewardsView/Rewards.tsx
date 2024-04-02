@@ -7,7 +7,7 @@ import LoginButton from "./common/LogginButton";
 import NFTsStaking from "./common/NFTsStaking/NFTsStaking";
 import Participants from "./common/Participants";
 import StreakDays from "./common/StreakeDays";
-import { useGetUserInfo } from "./lib/nfts-hooks";
+import { useGetUserInfo, useGetUserSfts } from "./lib/nfts-hooks";
 import { useBindXUserWithDapfyUser, useStreakDialog } from "./lib/tasks-hooks";
 
 const Rewards = () => {
@@ -15,6 +15,7 @@ const Rewards = () => {
   useStreakDialog();
 
   const { userNfts } = useGetUserInfo();
+  const { nfts } = useGetUserSfts();
 
   return (
     <Container className="mt-10 flex flex-col gap-10 max-w-[800px] text-center justify-center">
@@ -29,7 +30,7 @@ const Rewards = () => {
       <StreakDays />
 
       <CollectedEgld />
-      {userNfts.length > 0 && <NFTsStaking />}
+      {(userNfts.length > 0 || nfts.length > 0) && <NFTsStaking />}
 
       {/* <EmailReports /> */}
     </Container>

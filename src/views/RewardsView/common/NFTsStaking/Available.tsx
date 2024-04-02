@@ -8,18 +8,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useGetUserNfts from "@/hooks/useGetUserNfts";
 import { cn } from "@/lib/utils";
 import { getSmartContractInteraction } from "@/services/sc";
 import { IElrondNFT } from "@/types/elrond.interface";
 import Image from "next/image";
 import { useState } from "react";
-import { useGetSftCollection } from "../../lib/nfts-hooks";
+import { useGetUserSfts } from "../../lib/nfts-hooks";
 
 const Available = () => {
-  const { sftCollection } = useGetSftCollection();
-  const { nfts } = useGetUserNfts(sftCollection ? sftCollection : null);
-  console.log("nfts", nfts);
+  const { nfts } = useGetUserSfts();
 
   const handleStake = (collection: string, nonce: number, quantity: number) => {
     getSmartContractInteraction("mintingStakingNftWsp").ESDTSFTTransfer({

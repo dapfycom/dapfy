@@ -1,3 +1,4 @@
+import useGetUserNfts from "@/hooks/useGetUserNfts";
 import { useAppSelector } from "@/hooks/useRedux";
 import { selectUserAddress } from "@/redux/dapp/dapp-slice";
 import { fetchScSimpleData } from "@/services/sc/queries";
@@ -64,5 +65,14 @@ export const useGetSftCollection = () => {
     sftCollection: data || "",
     isLoading,
     error,
+  };
+};
+
+export const useGetUserSfts = () => {
+  const { sftCollection } = useGetSftCollection();
+  const { nfts } = useGetUserNfts(sftCollection ? sftCollection : null);
+
+  return {
+    nfts: nfts || [],
   };
 };
