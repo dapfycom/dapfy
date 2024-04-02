@@ -14,7 +14,7 @@ const Rewards = () => {
   useBindXUserWithDapfyUser();
   useStreakDialog();
 
-  const { rewardsTokens } = useGetUserInfo();
+  const { userNfts } = useGetUserInfo();
 
   return (
     <Container className="mt-10 flex flex-col gap-10 max-w-[800px] text-center justify-center">
@@ -29,7 +29,7 @@ const Rewards = () => {
       <StreakDays />
 
       <CollectedEgld />
-      {rewardsTokens.length > 0 && <NFTsStaking />}
+      {userNfts.length > 0 && <NFTsStaking />}
 
       {/* <EmailReports /> */}
     </Container>
