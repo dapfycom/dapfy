@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 
-import boberImg from "@/assets/images/coins/bober.jpg";
 import EpochCountDown from "@/components/EpochCountDown/EpochCountDown";
 import MainNav from "@/components/MainNav/MainNav";
 import NavbarActions from "@/components/NavActions/NavActions";
@@ -38,7 +37,9 @@ const Navbar = () => {
             <Link href={routeNames.home} className="ml-[-10px] flex gap-x-2">
               <p className="font-bold text-4xl">
                 <Image
-                  src={boberImg}
+                  src={
+                    "https://media.elrond.com/tokens/asset/MOGE-3aadc7/logo.svg"
+                  }
                   alt="logo"
                   width={40}
                   height={40}
