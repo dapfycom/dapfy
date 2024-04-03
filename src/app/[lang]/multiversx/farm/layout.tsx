@@ -79,12 +79,18 @@ const FarmLayout = ({ children }: PropsWithChildren) => {
               selected={selectedProtocol === "ashswap"}
               href={routeNames.farm + "/ashswap"}
             >
-              <Image
-                src={"https://app.ashswap.io/logo.png"}
-                alt="ashswap"
-                width={70}
-                height={24}
-              />
+              <div className="flex gap-2 items-center">
+                <Image
+                  src={
+                    "https://app.ashswap.io/_next/static/media/logo-ashswap.7f385bbf.png"
+                  }
+                  alt="ashswap"
+                  width={70}
+                  height={24}
+                  className="w-7 h-auto"
+                />
+                ashswap
+              </div>
             </ProtolContainer>
           </div>
 
@@ -111,7 +117,7 @@ const ProtolContainer = ({
     <Button
       asChild
       variant={selected ? "secondary" : "outline"}
-      className="cursor-pointer w-[130px]"
+      className="cursor-pointer w-[150px]"
       onClick={onClick}
     >
       <Link href={href}>
