@@ -20,7 +20,7 @@ const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUnCollectedRewards();
   const { tasks } = useGetUserTasks();
-  const [mentionBoberPost, setMentionBoberPost] = useState(false);
+  const [mentionTokenPost, setMentionTokenPost] = useState(false);
 
   const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
 
@@ -33,17 +33,17 @@ const CollectedEgld = () => {
         const date = new Date(Number(boberPostCookie));
 
         if (new Date() > addMinutes(date, 15)) {
-          setMentionBoberPost(true);
+          setMentionTokenPost(true);
         }
       } else {
-        setMentionBoberPost(false);
+        setMentionTokenPost(false);
 
         setCookie(key, new Date().getTime(), {
-          maxAge: 60 * 60 * 18,
+          maxAge: 60 * 60 * 12,
         });
       }
     } else {
-      setMentionBoberPost(false);
+      setMentionTokenPost(false);
     }
   }, [tasks?.mention]);
 
@@ -104,7 +104,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Pomote ticker $BOBER on X and tag @dapfycom"
+                    text="Pomote ticker $MOGE on X and tag @dapfycom"
                     completed={!!tasks?.mention}
                   />
                 </a>
@@ -116,8 +116,8 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Write a funny post/meme about $BOBER"
-                    completed={mentionBoberPost}
+                    text="Write a funny post/meme about $MOGE"
+                    completed={mentionTokenPost}
                   />
                 </a>
               </li>
@@ -128,7 +128,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Buy BOBER using the swap aggregator"
+                    text="Buy MOGE using the swap aggregator"
                     completed={isUserInteractedDefiTool}
                   />
                 </Link>
