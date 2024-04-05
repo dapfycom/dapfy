@@ -55,8 +55,6 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  console.log("params", params);
-
   return (
     <html lang={params.lang} className={GeistSans.className}>
       <Script
