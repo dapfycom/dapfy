@@ -128,7 +128,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Buy MOGE using the swap aggregator (1 usd value minimum)"
+                    text="Buy MOGE using the swap aggregator"
                     completed={isUserInteractedDefiTool}
                   />
                 </Link>
