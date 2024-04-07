@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
+import { getCookie, setCookie } from "cookies-next";
+import { addDays } from "date-fns";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { claimRewards } from "../lib/services";
 import {
   useGetIsUserInteractedDefiTool,
@@ -15,12 +18,35 @@ const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUnCollectedRewards();
   const { tasks } = useGetUserTasks();
-
+  const [lastTask, setLastTask] = useState(false);
   const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
+
+  useEffect(() => {
+    const memeCookier = getCookie("meme");
+
+    if (memeCookier) {
+      setLastTask(true);
+    }
+  }, []);
 
   if (!isAuthenticated) {
     return null;
   }
+
+  const handleClickCollectKarma = () => {
+    const currentDate = new Date();
+    let expireDate = new Date();
+    expireDate.setUTCHours(16, 0, 0, 0);
+
+    if (currentDate.getUTCHours() >= 16) {
+      expireDate = addDays(new Date(), 1);
+      expireDate.setUTCHours(16, 0, 0, 0);
+    }
+    setCookie("meme", "true", {
+      // tomorrow at 4:00:00 PM GTM
+      expires: expireDate,
+    });
+  };
 
   return (
     <>
@@ -85,6 +111,29 @@ const CollectedEgld = () => {
                   completed={isUserInteractedDefiTool}
                 />
               </li>
+              <span className="flex gap-3">
+                <span className="w-[18px] sm:w-[23px]">
+                  {lastTask ? (
+                    <CheckCircle2 className="text-green-500 w-[18px] sm:w-[23px]" />
+                  ) : (
+                    <Circle className="text-green-500 w-[18px] sm:w-[23px]" />
+                  )}
+                </span>
+
+                <div className="flex flex-auto gap-5">
+                  <div>
+                    Complete quests & collect karma on memeversx using this
+                    link:{" "}
+                    <span
+                      className="text-blue-500 cursor-pointer"
+                      onClick={handleClickCollectKarma}
+                    >
+                      complete quests &collect karma!
+                    </span>
+                  </div>{" "}
+                  <ArrowRight />
+                </div>
+              </span>
             </ul>
           </div>
         </div>
