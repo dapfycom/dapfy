@@ -46,6 +46,9 @@ const CollectedEgld = () => {
       // tomorrow at 4:00:00 PM GTM
       expires: expireDate,
     });
+
+    // navigate to https://memeversx.com?ref=dapfy
+    window.open("https://memeversx.com?ref=dapfy", "_blank");
   };
 
   return (
