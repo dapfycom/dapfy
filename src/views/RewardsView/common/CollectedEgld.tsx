@@ -1,15 +1,10 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
-import { routeNames } from "@/config/routes";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import BigNumber from "bignumber.js";
-import { getCookie, setCookie } from "cookies-next";
-import { addMinutes } from "date-fns";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { claimRewards } from "../lib/services";
 import {
   useGetIsUserInteractedDefiTool,
@@ -20,32 +15,8 @@ const CollectedEgld = () => {
   const { isAuthenticated } = useXAuthentication();
   const { rewards } = useGetUnCollectedRewards();
   const { tasks } = useGetUserTasks();
-  const [mentionTokenPost, setMentionTokenPost] = useState(false);
 
   const { isUserInteractedDefiTool } = useGetIsUserInteractedDefiTool();
-
-  useEffect(() => {
-    if (tasks?.mention) {
-      const key = Buffer.from("x-mention", "utf-8").toString("hex");
-      const boberPostCookie = getCookie(key);
-
-      if (boberPostCookie) {
-        const date = new Date(Number(boberPostCookie));
-
-        if (new Date() > addMinutes(date, 15)) {
-          setMentionTokenPost(true);
-        }
-      } else {
-        setMentionTokenPost(false);
-
-        setCookie(key, new Date().getTime(), {
-          maxAge: 60 * 60 * 12,
-        });
-      }
-    } else {
-      setMentionTokenPost(false);
-    }
-  }, [tasks?.mention]);
 
   if (!isAuthenticated) {
     return null;
@@ -96,7 +67,6 @@ const CollectedEgld = () => {
                   />
                 </a>
               </li>
-
               <li>
                 <a
                   href="https://x.com"
@@ -104,34 +74,16 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text="Pomote ticker $MOGE on X and tag @dapfycom"
+                    text="Write a tweet about @dapfycom"
                     completed={!!tasks?.mention}
                   />
                 </a>
               </li>
               <li>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <UserTask
-                    text="Write a funny post/meme about $MOGE"
-                    completed={mentionTokenPost}
-                  />
-                </a>
-              </li>
-              <li>
-                <Link
-                  href={routeNames.aggregator}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <UserTask
-                    text="Buy MOGE using the swap aggregator"
-                    completed={isUserInteractedDefiTool}
-                  />
-                </Link>
+                <UserTask
+                  text=" Interact with one of our DeFi tools"
+                  completed={isUserInteractedDefiTool}
+                />
               </li>
             </ul>
           </div>
