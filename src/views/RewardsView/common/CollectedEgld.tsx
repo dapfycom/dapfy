@@ -1,6 +1,5 @@
 import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
-import { routeNames } from "@/config/routes";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
@@ -129,14 +128,12 @@ const CollectedEgld = () => {
               </li>
               <li>
                 <Link
-                  href={routeNames.aggregator}
+                  href={"https://xexchange.com/swap"}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text={`Buy ${formatTokenI(
-                      token
-                    )} using the swap aggregator`}
+                    text={`Buy ${formatTokenI(token)} using the swap xexchange`}
                     completed={isUserInteractedDefiTool}
                   />
                 </Link>
