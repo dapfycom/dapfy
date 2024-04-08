@@ -1,9 +1,7 @@
 import { selectedNetwork } from "@/config/network";
 import { decodeBase64ToString } from "@/lib/coder";
 import { timeStampToSeconds } from "@/lib/date";
-import { addressIsValid } from "@/lib/utils";
 import { fetchTransactions } from "@/services/rest/elrond/transactions";
-import { Address } from "@multiversx/sdk-core/out";
 
 export const UserAddressHasInteracted = async (payload: {
   to: Date;
@@ -19,7 +17,7 @@ export const UserAddressHasInteracted = async (payload: {
     after: timeStampToSeconds(payload.from.getTime()),
     sender: payload.address,
     status: "success",
-    receiver: selectedNetwork.scAddress.ashSwapAggregator,
+    receiver: "erd1qqqqqqqqqqqqqpgqyx43t88dek9yr4889ykzx0wuz3kfwd4a2jps9xnxhm",
     size: 50,
     withScResults: true,
   });
@@ -33,51 +31,36 @@ export const UserAddressHasInteracted = async (payload: {
     let lobbyAddress = "";
     const addressAtTheEnd = dataArr[dataArr.length - 1];
 
-    if (addressIsValid(addressAtTheEnd)) {
-      try {
-        lobbyAddress = Address.fromHex(addressAtTheEnd).bech32();
-      } catch (error) {
-        console.error(error);
-      }
+    const results = tx?.results || [];
+    for (let index = 0; index < results.length; index++) {
+      const result = results[index];
+      if (!result.data) continue;
 
-      if (
-        lobbyAddress ===
-        "erd1085h6wdckzfkvfftq837mwt2a780dv0p8wcjjpauku7at0dlqswszewvjn"
-      ) {
-        const results = tx?.results || [];
-        for (let index = 0; index < results.length; index++) {
-          const result = results[index];
-          if (!result.data) continue;
+      const resultData = decodeBase64ToString(result.data);
 
-          const resultData = decodeBase64ToString(result.data);
+      const resultDataArr = resultData.split("@");
+      // console.log(
+      //   "resultDataArr",
+      //   resultDataArr.map((x) => Buffer.from(x, "hex").toString("utf-8"))
+      // );
 
-          const resultDataArr = resultData.split("@");
-          // console.log(
-          //   "resultDataArr",
-          //   resultDataArr.map((x) => Buffer.from(x, "hex").toString("utf-8"))
-          // );
+      for (let index = 0; index < resultDataArr.length; index++) {
+        const result = resultDataArr[index];
+        try {
+          if (!result) continue;
+          // console.log("result", result);
+          const decodedResult = Buffer.from(result, "hex").toString("utf-8");
 
-          for (let index = 0; index < resultDataArr.length; index++) {
-            const result = resultDataArr[index];
-            try {
-              if (!result) continue;
-              // console.log("result", result);
-              const decodedResult = Buffer.from(result, "hex").toString(
-                "utf-8"
-              );
+          console.log("decodedResult", decodedResult);
 
-              // console.log("decodedResult", decodedResult);
-
-              if (decodedResult === selectedNetwork.tokensID.jeet) {
-                hasInteracted = true;
-              }
-            } catch (error) {
-              console.log("Error on results", {
-                result,
-                error,
-              });
-            }
+          if (decodedResult === selectedNetwork.tokensID.jeet) {
+            hasInteracted = true;
           }
+        } catch (error) {
+          console.log("Error on results", {
+            result,
+            error,
+          });
         }
       }
     }
