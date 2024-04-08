@@ -54,6 +54,7 @@ const networkConfig = {
       busd: "BUSD-40b57e",
       hypeusdc: "HYPEUSDC-3164e5",
       moge: "MOGE-3aadc7",
+      jeet: "JEET-dda037",
     },
 
     scAddress: {
