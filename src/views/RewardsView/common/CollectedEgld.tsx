@@ -133,7 +133,7 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text={`Buy ${formatTokenI(token)} using the swap xexchange`}
+                    text={`Buy ${formatTokenI(token)} using the swap xExchange`}
                     completed={isUserInteractedDefiTool}
                   />
                 </Link>
