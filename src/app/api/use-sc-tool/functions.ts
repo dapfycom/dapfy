@@ -28,9 +28,6 @@ export const UserAddressHasInteracted = async (payload: {
     const hexData = decodeBase64ToString(tx.data || "");
     const dataArr = hexData.split("@");
 
-    let lobbyAddress = "";
-    const addressAtTheEnd = dataArr[dataArr.length - 1];
-
     const results = tx?.results || [];
     for (let index = 0; index < results.length; index++) {
       const result = results[index];
