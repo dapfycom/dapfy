@@ -5,7 +5,8 @@ import { formatBalance } from "@/utils/functions/formatBalance";
 import { formatTokenI } from "@/utils/functions/tokens";
 import BigNumber from "bignumber.js";
 import { getCookie, setCookie } from "cookies-next";
-import { addMinutes } from "date-fns";
+import { createHash } from "crypto";
+import { addDays, addMinutes } from "date-fns";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -138,6 +139,22 @@ const CollectedEgld = () => {
                   />
                 </Link>
               </li>
+              <li>
+                <AfterClickTask
+                  text="Smash the rocket on dexscreener 🚀"
+                  sKey={"dexscreener"}
+                  time={5}
+                  url="https://dexscreener.com/multiversx/erd1qqqqqqqqqqqqqpgqyx43t88dek9yr4889ykzx0wuz3kfwd4a2jps9xnxhm"
+                />
+              </li>
+              <li>
+                <AfterClickTask
+                  text="Trade JEET using the new Telegram trading bot 🔥"
+                  sKey={"trade-jeet-telegram"}
+                  time={5}
+                  url="https://edge.projectx.mx/referral/c3821754"
+                />
+              </li>
             </ul>
           </div>
         </div>
@@ -174,6 +191,56 @@ const CollectedEgld = () => {
 };
 
 export default CollectedEgld;
+
+const AfterClickTask = ({
+  text,
+  sKey,
+  time,
+  url,
+}: {
+  completed?: boolean;
+  text: string;
+  time: number /* Minutes */;
+  sKey: string;
+  url?: string;
+}) => {
+  const [completed, setCompleted] = useState(false);
+  const key = createHash("md5").update(sKey).digest("hex");
+
+  const handleClick = () => {
+    const currentDate = new Date();
+    let expireDate = new Date();
+    expireDate.setUTCHours(16, 0, 0, 0);
+
+    if (currentDate.getUTCHours() >= 16) {
+      expireDate = addDays(new Date(), 1);
+      expireDate.setUTCHours(16, 0, 0, 0);
+    }
+
+    setCookie(key, new Date().getTime(), {
+      expires: expireDate,
+    });
+
+    if (url) {
+      window.open(url, "_blank");
+    }
+  };
+
+  useEffect(() => {
+    const completedTaskFromCookie = getCookie(key);
+
+    if (
+      addMinutes(new Date(Number(completedTaskFromCookie)), time) < new Date()
+    ) {
+      setCompleted(true);
+    }
+  }, []);
+  return (
+    <div onClick={handleClick} className="cursor-pointer">
+      <UserTask completed={completed} text={text} />
+    </div>
+  );
+};
 
 const UserTask = ({
   completed,

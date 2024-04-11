@@ -49,9 +49,20 @@ export const extractStringsBetweenAts = (input: string): string[] => {
 };
 
 export const convertToBoolean = (input: string | number): boolean => {
-  if (input === "00" || input === "0" || input === "" || input === 0) {
+  if (
+    input === "00" ||
+    input === "0" ||
+    input === "" ||
+    input === "false" ||
+    input === 0
+  ) {
     return false;
-  } else if (input === "01" || input === "1" || input === 1) {
+  } else if (
+    input === "01" ||
+    input === "1" ||
+    input === 1 ||
+    input === "true"
+  ) {
     return true;
   } else {
     throw new Error(`Input "${JSON.stringify(input)}" value not recognized`);
