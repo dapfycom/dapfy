@@ -139,22 +139,6 @@ const CollectedEgld = () => {
                   />
                 </Link>
               </li>
-              <li>
-                <AfterClickTask
-                  text="Smash the rocket on dexscreener 🚀"
-                  sKey={"dexscreener"}
-                  time={5}
-                  url="https://dexscreener.com/multiversx/erd1qqqqqqqqqqqqqpgqyx43t88dek9yr4889ykzx0wuz3kfwd4a2jps9xnxhm"
-                />
-              </li>
-              <li>
-                <AfterClickTask
-                  text="Trade JEET using the new Telegram trading bot 🔥"
-                  sKey={"trade-jeet-telegram"}
-                  time={5}
-                  url="https://edge.projectx.mx/referral/c3821754"
-                />
-              </li>
             </ul>
           </div>
         </div>
