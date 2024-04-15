@@ -19,7 +19,7 @@ const initialState: IdustState = {
   toToken: selectedNetwork.tokensID.wegld, // token that user wants to receive
   convertInfo: [],
   slipage: 2,
-  maxTokenSelection: 30,
+  maxTokenSelection: 35,
 };
 
 export const dust = createSlice({
