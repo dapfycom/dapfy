@@ -1,212 +1,278 @@
 {
-    "buildInfo": {
-        "rustc": {
-            "version": "1.72.0-nightly",
-            "commitHash": "8c74a5d27c644a0f7a22bb2fa8dd3ff8257bc220",
-            "commitDate": "2023-06-14",
-            "channel": "Nightly",
-            "short": "rustc 1.72.0-nightly (8c74a5d27 2023-06-14)"
-        },
-        "contractCrate": {
-            "name": "contract",
-            "version": "0.0.0"
-        },
-        "framework": {
-            "name": "multiversx-sc",
-            "version": "0.45.1"
-        }
+  "buildInfo": {
+    "rustc": {
+      "version": "1.76.0-nightly",
+      "commitHash": "d86d65bbc19b928387f68427fcc3a0da498d8a19",
+      "commitDate": "2023-12-10",
+      "channel": "Nightly",
+      "short": "rustc 1.76.0-nightly (d86d65bbc 2023-12-10)"
     },
-    "name": "Contract",
-    "constructor": {
-        "inputs": [],
-        "outputs": []
+    "contractCrate": {
+      "name": "contract",
+      "version": "0.0.0"
     },
-    "endpoints": [
+    "framework": {
+      "name": "multiversx-sc",
+      "version": "0.45.1"
+    }
+  },
+  "name": "Contract",
+  "constructor": {
+    "inputs": [],
+    "outputs": []
+  },
+  "endpoints": [
+    {
+      "name": "upgrade",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "supply",
+      "mutability": "mutable",
+      "payableInTokens": ["EGLD"],
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "add_admin",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
         {
-            "name": "upgrade",
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "supply",
-            "mutability": "mutable",
-            "payableInTokens": [
-                "EGLD"
-            ],
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "add_admin",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "admin",
-                    "type": "Address"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "set_users",
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "reward_epoch",
-                    "type": "u64"
-                },
-                {
-                    "name": "new_board_members",
-                    "type": "List<Address>"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "claim",
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "config_stike",
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "days",
-                    "type": "List<u64>"
-                },
-                {
-                    "name": "percent",
-                    "type": "List<u64>"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "hasClaimed",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "bool"
-                }
-            ]
-        },
-        {
-            "name": "getSupplyAmount",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "name": "getUserClaimable",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "user",
-                    "type": "Address"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "name": "getUserEarned",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "user",
-                    "type": "Address"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "name": "getUserLastRewardEpoch",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "user",
-                    "type": "Address"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "getUserCurrentEpochReward",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "getUserStrike",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "user",
-                    "type": "Address"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "getStikeDays",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "position",
-                    "type": "u64"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "getStikePercent",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "position",
-                    "type": "u64"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
+          "name": "admin",
+          "type": "Address"
         }
-    ],
-    "esdtAttributes": [],
-    "hasCallback": false,
-    "types": {}
+      ],
+      "outputs": []
+    },
+    {
+      "name": "update_minting_staking_contract",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "minting_staking_contract",
+          "type": "Address"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "update_times_reached_max_strikes",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        },
+        {
+          "name": "times",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "set_users",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "reward_epoch",
+          "type": "u64"
+        },
+        {
+          "name": "new_board_members",
+          "type": "List<Address>"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "claim",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "config_stike",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "days",
+          "type": "List<u64>"
+        },
+        {
+          "name": "percent",
+          "type": "List<u64>"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setUserStreak",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        },
+        {
+          "name": "streak",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "hasClaimed",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "getSupplyAmount",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getUserClaimable",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getUserEarned",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getUserLastRewardEpoch",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getUserCurrentEpochReward",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getUserStrike",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getStikeDays",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "position",
+          "type": "u64"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getStikePercent",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "position",
+          "type": "u64"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getTimesReachedMaxStrikes",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getMintingStakingContract",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "Address"
+        }
+      ]
+    }
+  ],
+  "esdtAttributes": [],
+  "hasCallback": false,
+  "types": {}
 }
