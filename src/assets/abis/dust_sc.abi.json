@@ -1,177 +1,273 @@
 {
-    "buildInfo": {
-        "rustc": {
-            "version": "1.70.0-nightly",
-            "commitHash": "28a29282f6dde2e4aba6e1e4cfea5c9430a00217",
-            "commitDate": "2023-04-06",
-            "channel": "Nightly",
-            "short": "rustc 1.70.0-nightly (28a29282f 2023-04-06)"
-        },
-        "contractCrate": {
-            "name": "dust_sc",
-            "version": "0.0.0"
-        },
-        "framework": {
-            "name": "multiversx-sc",
-            "version": "0.39.5"
-        }
+  "buildInfo": {
+    "rustc": {
+      "version": "1.76.0-nightly",
+      "commitHash": "d86d65bbc19b928387f68427fcc3a0da498d8a19",
+      "commitDate": "2023-12-10",
+      "channel": "Nightly",
+      "short": "rustc 1.76.0-nightly (d86d65bbc 2023-12-10)"
     },
-    "docs": [
-        "An empty contract. To be used as a template when starting a new contract from scratch."
-    ],
-    "name": "DustContract",
-    "constructor": {
-        "inputs": [
-            {
-                "name": "router",
-                "type": "Address"
-            },
-            {
-                "name": "fees_address",
-                "type": "Address"
-            },
-            {
-                "name": "initial_fees_percentage",
-                "type": "u64"
-            },
-            {
-                "name": "wegld_token_id",
-                "type": "TokenIdentifier"
-            },
-            {
-                "name": "usdc_token_id",
-                "type": "TokenIdentifier"
-            },
-            {
-                "name": "bsk_token_id",
-                "type": "TokenIdentifier"
-            }
-        ],
-        "outputs": []
+    "contractCrate": {
+      "name": "dust_sc_new",
+      "version": "0.0.0"
     },
-    "endpoints": [
-        {
-            "name": "setFeePercentage",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "fee_percentage",
-                    "type": "u64"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "setRoutes",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "swipe",
-            "mutability": "mutable",
-            "payableInTokens": [
-                "*"
-            ],
-            "inputs": [
-                {
-                    "name": "token_out",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "min_amount_out",
-                    "type": "BigUint"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "getAmountOut",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "token_out",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "tokens_to_swipe",
-                    "type": "variadic<multi<TokenIdentifier,BigUint>>",
-                    "multi_arg": true
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "name": "getSingleRoutes",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "token_in",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "token_out",
-                    "type": "TokenIdentifier"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "variadic<PairContractMetadata>",
-                    "multi_result": true
-                }
-            ]
-        },
-        {
-            "name": "getAllowedOutputTokens",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "variadic<TokenIdentifier>",
-                    "multi_result": true
-                }
-            ]
-        },
-        {
-            "name": "getAllowedInputTokens",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "variadic<TokenIdentifier>",
-                    "multi_result": true
-                }
-            ]
-        }
-    ],
-    "events": [],
-    "hasCallback": false,
-    "types": {
-        "PairContractMetadata": {
-            "type": "struct",
-            "fields": [
-                {
-                    "name": "first_token_id",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "second_token_id",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "address",
-                    "type": "Address"
-                }
-            ]
-        }
+    "framework": {
+      "name": "multiversx-sc",
+      "version": "0.45.2"
     }
+  },
+  "docs": [
+    "An empty contract. To be used as a template when starting a new contract from scratch."
+  ],
+  "name": "DustContract",
+  "constructor": {
+    "inputs": [
+      {
+        "name": "fees_address",
+        "type": "Address"
+      },
+      {
+        "name": "initial_fees_percentage",
+        "type": "u64"
+      }
+    ],
+    "outputs": []
+  },
+  "endpoints": [
+    {
+      "name": "upgrade",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "fees_address",
+          "type": "Address"
+        },
+        {
+          "name": "initial_fees_percentage",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "deleteOutputToken",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "TokenIdentifier"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setOutputToken",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "TokenIdentifier"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "addRoutes",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "token_id",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "routes",
+          "type": "variadic<Route>",
+          "multi_arg": true
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "deleteRoutes",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "tokens",
+          "type": "variadic<TokenIdentifier>",
+          "multi_arg": true
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setFeePercentage",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "fee_percentage",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "getFunds",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "EgldOrEsdtTokenIdentifier"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "sellDust",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "token_out",
+          "type": "TokenIdentifier"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "swipe",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [
+        {
+          "name": "token_out",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "min_amount_out",
+          "type": "BigUint"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "getAmountOut",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "token_out",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "tokens_to_swipe",
+          "type": "variadic<multi<TokenIdentifier,BigUint>>",
+          "multi_arg": true
+        }
+      ],
+      "outputs": [
+        {
+          "type": "TokenIdentifier"
+        },
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getSingleRoutes",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "token_in",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "token_out",
+          "type": "TokenIdentifier"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "variadic<Route>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getRoutes",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<Route>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getAllowedOutputTokens",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<TokenIdentifier>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getAllowedInputTokens",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "variadic<TokenIdentifier>",
+          "multi_result": true
+        }
+      ]
+    }
+  ],
+  "esdtAttributes": [],
+  "hasCallback": false,
+  "types": {
+    "PairType": {
+      "type": "enum",
+      "variants": [
+        {
+          "name": "Maiar",
+          "discriminant": 0
+        },
+        {
+          "name": "OneDex",
+          "discriminant": 1
+        }
+      ]
+    },
+    "Route": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "pair_address",
+          "type": "Address"
+        },
+        {
+          "name": "pair_type",
+          "type": "PairType"
+        },
+        {
+          "name": "first_token_id",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "second_token_id",
+          "type": "TokenIdentifier"
+        }
+      ]
+    }
+  }
 }

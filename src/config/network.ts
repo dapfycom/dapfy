@@ -132,7 +132,7 @@ const networkConfig = {
         "erd1qqqqqqqqqqqqqpgqfj3z3k4vlq7dc2928rxez0uhhlq46s6p4mtqerlxhc",
       farm: "",
       flip: "erd1qqqqqqqqqqqqqpgqfg6t4tr5vj70359kws6nltkw7qfv8rv8d8ssj43k4j",
-      dust: "erd1qqqqqqqqqqqqqpgq375pvn7af4k2tv34mshm80pqjs0uhl82d8ssdv4qpj",
+      dust: "erd1qqqqqqqqqqqqqpgqlumqk6qw6mcq4jse4hlkwserhn9dl3wyd8ss3qs95c",
       hatomParent:
         "erd1qqqqqqqqqqqqqpgq5fldcnkg7j5333h7u4n8xhewt0pjj76qvr2s0lcyyl",
       aggregator:
@@ -199,6 +199,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIRONMENT: ENVIROMENTTYPE = "mainnet";
+export const ENVIRONMENT: ENVIROMENTTYPE = "devnet";
 
 export const selectedNetwork = networkConfig[ENVIRONMENT];
