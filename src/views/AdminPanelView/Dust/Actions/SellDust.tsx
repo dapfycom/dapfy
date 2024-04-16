@@ -31,7 +31,7 @@ const SellDust = () => {
           variant={"secondary"}
           onClick={() => setToken(selectedNetwork.tokensID.wegld)}
         >
-          EGLD
+          WEGLD
         </Button>
         <Button
           variant={"secondary"}
