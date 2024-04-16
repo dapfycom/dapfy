@@ -11,6 +11,7 @@
 
 import {
   FarmIcon,
+  FireIcon,
   SendMessageIcon,
   SwapIcon,
 } from "@/components/ui-system/icons/ui-icons";
@@ -142,5 +143,10 @@ export const adminRoutes = [
     path: routeNames.admin + "/tickets",
     title: "Tickets",
     icon: <SendMessageIcon />,
+  },
+  {
+    path: routeNames.admin + "/dust",
+    title: "Dust",
+    icon: <FireIcon />,
   },
 ];
