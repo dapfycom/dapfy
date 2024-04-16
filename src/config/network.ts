@@ -120,6 +120,7 @@ const networkConfig = {
       bober: "",
       busd: "",
       usdt: "",
+      jeet: "",
     },
     scAddress: {
       maiarRouter: "",

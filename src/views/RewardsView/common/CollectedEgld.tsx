@@ -218,7 +218,7 @@ const AfterClickTask = ({
     ) {
       setCompleted(true);
     }
-  }, []);
+  }, [key, time]);
   return (
     <div onClick={handleClick} className="cursor-pointer">
       <UserTask completed={completed} text={text} />
