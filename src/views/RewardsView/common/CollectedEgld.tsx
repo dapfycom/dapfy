@@ -2,14 +2,12 @@ import { ShoppingBagIcon } from "@/components/ui-system/icons/ui-icons";
 import { Button } from "@/components/ui/button";
 import { useXAuthentication } from "@/hooks/useXAuthentication";
 import { formatBalance } from "@/utils/functions/formatBalance";
-import { formatTokenI } from "@/utils/functions/tokens";
 import BigNumber from "bignumber.js";
 import { getCookie, setCookie } from "cookies-next";
 import { createHash } from "crypto";
 import { addDays, addMinutes } from "date-fns";
 import { ArrowRight, CheckCircle2, Circle } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { claimRewards } from "../lib/services";
 import {
@@ -106,38 +104,10 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text={`Pomote ticker $${formatTokenI(
-                      token
-                    )} on X and tag @dapfycom`}
+                    text={`Write a post about @dapfycom on X / Use the Swap aggregator or Dust converter`}
                     completed={!!tasks?.mention}
                   />
                 </a>
-              </li>
-              <li>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <UserTask
-                    text={`Write a funny post/meme about $${formatTokenI(
-                      token
-                    )}`}
-                    completed={mentionTokenPost}
-                  />
-                </a>
-              </li>
-              <li>
-                <Link
-                  href={"https://xexchange.com/swap"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <UserTask
-                    text={`Buy ${formatTokenI(token)} using the swap xExchange`}
-                    completed={isUserInteractedDefiTool}
-                  />
-                </Link>
               </li>
             </ul>
           </div>
