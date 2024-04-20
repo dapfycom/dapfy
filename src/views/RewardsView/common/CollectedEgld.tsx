@@ -104,10 +104,17 @@ const CollectedEgld = () => {
                   rel="noopener noreferrer"
                 >
                   <UserTask
-                    text={`Write a post about @dapfycom on X / Use the Swap aggregator or Dust converter`}
+                    text={`Write a post about @dapfycom on X`}
                     completed={!!tasks?.mention}
                   />
                 </a>
+              </li>
+
+              <li>
+                <UserTask
+                  text={`Use the Swap aggregator or Dust converter`}
+                  completed={isUserInteractedDefiTool}
+                />
               </li>
             </ul>
           </div>
