@@ -10,7 +10,7 @@ import {
   limitDollarAmount,
   limitDollarAmountMin,
 } from "./contants";
-import { selectToTokenDust } from "./dust-slice";
+import { selectMaxTokensToConvert, selectToTokenDust } from "./dust-slice";
 import {
   fetchAllowedInputTokens,
   fetchAllowedOutputTokens,
@@ -60,7 +60,7 @@ export const useGetAmountOut = (
 
 export const useSelectableDustTokens = () => {
   const { isLoggedIn } = useGetLoginInfo();
-
+  const maxTokensLength = useAppSelector(selectMaxTokensToConvert);
   const { inputTokens, isLoading: isLoading1 } = useGetAllowedInputTokens();
   const toTokenToConvert = useAppSelector(selectToTokenDust);
 
@@ -90,15 +90,26 @@ export const useSelectableDustTokens = () => {
   const finalTokens = finalTokens2.sort((a, b) => {
     if (
       new BigNumber(a.balance)
+        .dividedBy(10 ** a.decimals)
         .multipliedBy(a.price || 0)
-        .isLessThan(new BigNumber(b.balance).multipliedBy(b.price || 0))
+        .isLessThan(
+          new BigNumber(b.balance)
+            .dividedBy(10 ** b.decimals)
+            .multipliedBy(b.price || 0)
+        )
     ) {
       return 1;
     }
     if (
       new BigNumber(a.balance)
+        .dividedBy(10 ** a.decimals)
+
         .multipliedBy(a.price || 0)
-        .isGreaterThan(new BigNumber(b.balance).multipliedBy(b.price || 0))
+        .isGreaterThan(
+          new BigNumber(b.balance)
+            .dividedBy(10 ** b.decimals)
+            .multipliedBy(b.price || 0)
+        )
     ) {
       return -1;
     }
@@ -106,7 +117,7 @@ export const useSelectableDustTokens = () => {
   });
 
   return {
-    finalTokens: isLoggedIn ? finalTokens : [],
+    finalTokens: isLoggedIn ? finalTokens.slice(0, maxTokensLength) : [],
     isLoading: isLoading1 || isLoading2,
   };
 };

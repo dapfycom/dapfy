@@ -19,7 +19,7 @@ const initialState: IdustState = {
   toToken: selectedNetwork.tokensID.wegld, // token that user wants to receive
   convertInfo: [],
   slipage: 2,
-  maxTokenSelection: 35,
+  maxTokenSelection: 30,
 };
 
 export const dust = createSlice({
@@ -112,6 +112,9 @@ export const selectConvertInfo = (state: AppState) => state.dust.convertInfo;
 export const selectToTokenDust = (state: AppState) => state.dust.toToken;
 
 export const selectDustSlippage = (state: AppState) => state.dust.slipage;
+
+export const selectMaxTokensToConvert = (state: AppState) =>
+  state.dust.maxTokenSelection;
 
 // Action creators are generated for each case reducer function
 export const { selectOutputToken, selectToToken, setSlipage } = dust.actions;
