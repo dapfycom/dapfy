@@ -55,6 +55,7 @@ const networkConfig = {
       hypeusdc: "HYPEUSDC-3164e5",
       moge: "MOGE-3aadc7",
       jeet: "JEET-dda037",
+      padawan: "PADAWAN-a17f58",
     },
 
     scAddress: {
@@ -121,6 +122,7 @@ const networkConfig = {
       busd: "",
       usdt: "",
       jeet: "",
+      padawan: "",
     },
     scAddress: {
       maiarRouter: "",

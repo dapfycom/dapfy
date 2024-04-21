@@ -37,11 +37,18 @@ const Navbar = () => {
             <Link href={routeNames.home} className="ml-[-10px] flex gap-x-2">
               <p className="font-bold text-4xl">
                 <Image
-                  src={"/images/jeet.png"}
+                  src={"/images/logo-white.png"}
                   alt="logo"
-                  width={60}
-                  height={60}
-                  className="rounded-full"
+                  width={40}
+                  height={40}
+                  className="hidden dark:block"
+                />
+                <Image
+                  src={"/images/logo-black.png"}
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  className="block dark:hidden"
                 />
               </p>
             </Link>

@@ -3,8 +3,13 @@ import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
+import BigNumber from "bignumber.js";
 import useSwr from "swr";
-import { limitDollarAmount, limitDollarAmountMin } from "./contants";
+import {
+  excludeTokens,
+  limitDollarAmount,
+  limitDollarAmountMin,
+} from "./contants";
 import { selectToTokenDust } from "./dust-slice";
 import {
   fetchAllowedInputTokens,
@@ -38,8 +43,6 @@ export const useGetAllowedOutputTokens = () => {
 export const useGetAmountOut = (
   tokensOut: { identifier: string; balance: string }[]
 ) => {
-  console.log({ tokensOut });
-
   const selectedToToken = useAppSelector(selectToTokenDust);
   const { data, isLoading, error } = useSwr(
     tokensOut.length > 0
@@ -80,9 +83,27 @@ export const useSelectableDustTokens = () => {
     }
   });
 
-  const finalTokens = finalTokens1.filter(
-    (token) => token.identifier !== "LPAD-84628f"
+  const finalTokens2 = finalTokens1.filter(
+    (token) => excludeTokens.includes(token.identifier) === false
   );
+
+  const finalTokens = finalTokens2.sort((a, b) => {
+    if (
+      new BigNumber(a.balance)
+        .multipliedBy(a.price || 0)
+        .isLessThan(new BigNumber(b.balance).multipliedBy(b.price || 0))
+    ) {
+      return 1;
+    }
+    if (
+      new BigNumber(a.balance)
+        .multipliedBy(a.price || 0)
+        .isGreaterThan(new BigNumber(b.balance).multipliedBy(b.price || 0))
+    ) {
+      return -1;
+    }
+    return 0;
+  });
 
   return {
     finalTokens: isLoggedIn ? finalTokens : [],

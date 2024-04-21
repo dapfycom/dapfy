@@ -7,3 +7,5 @@ export const excludeSmartContracts = [
   "rewards",
   "ashSwapFarm",
 ];
+
+export const allowedSmartContracts = ["dust", "aggregator"];
