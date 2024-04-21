@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,6 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import useGetMultipleElrondTokens from "@/hooks/useGetMultipleElrondTokens";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { formatTokenI } from "@/utils/functions/tokens";
@@ -20,7 +27,6 @@ import ConvertButton from "./ConvertButton/ConvertButton";
 import ConvertInfo from "./ConvertInfo/ConvertInfo";
 import SelectAllTokens from "./SelectAllTokens/SelectAllTokens";
 import SelectTokens from "./SelectTokens/SelectTokens";
-
 const MoonDustXCard = () => {
   const dispatch = useAppDispatch();
   const selectedToToken = useAppSelector(selectToTokenDust);
@@ -32,28 +38,39 @@ const MoonDustXCard = () => {
         <div className="flex justify-between  items-center flex-col md:flex-row">
           <CardTitle className="mb-3">Convert dust into:</CardTitle>
           <div className="flex justify-center md:justify-end flex-wrap gap-4">
-            {toTokensToConvert.map((tokenI) => {
-              const elrondToken = tokens?.find((t) => t.identifier === tokenI);
-              return (
-                <Button
-                  key={tokenI}
-                  onClick={() => dispatch(selectToToken(tokenI))}
-                  variant={selectedToToken === tokenI ? "secondary" : "outline"}
-                >
-                  <div className="flex items-center gap-3">
-                    {elrondToken?.assets?.svgUrl && (
-                      <Image
-                        src={elrondToken.assets.svgUrl}
-                        alt=""
-                        width={26}
-                        height={26}
-                      />
-                    )}
-                    {formatTokenI(tokenI)}
-                  </div>
-                </Button>
-              );
-            })}
+            <Select
+              value={selectedToToken}
+              onValueChange={(value) => dispatch(selectToToken(value))}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {toTokensToConvert.map((tokenI) => {
+                    const elrondToken = tokens?.find(
+                      (t) => t.identifier === tokenI
+                    );
+                    return (
+                      <SelectItem value={tokenI} key={tokenI}>
+                        {" "}
+                        <div className="flex items-center gap-3">
+                          {elrondToken?.assets?.svgUrl && (
+                            <Image
+                              src={elrondToken.assets.svgUrl}
+                              alt=""
+                              width={26}
+                              height={26}
+                            />
+                          )}
+                          {formatTokenI(tokenI)}
+                        </div>
+                      </SelectItem>
+                    );
+                  })}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </CardHeader>
