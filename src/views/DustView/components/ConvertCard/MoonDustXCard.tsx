@@ -32,6 +32,9 @@ const MoonDustXCard = () => {
   const selectedToToken = useAppSelector(selectToTokenDust);
   const { outputTokens: toTokensToConvert } = useGetAllowedOutputTokens();
   const { tokens } = useGetMultipleElrondTokens(toTokensToConvert);
+
+  console.log({ toTokensToConvert });
+
   return (
     <Card className="text-left">
       <CardHeader>

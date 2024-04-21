@@ -30,3 +30,33 @@ export const copyTextToClipboard = async (text: string) => {
     throw new Error("Not able to copy");
   }
 };
+
+export function reorderTokens(
+  tokens: string[],
+  tokenPositions: { token: string; position: number }[]
+): string[] {
+  // Crear un arreglo del tamaño de `tokens` lleno de `null` para identificar posiciones vacías.
+  const reordered: (string | null)[] = new Array(tokens.length).fill(null);
+
+  // Mapear cada token a su posición deseada.
+  tokenPositions.forEach(({ token, position }) => {
+    // Ajustar para que las posiciones sean base 0, asumiendo que están base 1 en `tokenPositions`.
+    reordered[position - 1] = token;
+  });
+
+  // Índice para seguir la posición de inserción para tokens no especificados.
+  let fillIndex = 0;
+
+  tokens.forEach((token) => {
+    const positionDefined = tokenPositions.find((tp) => tp.token === token);
+    if (!positionDefined) {
+      // Buscar la próxima posición disponible si el token no tiene posición definida.
+      while (reordered[fillIndex] !== null) {
+        fillIndex++;
+      }
+      reordered[fillIndex] = token;
+    }
+  });
+
+  return reordered as string[];
+}

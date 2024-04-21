@@ -2,6 +2,7 @@ import { selectedNetwork } from "@/config/network";
 import useGetUserTokens from "@/hooks/useGetUserTokens";
 import { useAppSelector } from "@/hooks/useRedux";
 import { formatBalanceDollar } from "@/utils/functions/formatBalance";
+import { reorderTokens } from "@/utils/functions/general";
 import { useGetLoginInfo } from "@multiversx/sdk-dapp/hooks";
 import BigNumber from "bignumber.js";
 import useSwr from "swr";
@@ -33,9 +34,31 @@ export const useGetAllowedOutputTokens = () => {
     "dustWsp:getAllowedOutputTokens",
     () => fetchAllowedOutputTokens()
   );
+
   const toTokens = data || [];
   return {
-    outputTokens: toTokens.filter((t) => t !== selectedNetwork.tokensID.usdc),
+    outputTokens: reorderTokens(toTokens, [
+      {
+        position: 1,
+        token: selectedNetwork.tokensID.wegld,
+      },
+      {
+        position: 2,
+        token: selectedNetwork.tokensID.jeet,
+      },
+      {
+        position: 3,
+        token: selectedNetwork.tokensID.bsk,
+      },
+      {
+        position: 4,
+        token: selectedNetwork.tokensID.bober,
+      },
+      {
+        position: 5,
+        token: selectedNetwork.tokensID.padawan,
+      },
+    ]),
     isLoading,
     error,
   };
