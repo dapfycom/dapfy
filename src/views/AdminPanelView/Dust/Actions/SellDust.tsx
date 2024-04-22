@@ -14,7 +14,7 @@ const SellDust = () => {
     getSmartContractInteraction("dustWsp").scCall({
       functionName: "sellDust",
       arg: [BytesValue.fromUTF8(token)],
-      gasL: 200_000_000,
+      gasL: 600_000_000,
     });
   };
   return (
