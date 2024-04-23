@@ -68,6 +68,14 @@ const MintButton = () => {
           >
             <Plus />
           </Button>
+
+          <Button
+            size={"icon"}
+            variant={"outline"}
+            onClick={() => setAmount(max)}
+          >
+            <span className="text-xs">MAX</span>
+          </Button>
         </div>
       )}
 
