@@ -1,3 +1,9 @@
+export interface EsdtPayment {
+  amount: string;
+  token_identifier: string;
+  token_nonce: number;
+}
+
 type ElrondType =
   | "NonFungibleESDT"
   | "SemiFungibleESDT"

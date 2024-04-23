@@ -8,6 +8,7 @@ import ashSwapFarmAbiUrl from "@/assets/abis/farmclick_ashswap.abi.json";
 import hatomParentAbiUrl from "@/assets/abis/hatom_parent.abi.json";
 import mintingStakingNftAbiUrl from "@/assets/abis/minting_staking_nft.abi.json";
 
+import mintJeeterAbi from "@/assets/abis/mint_jeeter.abi.json";
 import originalOneDexAbiUrl from "@/assets/abis/original_OneDex.abi.json";
 import pvpAbiUrl from "@/assets/abis/pvp.abi.json";
 import flipAbiUrl from "@/assets/abis/sc_flip.abi.json";
@@ -15,6 +16,7 @@ import stakeBskAbiUrl from "@/assets/abis/staking-sc.abi.json";
 import { selectedNetwork } from "@/config/network";
 import { AbiRegistry, Address } from "@multiversx/sdk-core/out";
 import { SmartContractInteraction } from "./calls/transaction";
+
 export { provider } from "./provider";
 export const EGLD_VAL = Math.pow(10, 18);
 
@@ -36,7 +38,8 @@ export type WspTypes =
   | "rewardsWsp"
   | "stakeBskWsp"
   | "pvpWsp"
-  | "mintingStakingNftWsp";
+  | "mintingStakingNftWsp"
+  | "mintJeeterWsp";
 
 export const getInterface = (workspace: WspTypes) => {
   let address = null;
@@ -146,6 +149,13 @@ export const getInterface = (workspace: WspTypes) => {
       abiUrl = mintingStakingNftAbiUrl;
       implementsInterfaces = "MintingStakingNft";
       break;
+    case "mintJeeterWsp":
+      simpleAddress = selectedNetwork.scAddress.mintJeeter;
+      address = new Address(simpleAddress);
+      abiUrl = mintJeeterAbi;
+      implementsInterfaces = "JeeterMinter";
+      break;
+
     default:
       simpleAddress = workspace;
       address = new Address(simpleAddress);
@@ -224,6 +234,11 @@ export const getSmartContractInteraction = (
     mintingStakingNftWsp: new SmartContractInteraction(
       getInterface("mintingStakingNftWsp").simpleAddress,
       AbiRegistry.create(getInterface("mintingStakingNftWsp").abiUrl)
+    ),
+
+    mintJeeterWsp: new SmartContractInteraction(
+      getInterface("mintJeeterWsp").simpleAddress,
+      AbiRegistry.create(getInterface("mintJeeterWsp").abiUrl)
     ),
   };
 

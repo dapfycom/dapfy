@@ -29,3 +29,10 @@ export const validatePercent = (value: string | number): boolean => {
   }
   return true;
 };
+
+export function calculatePercentage(total: number, value: number): number {
+  if (total === 0) {
+    throw new Error("Total must not be zero to avoid division by zero.");
+  }
+  return (value / total) * 100;
+}

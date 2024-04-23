@@ -152,6 +152,8 @@ const networkConfig = {
       stakeBsk: "",
       mintingStakingNft:
         "erd1qqqqqqqqqqqqqpgqjsjkl4qeafpgs8v6px83qwal8n66wmsgq5yqp3ljer",
+      mintJeeter:
+        "erd1qqqqqqqqqqqqqpgq8nw4egcl9djs5fj8ngtcg5w5axedlt9jq5yqt0ljsr",
     },
   },
   testnet: {
@@ -202,6 +204,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIRONMENT: ENVIROMENTTYPE = "mainnet";
+export const ENVIRONMENT: ENVIROMENTTYPE = "devnet";
 
 export const selectedNetwork = networkConfig[ENVIRONMENT];
