@@ -1,5 +1,14 @@
 import collectionImage from "@/assets/images/jeeter-collection.jpg";
-import Image from "next/image";
+import collectionImage2 from "@/assets/images/jeeter-collection2.jpg";
+import collectionImage3 from "@/assets/images/jeeter-collection3.jpg";
+import collectionImage4 from "@/assets/images/jeeter-collection4.jpg";
+import collectionImage5 from "@/assets/images/jeeter-collection5.jpg";
+import collectionImage6 from "@/assets/images/jeeter-collection6.jpg";
+import collectionImage7 from "@/assets/images/jeeter-collection7.jpg";
+import collectionImage8 from "@/assets/images/jeeter-collection8.jpg";
+import collectionImage9 from "@/assets/images/jeeter-collection9.jpg";
+
+import ImageSlider from "./components/ImageSlider/ImageSlider";
 import MintButton from "./components/MintButton/MintButton";
 import ProgressMint from "./components/Progress/ProgressMint";
 import Title from "./components/Title/Title";
@@ -15,12 +24,18 @@ export const NFTsPage = () => {
             revenue share from jeetdex.com.
           </p>
           <div className="flex justify-center mb-4">
-            <Image
-              alt="JEETER NFT 1/100"
-              className="aspect-square object-cover rounded-lg"
-              height={500}
-              src={collectionImage}
-              width={500}
+            <ImageSlider
+              images={[
+                collectionImage,
+                collectionImage2,
+                collectionImage3,
+                collectionImage4,
+                collectionImage5,
+                collectionImage6,
+                collectionImage7,
+                collectionImage8,
+                collectionImage9,
+              ]}
             />
           </div>
 

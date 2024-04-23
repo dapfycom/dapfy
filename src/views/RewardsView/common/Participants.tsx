@@ -5,7 +5,7 @@ import { useGetUsersAvatars } from "../lib/tasks-hooks";
 const Participants = () => {
   const { isAuthenticated } = useXAuthentication();
   const { avatars } = useGetUsersAvatars();
-  console.log({});
+  console.log(avatars);
 
   if (isAuthenticated) {
     return null;

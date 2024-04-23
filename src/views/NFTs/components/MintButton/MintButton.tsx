@@ -1,11 +1,15 @@
 "use client";
 import RequiredLoginButton from "@/components/RequiredLoginButton/RequiredLoginButton";
 import { Button } from "@/components/ui/button";
+import { selectedNetwork } from "@/config/network";
+import useAuthentication from "@/hooks/useAuthentication";
+import useGetAccountToken from "@/hooks/useGetAccountToken";
 import { useTrackTransactionStatus } from "@multiversx/sdk-dapp/hooks";
 import BigNumber from "bignumber.js";
 import { Loader, Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { mintJeeter } from "../../utils/calls.services";
+import { minAmountJeetToMint } from "../../utils/constants";
 import {
   useGetLeftToMint,
   useGetMaxUserAllowedToBuy,
@@ -20,6 +24,13 @@ const MintButton = () => {
   const { mutate: mutateLeftToMint } = useGetLeftToMint();
   const [sessionId, setSessionId] = useState<string | null>(null);
   const { mutate: mutateUserMinted } = useGetUserMinted();
+  const { tokenLogin } = useAuthentication();
+  const { accountToken, isLoading: isLoading2 } = useGetAccountToken(
+    selectedNetwork.tokensID.jeet
+  );
+
+  console.log(accountToken);
+
   const handleMint = async () => {
     if (!data) return;
 
@@ -43,49 +54,77 @@ const MintButton = () => {
     onSuccess,
   });
 
+  const canMint = new BigNumber(
+    accountToken?.balance || 0
+  ).isGreaterThanOrEqualTo(minAmountJeetToMint);
+
   return (
     <div className="flex flex-col items-center gap-4 justify-center">
-      {isLoading ? (
+      {isLoading || isLoading2 ? (
         <div className="text-xl">
           <Loader className="animate-spin" />
         </div>
       ) : (
-        <div className="flex gap-3 items-center">
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => setAmount((prev) => (prev <= 0 ? 0 : prev - 1))}
-          >
-            <Minus />
-          </Button>
+        <div>
+          {canMint ? (
+            <div className="flex gap-4 flex-col items-center">
+              <div className="flex gap-3 items-center">
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  onClick={() =>
+                    setAmount((prev) => (prev <= 0 ? 0 : prev - 1))
+                  }
+                >
+                  <Minus />
+                </Button>
 
-          <div className="text-xl">{amount}</div>
+                <div className="text-xl">{amount}</div>
 
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => setAmount((prev) => (prev >= max ? max : prev + 1))}
-          >
-            <Plus />
-          </Button>
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  onClick={() =>
+                    setAmount((prev) => (prev >= max ? max : prev + 1))
+                  }
+                >
+                  <Plus />
+                </Button>
 
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => setAmount(max)}
-          >
-            <span className="text-xs">MAX</span>
-          </Button>
+                <Button
+                  size={"icon"}
+                  variant={"outline"}
+                  onClick={() => setAmount(max)}
+                >
+                  <span className="text-xs">MAX</span>
+                </Button>
+              </div>
+              <RequiredLoginButton
+                className="w-full sm:w-auto"
+                disabled={amount === 0 || isLoading}
+                onClick={handleMint}
+              >
+                Purchase digital collectible
+              </RequiredLoginButton>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4 items-center">
+              <div>
+                Mint open only for those that have at least 1 million JEET.
+              </div>
+              <Button variant={"secondary"} className="px-6" asChild>
+                <a
+                  href={`https://xexchange.com/swap?firstToken=EGLD&secondToken=${selectedNetwork.tokensID.jeet}&accessToken=${tokenLogin?.nativeAuthToken}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buy Jeet
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
       )}
-
-      <RequiredLoginButton
-        className="w-full sm:w-auto"
-        disabled={amount === 0 || isLoading}
-        onClick={handleMint}
-      >
-        Purchase digital collectible
-      </RequiredLoginButton>
     </div>
   );
 };
