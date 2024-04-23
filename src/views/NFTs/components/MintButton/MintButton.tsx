@@ -54,9 +54,9 @@ const MintButton = () => {
           <Button
             size={"icon"}
             variant={"outline"}
-            onClick={() => setAmount((prev) => (prev >= max ? max : prev + 1))}
+            onClick={() => setAmount((prev) => (prev <= 0 ? 0 : prev - 1))}
           >
-            <Plus />
+            <Minus />
           </Button>
 
           <div className="text-xl">{amount}</div>
@@ -64,9 +64,9 @@ const MintButton = () => {
           <Button
             size={"icon"}
             variant={"outline"}
-            onClick={() => setAmount((prev) => (prev <= 0 ? 0 : prev - 1))}
+            onClick={() => setAmount((prev) => (prev >= max ? max : prev + 1))}
           >
-            <Minus />
+            <Plus />
           </Button>
         </div>
       )}
@@ -76,7 +76,7 @@ const MintButton = () => {
         disabled={amount === 0 || isLoading}
         onClick={handleMint}
       >
-        Purchase
+        Purchase digital collectible
       </RequiredLoginButton>
     </div>
   );

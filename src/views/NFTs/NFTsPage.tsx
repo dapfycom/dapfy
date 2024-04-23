@@ -11,8 +11,8 @@ export const NFTsPage = () => {
         <div className="max-w-2xl w-full p-4 rounded-lg shadow-md">
           <Title />
           <p className="text-gray-600 dark:text-gray-300 text-center mb-4">
-            100 cool pfp NFTs ready to JEET. Buy with $JEET token. NFT holders
-            get revenue share from the upcoming DEX.
+            100 unique NFTs ready to JEET. Buy with $JEET token. NFT holders get
+            revenue share from jeetdex.com.
           </p>
           <div className="flex justify-center mb-4">
             <Image

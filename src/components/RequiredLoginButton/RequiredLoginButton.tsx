@@ -1,7 +1,11 @@
 import useAuthentication from "@/hooks/useAuthentication";
+import { PropsWithChildren } from "react";
 import { Button, ButtonProps } from "../ui/button";
 
-const RequiredLoginButton = ({ ...props }: ButtonProps) => {
+const RequiredLoginButton = ({
+  children,
+  ...props
+}: PropsWithChildren<ButtonProps>) => {
   const { handleConnect, isLoggedIn } = useAuthentication();
   const handleClick = (e: any) => {
     if (isLoggedIn && props.onClick) {
@@ -12,7 +16,7 @@ const RequiredLoginButton = ({ ...props }: ButtonProps) => {
   };
   return (
     <Button {...props} onClick={(e) => handleClick(e)}>
-      Purchase
+      {children}
     </Button>
   );
 };
