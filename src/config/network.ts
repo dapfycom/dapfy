@@ -153,7 +153,7 @@ const networkConfig = {
       mintingStakingNft:
         "erd1qqqqqqqqqqqqqpgqjsjkl4qeafpgs8v6px83qwal8n66wmsgq5yqp3ljer",
       mintJeeter:
-        "erd1qqqqqqqqqqqqqpgq5kr3pln8ppek8jj39jtlcaynx4g2854wq5yqwmxcw6",
+        "erd1qqqqqqqqqqqqqpgq2aedflhdmr6jghrhsxufdnqh3ak22xnuq5yqmr6ccp",
     },
   },
   testnet: {
