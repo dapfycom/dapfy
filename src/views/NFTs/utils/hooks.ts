@@ -13,7 +13,11 @@ export const useGetNFTsPrice = () => {
   );
 
   return {
-    data,
+    data: data || {
+      amount: 0,
+      token_identifier: "",
+      token_nonce: 0,
+    },
     error,
     mutate,
   };

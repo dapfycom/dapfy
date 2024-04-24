@@ -7,4 +7,4 @@ const axiosRewards = axios.create({
 
 export default axiosRewards;
 
-export const fakeData = process.env.NODE_ENV !== "production" && true;
+export const fakeData = process.env.NODE_ENV !== "production" && false;
