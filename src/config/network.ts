@@ -91,6 +91,8 @@ const networkConfig = {
       pvp: "erd1qqqqqqqqqqqqqpgqtuyjw08nvj4v4akk5yfkaqxw7p9s8vndq5yqd805px",
       mintingStakingNft:
         "erd1qqqqqqqqqqqqqpgqgzxgr8ynapal3y0l3avpfvpgtl37uufnq5yq7fpkkl",
+      mintJeeter:
+        "erd1qqqqqqqqqqqqqpgq3tzxdx7v5rzssnn30fe8fs2mwpwxnj4fq5yq60hafh",
     },
   },
   devnet: {
@@ -204,6 +206,6 @@ const networkConfig = {
     },
   },
 };
-export const ENVIRONMENT: ENVIROMENTTYPE = "devnet";
+export const ENVIRONMENT: ENVIROMENTTYPE = "mainnet";
 
 export const selectedNetwork = networkConfig[ENVIRONMENT];
