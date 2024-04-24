@@ -49,6 +49,8 @@ export const routeNames = {
   xpayments: "/multiversx/tools/x-payments",
   raffle: "/multiversx/tools/raffle",
 
+  mintJeeter: "/mint",
+
   docs: "/docs",
   blog: "/blog",
   admin: "/admin",
@@ -100,7 +102,10 @@ export const mainSiteRoutes = [
     path: routeNames.dust,
     title: "Dust",
   },
-
+  {
+    path: routeNames.mintJeeter,
+    title: "Mint",
+  },
   {
     title: "Admin",
     path: routeNames.admin,
