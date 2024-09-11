@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -34,8 +35,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ... rest of the file ...
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,6 +42,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          defer
+          data-domain="dapfy.com"
+          src="https://plausible.io/js/script.js"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

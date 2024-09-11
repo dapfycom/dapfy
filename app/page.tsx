@@ -212,7 +212,7 @@ export default function Component() {
               </p>
               <div className="flex items-center justify-center space-x-2 mt-6">
                 <a
-                  href="https://www.tiktok.com/@dapfy"
+                  href="https://www.tiktok.com/@dapfycom"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
