@@ -82,8 +82,8 @@ export default function Component() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto"
           >
-            We're building a marketplace to help creators sell digital products
-            (videos, music, images, ebooks, docs). 🎨💻📚
+            We&apos;re building a marketplace to help creators sell digital
+            products (videos, music, images, ebooks, docs). 🎨💻📚
           </motion.p>
         </motion.div>
 
@@ -170,7 +170,8 @@ export default function Component() {
       >
         <p className="max-w-2xl mx-auto">
           Our mission is to serve humanity by helping creators turn their
-          passion into money. Dapfy's vision is to always remain free to use.
+          passion into money. Dapfy&apos;s vision is to always remain free to
+          use.
         </p>
       </motion.div>
 
@@ -203,10 +204,11 @@ export default function Component() {
                 <X className="h-6 w-6" />
               </button>
               <h2 className="text-2xl font-bold text-blue-600 mb-4">
-                You're on our list! 🎉
+                You&apos;re on our list! 🎉
               </h2>
               <p className="text-gray-600 mb-4">
-                Thanks for joining! We'll keep you updated on all things Dapfy.
+                Thanks for joining! We&apos;ll keep you updated on all things
+                Dapfy.
               </p>
               <div className="flex items-center justify-center space-x-2 mt-6">
                 <a
