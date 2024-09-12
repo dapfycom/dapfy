@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, CheckCircle2, X } from "lucide-react";
 import { useState } from "react";
+import { Tweet } from "react-tweet";
 
 export default function Component() {
   const [email, setEmail] = useState("");
@@ -61,7 +62,7 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-blue-100 flex flex-col items-center justify-between p-4 md:p-8">
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-6xl mx-auto mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -162,6 +163,12 @@ export default function Component() {
         </motion.div>
       </div>
 
+      <div>
+        <h2 className="text-2xl font-bold text-blue-600 mb-4">
+          We&apos;ve Joined the AWS Activate Program! 🤩
+        </h2>
+        <Tweet id="1834316748599840980" />
+      </div>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
