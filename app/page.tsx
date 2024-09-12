@@ -164,7 +164,7 @@ export default function Component() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-blue-600 mb-4">
+        <h2 className="text-2xl font-bold text-blue-600 mb-4 text-center">
           We&apos;ve Joined the AWS Activate Program! 🤩
         </h2>
         <Tweet id="1834316748599840980" />
