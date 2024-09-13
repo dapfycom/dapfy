@@ -167,7 +167,7 @@ export default function Component() {
         <h2 className="text-2xl font-bold text-blue-600 mb-4 text-center">
           We&apos;ve Joined the AWS Activate Program! 🤩
         </h2>
-        <Tweet id="1834316748599840980" />
+        <Tweet id="1834529194597892551" />
       </div>
       <motion.div
         initial={{ opacity: 0 }}
