@@ -24,6 +24,7 @@ export async function POST(req: Request) {
       message: "Email added to waitlist",
       data: { email, id: Number(result.lastInsertRowid) },
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error adding email to waitlist:", error);
 
